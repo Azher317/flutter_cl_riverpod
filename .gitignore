@@ -21,3 +21,13 @@ doc/api/
 *.js.map
 
 .fake
+
+# IDE module files
+*.iml
+
+# Native build caches
+android/app/.cxx/
+**/*.cxx/
+
+# Tooling output
+custom_lint.log
