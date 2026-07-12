@@ -1,6 +1,7 @@
 import 'package:app/core/errors/failures.dart';
 import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/messaging/snackbar.dart';
+import 'package:app/core/theme/sizes.dart';
 import 'package:app/features/auth/presentation/notifiers/login_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -29,7 +30,7 @@ class LoginScreen extends HookConsumerWidget {
           Failure() => error.message,
           _ => context.l10n.defaultErrorMessage,
         };
-        Utils.showErrorSnackBar(message);
+        AppMessenger.show(message, type: MessageType.error);
       }
     });
 
@@ -47,7 +48,7 @@ class LoginScreen extends HookConsumerWidget {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
+            padding: Insets.largeAll,
             child: Form(
               key: formKey,
               child: Column(
@@ -56,19 +57,25 @@ class LoginScreen extends HookConsumerWidget {
                   TextFormField(
                     controller: phoneController,
                     keyboardType: TextInputType.phone,
-                    decoration: const InputDecoration(labelText: 'Phone'),
-                    validator: (value) =>
-                        (value == null || value.isEmpty) ? 'Required' : null,
+                    decoration: InputDecoration(
+                      labelText: context.l10n.phone,
+                    ),
+                    validator: (value) => (value == null || value.isEmpty)
+                        ? context.l10n.fieldRequired
+                        : null,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: Insets.medium),
                   TextFormField(
                     controller: passwordController,
                     obscureText: true,
-                    decoration: const InputDecoration(labelText: 'Password'),
-                    validator: (value) =>
-                        (value == null || value.isEmpty) ? 'Required' : null,
+                    decoration: InputDecoration(
+                      labelText: context.l10n.password,
+                    ),
+                    validator: (value) => (value == null || value.isEmpty)
+                        ? context.l10n.fieldRequired
+                        : null,
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(height: Insets.large),
                   FilledButton(
                     onPressed: isLoading ? null : submit,
                     child: isLoading
@@ -77,7 +84,7 @@ class LoginScreen extends HookConsumerWidget {
                             height: 20,
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
-                        : const Text('Login'),
+                        : Text(context.l10n.login),
                   ),
                 ],
               ),

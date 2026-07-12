@@ -179,3 +179,50 @@ final class GetCachedSessionUseCaseProvider
 
 String _$getCachedSessionUseCaseHash() =>
     r'e00a9b04765e908f1ac76339e1dd099e19e34533';
+
+@ProviderFor(isSignedInUseCase)
+const isSignedInUseCaseProvider = IsSignedInUseCaseProvider._();
+
+final class IsSignedInUseCaseProvider
+    extends
+        $FunctionalProvider<
+          IsSignedInUseCase,
+          IsSignedInUseCase,
+          IsSignedInUseCase
+        >
+    with $Provider<IsSignedInUseCase> {
+  const IsSignedInUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'isSignedInUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$isSignedInUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<IsSignedInUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  IsSignedInUseCase create(Ref ref) {
+    return isSignedInUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(IsSignedInUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<IsSignedInUseCase>(value),
+    );
+  }
+}
+
+String _$isSignedInUseCaseHash() => r'733455dbe1d14c5b39f325a215e957be206c3638';

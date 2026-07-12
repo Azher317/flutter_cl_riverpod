@@ -59,6 +59,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get password => 'Password';
 
   @override
+  String get phone => 'Phone';
+
+  @override
   String get pickDate => 'Pick date';
 
   @override

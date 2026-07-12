@@ -4,12 +4,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:app/core/storage/object_preference_provider.dart';
+import 'package:app/core/storage/storage_keys.dart';
 import 'package:app/core/theme/theme_change.dart';
 
 part 'app_settings_provider.freezed.dart';
 part 'app_settings_provider.g.dart';
-
-const _kAppSettingsKey = 'settings';
 
 @freezed
 abstract class AppSettings with _$AppSettings {
@@ -32,7 +31,7 @@ abstract class AppSettings with _$AppSettings {
 class Settings extends _$Settings with ObjectPreferenceProvider<AppSettings> {
   @override
   @protected
-  String get key => _kAppSettingsKey;
+  String get key => PreferenceKeys.settings;
 
   @override
   AppSettings fromJson(Map<String, dynamic> map) => AppSettings.fromJson(map);

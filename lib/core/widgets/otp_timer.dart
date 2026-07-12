@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -64,15 +65,15 @@ class _OtpTimerState extends State<OtpTimer> {
           widget.iconAssetPath,
           height: 22,
           width: 22,
-          color:const Color(0xff757680),
+          color: context.colorScheme.onSurfaceVariant,
         ),
         const SizedBox(width: 8),
         Text(
           '$_timerSecondsRemaining',
-          style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 16,
-              color: Color(0xff757680)),
+          style: context.textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w500,
+            color: context.colorScheme.onSurfaceVariant,
+          ),
         ),
       ],
     );

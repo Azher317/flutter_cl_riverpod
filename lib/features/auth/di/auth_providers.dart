@@ -3,6 +3,7 @@ import 'package:app/features/auth/data/datasources/auth_remote_data_source.dart'
 import 'package:app/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:app/features/auth/domain/repositories/auth_repository.dart';
 import 'package:app/features/auth/domain/usecases/get_cached_session_usecase.dart';
+import 'package:app/features/auth/domain/usecases/is_signed_in_usecase.dart';
 import 'package:app/features/auth/domain/usecases/login_usecase.dart';
 import 'package:app/features/auth/domain/usecases/logout_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -26,3 +27,7 @@ LogoutUseCase logoutUseCase(Ref ref) =>
 @riverpod
 GetCachedSessionUseCase getCachedSessionUseCase(Ref ref) =>
     GetCachedSessionUseCase(ref.watch(authRepositoryProvider));
+
+@riverpod
+IsSignedInUseCase isSignedInUseCase(Ref ref) =>
+    IsSignedInUseCase(ref.watch(authRepositoryProvider));

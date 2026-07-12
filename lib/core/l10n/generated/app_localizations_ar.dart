@@ -58,6 +58,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get password => 'كلمة المرور';
 
   @override
+  String get phone => 'رقم الهاتف';
+
+  @override
   String get pickDate => 'اختر التاريخ';
 
   @override

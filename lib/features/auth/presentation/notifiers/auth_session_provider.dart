@@ -1,7 +1,7 @@
 import 'package:app/core/session/session_controller.dart';
 import 'package:app/features/auth/domain/entities/auth_session_entity.dart';
 import 'package:app/features/auth/domain/entities/user_entity.dart';
-import 'package:app/features/auth/presentation/providers/auth_providers.dart';
+import 'package:app/features/auth/di/auth_providers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

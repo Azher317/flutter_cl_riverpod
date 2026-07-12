@@ -17,7 +17,6 @@ dependencies:
 
   # Fonts And Icons
   cupertino_icons: ^1.0.8
-  google_fonts: ^6.2.1
 
   # Logger
   logger: ^2.0.2
@@ -69,6 +68,8 @@ dependencies:
   # ffmpeg_kit_flutter: ^6.0.2
 
   path_provider: 2.1.5
+  flutter_secure_storage: ^10.3.1
+  vector_graphics: ^1.2.2
   
 dev_dependencies:
   flutter_test:
@@ -109,3 +110,9 @@ flutter:
     # - assets/icons/
     # - assets/lottie/
     # - assets/videos/
+  fonts:
+    - family: NotoSansArabic
+      fonts:
+        - asset: assets/fonts/NotoSansArabic-Regular.ttf
+        - asset: assets/fonts/NotoSansArabic-Bold.ttf
+          weight: 700

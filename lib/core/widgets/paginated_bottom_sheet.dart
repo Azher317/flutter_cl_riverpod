@@ -60,9 +60,8 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
                 child: Text(
                   titleText,
-                  style: TextStyle(
+                  style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w700,
-                    fontSize: 18,
                   ),
                 ),
               ),
@@ -114,12 +113,22 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                                         (settings == 'en'
                                             ? (item.nameEn ?? item.name)
                                             : (item.nameAr ?? item.name));
-                                    return ListTile(
-                                      title: Text(displayName),
-                                      subtitle:
-                                          subtitleBuilder?.call(item as T),
-                                      leading: leadingBuilder?.call(item as T),
-                                      onTap: () => onSelect(item as T),
+                                    // RepaintBoundary isolates each row so
+                                    // scrolling doesn't force siblings to
+                                    // repaint. itemExtent is intentionally
+                                    // not used here: subtitle/leading are
+                                    // optional per item, so row height isn't
+                                    // uniform and a fixed extent would clip
+                                    // taller rows.
+                                    return RepaintBoundary(
+                                      child: ListTile(
+                                        title: Text(displayName),
+                                        subtitle:
+                                            subtitleBuilder?.call(item as T),
+                                        leading:
+                                            leadingBuilder?.call(item as T),
+                                        onTap: () => onSelect(item as T),
+                                      ),
                                     );
                                   },
                                 ),

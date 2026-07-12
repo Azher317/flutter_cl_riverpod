@@ -29,7 +29,8 @@ AppBar customAppBar(
                 fixedSize: Size(45.w, 45.w),
                 backgroundColor: context.colorScheme.secondary,
                 foregroundColor: context.colorScheme.onSurface,
-                overlayColor: context.colorScheme.primary.withOpacity(0.12),
+                overlayColor:
+                    context.colorScheme.primary.withValues(alpha: 0.12),
                 shape: const CircleBorder(),
               ),
               onPressed: () {
@@ -43,7 +44,8 @@ AppBar customAppBar(
             )
           : IconButton(
               style: IconButton.styleFrom(
-                overlayColor: context.colorScheme.primary.withOpacity(0.12),
+                overlayColor:
+                    context.colorScheme.primary.withValues(alpha: 0.12),
                 shape: const CircleBorder(),
               ),
               onPressed: () {
@@ -83,7 +85,8 @@ SliverAppBar customSliverAppBar(
                 fixedSize: Size(45, 45),
                 backgroundColor: context.colorScheme.secondary,
                 foregroundColor: context.colorScheme.onSurface,
-                overlayColor: context.colorScheme.primary.withOpacity(0.12),
+                overlayColor:
+                    context.colorScheme.primary.withValues(alpha: 0.12),
                 shape: const CircleBorder(),
               ),
               onPressed: () {
@@ -97,7 +100,8 @@ SliverAppBar customSliverAppBar(
             )
           : IconButton(
               style: IconButton.styleFrom(
-                overlayColor: context.colorScheme.primary.withOpacity(0.12),
+                overlayColor:
+                    context.colorScheme.primary.withValues(alpha: 0.12),
                 shape: const CircleBorder(),
               ),
               onPressed: () {

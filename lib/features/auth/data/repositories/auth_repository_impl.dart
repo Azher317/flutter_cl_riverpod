@@ -1,6 +1,7 @@
 import 'package:app/core/either.dart';
 import 'package:app/core/errors/exceptions.dart';
 import 'package:app/core/errors/failures.dart';
+import 'package:app/core/errors/safe_repository_call.dart';
 import 'package:app/features/auth/data/datasources/auth_local_data_source.dart';
 import 'package:app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:app/features/auth/data/models/authentication_model.dart';
@@ -8,7 +9,7 @@ import 'package:app/features/auth/domain/entities/auth_session_entity.dart';
 import 'package:app/features/auth/domain/params/login_params.dart';
 import 'package:app/features/auth/domain/repositories/auth_repository.dart';
 
-class AuthRepositoryImpl implements AuthRepository {
+class AuthRepositoryImpl with SafeRepositoryCall implements AuthRepository {
   const AuthRepositoryImpl({
     required AuthRemoteDataSource remoteDataSource,
     required AuthLocalDataSource localDataSource,
@@ -19,21 +20,13 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthLocalDataSource _localDataSource;
 
   @override
-  Future<Either<Failure, AuthSessionEntity>> login(LoginParams params) async {
-    try {
+  Future<Either<Failure, AuthSessionEntity>> login(LoginParams params) {
+    return guard(() async {
       final user = await _remoteDataSource.login(params);
       final session = AuthenticationModel.fromUserModel(user);
       await _localDataSource.cacheSession(session);
-      return Right(session.toEntity());
-    } on InvalidCredentialsException catch (e) {
-      return Left(InvalidCredentialsFailure(e.message));
-    } on NetworkException catch (e) {
-      return Left(NetworkFailure(e.message));
-    } on ServerException catch (e) {
-      return Left(ServerFailure(e.message));
-    } on CacheException catch (e) {
-      return Left(CacheFailure(e.message));
-    }
+      return session.toEntity();
+    });
   }
 
   @override
@@ -49,7 +42,8 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, AuthSessionEntity?>> getCachedSession() async {
     try {
-      return Right(_localDataSource.getCachedSession()?.toEntity());
+      final session = await _localDataSource.getCachedSession();
+      return Right(session?.toEntity());
     } on CacheException {
       // A stale/corrupted cache isn't a user-facing failure — treat it as
       // "no session" rather than surfacing an error.

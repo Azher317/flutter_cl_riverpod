@@ -1,84 +1,35 @@
 import 'package:app/core/extensions/theme_extentions.dart';
+import 'package:app/core/theme/extra_colors.dart';
 import 'package:flutter/material.dart';
 
-class Utils {
-  static final messengerKey = GlobalKey<ScaffoldMessengerState>();
-  static void showErrorSnackBar(String? text) {
-    if (text == null) return;
+enum MessageType { success, error, warning, info }
 
-    final messengerState = messengerKey.currentState;
-    final context = messengerKey.currentContext;
+class AppMessenger {
+  const AppMessenger._();
 
-    if (messengerState == null || context == null) return;
+  static final key = GlobalKey<ScaffoldMessengerState>();
 
-    SnackBar snackBar = SnackBar(
-      content: Text(text, style: TextStyle(color: context.colorScheme.onError)),
-      behavior: SnackBarBehavior.floating,
-      backgroundColor: context.colorScheme.error,
-    );
-    messengerKey.currentState!
+  static void show(String? text, {MessageType type = MessageType.info}) {
+    if (text == null || text.isEmpty) return;
+    final state = key.currentState;
+    final context = key.currentContext;
+    if (state == null || context == null) return;
+
+    final scheme = context.colorScheme;
+    final status = Theme.of(context).appStatusColors;
+    final (Color bg, Color fg) = switch (type) {
+      MessageType.success => (status.successContainer, status.onSuccessContainer),
+      MessageType.error => (scheme.errorContainer, scheme.onErrorContainer),
+      MessageType.warning => (status.warning, status.onWarning),
+      MessageType.info => (scheme.secondaryContainer, scheme.onSecondaryContainer),
+    };
+
+    state
       ..removeCurrentSnackBar()
-      ..showSnackBar(snackBar);
-  }
-
-  static void showSuccessSnackBar(String? text) {
-    if (text == null) return;
-    SnackBar snackBar = SnackBar(
-      content: Text(text),
-      behavior: SnackBarBehavior.floating,
-    );
-    messengerKey.currentState!
-      ..removeCurrentSnackBar()
-      ..showSnackBar(snackBar);
-  }
-
-  static void showNotificatonSnackBar(String? title) {
-    if (title == null) return;
-    SnackBar snackBar = SnackBar(
-      content: Text(title),
-      behavior: SnackBarBehavior.floating,
-    );
-    messengerKey.currentState!
-      ..removeCurrentSnackBar()
-      ..showSnackBar(snackBar);
-  }
-}
-
-extension SnackBarX on BuildContext {
-  void showSnackBar(String text) {
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        content: Text(text),
+      ..showSnackBar(SnackBar(
         behavior: SnackBarBehavior.floating,
-        backgroundColor: theme.colorScheme.error,
-      ),
-    );
-  }
-
-  void showSuccessSnackBar(String text) {
-    // final theme = Theme.of(this);
-
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        content: Text(text),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
-  }
-
-  void showErrorSnackBar(String text) {
-    final theme = Theme.of(this);
-
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        content: Text(
-          text,
-          style: TextStyle(
-            color: theme.colorScheme.onError,
-          ),
-        ),
-        backgroundColor: theme.colorScheme.error,
-      ),
-    );
+        backgroundColor: bg,
+        content: Text(text, style: context.textTheme.bodyMedium?.copyWith(color: fg)),
+      ));
   }
 }

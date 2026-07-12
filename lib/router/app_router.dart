@@ -1,4 +1,4 @@
-import 'package:app/features/auth/presentation/providers/auth_session_provider.dart';
+import 'package:app/features/auth/presentation/notifiers/auth_session_provider.dart';
 import 'package:app/features/auth/presentation/screens/login_screen.dart';
 import 'package:app/features/home/presentation/screens/home_screen.dart';
 import 'package:app/features/splash/presentation/screens/splash_screen.dart';

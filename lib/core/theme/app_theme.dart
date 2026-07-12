@@ -1,10 +1,21 @@
 import 'package:app/core/theme/extra_colors.dart';
 import 'package:app/core/theme/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   const AppTheme._();
+
+  // Bundled locally instead of GoogleFonts' runtime-fetched
+  // notoSansArabicTextTheme, which downloads the font file over the network
+  // on first launch and can flash a fallback font or fail outright offline.
+  // Requires the .ttf assets + this pubspec.yaml entry in the real app repo:
+  //   fonts:
+  //     - family: NotoSansArabic
+  //       fonts:
+  //         - asset: assets/fonts/NotoSansArabic-Regular.ttf
+  //         - asset: assets/fonts/NotoSansArabic-Bold.ttf
+  //           weight: 700
+  static const String _fontFamily = 'NotoSansArabic';
 
   static const Color _seedColor = Color(0xFFEE4266);
   static BorderRadius get _radius => BorderRadius.circular(BorderSize.small);
@@ -41,8 +52,8 @@ class AppTheme {
       navigationBarTheme: _navigationBarTheme(scheme),
       outlinedButtonTheme: _outlinedButtonTheme(),
       textButtonTheme: _textButtonTheme(),
-      splashColor: scheme.primary.withOpacity(0.12),
-      highlightColor: scheme.primary.withOpacity(0.05),
+      splashColor: scheme.primary.withValues(alpha: 0.12),
+      highlightColor: scheme.primary.withValues(alpha: 0.05),
       checkboxTheme: _checkboxTheme(scheme),
     );
 
@@ -109,7 +120,7 @@ class AppTheme {
   }
 
   static TextTheme _textTheme(TextTheme base) {
-    final t = GoogleFonts.notoSansArabicTextTheme(base);
+    final t = base.apply(fontFamily: _fontFamily);
 
     return t.copyWith(
       titleLarge: t.titleLarge?.copyWith(

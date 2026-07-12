@@ -1,32 +1,34 @@
 import 'dart:convert';
 
 import 'package:app/core/errors/exceptions.dart';
-import 'package:app/core/storage/shared_preferences_provider.dart';
+import 'package:app/core/storage/secure_storage_provider.dart';
+import 'package:app/core/storage/storage_keys.dart';
 import 'package:app/features/auth/data/models/authentication_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'auth_local_data_source.g.dart';
 
-const _kAuthSessionKey = 'authentication';
-
 abstract class AuthLocalDataSource {
   Future<void> cacheSession(AuthenticationModel session);
-  AuthenticationModel? getCachedSession();
+  Future<AuthenticationModel?> getCachedSession();
   Future<void> clearSession();
 }
 
+// The session (including the bearer token) is stored via FlutterSecureStorage
+// (Keychain/Keystore-backed) rather than SharedPreferences — tokens must not
+// sit in plaintext, unencrypted app storage.
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
-  const AuthLocalDataSourceImpl(this._sharedPreferences);
+  const AuthLocalDataSourceImpl(this._secureStorage);
 
-  final SharedPreferences _sharedPreferences;
+  final FlutterSecureStorage _secureStorage;
 
   @override
   Future<void> cacheSession(AuthenticationModel session) async {
     try {
-      await _sharedPreferences.setString(
-        _kAuthSessionKey,
-        json.encode(session.toJson()),
+      await _secureStorage.write(
+        key: SecureStorageKeys.authSession,
+        value: json.encode(session.toJson()),
       );
     } catch (e) {
       throw CacheException('Failed to cache session: $e');
@@ -34,8 +36,8 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   }
 
   @override
-  AuthenticationModel? getCachedSession() {
-    final raw = _sharedPreferences.getString(_kAuthSessionKey);
+  Future<AuthenticationModel?> getCachedSession() async {
+    final raw = await _secureStorage.read(key: SecureStorageKeys.authSession);
     if (raw == null) return null;
     try {
       return AuthenticationModel.fromJson(
@@ -44,7 +46,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     } catch (e) {
       // Self-healing: a stale/incompatible cache shouldn't keep failing on
       // every launch, so clear it before surfacing the exception.
-      _sharedPreferences.remove(_kAuthSessionKey);
+      await _secureStorage.delete(key: SecureStorageKeys.authSession);
       throw CacheException('Failed to read cached session: $e');
     }
   }
@@ -52,7 +54,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> clearSession() async {
     try {
-      await _sharedPreferences.remove(_kAuthSessionKey);
+      await _secureStorage.delete(key: SecureStorageKeys.authSession);
     } catch (e) {
       throw CacheException('Failed to clear session: $e');
     }
@@ -61,4 +63,4 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
 @riverpod
 AuthLocalDataSource authLocalDataSource(Ref ref) =>
-    AuthLocalDataSourceImpl(ref.sharedPreferences);
+    AuthLocalDataSourceImpl(ref.secureStorage);

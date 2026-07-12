@@ -194,6 +194,12 @@ abstract class AppLocalizations {
   /// **'Password'**
   String get password;
 
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
   /// No description provided for @pickDate.
   ///
   /// In en, this message translates to:

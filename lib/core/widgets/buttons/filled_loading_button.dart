@@ -1,3 +1,4 @@
+import 'package:app/core/theme/sizes.dart';
 import 'package:flutter/material.dart';
 
 class FilledLoadingButton extends StatelessWidget {
@@ -17,7 +18,18 @@ class FilledLoadingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: isLoading ? null : onPressed,
-      child: isLoading ? const CircularProgressIndicator() : child,
+      child: isLoading
+          ? SizedBox(
+              height: IconSize.medium,
+              width: IconSize.medium,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                valueColor: AlwaysStoppedAnimation(
+                  Theme.of(context).colorScheme.onPrimary,
+                ),
+              ),
+            )
+          : child,
     );
   }
 }

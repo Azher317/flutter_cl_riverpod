@@ -11,16 +11,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:app/core/extensions/common_extensions.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-class App extends ConsumerStatefulWidget {
+class App extends ConsumerWidget {
   const App({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _AppState();
-}
-
-class _AppState extends ConsumerState<App> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final themeMode = ref.watch(settingsProvider.select((s) => s.themeMode));
     final localeCode = ref.watch(settingsProvider.select((s) => s.locale));
     final router = ref.watch(routerProvider);
@@ -29,7 +24,7 @@ class _AppState extends ConsumerState<App> {
       title: appName,
       debugShowCheckedModeBanner: false,
       routerConfig: router,
-      scaffoldMessengerKey: Utils.messengerKey,
+      scaffoldMessengerKey: AppMessenger.key,
       // Locale
       locale: localeCode,
       onGenerateTitle: (context) => context.l10n.appName,

@@ -15,4 +15,7 @@ DefaultResponse<T> _$DefaultResponseFromJson<T>(
   statusCode: (json['statusCode'] as num).toDouble(),
 );
 
-const _$RoleEnumMap = {Role.supervisor: 'Supervisor', Role.unknown: 'unknown'};
+const _$RoleDtoEnumMap = {
+  RoleDto.supervisor: 'Supervisor',
+  RoleDto.unknown: 'unknown',
+};

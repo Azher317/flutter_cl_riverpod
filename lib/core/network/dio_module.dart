@@ -1,6 +1,7 @@
-import 'dart:convert';
+import 'dart:async';
 
 import 'package:app/core/network/api_document.dart';
+import 'package:app/core/network/api_headers.dart';
 import 'package:app/core/network/authenticator.dart';
 import 'package:app/core/network/clients_lib.dart';
 import 'package:app/core/session/session_provider.dart';
@@ -12,14 +13,25 @@ part 'dio_module.g.dart';
 @Riverpod(keepAlive: true)
 Dio dio(Ref ref) {
   final dio = Dio();
+
+  // Guards concurrent 401s so N simultaneous requests trigger exactly one
+  // logout instead of N redundant ones. This is *not* a refresh-token flow —
+  // there's no /auth/refresh endpoint in this app yet, so a 401 still ends
+  // the session rather than silently re-authenticating. Once a refresh
+  // endpoint exists, this is the seam to extend: race the first 401 into a
+  // real refresh call, complete [_pendingLogout] with the outcome, and only
+  // fall through to logout() if the refresh itself fails.
+  Completer<void>? pendingLogout;
+
   dio
     ..options.baseUrl = ApiDocument.baseUrl
     ..options.connectTimeout = const Duration(seconds: 30)
     ..options.sendTimeout = const Duration(seconds: 60)
-    ..options.contentType = 'application/json; charset=utf-8'
+    ..options.receiveTimeout = const Duration(seconds: 60)
+    ..options.contentType = '${ApiHeaders.applicationJson}; charset=utf-8'
     ..options.headers = {
-      "accept": "text/plain",
-      "Content-Type": "application/json",
+      ApiHeaders.accept: "text/plain",
+      ApiHeaders.contentType: ApiHeaders.applicationJson,
     }
     ..interceptors.add(Authenticator(ref.read(sessionControllerProvider)))
     ..interceptors.add(
@@ -27,7 +39,17 @@ Dio dio(Ref ref) {
         onError: (e, handler) async {
           final skipAuthLogout = e.requestOptions.extra['skipAuthLogout'] == true;
           if (e.response?.statusCode == 401 && !skipAuthLogout) {
-            await ref.read(sessionControllerProvider).logout();
+            if (pendingLogout == null) {
+              pendingLogout = Completer<void>();
+              try {
+                await ref.read(sessionControllerProvider).logout();
+              } finally {
+                pendingLogout!.complete();
+                pendingLogout = null;
+              }
+            } else {
+              await pendingLogout!.future;
+            }
           }
           switch (e.type) {
             case DioExceptionType.badCertificate:
@@ -45,7 +67,10 @@ Dio dio(Ref ref) {
             case DioExceptionType.transformTimeout:
               break;
             case DioExceptionType.unknown:
-              String message = "حدث خطأ ما";
+              // Not shown to the user directly — the data layer maps this
+              // into a typed exception/Failure, and the UI resolves the
+              // display string via l10n (see login_screen.dart).
+              String message = "Unknown error";
               if (e.error is FormatException) {
                 message = e.error
                     .toString()
@@ -56,7 +81,7 @@ Dio dio(Ref ref) {
                 if (data is Map<String, dynamic>) {
                   message = data['message'] ?? message;
                 } else if (data is String) {
-                  message = json.decode(json.encode(data));
+                  message = data;
                 }
               }
               final parsedResponse = Response(
@@ -75,42 +100,6 @@ Dio dio(Ref ref) {
               return; // add this line to prevent calling handler.next(e)
           }
           handler.next(e);
-        },
-        onResponse: (response, handler) {
-          dynamic data = response.data;
-          if (response.data is List<dynamic>) {
-            data = {
-              "data": response.data,
-              "message": response.statusMessage,
-              "statusCode": response.statusCode,
-            };
-          }
-          // else if (data is Map<String, dynamic> &&
-          //     (data['data'] == null ||
-          //         data['message'] == null ||
-          //         data['statusCode'] == null)) {
-          //   data['data'] ??= {}; // Set result to an empty object if it's null
-          //   data["message"] ??= response.statusMessage;
-          //   data["statusCode"] ??= response.statusCode;
-          // }
-          else if (response.data is String) {
-            data = {
-              "data": {},
-              "message": response.data,
-              "statusCode": response.statusCode,
-            };
-          }
-          final modifiedResponse = Response(
-            requestOptions: response.requestOptions,
-            data: data,
-            headers: response.headers,
-            isRedirect: response.isRedirect,
-            redirects: response.redirects,
-            extra: response.extra,
-            statusCode: response.statusCode,
-            statusMessage: response.statusMessage,
-          );
-          return handler.next(modifiedResponse);
         },
       ),
     );

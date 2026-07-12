@@ -9,11 +9,11 @@ part 'default_response.g.dart';
   genericArgumentFactories: true,
 )
 class DefaultResponse<T> {
-  // "message": "تم بنجاح",
+  // Deserialized from the JSON key "msg".
   final String? msg;
-  // "result": {},
+  // Deserialized from the JSON key "data".
   final T data;
-  // "statusCode": 200
+  // Deserialized from the JSON key "statusCode".
   final double statusCode;
 
   const DefaultResponse({
@@ -28,9 +28,7 @@ class DefaultResponse<T> {
 
   DefaultResponse<T> copyWith({
     final String? msg,
-    // "data": {},
     final T? data,
-    // "error": true
     final double? statusCode,
   }) {
     return DefaultResponse<T>(
@@ -40,11 +38,15 @@ class DefaultResponse<T> {
   }
 }
 
+// A string-keyed ("Supervisor") role representation. Currently unused —
+// UserModel.role is a raw int from a different, undocumented wire format,
+// so this isn't wired to it; kept for whichever endpoint/DTO actually
+// sends a string-keyed role.
 @JsonEnum(alwaysCreate: true)
-enum Role {
+enum RoleDto {
   @JsonValue("Supervisor")
   supervisor,
   unknown;
 
-  String toJson() => _$RoleEnumMap[this]!;
+  String toJson() => _$RoleDtoEnumMap[this]!;
 }

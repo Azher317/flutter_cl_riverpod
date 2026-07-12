@@ -15,6 +15,7 @@
   "noConnection": "No internet connection, please check your network",
   "noItemsFoundError": "No items found",
   "password": "Password",
+  "phone": "Phone",
   "pickDate": "Pick date",
   "relocate": "Relocate",
   "retry": "Retry",

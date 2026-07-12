@@ -11,6 +11,12 @@ class UserEntity {
   });
 
   final String id;
+  // Kept as a raw int rather than an enum: the backend's role→int contract
+  // isn't documented anywhere in this codebase, and nothing here currently
+  // branches on role, so any specific enum-value mapping would be a guess.
+  // Introduce a `Role` enum once that contract is known (see the unused,
+  // string-keyed `RoleDto` in core/network/default_response.dart, which is
+  // for a differently-shaped role field, not this one).
   final int role;
   final String name;
   final String phone;

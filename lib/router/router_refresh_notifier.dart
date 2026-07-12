@@ -1,4 +1,4 @@
-import 'package:app/features/auth/presentation/providers/auth_session_provider.dart';
+import 'package:app/features/auth/presentation/notifiers/auth_session_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
