@@ -2,6 +2,7 @@ import 'package:app/core/settings/app_settings_provider.dart';
 import 'package:app/core/network/clients_lib.dart';
 import 'package:app/core/l10n/generated/app_localizations.dart';
 import 'package:app/core/l10n/locale.dart';
+import 'package:app/core/validation/validation_regex.dart';
 import 'package:flutter/material.dart';
 import 'package:form_validator/form_validator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -51,14 +52,12 @@ extension ValueNotifierUpdated<T> on ValueNotifier<T> {
   }
 }
 
-extension on ValidationBuilder {
-  ValidationBuilder iraqiPhoneNumber(BuildContext context) {
-    return add((v) {
-      return RegExp(r"^(0|964|00964|\+964)?7[0-9]{9}$").hasMatch(v!)
-          ? null
-          : context.l10n.validatorPhoneNumber;
-    });
-  }
+extension IraqiPhoneX on ValidationBuilder {
+  ValidationBuilder iraqiPhoneNumber(BuildContext context) => add(
+    (v) => iraqiPhoneNumberRegex.hasMatch(v ?? '')
+        ? null
+        : context.l10n.validatorPhoneNumber,
+  );
 }
 
 extension AppLocalizationsExtension on BuildContext {
