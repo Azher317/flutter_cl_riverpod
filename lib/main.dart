@@ -1,8 +1,7 @@
 import 'dart:async';
-import 'dart:developer' as developer;
 
 import 'package:app/app.dart';
-import 'package:app/core/observability/app_provider_observer.dart';
+import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/session/session_provider.dart';
 import 'package:app/features/auth/presentation/notifiers/auth_session_provider.dart';
 import 'package:flutter/foundation.dart';
@@ -10,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app/core/storage/shared_preferences_provider.dart';
+import 'package:talker_riverpod_logger/talker_riverpod_logger.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 const String appName = 'Azher';
@@ -19,23 +19,11 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     FlutterError.onError = (details) {
-      developer.log(
-        'FlutterError',
-        name: 'main',
-        error: details.exception,
-        stackTrace: details.stack,
-        level: 1000,
-      );
+      talker.handle(details.exception, details.stack, 'FlutterError');
       FlutterError.presentError(details);
     };
     PlatformDispatcher.instance.onError = (error, stack) {
-      developer.log(
-        'Uncaught platform error',
-        name: 'main',
-        error: error,
-        stackTrace: stack,
-        level: 1000,
-      );
+      talker.handle(error, stack, 'Uncaught platform error');
       return true;
     };
 
@@ -48,7 +36,18 @@ Future<void> main() async {
 
     runApp(
       ProviderScope(
-        observers: [AppProviderObserver()],
+        observers: [
+          TalkerRiverpodObserver(
+            talker: talker,
+            settings: const TalkerRiverpodLoggerSettings(
+              enabled: true,
+              printProviderAdded: false,
+              printProviderUpdated: false,
+              printProviderDisposed: false,
+              printProviderFailed: true,
+            ),
+          ),
+        ],
         overrides: [
           sharedPreferencesProvider.overrideWith((ref) => sharedPreferences),
           sessionControllerProvider.overrideWith(
@@ -59,12 +58,6 @@ Future<void> main() async {
       ),
     );
   }, (error, stack) {
-    developer.log(
-      'Uncaught async error',
-      name: 'main',
-      error: error,
-      stackTrace: stack,
-      level: 1000,
-    );
+    talker.handle(error, stack, 'Uncaught async error');
   });
 }

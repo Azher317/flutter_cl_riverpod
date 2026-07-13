@@ -1,12 +1,12 @@
 import 'package:app/core/theme/sizes.dart';
 import 'package:app/core/extensions/theme_extentions.dart';
+import 'package:app/core/widgets/image_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class SvgPrefixIcon extends StatelessWidget {
-  const SvgPrefixIcon({super.key, required this.svg, this.size, this.color});
+  const SvgPrefixIcon({super.key, required this.img, this.size, this.color});
 
-  final String svg;
+  final String img;
   final double? size;
   final Color? color;
 
@@ -22,8 +22,8 @@ class SvgPrefixIcon extends StatelessWidget {
         child: SizedBox(
           width: size ?? 24,
           height: size ?? 24,
-          child: SvgPicture.asset(
-            svg,
+          child: ImageSvg(
+            img: img,
             fit: BoxFit.contain,
             color: color ?? context.colorScheme.primary,
           ),

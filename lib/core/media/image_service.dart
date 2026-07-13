@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:app/core/observability/app_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -34,7 +33,7 @@ Future<CroppedFile?> cropImage(BuildContext context) async {
       ],
     );
   } catch (e, st) {
-    log(e.toString(), stackTrace: st);
+    AppLogger.error(e.toString(), e, st);
     return null;
   }
 }

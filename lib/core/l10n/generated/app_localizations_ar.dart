@@ -64,6 +64,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get pickDate => 'اختر التاريخ';
 
   @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
   String get relocate => 'إعادة تحديد الموقع';
 
   @override

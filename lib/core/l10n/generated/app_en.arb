@@ -17,6 +17,7 @@
   "password": "Password",
   "phone": "Phone",
   "pickDate": "Pick date",
+  "logout": "Logout",
   "relocate": "Relocate",
   "retry": "Retry",
   "search": "Search",

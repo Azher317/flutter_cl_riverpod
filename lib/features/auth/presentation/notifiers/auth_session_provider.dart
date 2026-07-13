@@ -1,8 +1,8 @@
+import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/session/session_controller.dart';
 import 'package:app/features/auth/domain/entities/auth_session_entity.dart';
 import 'package:app/features/auth/domain/entities/user_entity.dart';
 import 'package:app/features/auth/di/auth_providers.dart';
-import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'auth_session_provider.g.dart';
@@ -33,7 +33,7 @@ class AuthSession extends _$AuthSession implements SessionController {
   Future<void> logout() async {
     final result = await ref.read(logoutUseCaseProvider).call();
     result.fold(
-      (failure) => debugPrint('Logout failed: $failure'),
+      (failure) => AppLogger.warning('Logout failed: $failure'),
       (_) => null,
     );
     // Best-effort logout: clear in-memory state regardless of whether the

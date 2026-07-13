@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/storage/shared_preferences_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -30,7 +30,7 @@ mixin ObjectPreferenceProvider<State> on $Notifier<State> {
 
       return state = value;
     } catch (e, stackTrace) {
-      log("Preference: $key", error: e, stackTrace: stackTrace);
+      AppLogger.error("Preference: $key", e, stackTrace);
       return state;
     }
   }
@@ -39,11 +39,10 @@ mixin ObjectPreferenceProvider<State> on $Notifier<State> {
     final raw = ref.sharedPreferences.getString(key);
     if (raw == null) return fallback;
     try {
-      log(raw.toString());
       final Map<String, dynamic> map = jsonDecode(raw);
       return fromJson(map);
     } catch (e, stackTrace) {
-      log("Preference: $key", error: e, stackTrace: stackTrace);
+      AppLogger.error("Preference: $key", e, stackTrace);
       return fallback;
     }
   }
@@ -81,7 +80,7 @@ mixin NullableObjectPreferenceProvider<State> on $Notifier<State?> {
 
       return state = value;
     } catch (e, stackTrace) {
-      log("Preference: $key", error: e, stackTrace: stackTrace);
+      AppLogger.error("Preference: $key", e, stackTrace);
       return state;
     }
   }
@@ -95,7 +94,7 @@ mixin NullableObjectPreferenceProvider<State> on $Notifier<State?> {
       final Map<String, dynamic> map = jsonDecode(raw);
       return fromJson(map);
     } catch (e, stackTrace) {
-      log("Preference: $key", error: e, stackTrace: stackTrace);
+      AppLogger.error("Preference: $key", e, stackTrace);
       return null;
     }
   }

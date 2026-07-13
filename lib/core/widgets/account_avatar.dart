@@ -1,9 +1,8 @@
 import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/theme/sizes.dart';
-import 'package:app/core/gen/assets.gen.dart';
+import 'package:app/core/widgets/image_svg.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class AccountAvatar extends StatelessWidget {
   const AccountAvatar({
@@ -54,10 +53,7 @@ class AccountAvatar extends StatelessWidget {
                       ),
                     ),
                     padding: Insets.extraSmallAll,
-                    child: SvgPicture.asset(
-                      Assets.svg.cameraPlus.path,
-                      fit: BoxFit.contain,
-                    ),
+                    child: ImageSvg(img: 'CameraPlus', fit: BoxFit.contain),
                   )
                 : CachedNetworkImage(
                     fit: BoxFit.cover,
@@ -93,10 +89,7 @@ class AccountAvatar extends StatelessWidget {
                         ),
                       ),
                       padding: Insets.smallAll,
-                      child: SvgPicture.asset(
-                        Assets.svg.cameraPlus.path,
-                        fit: BoxFit.contain,
-                      ),
+                      child: ImageSvg(img: 'CameraPlus', fit: BoxFit.contain),
                     ),
                     errorWidget: (context, url, error) => Container(
                       height: size,
@@ -112,10 +105,7 @@ class AccountAvatar extends StatelessWidget {
                         ),
                       ),
                       padding: Insets.smallAll,
-                      child: SvgPicture.asset(
-                        Assets.svg.cameraPlus.path,
-                        fit: BoxFit.cover,
-                      ),
+                      child: ImageSvg(img: 'CameraPlus', fit: BoxFit.cover),
                     ),
                   ),
           ),
@@ -132,8 +122,8 @@ class AccountAvatar extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               padding: Insets.extraSmallAll,
-              child: SvgPicture.asset(
-                Assets.svg.cameraPlus.path,
+              child: ImageSvg(
+                img: 'CameraPlus',
                 color: context.colorScheme.primary,
               ),
             ),

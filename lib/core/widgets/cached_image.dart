@@ -26,7 +26,9 @@ class CachedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dpr = MediaQuery.devicePixelRatioOf(context).clamp(1.0, devicePixelRatioCap);
+    final dpr = MediaQuery.devicePixelRatioOf(
+      context,
+    ).clamp(1.0, devicePixelRatioCap);
     // Decode target in physical pixels; null lets that axis stay intrinsic.
     final int? memW = width == null ? null : (width! * dpr).round();
     final int? memH = height == null ? null : (height! * dpr).round();
@@ -40,8 +42,9 @@ class CachedImage extends StatelessWidget {
         fit: fit,
         memCacheWidth: memW,
         memCacheHeight: memH,
-        placeholder: (_, __) => CustomSkeleton(width: width, height: height, radius: radius),
-        errorWidget: (context, _, __) => ColoredBox(
+        placeholder: (_, _) =>
+            CustomSkeleton(width: width, height: height, radius: radius),
+        errorWidget: (context, _, _) => ColoredBox(
           color: Theme.of(context).colorScheme.surfaceContainerHighest,
           child: Icon(
             Icons.broken_image_outlined,

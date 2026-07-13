@@ -65,6 +65,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pickDate => 'Pick date';
 
   @override
+  String get logout => 'Logout';
+
+  @override
   String get relocate => 'Relocate';
 
   @override

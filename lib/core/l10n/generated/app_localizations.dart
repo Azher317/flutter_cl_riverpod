@@ -206,6 +206,12 @@ abstract class AppLocalizations {
   /// **'Pick date'**
   String get pickDate;
 
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
   /// No description provided for @relocate.
   ///
   /// In en, this message translates to:

@@ -6,7 +6,6 @@ import 'package:app/core/theme/sizes.dart';
 import 'package:app/core/widgets/break_line.dart';
 import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:app/core/widgets/svg_prefix_icon.dart';
-import 'package:app/core/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -80,68 +79,73 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                     ),
                   ),
                   padding: Insets.mediumAll,
-                  child: Column(spacing: Insets.medium, children: [
-                    CustomTextFormField(
-                      prefixIcon:
-                          SvgPrefixIcon(svg: Assets.svg.search01.keyName),
-                      controller: searchController,
-                      hintText: context.l10n.search,
-                      onChanged: onSearch,
-                      onFieldSubmitted: onFieldSubmitted,
-                    ),
-                    Expanded(
-                      child: RefreshIndicator(
-                        onRefresh: () async {
-                          await Future.sync(() => pagingController.refresh());
-                        },
-                        child: Column(
-                          children: [
-                            // Add custom items if provided
-                            if (customItems != null) ...customItems!,
-                            if (customItems != null)
-                              const Divider(thickness: 0.5),
-                            // Then show the regular list
-                            Expanded(
-                              child: PagedListView.separated(
-                                pagingController: pagingController,
-                                builderDelegate:
-                                    defaultListPagedChildBuilderDelegate(
-                                  context: context,
-                                  controller: pagingController,
-                                  itemBuilder: (context, item, index) {
-                                    final displayName = item.name ??
-                                        (settings == 'en'
-                                            ? (item.nameEn ?? item.name)
-                                            : (item.nameAr ?? item.name));
-                                    // RepaintBoundary isolates each row so
-                                    // scrolling doesn't force siblings to
-                                    // repaint. itemExtent is intentionally
-                                    // not used here: subtitle/leading are
-                                    // optional per item, so row height isn't
-                                    // uniform and a fixed extent would clip
-                                    // taller rows.
-                                    return RepaintBoundary(
-                                      child: ListTile(
-                                        title: Text(displayName),
-                                        subtitle:
-                                            subtitleBuilder?.call(item as T),
-                                        leading:
-                                            leadingBuilder?.call(item as T),
-                                        onTap: () => onSelect(item as T),
+                  child: Column(
+                    spacing: Insets.medium,
+                    children: [
+                      CustomTextFormField(
+                        prefixIcon: SvgPrefixIcon(img: 'search-01'),
+                        controller: searchController,
+                        hintText: context.l10n.search,
+                        onChanged: onSearch,
+                        onFieldSubmitted: onFieldSubmitted,
+                      ),
+                      Expanded(
+                        child: RefreshIndicator(
+                          onRefresh: () async {
+                            await Future.sync(() => pagingController.refresh());
+                          },
+                          child: Column(
+                            children: [
+                              // Add custom items if provided
+                              if (customItems != null) ...customItems!,
+                              if (customItems != null)
+                                const Divider(thickness: 0.5),
+                              // Then show the regular list
+                              Expanded(
+                                child: PagedListView.separated(
+                                  pagingController: pagingController,
+                                  builderDelegate:
+                                      defaultListPagedChildBuilderDelegate(
+                                        context: context,
+                                        controller: pagingController,
+                                        itemBuilder: (context, item, index) {
+                                          final displayName =
+                                              item.name ??
+                                              (settings == 'en'
+                                                  ? (item.nameEn ?? item.name)
+                                                  : (item.nameAr ?? item.name));
+                                          // RepaintBoundary isolates each row so
+                                          // scrolling doesn't force siblings to
+                                          // repaint. itemExtent is intentionally
+                                          // not used here: subtitle/leading are
+                                          // optional per item, so row height isn't
+                                          // uniform and a fixed extent would clip
+                                          // taller rows.
+                                          return RepaintBoundary(
+                                            child: ListTile(
+                                              title: Text(displayName),
+                                              subtitle: subtitleBuilder?.call(
+                                                item as T,
+                                              ),
+                                              leading: leadingBuilder?.call(
+                                                item as T,
+                                              ),
+                                              onTap: () => onSelect(item as T),
+                                            ),
+                                          );
+                                        },
                                       ),
-                                    );
+                                  separatorBuilder: (context, index) {
+                                    return const Divider(thickness: 0.5);
                                   },
                                 ),
-                                separatorBuilder: (context, index) {
-                                  return const Divider(thickness: 0.5);
-                                },
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ]),
+                    ],
+                  ),
                 ),
               ),
             ],

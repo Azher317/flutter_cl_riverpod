@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:app/core/models/_models.dart';
+import 'package:app/core/observability/app_logger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -71,7 +70,7 @@ extension PagingControllerX<ItemType> on PagingController<int, ItemType> {
           appendPage(page.result, nextPageKey);
         }
       } catch (e, stackTrace) {
-        log(toString(), error: error, stackTrace: stackTrace);
+        AppLogger.handle(e, stackTrace);
         error = e;
       }
     });

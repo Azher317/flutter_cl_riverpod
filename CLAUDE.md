@@ -58,6 +58,26 @@ Single `routerProvider` (`go_router`) in [lib/router/app_router.dart](lib/router
 ### Generated files
 `*.g.dart` and `*.freezed.dart` are generated and excluded from the analyzer — never edit them; change the source annotation and re-run build_runner.
 
+## Assets
+
+Assets in `assets/images/png/` and `assets/images/svg/` are referenced through generated constants in [lib/core/constants/assets.dart](lib/core/constants/assets.dart) (a lightweight standalone script, not `flutter_gen_runner`).
+
+**Usage:**
+```dart
+ImagePng(img: PngAssets.logo)
+ImageSvg(img: SvgAssets.home, color: Colors.red)
+```
+
+**When adding, renaming, or removing assets**, regenerate the constants:
+
+```bash
+dart run app:gen_assets
+```
+
+Non-ASCII filenames (e.g. Arabic) are skipped by the generator — reference those with raw strings.
+
+The generated file `lib/core/constants/assets.dart` is committed to the repo.
+
 ## Notes
 - New projects cloned from this template: follow the setup checklist in [README.md](README.md) (rename package via `change_app_package_name`, replace `package:app`, deep-link hosts, custom_lint activation, assetlinks).
 - Localization includes a hand-written Kurdish delegate (`lib/core/l10n/kurdish/`) layered on top of the generated `AppLocalizations`.

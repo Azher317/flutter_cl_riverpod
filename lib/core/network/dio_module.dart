@@ -4,11 +4,15 @@ import 'package:app/core/network/api_document.dart';
 import 'package:app/core/network/api_headers.dart';
 import 'package:app/core/network/authenticator.dart';
 import 'package:app/core/network/clients_lib.dart';
+import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/session/session_provider.dart';
-import 'package:awesome_dio_interceptor/awesome_dio_interceptor.dart';
 import 'package:flutter/foundation.dart';
+import 'package:talker_dio_logger/talker_dio_logger.dart';
 
 part 'dio_module.g.dart';
+
+bool _isAuthPath(String path) =>
+    path.contains('/auth'); // matches Endpoints.login = '/auth/login'
 
 @Riverpod(keepAlive: true)
 Dio dio(Ref ref) {
@@ -37,7 +41,8 @@ Dio dio(Ref ref) {
     ..interceptors.add(
       InterceptorsWrapper(
         onError: (e, handler) async {
-          final skipAuthLogout = e.requestOptions.extra['skipAuthLogout'] == true;
+          final skipAuthLogout =
+              e.requestOptions.extra['skipAuthLogout'] == true;
           if (e.response?.statusCode == 401 && !skipAuthLogout) {
             if (pendingLogout == null) {
               pendingLogout = Completer<void>();
@@ -53,12 +58,10 @@ Dio dio(Ref ref) {
           }
           switch (e.type) {
             case DioExceptionType.badCertificate:
-              break;
             case DioExceptionType.badResponse:
-              debugPrint(e.error.toString());
               break;
             case DioExceptionType.cancel:
-              debugPrint(e.message);
+              talker.warning(e.message ?? 'Request cancelled');
               break;
             case DioExceptionType.connectionError:
             case DioExceptionType.connectionTimeout:
@@ -89,6 +92,9 @@ Dio dio(Ref ref) {
                 data: {"data": {}, "message": message, "statusCode": 400},
                 statusMessage: e.message,
               );
+              // handler.reject short-circuits the interceptor chain, so the
+              // dio logger (added last) never sees this — log it explicitly.
+              talker.handle(e, e.stackTrace);
               handler.reject(
                 DioException(
                   requestOptions: e.requestOptions,
@@ -104,7 +110,48 @@ Dio dio(Ref ref) {
       ),
     );
 
-  if (kDebugMode) dio.interceptors.add(AwesomeDioInterceptor());
+  if (kDebugMode) {
+    dio.interceptors.add(
+      TalkerDioLogger(
+        talker: talker,
+        // Sensitive values are replaced with `*****` in request, response and
+        // error logs. To hide a new value, add its key below; to see a value in
+        // the clear while debugging, remove (or comment out) its key.
+        //
+        // `hiddenBodyKeys` matches the key as it appears in the JSON **on the
+        // wire**, not the Dart field name. This app has no `field_rename` (see
+        // core/annotations/json_serializable.dart), so the two happen to match
+        // today — but a field carrying `@JsonKey(name: 'access_token')` must be
+        // listed as `access_token`, not `accessToken`. Matching is
+        // case-insensitive but not snake/camel-aware, so a wrong spelling fails
+        // silently. Keys are matched at any depth, so `token` also covers the
+        // `data.token` nested inside the DefaultResponse envelope.
+        //
+        // Keys below that aren't in the schema yet (refresh/otp/…) are listed
+        // deliberately: over-masking a debug log is harmless, under-masking
+        // leaks. `phoneNumber` is intentionally left visible — it's PII, not a
+        // credential, and it's what makes an auth log useful.
+        settings: TalkerDioLoggerSettings(
+          printRequestHeaders: true,
+          printResponseHeaders: true,
+          hiddenHeaders: {
+            'authorization', // api_headers.dart, set by Authenticator
+            'cookie', 'set-cookie', // no cookie handling today; defensive
+          },
+          hiddenBodyKeys: {
+            // In the schema today:
+            'password', // LoginRequestModel
+            'token', // UserModel (login response), AuthenticationModel
+            // Not in the schema yet — masked pre-emptively:
+            'accessToken', 'access_token',
+            'refreshToken', 'refresh_token',
+            'otp', 'pin', 'secret',
+            'newPassword', 'oldPassword', 'confirmPassword',
+          },
+        ),
+      ),
+    );
+  }
 
   return dio;
 }
