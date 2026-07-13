@@ -1,9 +1,10 @@
+//TODO this widget need refactoring
+
 import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/theme/sizes.dart';
 import 'package:app/core/widgets/buttons/filled_loading_button.dart';
 import 'package:app/core/widgets/flex_padded.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -29,10 +30,7 @@ class CustomDialog extends HookConsumerWidget {
           gap: Insets.medium,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              titleText,
-              style: context.textTheme.titleLarge,
-            ),
+            Text(titleText, style: context.textTheme.titleLarge),
             ...children,
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -42,12 +40,13 @@ class CustomDialog extends HookConsumerWidget {
                   onPressed: onAdd,
                   child: const Text("إضافة"),
                 ),
-                const Gap(Insets.small),
+                const SizedBox(width: Insets.small),
                 FilledButton(
                   onPressed: context.pop,
                   style: FilledButton.styleFrom(
-                      backgroundColor: context.colorScheme.error,
-                      foregroundColor: context.colorScheme.onError),
+                    backgroundColor: context.colorScheme.error,
+                    foregroundColor: context.colorScheme.onError,
+                  ),
                   child: const Text("الغاء"),
                 ),
               ],

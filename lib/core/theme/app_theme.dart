@@ -5,16 +5,6 @@ import 'package:flutter/material.dart';
 class AppTheme {
   const AppTheme._();
 
-  // Bundled locally instead of GoogleFonts' runtime-fetched
-  // notoSansArabicTextTheme, which downloads the font file over the network
-  // on first launch and can flash a fallback font or fail outright offline.
-  // Requires the .ttf assets + this pubspec.yaml entry in the real app repo:
-  //   fonts:
-  //     - family: NotoSansArabic
-  //       fonts:
-  //         - asset: assets/fonts/NotoSansArabic-Regular.ttf
-  //         - asset: assets/fonts/NotoSansArabic-Bold.ttf
-  //           weight: 700
   static const String _fontFamily = 'NotoSansArabic';
 
   static const Color _seedColor = Color(0xFFEE4266);

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class ColumnPadded extends Column {
   ColumnPadded({
@@ -13,13 +12,13 @@ class ColumnPadded extends Column {
     super.textDirection,
     super.verticalDirection,
   }) : super(
-          children: [
-            for (var i = 0; i < children.length; i++) ...[
-              children[i],
-              if (i != children.length - 1) Gap(gap),
-            ]
-          ],
-        );
+         children: [
+           for (var i = 0; i < children.length; i++) ...[
+             children[i],
+             if (i != children.length - 1) SizedBox(height: gap),
+           ],
+         ],
+       );
 }
 
 class RowPadded extends Row {
@@ -34,13 +33,13 @@ class RowPadded extends Row {
     super.textDirection,
     super.verticalDirection,
   }) : super(
-          children: [
-            for (var i = 0; i < children.length; i++) ...[
-              children[i],
-              if (i != children.length - 1) Gap(gap),
-            ]
-          ],
-        );
+         children: [
+           for (var i = 0; i < children.length; i++) ...[
+             children[i],
+             if (i != children.length - 1) SizedBox(width: gap),
+           ],
+         ],
+       );
 }
 
 class FlexPadded extends Flex {
@@ -56,11 +55,15 @@ class FlexPadded extends Flex {
     super.textDirection,
     super.verticalDirection,
   }) : super(
-          children: [
-            for (var i = 0; i < children.length; i++) ...[
-              children[i],
-              if (i != children.length - 1) Gap(gap),
-            ]
-          ],
-        );
+         children: [
+           for (var i = 0; i < children.length; i++) ...[
+             children[i],
+             if (i != children.length - 1)
+               SizedBox(
+                 width: direction == Axis.horizontal ? gap : null,
+                 height: direction == Axis.vertical ? gap : null,
+               ),
+           ],
+         ],
+       );
 }

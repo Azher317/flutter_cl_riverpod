@@ -36,10 +36,7 @@ class DefaultErrorWidget extends StatelessWidget {
             ),
             if (onRetry != null) ...[
               const SizedBox(height: Insets.large),
-              FilledButton(
-                onPressed: onRetry,
-                child: Text(context.l10n.retry),
-              ),
+              FilledButton(onPressed: onRetry, child: Text(context.l10n.retry)),
             ],
           ],
         ),

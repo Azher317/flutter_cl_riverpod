@@ -7,7 +7,6 @@ import 'package:app/core/widgets/break_line.dart';
 import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:app/core/widgets/svg_prefix_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -52,9 +51,9 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Gap(Insets.medium),
+              const SizedBox(height: Insets.medium),
               BreakLine(),
-              const Gap(Insets.medium),
+              const SizedBox(height: Insets.medium),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
                 child: Text(
@@ -64,7 +63,7 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                   ),
                 ),
               ),
-              const Gap(Insets.medium),
+              const SizedBox(height: Insets.medium),
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(
@@ -97,7 +96,7 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                           child: Column(
                             children: [
                               // Add custom items if provided
-                              if (customItems != null) ...customItems!,
+                              ...?customItems,
                               if (customItems != null)
                                 const Divider(thickness: 0.5),
                               // Then show the regular list

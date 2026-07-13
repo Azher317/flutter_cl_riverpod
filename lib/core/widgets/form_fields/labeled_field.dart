@@ -1,7 +1,6 @@
 import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/theme/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class LabeledField extends StatelessWidget {
   const LabeledField({super.key, required this.label, required this.items});
@@ -21,12 +20,12 @@ class LabeledField extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        Gap(Insets.medium),
+        SizedBox(height: Insets.medium),
         Column(
           children: [
             for (int i = 0; i < items.length; i++) ...[
               items[i],
-              if (i < items.length - 1) Gap(Insets.medium),
+              if (i < items.length - 1) SizedBox(width: Insets.medium),
             ],
           ],
         ),

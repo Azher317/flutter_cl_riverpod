@@ -25,14 +25,20 @@ class EmptyState extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(icon, size: IconSize.extraLarge, color: scheme.onSurfaceVariant),
+            Icon(
+              icon,
+              size: IconSize.extraLarge,
+              color: scheme.onSurfaceVariant,
+            ),
             const SizedBox(height: Insets.medium),
             Text(title, style: text.titleMedium, textAlign: TextAlign.center),
             if (message != null) ...[
               const SizedBox(height: Insets.small),
               Text(
                 message!,
-                style: text.bodyMedium?.copyWith(color: scheme.onSurfaceVariant),
+                style: text.bodyMedium?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
                 textAlign: TextAlign.center,
               ),
             ],
