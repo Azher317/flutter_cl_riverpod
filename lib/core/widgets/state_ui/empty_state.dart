@@ -1,4 +1,4 @@
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/widgets/state_ui/state_message.dart';
 import 'package:flutter/material.dart';
 
 class EmptyState extends StatelessWidget {
@@ -17,38 +17,11 @@ class EmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scheme = Theme.of(context).colorScheme;
-    final text = Theme.of(context).textTheme;
-    return Center(
-      child: Padding(
-        padding: Insets.largeAll,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              size: IconSize.extraLarge,
-              color: scheme.onSurfaceVariant,
-            ),
-            const SizedBox(height: Insets.medium),
-            Text(title, style: text.titleMedium, textAlign: TextAlign.center),
-            if (message != null) ...[
-              const SizedBox(height: Insets.small),
-              Text(
-                message!,
-                style: text.bodyMedium?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-            if (action != null) ...[
-              const SizedBox(height: Insets.large),
-              action!,
-            ],
-          ],
-        ),
-      ),
+    return StateMessage(
+      icon: icon,
+      title: title,
+      message: message,
+      action: action,
     );
   }
 }

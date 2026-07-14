@@ -1,5 +1,5 @@
 import 'package:app/core/extensions/theme_extentions.dart';
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -37,35 +37,35 @@ class RoundedButton extends StatelessWidget {
             child: Center(
               child: svgPath != null
                   ? count !=
-                          null // <- Use count to conditionally render Badge.count
-                      ? Badge.count(
-                          count: count!,
-                          alignment: Alignment.topLeft,
-                          backgroundColor: hasBadge
-                              ? context.colorScheme.primary
-                              : Colors.transparent,
-                          child: SvgPicture.asset(
-                            svgPath!,
-                            // ignore: deprecated_member_use
-                            color: iconColor,
-                            height: iconSize,
-                            width: iconSize,
-                          ),
-                        )
-                      : Badge(
-                          alignment: Alignment.topRight,
-                          smallSize: 10,
-                          backgroundColor: hasBadge
-                              ? context.colorScheme.primary
-                              : Colors.transparent,
-                          child: SvgPicture.asset(
-                            svgPath!,
-                            // ignore: deprecated_member_use
-                            color: iconColor,
-                            height: iconSize,
-                            width: iconSize,
-                          ),
-                        )
+                            null // <- Use count to conditionally render Badge.count
+                        ? Badge.count(
+                            count: count!,
+                            alignment: Alignment.topLeft,
+                            backgroundColor: hasBadge
+                                ? context.colorScheme.primary
+                                : Colors.transparent,
+                            child: SvgPicture.asset(
+                              svgPath!,
+                              // ignore: deprecated_member_use
+                              color: iconColor,
+                              height: iconSize,
+                              width: iconSize,
+                            ),
+                          )
+                        : Badge(
+                            alignment: Alignment.topRight,
+                            smallSize: 10,
+                            backgroundColor: hasBadge
+                                ? context.colorScheme.primary
+                                : Colors.transparent,
+                            child: SvgPicture.asset(
+                              svgPath!,
+                              // ignore: deprecated_member_use
+                              color: iconColor,
+                              height: iconSize,
+                              width: iconSize,
+                            ),
+                          )
                   : Badge(
                       alignment: Alignment.topRight,
                       smallSize: 10,

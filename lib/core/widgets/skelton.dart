@@ -1,10 +1,11 @@
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 /// Shared shimmer sweep logic for skeleton placeholders: one
 /// [AnimationController] per widget, theme-driven colors, wrapped in a
 /// [RepaintBoundary] so the sweep doesn't repaint sibling widgets.
-mixin _ShimmerSweep<T extends StatefulWidget> on State<T>, SingleTickerProviderStateMixin<T> {
+mixin _ShimmerSweep<T extends StatefulWidget>
+    on State<T>, SingleTickerProviderStateMixin<T> {
   late final AnimationController shimmerController = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 1200),
@@ -45,7 +46,12 @@ mixin _ShimmerSweep<T extends StatefulWidget> on State<T>, SingleTickerProviderS
 }
 
 class CustomSkeleton extends StatefulWidget {
-  const CustomSkeleton({super.key, this.height, this.width, this.radius = BorderSize.small});
+  const CustomSkeleton({
+    super.key,
+    this.height,
+    this.width,
+    this.radius = BorderSize.small,
+  });
 
   final double? height, width;
   final double radius;

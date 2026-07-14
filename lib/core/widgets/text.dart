@@ -1,3 +1,4 @@
+import 'package:app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
@@ -35,7 +36,7 @@ class CustomText extends StatelessWidget {
     TextDecoration? decoration,
   }) {
     return TextStyle(
-      fontFamily: 'NotoSansArabic',
+      fontFamily: AppTheme.fontFamily,
       fontSize: fontSize ?? 14,
       fontWeight: fontWeight ?? FontWeight.w500,
       color: color,
@@ -59,10 +60,9 @@ class CustomText extends StatelessWidget {
       softWrap: true,
       maxLines: maxLines ?? 100,
       overflow: overflow,
-      style: TextStyle(
-        fontFamily: 'NotoSansArabic',
-        fontSize: fontSize ?? 14,
-        fontWeight: fontWeight ?? FontWeight.w500,
+      style: CustomText.textStyle(
+        fontSize: fontSize,
+        fontWeight: fontWeight,
         color: color,
         decoration: decoration,
         height: height,

@@ -1,12 +1,9 @@
-import 'package:app/core/theme/sizes.dart';
-import 'package:app/core/widgets/skelton.dart';
+import 'package:app/core/constants/sizes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-/// Network image that (a) decodes at display size to save memory instead of
-/// decoding full-resolution source images into a small widget, and
-/// (b) shows a shimmer placeholder + graceful error consistently app-wide.
-class CachedImage extends StatelessWidget {
+class CachedImage extends StatefulWidget {
   const CachedImage(
     this.url, {
     super.key,
@@ -15,43 +12,100 @@ class CachedImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     this.radius = BorderSize.small,
     this.devicePixelRatioCap = 2.0,
+    this.cacheKey,
+    this.semanticLabel,
   });
 
-  final String url;
+  final String? url;
   final double? width;
   final double? height;
   final BoxFit fit;
   final double radius;
   final double devicePixelRatioCap;
 
+  /// Pass a stable key when [url] carries expiring/signed query params, so the
+  /// same asset maps to one cache entry instead of re-downloading each time.
+  final String? cacheKey;
+
+  final String? semanticLabel;
+
+  @override
+  State<CachedImage> createState() => _CachedImageState();
+}
+
+class _CachedImageState extends State<CachedImage> {
+  int _retryCount = 0;
+
   @override
   Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final borderRadius = BorderRadius.circular(widget.radius);
+
+    // Null/blank URL never touches the network — show the error box directly.
+    final resolved = widget.url?.trim();
+    if (resolved == null || resolved.isEmpty) {
+      return ClipRRect(borderRadius: borderRadius, child: _errorBox(scheme));
+    }
+
     final dpr = MediaQuery.devicePixelRatioOf(
       context,
-    ).clamp(1.0, devicePixelRatioCap);
-    // Decode target in physical pixels; null lets that axis stay intrinsic.
-    final int? memW = width == null ? null : (width! * dpr).round();
-    final int? memH = height == null ? null : (height! * dpr).round();
+    ).clamp(1.0, widget.devicePixelRatioCap);
+    final int? memCacheWidth = widget.width == null
+        ? null
+        : (widget.width! * dpr).round();
+    final int? memCacheHeight = widget.height == null
+        ? null
+        : (widget.height! * dpr).round();
 
     return ClipRRect(
-      borderRadius: BorderRadius.circular(radius),
-      child: CachedNetworkImage(
-        imageUrl: url,
-        width: width,
-        height: height,
-        fit: fit,
-        memCacheWidth: memW,
-        memCacheHeight: memH,
-        placeholder: (_, _) =>
-            CustomSkeleton(width: width, height: height, radius: radius),
-        errorWidget: (context, _, _) => ColoredBox(
-          color: Theme.of(context).colorScheme.surfaceContainerHighest,
-          child: Icon(
-            Icons.broken_image_outlined,
-            color: Theme.of(context).colorScheme.onSurfaceVariant,
-          ),
+      borderRadius: borderRadius,
+      child: Semantics(
+        image: true,
+        label: widget.semanticLabel,
+        child: CachedNetworkImage(
+          key: ValueKey(_retryCount),
+          imageUrl: resolved,
+          cacheKey: widget.cacheKey,
+          width: widget.width,
+          height: widget.height,
+          fit: widget.fit,
+          memCacheWidth: memCacheWidth,
+          memCacheHeight: memCacheHeight,
+          fadeInDuration: Duration.zero,
+          placeholderFadeInDuration: Duration.zero,
+          placeholder: (context, _) => _skeleton(),
+          errorWidget: (context, _, _) =>
+              _errorBox(scheme, onRetry: () => setState(() => _retryCount++)),
         ),
       ),
     );
   }
+
+  Widget _errorBox(ColorScheme scheme, {VoidCallback? onRetry}) => ColoredBox(
+    color: scheme.surfaceContainerHighest,
+    child: Center(
+      child: GestureDetector(
+        onTap: onRetry,
+        child: Icon(
+          Icons.broken_image_outlined,
+          color: scheme.onSurfaceVariant,
+        ),
+      ),
+    ),
+  );
+
+  Widget _skeleton() => Skeletonizer(
+    enabled: true,
+    child: LayoutBuilder(
+      builder: (context, constraints) => Bone(
+        width: constraints.hasBoundedWidth
+            ? constraints.maxWidth
+            : widget.width ?? 74,
+        height: constraints.hasBoundedHeight
+            ? constraints.maxHeight
+            : widget.height ?? 74,
+        borderRadius: BorderRadius.circular(widget.radius),
+      ),
+    ),
+  );
 }

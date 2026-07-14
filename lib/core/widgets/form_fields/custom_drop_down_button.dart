@@ -1,5 +1,3 @@
-import 'package:app/core/extensions/theme_extentions.dart';
-import 'package:app/core/theme/sizes.dart';
 import 'package:flutter/material.dart';
 
 class CustomDropdownButtonFormField<T> extends StatelessWidget {
@@ -15,7 +13,6 @@ class CustomDropdownButtonFormField<T> extends StatelessWidget {
     required this.onChanged,
     this.hintStyle,
     this.alignment,
-    this.borderRadius,
   });
 
   final String hintText;
@@ -27,7 +24,6 @@ class CustomDropdownButtonFormField<T> extends StatelessWidget {
   final List<DropdownMenuItem<T>>? items;
   final T? value;
   final AlignmentGeometry? alignment;
-  final double? borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +32,9 @@ class CustomDropdownButtonFormField<T> extends StatelessWidget {
       value: value,
       items: items,
       decoration: InputDecoration(
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? BorderSize.small),
-          borderSide: BorderSide(color: context.colorScheme.outline),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? BorderSize.small),
-          borderSide: BorderSide(color: context.colorScheme.outline),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? BorderSize.small),
-          borderSide: BorderSide(color: context.colorScheme.error),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(borderRadius ?? BorderSize.small),
-          borderSide: BorderSide(color: context.colorScheme.error),
-        ),
         fillColor: fillColor,
         hintText: hintText,
-        hintStyle: hintStyle ??
-            context.textTheme.bodyLarge?.copyWith(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-            ),
+        hintStyle: hintStyle,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
       ),

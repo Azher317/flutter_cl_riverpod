@@ -1,6 +1,6 @@
 import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/extensions/theme_extentions.dart';
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/widgets/state_ui/state_message.dart';
 import 'package:flutter/material.dart';
 
 class DefaultErrorWidget extends StatelessWidget {
@@ -17,30 +17,13 @@ class DefaultErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        padding: Insets.largeAll,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.error_outline,
-              size: IconSize.extraLarge,
-              color: context.colorScheme.error,
-            ),
-            const SizedBox(height: Insets.medium),
-            Text(
-              context.l10n.defaultErrorMessage,
-              style: context.textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            ),
-            if (onRetry != null) ...[
-              const SizedBox(height: Insets.large),
-              FilledButton(onPressed: onRetry, child: Text(context.l10n.retry)),
-            ],
-          ],
-        ),
-      ),
+    return StateMessage(
+      icon: Icons.error_outline,
+      iconColor: context.colorScheme.error,
+      title: context.l10n.defaultErrorMessage,
+      action: onRetry == null
+          ? null
+          : FilledButton(onPressed: onRetry, child: Text(context.l10n.retry)),
     );
   }
 }

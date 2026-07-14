@@ -1,7 +1,7 @@
 import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/extensions/date_time_extensions.dart';
 import 'package:app/core/extensions/theme_extentions.dart';
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class CustomTimePickerFormField extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/pagination/paging_list_delegate.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/constants/sizes.dart';
 import 'package:app/core/widgets/break_line.dart';
 import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:app/core/widgets/svg_prefix_icon.dart';

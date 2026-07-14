@@ -1,7 +1,7 @@
 //TODO this widget need refactoring
 
 import 'package:app/core/extensions/theme_extentions.dart';
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/constants/sizes.dart';
 import 'package:app/core/widgets/buttons/filled_loading_button.dart';
 import 'package:app/core/widgets/flex_padded.dart';
 import 'package:flutter/material.dart';

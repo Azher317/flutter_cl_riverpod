@@ -1,15 +1,18 @@
+import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/extensions/theme_extentions.dart';
+import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class PasswordFormField extends StatefulWidget {
-  const PasswordFormField(
-      {super.key,
-      required this.controller,
-      this.label,
-      this.hint,
-      this.validator,
-      this.focusNode,
-      this.onFieldSubmitted});
+  const PasswordFormField({
+    super.key,
+    required this.controller,
+    this.label,
+    this.hint,
+    this.validator,
+    this.focusNode,
+    this.onFieldSubmitted,
+  });
 
   final TextEditingController controller;
   final String? label;
@@ -24,37 +27,24 @@ class PasswordFormField extends StatefulWidget {
 
 class _PasswordFormFieldState extends State<PasswordFormField> {
   bool isObscure = true;
+
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return CustomTextFormField(
       controller: widget.controller,
       focusNode: widget.focusNode,
       onFieldSubmitted: widget.onFieldSubmitted,
-      decoration: InputDecoration(
-        hintText: widget.hint ?? 'الرمز السري',
-        suffixIcon: isObscure
-            ? IconButton(
-                onPressed: () {
-                  setState(() {
-                    isObscure = !isObscure;
-                  });
-                },
-                icon: Icon(Icons.visibility_off,
-                    color: context.colorScheme.onSurfaceVariant),
-              )
-            : IconButton(
-                onPressed: () {
-                  setState(() {
-                    isObscure = !isObscure;
-                  });
-                },
-                icon: Icon(Icons.visibility,
-                    color: context.colorScheme.onSurfaceVariant),
-              ),
-      ),
+      hintText: widget.hint ?? context.l10n.typeYourPasswordHere,
+      labelText: widget.label,
       obscureText: isObscure,
       validator: widget.validator,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
+      suffixIcon: IconButton(
+        onPressed: () => setState(() => isObscure = !isObscure),
+        icon: Icon(
+          isObscure ? Icons.visibility_off : Icons.visibility,
+          color: context.colorScheme.onSurfaceVariant,
+        ),
+      ),
     );
   }
 }

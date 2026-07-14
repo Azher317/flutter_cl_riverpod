@@ -1,11 +1,16 @@
 import 'package:app/core/extensions/theme_extentions.dart';
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class DirectionalIcon extends StatelessWidget {
-  const DirectionalIcon(
-      {super.key, this.icon, this.iconColor, required this.iconSize, this.svg});
+  const DirectionalIcon({
+    super.key,
+    this.icon,
+    this.iconColor,
+    required this.iconSize,
+    this.svg,
+  });
 
   final IconData? icon;
   final Color? iconColor;
