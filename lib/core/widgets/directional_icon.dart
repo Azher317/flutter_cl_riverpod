@@ -1,7 +1,7 @@
 import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/constants/sizes.dart';
+import 'package:app/core/widgets/image/image_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class DirectionalIcon extends StatelessWidget {
   const DirectionalIcon({
@@ -9,13 +9,13 @@ class DirectionalIcon extends StatelessWidget {
     this.icon,
     this.iconColor,
     required this.iconSize,
-    this.svg,
+    this.img,
   });
 
   final IconData? icon;
   final Color? iconColor;
   final double? iconSize;
-  final String? svg;
+  final String? img;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class DirectionalIcon extends StatelessWidget {
       transform: Directionality.of(context) == TextDirection.ltr
           ? Matrix4.rotationY(3.1416)
           : Matrix4.identity(),
-      child: svg != null
-          ? SvgPicture.asset(
-              svg!,
+      child: img != null
+          ? ImageSvg(
+              img: img!,
               height: iconSize,
               width: iconSize,
               color: iconColor ?? context.colorScheme.primary,

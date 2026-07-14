@@ -1,5 +1,6 @@
 import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/extensions/theme_extentions.dart';
+import 'package:app/core/l10n/localized_name.dart';
 import 'package:app/core/pagination/paging_list_delegate.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
 import 'package:app/core/constants/sizes.dart';
@@ -108,11 +109,10 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                                         context: context,
                                         controller: pagingController,
                                         itemBuilder: (context, item, index) {
-                                          final displayName =
-                                              item.name ??
-                                              (settings == 'en'
-                                                  ? (item.nameEn ?? item.name)
-                                                  : (item.nameAr ?? item.name));
+                                          final displayName = localizedName(
+                                            item,
+                                            settings,
+                                          );
                                           // RepaintBoundary isolates each row so
                                           // scrolling doesn't force siblings to
                                           // repaint. itemExtent is intentionally

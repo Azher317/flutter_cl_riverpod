@@ -87,26 +87,3 @@ class FormBody extends StatelessWidget {
     return current;
   }
 }
-
-class Body extends StatelessWidget {
-  const Body({
-    super.key,
-    required this.children,
-  });
-
-  final List<Widget> children;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ColumnPadded(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: children,
-        ),
-      ),
-    );
-  }
-}

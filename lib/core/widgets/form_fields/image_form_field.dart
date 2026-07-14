@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:app/core/extensions/common_extensions.dart';
-import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/media/image_service.dart';
 import 'package:app/core/constants/sizes.dart';
 import 'package:app/core/widgets/flex_padded.dart';
@@ -86,11 +85,7 @@ class ImageFormField extends StatelessWidget {
                             if (hintText != null) ...[
                               Text(
                                 hintText!,
-                                style: context.textTheme.bodyLarge?.copyWith(
-                                  color: context.colorScheme.onSurfaceVariant,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                                style: theme.inputDecorationTheme.hintStyle,
                               ),
                             ],
                             Icon(
