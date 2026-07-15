@@ -1,10 +1,10 @@
+import 'package:app/core/constants/sizes.dart';
 import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/extensions/theme_extentions.dart';
-import 'package:app/core/constants/sizes.dart';
 import 'package:app/core/widgets/break_line.dart';
 import 'package:flutter/material.dart';
 
-Future<dynamic> customModalBottomSheet<T>(
+Future<dynamic> customModalBottomSheet(
   BuildContext context, {
   bool isDismissible = true,
   bool isScrollControlled = false,

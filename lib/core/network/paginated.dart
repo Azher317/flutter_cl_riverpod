@@ -1,42 +1,28 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class Paginated<T extends dynamic> {
-  final List<T> result;
+/// Shape every paginated payload exposes to [PaginatedExtension.addItems],
+/// regardless of the wire format it was parsed from (see [PaginatedResponse]).
+abstract interface class Paginated<T> {
+  List<T> get result;
 
-  final int total;
-
-  const Paginated({
-    required this.result,
-    required this.total,
-  });
+  int get total;
 }
 
 const int defaultLimitSize = 25;
 const int firstPage = 1;
 
-extension PaginatedExtension on PagingController {
-  // skip limit
-  void addItems<T>(
-    Paginated<T> data,
-    int pageKey, [
-    int limitSize = defaultLimitSize,
-  ]) {
-    final isLastPage = (itemList ?? []).length + limitSize >= data.total;
+extension PaginatedExtension<T> on PagingController<int, T> {
+  /// Appends [data] to the controller, deciding whether it was the final page
+  /// from the items actually returned — never from an assumed page size. A
+  /// short page (fewer rows than requested) or an empty page therefore closes
+  /// the list instead of drifting or looping.
+  void addItems(Paginated<T> data, int pageKey) {
+    final loaded = (itemList?.length ?? 0) + data.result.length;
+    final isLastPage = data.result.isEmpty || loaded >= data.total;
     if (isLastPage) {
       appendLastPage(data.result);
     } else {
-      final nextPageKey = pageKey + 1;
-      appendPage(data.result, nextPageKey);
+      appendPage(data.result, pageKey + 1);
     }
-  }
-}
-
-extension PaginatedResultState<T> on AsyncValue<Paginated<T>> {
-  void handleState(PagingController<int, T> controller, int page) {
-    whenOrNull(
-      data: (data) => controller.addItems(data, page),
-      error: (error, state) => controller.error = error,
-    );
   }
 }
