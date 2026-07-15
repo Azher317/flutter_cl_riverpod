@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 /// Single Talker instance for the whole app — HTTP, Riverpod, framework
@@ -8,12 +7,7 @@ import 'package:talker_flutter/talker_flutter.dart';
 /// [PagingControllerX]) have no [Ref] to read a provider from.
 final talker = TalkerFlutter.init(
   settings: TalkerSettings(
-    // Verbose/info logs are debug-only noise; error/critical stay on so
-    // release crashes are still captured.
-    enabled: true,
-    useConsoleLogs: kDebugMode,
-    useHistory: kDebugMode,
-    maxHistoryItems: kDebugMode ? 1000 : 100,
+    
   ),
   // Riverpod add/update/dispose/fail logs are noisy by default; start with
   // them off in the "Packages settings" sheet, toggle back on when needed.
@@ -33,8 +27,6 @@ final talker = TalkerFlutter.init(
 /// history, not this one.
 final routeTalker = TalkerFlutter.init(
   settings: TalkerSettings(
-    enabled: kDebugMode,
-    useConsoleLogs: kDebugMode,
     useHistory: false,
   ),
 );

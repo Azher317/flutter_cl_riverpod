@@ -1,95 +1,70 @@
+import 'package:app/core/constants/sizes.dart';
 import 'package:app/core/extensions/common_extensions.dart';
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/flex_padded.dart';
+import 'package:app/core/widgets/state_ui/empty_state.dart';
+import 'package:app/core/widgets/state_ui/state_message.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-PagedChildBuilderDelegate<ItemType>
-    defaultListPagedChildBuilderDelegate<ItemType>({
-  required BuildContext context,
-  required PagingController<int, ItemType> controller,
-  required ItemWidgetBuilder<ItemType> itemBuilder,
-}) {
-  final theme = Theme.of(context);
+Widget _pageLoader(BuildContext context) => const Center(
+  child: Padding(
+    padding: Insets.mediumAll,
+    child: CircularProgressIndicator(),
+  ),
+);
 
-  return PagedChildBuilderDelegate<ItemType>(
-    itemBuilder: itemBuilder,
-    animateTransitions: true,
-    transitionDuration: Time.small,
-    firstPageErrorIndicatorBuilder: (context) {
-      return Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ColumnPadded(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                context.l10n.defaultErrorMessage,
-                textAlign: TextAlign.center,
-                style: theme.textTheme.titleLarge,
-              ),
-              FilledButton(
-                onPressed: controller.refresh,
-                child: Text(context.l10n.retry),
-              )
-            ],
-          ),
-        ),
-      );
-    },
-    newPageErrorIndicatorBuilder: (context) {
-      return InkWell(
-        onTap: () {
-          controller.retryLastFailedRequest();
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ColumnPadded(
-            children: [
-              Text(
-                context.l10n.defaultErrorMessage,
-                textAlign: TextAlign.center,
-              ),
-              const Icon(Icons.refresh),
-            ],
-          ),
-        ),
-      );
-    },
-    firstPageProgressIndicatorBuilder: (context) {
-      return const Center(
-        child: Padding(
-          padding: Insets.mediumAll,
-          child: CircularProgressIndicator(),
-        ),
-      );
-    },
-    newPageProgressIndicatorBuilder: (context) {
-      return const Center(
-        child: Padding(
-          padding: Insets.mediumAll,
-          child: CircularProgressIndicator(),
-        ),
-      );
-    },
-    noItemsFoundIndicatorBuilder: (context) {
-      return ColumnPadded(
-        children: [
-          Text(
-            context.l10n.noItemsFoundError,
-            style: theme.textTheme.titleLarge,
-          ),
-          // todo: Add image or change filter button
-          FilledButton(
-            onPressed: controller.refresh,
+extension PagingListDelegateX<ItemType> on PagingController<int, ItemType> {
+  /// App-wide default set of loading / error / empty indicators for a paged
+  /// list. Being an extension on the controller, it cannot be handed a
+  /// controller of a different type by mistake.
+  PagedChildBuilderDelegate<ItemType> defaultListDelegate({
+    required BuildContext context,
+    required ItemWidgetBuilder<ItemType> itemBuilder,
+  }) {
+    return PagedChildBuilderDelegate<ItemType>(
+      itemBuilder: itemBuilder,
+      animateTransitions: true,
+      transitionDuration: Time.small,
+      firstPageErrorIndicatorBuilder: (context) {
+        return StateMessage(
+          icon: Icons.error_outline,
+          iconColor: context.colorScheme.error,
+          title: context.l10n.defaultErrorMessage,
+          action: FilledButton(
+            onPressed: refresh,
             child: Text(context.l10n.retry),
-          )
-        ],
-      );
-    },
-    noMoreItemsIndicatorBuilder: (context) {
-      return const SizedBox.shrink();
-    },
-  );
+          ),
+        );
+      },
+      newPageErrorIndicatorBuilder: (context) {
+        return InkWell(
+          onTap: retryLastFailedRequest,
+          child: Padding(
+            padding: Insets.smallAll,
+            child: ColumnPadded(
+              children: [
+                Text(
+                  context.l10n.defaultErrorMessage,
+                  textAlign: TextAlign.center,
+                ),
+                const Icon(Icons.refresh),
+              ],
+            ),
+          ),
+        );
+      },
+      firstPageProgressIndicatorBuilder: _pageLoader,
+      newPageProgressIndicatorBuilder: _pageLoader,
+      noItemsFoundIndicatorBuilder: (context) {
+        return EmptyState(
+          title: context.l10n.noItemsFoundError,
+          action: FilledButton(
+            onPressed: refresh,
+            child: Text(context.l10n.retry),
+          ),
+        );
+      },
+    );
+  }
 }

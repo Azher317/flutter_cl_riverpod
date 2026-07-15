@@ -15,7 +15,7 @@ class SvgPrefixIcon extends StatelessWidget {
     return Center(
       widthFactor: 1,
       child: Padding(
-        padding: EdgeInsetsDirectional.only(
+        padding: const EdgeInsetsDirectional.only(
           start: Insets.medium,
           end: Insets.extraSmall,
         ),
@@ -24,7 +24,6 @@ class SvgPrefixIcon extends StatelessWidget {
           height: size ?? 24,
           child: ImageSvg(
             img: img,
-            fit: BoxFit.contain,
             color: color ?? context.colorScheme.primary,
           ),
         ),

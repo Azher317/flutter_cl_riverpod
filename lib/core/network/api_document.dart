@@ -1,7 +1,7 @@
 abstract class ApiDocument {
   const ApiDocument._();
-  static const baseUrl = "https://tafly-api.taco5k.site/api/user";
-  static const mediaUrl = "https://tafly-api.taco5k.site/";
+  static const baseUrl = 'https://tafly-api.taco5k.site/api/user';
+  static const mediaUrl = 'https://tafly-api.taco5k.site/';
 
   static String? resolveMediaPath(String? path) {
     if (path == null || path.trim().isEmpty) return null;

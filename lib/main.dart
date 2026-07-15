@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:app/app.dart';
 import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/session/session_provider.dart';
+import 'package:app/core/storage/shared_preferences_provider.dart';
 import 'package:app/features/auth/presentation/notifiers/auth_session_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:app/core/storage/shared_preferences_provider.dart';
 import 'package:talker_riverpod_logger/talker_riverpod_logger.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -40,11 +40,8 @@ Future<void> main() async {
           TalkerRiverpodObserver(
             talker: talker,
             settings: const TalkerRiverpodLoggerSettings(
-              enabled: true,
               printProviderAdded: false,
               printProviderUpdated: false,
-              printProviderDisposed: false,
-              printProviderFailed: true,
             ),
           ),
         ],

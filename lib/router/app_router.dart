@@ -1,8 +1,8 @@
+import 'package:app/core/observability/app_logger.dart';
 import 'package:app/features/auth/presentation/notifiers/auth_session_provider.dart';
 import 'package:app/features/auth/presentation/screens/login_screen.dart';
 import 'package:app/features/home/presentation/screens/home_screen.dart';
 import 'package:app/features/splash/presentation/screens/splash_screen.dart';
-import 'package:app/core/observability/app_logger.dart';
 import 'package:app/router/router_refresh_notifier.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +24,6 @@ final routerProvider = Provider<GoRouter>((ref) {
   final refreshNotifier = RouterRefreshNotifier(ref);
 
   final router = GoRouter(
-    debugLogDiagnostics: false,
     initialLocation: RoutesDocument.splash,
     navigatorKey: _rootNavigatorKey,
     refreshListenable: refreshNotifier,

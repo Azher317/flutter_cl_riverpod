@@ -1,3 +1,4 @@
+import 'package:app/core/extensions/string_extensions.dart';
 import 'package:app/core/models/phone_number.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,11 +23,11 @@ class NullablePhoneNumberConvertor
 
   @override
   PhoneNumber? fromJson(String? json) {
-    if (json == null || json.isEmpty) return null;
+    if (json.isNullOrBlank) return null;
 
-    if (json.startsWith(iraqiPhoneNumberStarter)) {
+    if (json!.startsWith(iraqiPhoneNumberStarter)) {
       return iraqiPhoneNumber.copyWith(
-        number: json.replaceRange(0, 1, ""),
+        number: json.replaceRange(0, 1, ''),
       );
     }
 

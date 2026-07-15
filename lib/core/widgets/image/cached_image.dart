@@ -95,7 +95,6 @@ class _CachedImageState extends State<CachedImage> {
   );
 
   Widget _skeleton() => Skeletonizer(
-    enabled: true,
     child: LayoutBuilder(
       builder: (context, constraints) => Bone(
         width: constraints.hasBoundedWidth

@@ -1,7 +1,7 @@
+import 'package:app/core/constants/sizes.dart';
 import 'package:app/core/errors/failures.dart';
 import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/messaging/snackbar.dart';
-import 'package:app/core/constants/sizes.dart';
 import 'package:app/features/auth/presentation/notifiers/login_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -14,7 +14,7 @@ class LoginScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final phoneController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final formKey = useMemoized(() => GlobalKey<FormState>());
+    final formKey = useMemoized(GlobalKey<FormState>.new);
 
     final loginState = ref.watch(loginProvider);
     final isLoading = loginState.isLoading;
@@ -62,7 +62,7 @@ class LoginScreen extends HookConsumerWidget {
                         ? context.l10n.fieldRequired
                         : null,
                   ),
-                  SizedBox(height: Insets.medium),
+                  const SizedBox(height: Insets.medium),
                   TextFormField(
                     controller: passwordController,
                     obscureText: true,
@@ -73,7 +73,7 @@ class LoginScreen extends HookConsumerWidget {
                         ? context.l10n.fieldRequired
                         : null,
                   ),
-                  SizedBox(height: Insets.large),
+                  const SizedBox(height: Insets.large),
                   FilledButton(
                     onPressed: isLoading ? null : submit,
                     child: isLoading

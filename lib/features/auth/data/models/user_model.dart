@@ -1,5 +1,5 @@
-import 'package:app/features/auth/domain/entities/user_entity.dart';
 import 'package:app/core/annotations/json_serializable.dart';
+import 'package:app/features/auth/domain/entities/user_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user_model.freezed.dart';

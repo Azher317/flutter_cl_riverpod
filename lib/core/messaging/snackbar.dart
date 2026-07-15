@@ -18,18 +18,29 @@ class AppMessenger {
     final scheme = context.colorScheme;
     final status = Theme.of(context).appStatusColors;
     final (Color bg, Color fg) = switch (type) {
-      MessageType.success => (status.successContainer, status.onSuccessContainer),
+      MessageType.success => (
+        status.successContainer,
+        status.onSuccessContainer,
+      ),
       MessageType.error => (scheme.errorContainer, scheme.onErrorContainer),
       MessageType.warning => (status.warning, status.onWarning),
-      MessageType.info => (scheme.secondaryContainer, scheme.onSecondaryContainer),
+      MessageType.info => (
+        scheme.secondaryContainer,
+        scheme.onSecondaryContainer,
+      ),
     };
 
     state
       ..removeCurrentSnackBar()
-      ..showSnackBar(SnackBar(
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: bg,
-        content: Text(text, style: context.textTheme.bodyMedium?.copyWith(color: fg)),
-      ));
+      ..showSnackBar(
+        SnackBar(
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: bg,
+          content: Text(
+            text,
+            style: context.textTheme.bodyMedium?.copyWith(color: fg),
+          ),
+        ),
+      );
   }
 }

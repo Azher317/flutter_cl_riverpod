@@ -1,5 +1,5 @@
-import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/constants/sizes.dart';
+import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/image/cached_image.dart';
 import 'package:app/core/widgets/image/image_svg.dart';
 import 'package:flutter/material.dart';
@@ -28,9 +28,6 @@ class AccountAvatar extends StatelessWidget {
         alignment: Alignment.bottomRight,
         children: [
           Badge(
-            label:
-                // isVerified ? SvgPicture.asset(Assets.assetsSvgCheckmarkBadge) :
-                null,
             smallSize: verifiedSize,
             largeSize: verifiedSize,
             backgroundColor: Colors.transparent,
@@ -56,7 +53,6 @@ class AccountAvatar extends StatelessWidget {
                 color: context.colorScheme.surfaceContainerHighest,
                 border: Border.all(
                   color: context.colorScheme.primary,
-                  width: 1,
                 ),
                 shape: BoxShape.circle,
               ),
@@ -84,9 +80,9 @@ class AccountAvatar extends StatelessWidget {
 
   Widget _cameraPlaceholder(BuildContext context) => ColoredBox(
     color: context.colorScheme.surfaceContainerHighest,
-    child: Padding(
+    child: const Padding(
       padding: Insets.extraSmallAll,
-      child: ImageSvg(img: 'CameraPlus', fit: BoxFit.contain),
+      child: ImageSvg(img: 'CameraPlus'),
     ),
   );
 }

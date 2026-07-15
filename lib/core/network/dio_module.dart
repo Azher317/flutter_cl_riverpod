@@ -34,7 +34,7 @@ Dio dio(Ref ref) {
     ..options.receiveTimeout = const Duration(seconds: 60)
     ..options.contentType = '${ApiHeaders.applicationJson}; charset=utf-8'
     ..options.headers = {
-      ApiHeaders.accept: "text/plain",
+      ApiHeaders.accept: 'text/plain',
       ApiHeaders.contentType: ApiHeaders.applicationJson,
     }
     ..interceptors.add(Authenticator(ref.read(sessionControllerProvider)))
@@ -73,23 +73,27 @@ Dio dio(Ref ref) {
               // Not shown to the user directly — the data layer maps this
               // into a typed exception/Failure, and the UI resolves the
               // display string via l10n (see login_screen.dart).
-              String message = "Unknown error";
+              String message = 'Unknown error';
               if (e.error is FormatException) {
                 message = e.error
                     .toString()
-                    .replaceRange(0, 54, "")
-                    .replaceAll("^", "");
+                    .replaceRange(0, 54, '')
+                    .replaceAll('^', '');
               } else {
                 final data = e.response?.data;
                 if (data is Map<String, dynamic>) {
-                  message = data['message'] ?? message;
+                  message = data['message'] as String;
                 } else if (data is String) {
                   message = data;
                 }
               }
               final parsedResponse = Response(
                 requestOptions: e.requestOptions,
-                data: {"data": {}, "message": message, "statusCode": 400},
+                data: {
+                  'data': <String, dynamic>{},
+                  'message': message,
+                  'statusCode': 400,
+                },
                 statusMessage: e.message,
               );
               // handler.reject short-circuits the interceptor chain, so the
@@ -100,7 +104,6 @@ Dio dio(Ref ref) {
                   requestOptions: e.requestOptions,
                   response: parsedResponse,
                   error: message,
-                  type: DioExceptionType.unknown,
                 ),
               );
               return; // add this line to prevent calling handler.next(e)
@@ -131,7 +134,7 @@ Dio dio(Ref ref) {
         // deliberately: over-masking a debug log is harmless, under-masking
         // leaks. `phoneNumber` is intentionally left visible — it's PII, not a
         // credential, and it's what makes an auth log useful.
-        settings: TalkerDioLoggerSettings(
+        settings: const TalkerDioLoggerSettings(
           printRequestHeaders: true,
           printResponseHeaders: true,
           hiddenHeaders: {

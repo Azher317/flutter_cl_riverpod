@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 final RegExp iraqiPhoneNumberRegex = RegExp(r'^7[3-9][0-9]{8}$');
 
 final englishLettersOnly = FilteringTextInputFormatter.allow(
-  RegExp("[a-zA-Z]"),
+  RegExp('[a-zA-Z]'),
 );
 
 /// Latin (ASCII) digits 0-9 only. Blocks Arabic-Indic (٠–٩) and other numerals.
 final englishDigitsOnly = FilteringTextInputFormatter.allow(RegExp(r'[0-9]'));
 
-final asciiOnly = FilteringTextInputFormatter.allow(RegExp("[ -~]"));
+final asciiOnly = FilteringTextInputFormatter.allow(RegExp('[ -~]'));

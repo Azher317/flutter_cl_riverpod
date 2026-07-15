@@ -1,7 +1,7 @@
 //TODO this widget need refactoring
 
-import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/constants/sizes.dart';
+import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/buttons/filled_loading_button.dart';
 import 'package:app/core/widgets/flex_padded.dart';
 import 'package:flutter/material.dart';
@@ -33,12 +33,11 @@ class CustomDialog extends HookConsumerWidget {
             Text(titleText, style: context.textTheme.titleLarge),
             ...children,
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 FilledLoadingButton(
                   isLoading: isLoading,
                   onPressed: onAdd,
-                  child: const Text("إضافة"),
+                  child: const Text('إضافة'),
                 ),
                 const SizedBox(width: Insets.small),
                 FilledButton(
@@ -47,7 +46,7 @@ class CustomDialog extends HookConsumerWidget {
                     backgroundColor: context.colorScheme.error,
                     foregroundColor: context.colorScheme.onError,
                   ),
-                  child: const Text("الغاء"),
+                  child: const Text('الغاء'),
                 ),
               ],
             ),

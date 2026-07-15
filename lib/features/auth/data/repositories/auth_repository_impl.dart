@@ -55,7 +55,7 @@ class AuthRepositoryImpl with SafeRepositoryCall implements AuthRepository {
   Future<Either<Failure, bool>> isSignedIn() async {
     final result = await getCachedSession();
     return result.fold(
-      (failure) => Left(failure),
+      Left.new,
       (session) => Right(session != null),
     );
   }

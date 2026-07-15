@@ -1,5 +1,5 @@
-import 'package:app/features/auth/domain/params/login_params.dart';
 import 'package:app/features/auth/di/auth_providers.dart';
+import 'package:app/features/auth/domain/params/login_params.dart';
 import 'package:app/features/auth/presentation/notifiers/auth_session_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,7 +21,7 @@ class LoginNotifier extends _$LoginNotifier {
       session,
     ) {
       ref.read(authSessionProvider.notifier).setSession(session);
-      return AsyncData(null);
+      return const AsyncData(null);
     });
   }
 }

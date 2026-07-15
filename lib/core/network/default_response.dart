@@ -1,13 +1,10 @@
+import 'package:app/core/annotations/annotations_lib.dart';
 import 'package:app/core/models/json_types.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'default_response.g.dart';
 
-@JsonSerializable(
-  createToJson: false,
-  explicitToJson: true,
-  genericArgumentFactories: true,
-)
+@jsonSerializableResponseGeneric
 class DefaultResponse<T> {
   // Deserialized from the JSON key "msg".
   final String? msg;
@@ -44,7 +41,7 @@ class DefaultResponse<T> {
 // sends a string-keyed role.
 @JsonEnum(alwaysCreate: true)
 enum RoleDto {
-  @JsonValue("Supervisor")
+  @JsonValue('Supervisor')
   supervisor,
   unknown;
 

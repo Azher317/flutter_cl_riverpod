@@ -1,6 +1,6 @@
+import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
 import 'package:app/core/theme/theme_mode.dart';
-import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/features/auth/presentation/notifiers/auth_session_provider.dart';
 import 'package:app/router/app_router.dart';
 import 'package:flutter/foundation.dart';

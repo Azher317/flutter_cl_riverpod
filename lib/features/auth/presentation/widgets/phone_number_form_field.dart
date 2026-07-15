@@ -29,7 +29,7 @@ class PhoneNumberFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: controller,
-      hintText: "رقم الهاتف",
+      hintText: 'رقم الهاتف',
       keyboardType: TextInputType.phone,
       onChanged: onChanged,
       focusNode: focusNode,
@@ -37,7 +37,7 @@ class PhoneNumberFormField extends StatelessWidget {
       prefixIcon: CountryCodePicker(
         textStyle: context.textTheme.bodyMedium?.copyWith(),
         onChanged: onCountryCodeChanged,
-        initialSelection: "IQ",
+        initialSelection: 'IQ',
         padding: EdgeInsets.zero,
         showFlag: false,
       ),

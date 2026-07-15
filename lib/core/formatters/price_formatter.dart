@@ -1,12 +1,14 @@
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-class PriceTextFormFeildFormatter extends TextInputFormatter {
+class PriceFormatter extends TextInputFormatter {
   final NumberFormat _formatter = NumberFormat.decimalPattern();
 
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     final String unformatted = newValue.text.replaceAll(',', '');
 
     if (unformatted.isEmpty) return newValue;

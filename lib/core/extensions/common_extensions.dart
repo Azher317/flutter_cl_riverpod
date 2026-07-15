@@ -1,13 +1,12 @@
-import 'package:app/core/settings/app_settings_provider.dart';
-import 'package:app/core/network/clients_lib.dart';
 import 'package:app/core/l10n/generated/app_localizations.dart';
 import 'package:app/core/l10n/locale.dart';
+import 'package:app/core/network/clients_lib.dart';
+import 'package:app/core/settings/app_settings_provider.dart';
 import 'package:app/core/validation/validation_regex.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart'; // or material.dart
 import 'package:form_validator/form_validator.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart' hide TextDirection;
-import 'package:flutter/widgets.dart'; // or material.dart
 
 extension DeviceHeight on BuildContext {
   double get height => MediaQuery.of(this).size.height;
@@ -21,7 +20,6 @@ extension ValidatorX on BuildContext {
   ValidationBuilder get validator {
     final locale = AppFormValidatorLocale(this);
     return ValidationBuilder(
-      optional: false,
       requiredMessage: locale.required(),
       locale: locale,
     );
@@ -30,14 +28,6 @@ extension ValidatorX on BuildContext {
 
 extension FormStateX on GlobalKey<FormState> {
   bool isNotValid() => !(currentState?.validate() ?? false);
-}
-
-extension NullableDateTimeExtension on DateTime? {
-  String formatDate() {
-    var inputFormat = DateFormat('MM/dd/yyyy');
-
-    return this == null ? "" : inputFormat.format(this!);
-  }
 }
 
 extension HttpResponseX<T> on Future<HttpResponse<T>> {

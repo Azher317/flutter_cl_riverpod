@@ -1,17 +1,18 @@
+import 'package:app/core/constants/sizes.dart';
 import 'package:app/core/theme/extra_colors.dart';
-import 'package:app/core/theme/sizes.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
   const AppTheme._();
 
-  static const String _fontFamily = 'NotoSansArabic';
+  /// Also used by [CustomText] so its typography matches the theme's.
+  static const String fontFamily = 'NotoSansArabic';
 
   static const Color _seedColor = Color(0xFFEE4266);
   static BorderRadius get _radius => BorderRadius.circular(BorderSize.small);
 
   static EdgeInsets get _fieldPadding =>
-      EdgeInsets.symmetric(vertical: 14, horizontal: 12);
+      const EdgeInsets.symmetric(vertical: 14, horizontal: 12);
 
   static ThemeData light() => _build(Brightness.light);
   static ThemeData dark() => _build(Brightness.dark);
@@ -60,11 +61,11 @@ class AppTheme {
 
   static CheckboxThemeData _checkboxTheme(ColorScheme c) => CheckboxThemeData(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
-    side: BorderSide(color: c.onSurfaceVariant, width: 1),
+    side: BorderSide(color: c.onSurfaceVariant),
     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 
-  static AppBarTheme _appBarTheme(ColorScheme c) => AppBarTheme(
+  static AppBarTheme _appBarTheme(ColorScheme c) => const AppBarTheme(
     centerTitle: false,
     elevation: 0,
     scrolledUnderElevation: 0,
@@ -110,7 +111,7 @@ class AppTheme {
   }
 
   static TextTheme _textTheme(TextTheme base) {
-    final t = base.apply(fontFamily: _fontFamily);
+    final t = base.apply(fontFamily: fontFamily);
 
     return t.copyWith(
       titleLarge: t.titleLarge?.copyWith(
@@ -150,9 +151,9 @@ class AppTheme {
         style: FilledButton.styleFrom(
           foregroundColor: c.onPrimary,
           disabledForegroundColor: c.onPrimary,
-          minimumSize: Size(double.infinity, 52),
-          maximumSize: Size(double.infinity, 52),
-          shape: RoundedRectangleBorder(borderRadius: BorderSize.largeRadius),
+          minimumSize: const Size(double.infinity, 52),
+          maximumSize: const Size(double.infinity, 52),
+          shape: const RoundedRectangleBorder(borderRadius: BorderSize.largeRadius),
           textStyle: t.labelMedium?.copyWith(color: c.onPrimary),
         ),
       );
@@ -161,8 +162,8 @@ class AppTheme {
       OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           padding: _fieldPadding,
-          minimumSize: Size(double.infinity, 52),
-          shape: RoundedRectangleBorder(borderRadius: BorderSize.largeRadius),
+          minimumSize: const Size(double.infinity, 52),
+          shape: const RoundedRectangleBorder(borderRadius: BorderSize.largeRadius),
         ),
       );
 
@@ -171,7 +172,7 @@ class AppTheme {
       padding: EdgeInsets.zero,
       minimumSize: Size.zero,
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      shape: RoundedRectangleBorder(borderRadius: BorderSize.largeRadius),
+      shape: const RoundedRectangleBorder(borderRadius: BorderSize.largeRadius),
     ),
   );
 }

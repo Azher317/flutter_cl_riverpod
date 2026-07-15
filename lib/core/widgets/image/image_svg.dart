@@ -27,7 +27,7 @@ class ImageSvg extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(borderRadius),
       child: SvgPicture.asset(
-        "assets/images/svg/$img.svg",
+        'assets/images/svg/$img.svg',
         height: size ?? height,
         width: size ?? width,
         fit: fit,

@@ -37,7 +37,7 @@ class ImagePng extends StatelessWidget {
               alignment: alignment,
             )
           : Image.asset(
-              "assets/images/png/$img.png",
+              'assets/images/png/$img.png',
               height: size ?? height,
               width: size ?? width,
               fit: fit,
