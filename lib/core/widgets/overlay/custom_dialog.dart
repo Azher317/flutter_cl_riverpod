@@ -29,7 +29,7 @@ class CustomDialog extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(titleText, style: context.textTheme.titleLarge),
+            Text(titleText, style: context.textTheme.displaySmall),
             ...children,
             Row(
               children: [

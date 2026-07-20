@@ -16,15 +16,27 @@ class AppStatusColors extends ThemeExtension<AppStatusColors> {
     required this.warning,
     required this.onWarning,
   });
-
-  factory AppStatusColors.fromScheme(ColorScheme s) => AppStatusColors(
-        success: s.tertiary,
-        onSuccess: s.onTertiary,
-        successContainer: s.tertiaryContainer,
-        onSuccessContainer: s.onTertiaryContainer,
-        warning: s.secondary,
-        onWarning: s.onSecondary,
-      );
+  /// Dedicated, brightness-aware status palette generated from fixed green /
+  /// amber seeds so `success`/`warning` stay recognizable regardless of the
+  /// app's brand seed.
+  factory AppStatusColors.of(Brightness b) {
+    final success = ColorScheme.fromSeed(
+      seedColor: const Color(0xFF2E7D32),
+      brightness: b,
+    );
+    final warning = ColorScheme.fromSeed(
+      seedColor: const Color(0xFFF9A825),
+      brightness: b,
+    );
+    return AppStatusColors(
+      success: success.primary,
+      onSuccess: success.onPrimary,
+      successContainer: success.primaryContainer,
+      onSuccessContainer: success.onPrimaryContainer,
+      warning: warning.primaryContainer,
+      onWarning: warning.onPrimaryContainer,
+    );
+  }
 
   @override
   ThemeExtension<AppStatusColors> copyWith({
@@ -47,16 +59,24 @@ class AppStatusColors extends ThemeExtension<AppStatusColors> {
 
   @override
   ThemeExtension<AppStatusColors> lerp(
-      covariant ThemeExtension<AppStatusColors>? other, double t) {
+    covariant ThemeExtension<AppStatusColors>? other,
+    double t,
+  ) {
     if (other is! AppStatusColors) return this;
 
     return AppStatusColors(
       success: Color.lerp(success, other.success, t)!,
       onSuccess: Color.lerp(onSuccess, other.onSuccess, t)!,
-      successContainer:
-          Color.lerp(successContainer, other.successContainer, t)!,
-      onSuccessContainer:
-          Color.lerp(onSuccessContainer, other.onSuccessContainer, t)!,
+      successContainer: Color.lerp(
+        successContainer,
+        other.successContainer,
+        t,
+      )!,
+      onSuccessContainer: Color.lerp(
+        onSuccessContainer,
+        other.onSuccessContainer,
+        t,
+      )!,
       warning: Color.lerp(warning, other.warning, t)!,
       onWarning: Color.lerp(onWarning, other.onWarning, t)!,
     );
@@ -65,5 +85,5 @@ class AppStatusColors extends ThemeExtension<AppStatusColors> {
 
 extension AppStatusColorsX on ThemeData {
   AppStatusColors get appStatusColors =>
-      extension<AppStatusColors>() ?? AppStatusColors.fromScheme(colorScheme);
+      extension<AppStatusColors>() ?? AppStatusColors.of(brightness);
 }

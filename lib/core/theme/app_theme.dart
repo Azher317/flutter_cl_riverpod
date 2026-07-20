@@ -18,26 +18,17 @@ class AppTheme {
   static ThemeData dark() => _build(Brightness.dark);
 
   static ThemeData _build(Brightness brightness) {
-    final scheme =
-        ColorScheme.fromSeed(
-          seedColor: _seedColor,
-          dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
-
-          brightness: brightness,
-        ).copyWith(
-          // primary: const Color(0xffEE4266),
-          // secondary: const Color(0xffFFFEFF),
-          // onSurface: const Color(0xff292A2E),
-          // onSurfaceVariant: const Color(0xff7A8581),
-          // surface: const Color(0xffF2F2F2),
-          // outline: const Color(0xffDDDDDD),
-          // outlineVariant: const Color(0xffB9B9B9),
-        );
+    final scheme = ColorScheme.fromSeed(
+      seedColor: _seedColor,
+      dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
+      brightness: brightness,
+    );
 
     final base = ThemeData(
       useMaterial3: true,
       brightness: brightness,
       colorScheme: scheme,
+      fontFamily: fontFamily,
 
       // Core M3 component consistency
       appBarTheme: _appBarTheme(scheme),
@@ -45,6 +36,7 @@ class AppTheme {
       navigationBarTheme: _navigationBarTheme(scheme),
       outlinedButtonTheme: _outlinedButtonTheme(),
       textButtonTheme: _textButtonTheme(),
+      datePickerTheme: _datePickerTheme(scheme),
       splashColor: scheme.primary.withValues(alpha: 0.12),
       highlightColor: scheme.primary.withValues(alpha: 0.05),
       checkboxTheme: _checkboxTheme(scheme),
@@ -55,23 +47,23 @@ class AppTheme {
     return themed.copyWith(
       filledButtonTheme: _filledButtonTheme(themed.textTheme, scheme),
       inputDecorationTheme: _inputDecorationTheme(scheme, themed.textTheme),
-      extensions: <ThemeExtension<dynamic>>[
-        AppStatusColors.fromScheme(themed.colorScheme),
-      ],
+      extensions: <ThemeExtension<dynamic>>[AppStatusColors.of(brightness)],
     );
   }
 
   static CheckboxThemeData _checkboxTheme(ColorScheme c) => CheckboxThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+    shape: const RoundedRectangleBorder(borderRadius: BorderSize.xxsRadius),
     side: BorderSide(color: c.onSurfaceVariant),
     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
   );
 
-  static AppBarTheme _appBarTheme(ColorScheme c) => const AppBarTheme(
+  static AppBarTheme _appBarTheme(ColorScheme c) => AppBarTheme(
     centerTitle: false,
     elevation: 0,
     scrolledUnderElevation: 0,
-    actionsPadding: EdgeInsets.symmetric(horizontal: Insets.medium),
+    backgroundColor: c.surface,
+    foregroundColor: c.onSurface,
+    actionsPadding: const EdgeInsets.symmetric(horizontal: Insets.medium),
   );
 
   static CardThemeData _cardTheme(ColorScheme c) => CardThemeData(
@@ -79,6 +71,14 @@ class AppTheme {
     elevation: 0,
     shape: RoundedRectangleBorder(borderRadius: _radius),
   );
+
+  static DatePickerThemeData _datePickerTheme(ColorScheme c) =>
+      DatePickerThemeData(
+        backgroundColor: c.surfaceContainerHigh,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderSize.mediumRadius,
+        ),
+      );
 
   static NavigationBarThemeData _navigationBarTheme(ColorScheme c) =>
       NavigationBarThemeData(
@@ -116,10 +116,16 @@ class AppTheme {
     final t = base.apply(fontFamily: fontFamily);
 
     return t.copyWith(
-      titleLarge: t.titleLarge?.copyWith(
+      // Hero text (was living on titleLarge). Kept at 36 for existing screens.
+      displaySmall: t.displaySmall?.copyWith(
         fontWeight: FontWeight.w700,
         fontSize: 36,
-        height: 1,
+        height: 1.2,
+      ),
+      titleLarge: t.titleLarge?.copyWith(
+        fontWeight: FontWeight.w700,
+        fontSize: 22,
+        height: 1.2,
       ),
       titleMedium: t.titleMedium?.copyWith(
         fontWeight: FontWeight.w600,
@@ -134,7 +140,7 @@ class AppTheme {
       ),
       bodyLarge: t.bodyLarge?.copyWith(fontSize: 16),
       bodyMedium: t.bodyMedium?.copyWith(fontSize: 14),
-      bodySmall: t.bodyMedium?.copyWith(fontSize: 12),
+      bodySmall: t.bodySmall?.copyWith(fontSize: 12),
       labelLarge: t.labelLarge?.copyWith(
         fontWeight: FontWeight.w600,
         letterSpacing: 0.1,
@@ -144,7 +150,7 @@ class AppTheme {
         fontSize: 14,
         fontWeight: FontWeight.w600,
       ),
-      labelSmall: t.labelMedium?.copyWith(fontSize: 10, height: 1),
+      labelSmall: t.labelSmall?.copyWith(fontSize: 10, height: 1.2),
     );
   }
 
@@ -152,13 +158,16 @@ class AppTheme {
       FilledButtonThemeData(
         style: FilledButton.styleFrom(
           foregroundColor: c.onPrimary,
-          disabledForegroundColor: c.onPrimary,
+          // Let M3's default disabled foreground (onSurface @ 38%) signal the
+          // disabled state instead of forcing full-strength onPrimary.
           minimumSize: const Size(double.infinity, 52),
           maximumSize: const Size(double.infinity, 52),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderSize.largeRadius,
           ),
-          textStyle: t.labelMedium?.copyWith(color: c.onPrimary),
+          // Color comes from foregroundColor; keep it out of textStyle so the
+          // disabled color can apply.
+          textStyle: t.labelMedium,
         ),
       );
 

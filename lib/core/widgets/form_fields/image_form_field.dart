@@ -95,7 +95,7 @@ class ImageFormField extends StatelessWidget {
                         ),
                       ),
                       if (text != null) ...[
-                        Text(text!, style: theme.textTheme.titleLarge),
+                        Text(text!, style: theme.textTheme.displaySmall),
                       ],
                       if (field.hasError)
                         Padding(
@@ -133,7 +133,7 @@ class ImageFormField extends StatelessWidget {
                     ),
                   ),
                   if (text != null) ...[
-                    Text(text!, style: theme.textTheme.titleLarge),
+                    Text(text!, style: theme.textTheme.displaySmall),
                   ],
                 ],
               ),
