@@ -1,5 +1,5 @@
-import 'package:app/core/either.dart';
 import 'package:app/core/errors/failures.dart';
+import 'package:app/core/utils/either.dart';
 
 /// A use case that takes [Params] and returns [T].
 ///

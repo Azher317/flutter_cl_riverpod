@@ -1,8 +1,7 @@
 import 'package:app/core/l10n/generated/app_localizations.dart';
 import 'package:app/core/l10n/locale.dart';
-import 'package:app/core/network/clients_lib.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
-import 'package:app/core/validation/validation_regex.dart';
+import 'package:app/core/utils/validation/validation_regex.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart'; // or material.dart
 import 'package:form_validator/form_validator.dart';
@@ -28,10 +27,6 @@ extension ValidatorX on BuildContext {
 
 extension FormStateX on GlobalKey<FormState> {
   bool isNotValid() => !(currentState?.validate() ?? false);
-}
-
-extension HttpResponseX<T> on Future<HttpResponse<T>> {
-  Future<T> get data => then((value) => value.data);
 }
 
 extension ValueNotifierUpdated<T> on ValueNotifier<T> {

@@ -1,17 +1,14 @@
-import 'package:app/core/constants/sizes.dart';
-import 'package:app/core/extensions/common_extensions.dart';
-import 'package:app/core/extensions/theme_extentions.dart';
-import 'package:app/core/widgets/flex_padded.dart';
+import 'package:app/core/utils/constants/sizes.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
+import 'package:app/core/utils/extensions/theme_extentions.dart';
+import 'package:app/core/widgets/column_padded.dart';
 import 'package:app/core/widgets/state_ui/empty_state.dart';
 import 'package:app/core/widgets/state_ui/state_message.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 Widget _pageLoader(BuildContext context) => const Center(
-  child: Padding(
-    padding: Insets.mediumAll,
-    child: CircularProgressIndicator(),
-  ),
+  child: Padding(padding: Insets.mediumAll, child: CircularProgressIndicator()),
 );
 
 extension PagingListDelegateX<ItemType> on PagingController<int, ItemType> {

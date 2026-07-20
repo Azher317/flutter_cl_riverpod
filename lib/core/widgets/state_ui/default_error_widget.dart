@@ -1,5 +1,5 @@
-import 'package:app/core/extensions/common_extensions.dart';
-import 'package:app/core/extensions/theme_extentions.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
+import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/state_ui/state_message.dart';
 import 'package:flutter/material.dart';
 

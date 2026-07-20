@@ -1,5 +1,5 @@
-import 'package:app/core/extensions/common_extensions.dart';
-import 'package:app/core/extensions/theme_extentions.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
+import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,7 @@
-import 'package:app/core/either.dart';
 import 'package:app/core/errors/exceptions.dart';
 import 'package:app/core/errors/failures.dart';
 import 'package:app/core/errors/safe_repository_call.dart';
+import 'package:app/core/utils/either.dart';
 import 'package:app/features/auth/data/datasources/auth_local_data_source.dart';
 import 'package:app/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:app/features/auth/data/models/authentication_model.dart';

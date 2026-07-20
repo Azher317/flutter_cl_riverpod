@@ -1,6 +1,6 @@
-import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/l10n/localized_name.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:app/core/widgets/overlay/custom_modal_bottom_sheet.dart';
 import 'package:app/core/widgets/overlay/paginated_bottom_sheet.dart';

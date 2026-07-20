@@ -27,6 +27,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get defaultErrorMessage => 'An error occurred, please try again later';
 
   @override
+  String get badRequest => 'Invalid request, please check your input';
+
+  @override
+  String get conflict => 'This conflicts with existing data';
+
+  @override
+  String get forbidden => 'You don\'t have permission to perform this action';
+
+  @override
+  String get notFound => 'The requested item was not found';
+
+  @override
+  String get serverError => 'A server error occurred, please try again later';
+
+  @override
+  String get sessionExpired => 'Your session has expired, please sign in again';
+
+  @override
   String get fieldRequired => 'This field is required';
 
   @override

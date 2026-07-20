@@ -1,10 +1,10 @@
-import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/l10n/generated/app_localizations.dart';
 import 'package:app/core/l10n/kurdish/kurdish_material_localization_delegate.dart';
 import 'package:app/core/l10n/kurdish/kurdish_widget_localization_delegate.dart';
 import 'package:app/core/messaging/snackbar.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
 import 'package:app/core/theme/app_theme.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/main.dart';
 import 'package:app/router/app_router.dart';
 import 'package:flutter/material.dart';

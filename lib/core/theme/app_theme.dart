@@ -1,5 +1,5 @@
-import 'package:app/core/constants/sizes.dart';
 import 'package:app/core/theme/extra_colors.dart';
+import 'package:app/core/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -21,15 +21,17 @@ class AppTheme {
     final scheme =
         ColorScheme.fromSeed(
           seedColor: _seedColor,
+          dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
+
           brightness: brightness,
         ).copyWith(
-          primary: const Color(0xffEE4266),
-          secondary: const Color(0xffFFFEFF),
-          onSurface: const Color(0xff292A2E),
-          onSurfaceVariant: const Color(0xff7A8581),
-          surface: const Color(0xffF2F2F2),
-          outline: const Color(0xffDDDDDD),
-          outlineVariant: const Color(0xffB9B9B9),
+          // primary: const Color(0xffEE4266),
+          // secondary: const Color(0xffFFFEFF),
+          // onSurface: const Color(0xff292A2E),
+          // onSurfaceVariant: const Color(0xff7A8581),
+          // surface: const Color(0xffF2F2F2),
+          // outline: const Color(0xffDDDDDD),
+          // outlineVariant: const Color(0xffB9B9B9),
         );
 
     final base = ThemeData(
@@ -153,7 +155,9 @@ class AppTheme {
           disabledForegroundColor: c.onPrimary,
           minimumSize: const Size(double.infinity, 52),
           maximumSize: const Size(double.infinity, 52),
-          shape: const RoundedRectangleBorder(borderRadius: BorderSize.largeRadius),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderSize.largeRadius,
+          ),
           textStyle: t.labelMedium?.copyWith(color: c.onPrimary),
         ),
       );
@@ -163,7 +167,9 @@ class AppTheme {
         style: OutlinedButton.styleFrom(
           padding: _fieldPadding,
           minimumSize: const Size(double.infinity, 52),
-          shape: const RoundedRectangleBorder(borderRadius: BorderSize.largeRadius),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderSize.largeRadius,
+          ),
         ),
       );
 

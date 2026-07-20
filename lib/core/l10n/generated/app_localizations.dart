@@ -134,6 +134,42 @@ abstract class AppLocalizations {
   /// **'An error occurred, please try again later'**
   String get defaultErrorMessage;
 
+  /// No description provided for @badRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid request, please check your input'**
+  String get badRequest;
+
+  /// No description provided for @conflict.
+  ///
+  /// In en, this message translates to:
+  /// **'This conflicts with existing data'**
+  String get conflict;
+
+  /// No description provided for @forbidden.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have permission to perform this action'**
+  String get forbidden;
+
+  /// No description provided for @notFound.
+  ///
+  /// In en, this message translates to:
+  /// **'The requested item was not found'**
+  String get notFound;
+
+  /// No description provided for @serverError.
+  ///
+  /// In en, this message translates to:
+  /// **'A server error occurred, please try again later'**
+  String get serverError;
+
+  /// No description provided for @sessionExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session has expired, please sign in again'**
+  String get sessionExpired;
+
   /// No description provided for @fieldRequired.
   ///
   /// In en, this message translates to:

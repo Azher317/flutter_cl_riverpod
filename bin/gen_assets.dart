@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 
 const pngDir = 'assets/images/png';
 const svgDir = 'assets/images/svg';
-const outputPath = 'lib/core/constants/assets.dart';
+const outputPath = 'lib/core/utils/constants/assets.dart';
 
 void main() {
   final pngs = _collectAssets(pngDir, '.png');

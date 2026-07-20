@@ -1,6 +1,5 @@
-import 'package:app/core/constants/sizes.dart';
-import 'package:app/core/extensions/theme_extentions.dart';
-import 'package:app/core/widgets/flex_padded.dart';
+import 'package:app/core/utils/extensions/theme_extentions.dart';
+import 'package:app/core/widgets/column_padded.dart';
 import 'package:flutter/material.dart';
 
 class LabeledField extends StatelessWidget {
@@ -12,7 +11,6 @@ class LabeledField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ColumnPadded(
-      gap: Insets.medium,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -22,7 +20,7 @@ class LabeledField extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        ColumnPadded(gap: Insets.medium, children: items),
+        ColumnPadded(children: items),
       ],
     );
   }

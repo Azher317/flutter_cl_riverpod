@@ -27,6 +27,25 @@ class AppLocalizationsAr extends AppLocalizations {
   String get defaultErrorMessage => 'حدث خطأ ما, يرجى المحاولة مرة أخرى';
 
   @override
+  String get badRequest => 'طلب غير صالح, يرجى التحقق من المدخلات';
+
+  @override
+  String get conflict => 'يتعارض هذا مع بيانات موجودة';
+
+  @override
+  String get forbidden => 'ليس لديك صلاحية لتنفيذ هذا الإجراء';
+
+  @override
+  String get notFound => 'العنصر المطلوب غير موجود';
+
+  @override
+  String get serverError => 'حدث خطأ في الخادم, يرجى المحاولة لاحقاً';
+
+  @override
+  String get sessionExpired =>
+      'انتهت صلاحية الجلسة, يرجى تسجيل الدخول مرة أخرى';
+
+  @override
   String get fieldRequired => 'هذا الحقل مطلوب';
 
   @override

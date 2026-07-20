@@ -1,4 +1,4 @@
-import 'package:app/core/extensions/common_extensions.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
 
 extension ThemeModeCheck on ThemeMode {

@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:app/core/network/clients_lib.dart';
 
-class FileJsonConverter extends JsonConverter<File, MultipartFile> {
-  const FileJsonConverter();
+class FileJsonConvertor extends JsonConverter<File, MultipartFile> {
+  const FileJsonConvertor();
 
   @override
   File fromJson(MultipartFile json) => throw UnimplementedError();

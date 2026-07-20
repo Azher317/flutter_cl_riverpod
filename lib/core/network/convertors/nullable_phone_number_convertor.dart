@@ -1,5 +1,5 @@
-import 'package:app/core/extensions/string_extensions.dart';
 import 'package:app/core/models/phone_number.dart';
+import 'package:app/core/utils/extensions/string_extensions.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 class PhoneNumberConvertor implements JsonConverter<PhoneNumber, String> {

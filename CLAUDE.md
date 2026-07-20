@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-# Codegen — required after touching any @riverpod, @freezed, @RestApi, or ARB-annotated file
+# Codegen — required after touching any @riverpod, @freezed, or ARB-annotated file
 flutter pub run build_runner build --delete-conflicting-outputs   # or: bin/run.sh
 flutter pub run build_runner watch  --delete-conflicting-outputs   # rebuild on save
 
@@ -30,16 +30,16 @@ Clean Architecture (data / domain / presentation) per feature, with Riverpod for
 
 ### Feature layout (`lib/features/<feature>/`)
 - `domain/` — `entities/` (pure), `repositories/` (abstract), `usecases/`, `params/`. Usecases implement `UseCase<Type, Params>` / `NoParamsUseCase<Type>` from [lib/core/usecase/usecase.dart](lib/core/usecase/usecase.dart) and return `Future<Either<Failure, Type>>`.
-- `data/` — `models/` (Freezed + json_serializable, with `.toEntity()`), `datasources/` (remote via Retrofit `@RestApi`, local via storage), `repositories/` (impl of the domain contract).
+- `data/` — `models/` (Freezed + json_serializable, with `.toEntity()`), `datasources/` (remote via the `ApiConsumer`/`DioConsumer` HTTP wrapper, local via storage), `repositories/` (impl of the domain contract).
 - `presentation/` — `screens/` and `notifiers/` (Riverpod `@riverpod` notifiers holding `AsyncValue` UI state).
 - `di/` — `@riverpod` provider functions that wire datasource → repository → usecase.
 
 ### Error handling
-There is a **local `Either`** ([lib/core/either.dart](lib/core/either.dart)) — this project does **not** use `dartz`/`fpdart`. Flow:
-1. Datasources throw typed `*Exception`s ([lib/core/errors/exceptions.dart](lib/core/errors/exceptions.dart)).
-2. Repositories wrap calls in `guard(() async {...})` from the `SafeRepositoryCall` mixin ([lib/core/errors/safe_repository_call.dart](lib/core/errors/safe_repository_call.dart)), which maps exceptions → `Failure` ([lib/core/errors/failures.dart](lib/core/errors/failures.dart)) and returns `Left`/`Right`.
+There is a **local `Either`** ([lib/core/utils/either.dart](lib/core/utils/either.dart)) — this project does **not** use `dartz`/`fpdart`. Errors are translated exactly twice, each in one place:
+1. **Transport → exception.** `DioConsumer` ([lib/core/network/api_consumer.dart](lib/core/network/api_consumer.dart)) is the **only** place that catches `DioException`; it delegates to `NetworkErrorMapper.toException` ([lib/core/errors/network_error_mapper.dart](lib/core/errors/network_error_mapper.dart)), which classifies every transport error into a typed `*Exception` ([lib/core/errors/exceptions.dart](lib/core/errors/exceptions.dart)) — one type per HTTP status the UI may branch on (400/401/403/404/409), plus `NetworkException`/`ServerException`. A data source stays Dio-free and only adds an `on <AppException>` catch when its endpoint *reinterprets* a status (e.g. auth's login turns `UnauthorizedException` (401) into `InvalidCredentialsException` — the one bit of error knowledge that endpoint owns).
+2. **Exception → failure.** Repositories wrap calls in `guard(() async {...})` from the `SafeRepositoryCall` mixin ([lib/core/errors/safe_repository_call.dart](lib/core/errors/safe_repository_call.dart)), which maps each exception → its mirroring `Failure` ([lib/core/errors/failures.dart](lib/core/errors/failures.dart), `sealed`) and returns `Left`/`Right`. A trailing bare `catch` collapses any stray non-app error to `ServerFailure`.
 3. Notifiers `.fold()` the result into `AsyncData`/`AsyncError`.
-4. Screens resolve the `Failure` into a user-facing string via l10n.
+4. Screens render the `Failure` through the **central presenter** — `context.showFailure(failure)` / `context.localizeFailure(failure)` ([lib/core/messaging/failure_messenger.dart](lib/core/messaging/failure_messenger.dart)) — one localized `switch` over the sealed `Failure`, not re-written per screen. Exception messages carry only backend-provided text (or empty); generic user-facing wording is localized here.
 
 ### Session & networking (the key wiring to understand)
 `core/` defines the `SessionController` interface and a `sessionControllerProvider` that **throws `UnimplementedError` by default** ([lib/core/session/session_provider.dart](lib/core/session/session_provider.dart)). The concrete implementation (`AuthSession`) lives in the `auth` feature and is injected via a provider override at the composition root in [lib/main.dart](lib/main.dart):
@@ -50,17 +50,27 @@ sessionControllerProvider.overrideWith((ref) => ref.watch(authSessionProvider.no
 
 **Any test that touches `dioProvider` or anything downstream must supply this same override**, or the provider throws.
 
-Dio is configured in [lib/core/network/dio_module.dart](lib/core/network/dio_module.dart): base URL from `ApiDocument`, an `Authenticator` interceptor that attaches the session token, and a 401 interceptor that triggers **exactly one** logout across concurrent requests (guarded by a `Completer`). This is not a refresh-token flow — a 401 ends the session. Retrofit endpoints can opt out with `@Extra({'skipAuthLogout': true})` (see the login call in [lib/features/auth/data/datasources/auth_client.dart](lib/features/auth/data/datasources/auth_client.dart)). Reach Dio in providers via `ref.dio`.
+Dio is configured in [lib/core/network/dio_module.dart](lib/core/network/dio_module.dart): base URL from `ApiDocument`, an `Authenticator` interceptor that attaches the session token, and a 401 interceptor that triggers **exactly one** logout across concurrent requests (guarded by a `Completer`). This is not a refresh-token flow — a 401 ends the session. HTTP goes through the manual `ApiConsumer`/`DioConsumer` ([lib/core/network/api_consumer.dart](lib/core/network/api_consumer.dart)) — **not** Retrofit; data sources call `_api.get/post/...` and parse models themselves. A call opts out of the 401→logout by passing `extra: {'skipAuthLogout': true}` (see the login call in [lib/features/auth/data/datasources/auth_remote_data_source.dart](lib/features/auth/data/datasources/auth_remote_data_source.dart)). Inject `apiConsumerProvider`; reach the raw Dio via `ref.dio` if needed.
+
+### Pagination
+[lib/core/pagination/](lib/core/pagination/) wraps `infinite_scroll_pagination` behind two Flutter hooks — `usePagingController` (fetch throws on failure) and `usePagingControllerEither` (fetch returns the project-standard `Either<Failure, Paginated<T>>`) — in [pagination_controller.dart](lib/core/pagination/pagination_controller.dart). Pass `keys:` so the controller rebuilds/refetches when a search term changes (the "stale search" guard). Server pages are typed as `Paginated<T>` ([lib/core/network/paginated.dart](lib/core/network/paginated.dart)); the list UI goes through [paging_list_delegate.dart](lib/core/pagination/paging_list_delegate.dart).
 
 ### Routing
-Single `routerProvider` (`go_router`) in [lib/router/app_router.dart](lib/router/app_router.dart). Redirect logic is driven by `authSessionProvider`'s `AsyncValue`: `isLoading` → hold on splash; `value == null` → force login; signed in → bounce off splash/login. A `RouterRefreshNotifier` re-runs redirects when session state changes. Route paths are constants on `RoutesDocument`.
+Single `routerProvider` (`go_router`) in [lib/router/app_router.dart](lib/router/app_router.dart). Redirect logic is driven by `authSessionProvider`'s `AsyncValue`: `isLoading` → hold on splash; `value == null` → force login; signed in → bounce off splash/login. A `RouterRefreshNotifier` ([lib/router/router_refresh_notifier.dart](lib/router/router_refresh_notifier.dart)) re-runs redirects when session state changes. Route paths are constants on `RoutesDocument`.
+
+### Logging / observability
+All logging flows through a single global Talker instance in [lib/core/observability/app_logger.dart](lib/core/observability/app_logger.dart) — HTTP (`TalkerDioLogger` in the Dio module), Riverpod (`TalkerRiverpodObserver` in `main.dart`), Flutter/platform errors (`FlutterError.onError` + `PlatformDispatcher.onError`), and manual logs. It's a top-level global (not provider-held) because call sites like `PagingControllerX` have no `Ref`. Prefer the `AppLogger` static wrapper (`AppLogger.error/warning/handle`) at manual call sites so swapping in a crash reporter is a one-file change. A separate `routeTalker` prints go_router transitions to console only (`useHistory: false`) so they don't crowd the shared log timeline shown in `TalkerScreen`.
 
 ### Generated files
 `*.g.dart` and `*.freezed.dart` are generated and excluded from the analyzer — never edit them; change the source annotation and re-run build_runner.
 
+## Linting
+
+[analysis_options.yaml](analysis_options.yaml) hand-picks rules on top of `flutter_lints` (every rule is meant to be explainable). Notable: `strict-casts` / `strict-inference` / `strict-raw-types` are on, and the `prefer_const_*` family plus `use_build_context_synchronously` are promoted from info → **warning**. `custom_lint` is registered as an analyzer plugin, but Riverpod rules only surface via `dart run custom_lint`, not `flutter analyze`.
+
 ## Assets
 
-Assets in `assets/images/png/` and `assets/images/svg/` are referenced through generated constants in [lib/core/constants/assets.dart](lib/core/constants/assets.dart) (a lightweight standalone script, not `flutter_gen_runner`).
+Assets in `assets/images/png/` and `assets/images/svg/` are referenced through generated constants in [lib/core/utils/constants/assets.dart](lib/core/utils/constants/assets.dart) (a lightweight standalone script, not `flutter_gen_runner`).
 
 **Usage:**
 ```dart
@@ -74,11 +84,20 @@ ImageSvg(img: SvgAssets.home, color: Colors.red)
 dart run app:gen_assets
 ```
 
-Non-ASCII filenames (e.g. Arabic) are skipped by the generator — reference those with raw strings.
+Non-ASCII filenames (e.g. Arabic) are skipped by the generator — reference those with raw strings. The generated file `lib/core/utils/constants/assets.dart` is committed to the repo.
 
-The generated file `lib/core/constants/assets.dart` is committed to the repo.
+## Shared utilities (`lib/core/utils/`)
+
+Cross-cutting, feature-agnostic helpers live under `lib/core/utils/`: `either.dart` (the local `Either`), `annotations/` (shared `@freezed`/`@JsonSerializable` config), `constants/` (`assets.dart`, `sizes.dart`), `extensions/`, `formatters/`, `hooks/` (`use_debounce`, `use_debounced_search`), and `validation/`. Import as `package:app/core/utils/...`.
+
+## Dependency gotcha: Talker fork
+
+`pubspec.yaml` pins `talker`, `talker_flutter`, and `talker_dio_logger` to a patched fork via `dependency_overrides` (git ref `v1.2-patched`). **All three overrides are required** — the flutter/dio packages depend on `talker: ^5.1.17` from pub.dev, not on their sibling in the fork, so without the `talker` override the unpatched core is pulled in silently. The fork keeps version `5.1.17`, so `pub get` output looks identical either way. Verify the fork is actually used with:
+
+```bash
+flutter pub deps -s list | grep -i talker    # must say git, not hosted
+```
 
 ## Notes
 - New projects cloned from this template: follow the setup checklist in [README.md](README.md) (rename package via `change_app_package_name`, replace `package:app`, deep-link hosts, custom_lint activation, assetlinks).
 - Localization includes a hand-written Kurdish delegate (`lib/core/l10n/kurdish/`) layered on top of the generated `AppLocalizations`.
-- `docs/logging-talker-plan.md` is a planning document for migrating the three current logging mechanisms (`AwesomeDioInterceptor`, go_router diagnostics, scattered `dart:developer`/`debugPrint`) onto Talker — not yet implemented.

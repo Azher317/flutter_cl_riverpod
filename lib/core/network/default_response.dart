@@ -1,37 +1,39 @@
-import 'package:app/core/annotations/annotations_lib.dart';
 import 'package:app/core/models/json_types.dart';
+import 'package:app/core/utils/annotations/annotations_lib.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'default_response.g.dart';
 
 @jsonSerializableResponseGeneric
 class DefaultResponse<T> {
-  // Deserialized from the JSON key "msg".
-  final String? msg;
+  // Deserialized from the JSON key "message".
+  final String? message;
   // Deserialized from the JSON key "data".
   final T data;
   // Deserialized from the JSON key "statusCode".
   final double statusCode;
 
   const DefaultResponse({
-    this.msg,
+    this.message,
     required this.data,
     required this.statusCode,
   });
 
   factory DefaultResponse.fromJson(
-          Map<String, dynamic> json, FromJsonT<T> fromJsonT) =>
-      _$DefaultResponseFromJson<T>(json, fromJsonT);
+    Map<String, dynamic> json,
+    FromJsonT<T> fromJsonT,
+  ) => _$DefaultResponseFromJson<T>(json, fromJsonT);
 
   DefaultResponse<T> copyWith({
-    final String? msg,
+    final String? message,
     final T? data,
     final double? statusCode,
   }) {
     return DefaultResponse<T>(
-        msg: msg ?? this.msg,
-        data: data ?? this.data,
-        statusCode: statusCode ?? this.statusCode);
+      message: message ?? this.message,
+      data: data ?? this.data,
+      statusCode: statusCode ?? this.statusCode,
+    );
   }
 }
 

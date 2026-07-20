@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:app/core/constants/sizes.dart';
-import 'package:app/core/extensions/common_extensions.dart';
 import 'package:app/core/media/image_service.dart';
-import 'package:app/core/widgets/flex_padded.dart';
+import 'package:app/core/utils/constants/sizes.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
+import 'package:app/core/widgets/column_padded.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 
@@ -66,7 +66,7 @@ class ImageFormField extends StatelessWidget {
                     });
                   },
                   child: ColumnPadded(
-                    gap: 4,
+                    spacing: Insets.extraSmall,
                     children: [
                       Container(
                         width: width ?? height,

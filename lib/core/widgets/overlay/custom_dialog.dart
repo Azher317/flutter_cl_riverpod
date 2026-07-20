@@ -1,9 +1,9 @@
 //TODO this widget need refactoring
 
-import 'package:app/core/constants/sizes.dart';
-import 'package:app/core/extensions/theme_extentions.dart';
+import 'package:app/core/utils/constants/sizes.dart';
+import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/buttons/filled_loading_button.dart';
-import 'package:app/core/widgets/flex_padded.dart';
+import 'package:app/core/widgets/column_padded.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -27,7 +27,6 @@ class CustomDialog extends HookConsumerWidget {
         padding: const EdgeInsets.all(Insets.medium),
         child: ColumnPadded(
           crossAxisAlignment: CrossAxisAlignment.start,
-          gap: Insets.medium,
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(titleText, style: context.textTheme.titleLarge),

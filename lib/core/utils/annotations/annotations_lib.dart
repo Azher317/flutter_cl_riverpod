@@ -1,2 +1,2 @@
-export 'package:app/core/annotations/freezed.dart';
-export 'package:app/core/annotations/json_serializable.dart';
+export 'package:app/core/utils/annotations/freezed.dart';
+export 'package:app/core/utils/annotations/json_serializable.dart';

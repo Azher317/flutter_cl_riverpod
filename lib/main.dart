@@ -15,46 +15,49 @@ import 'package:timeago/timeago.dart' as timeago;
 const String appName = 'Azher';
 
 Future<void> main() async {
-  await runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  await runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-    FlutterError.onError = (details) {
-      talker.handle(details.exception, details.stack, 'FlutterError');
-      FlutterError.presentError(details);
-    };
-    PlatformDispatcher.instance.onError = (error, stack) {
-      talker.handle(error, stack, 'Uncaught platform error');
-      return true;
-    };
+      FlutterError.onError = (details) {
+        talker.handle(details.exception, details.stack, 'FlutterError');
+        FlutterError.presentError(details);
+      };
+      PlatformDispatcher.instance.onError = (error, stack) {
+        talker.handle(error, stack, 'Uncaught platform error');
+        return true;
+      };
 
-    final sharedPreferences = await SharedPreferences.getInstance();
+      final sharedPreferences = await SharedPreferences.getInstance();
 
-    timeago.setLocaleMessages(
-      'ar',
-      timeago.ArMessages(),
-    ); // Arabic time labels
+      timeago.setLocaleMessages(
+        'ar',
+        timeago.ArMessages(),
+      ); // Arabic time labels
 
-    runApp(
-      ProviderScope(
-        observers: [
-          TalkerRiverpodObserver(
-            talker: talker,
-            settings: const TalkerRiverpodLoggerSettings(
-              printProviderAdded: false,
-              printProviderUpdated: false,
+      runApp(
+        ProviderScope(
+          observers: [
+            TalkerRiverpodObserver(
+              talker: talker,
+              settings: const TalkerRiverpodLoggerSettings(
+                printProviderAdded: false,
+                printProviderUpdated: false,
+              ),
             ),
-          ),
-        ],
-        overrides: [
-          sharedPreferencesProvider.overrideWith((ref) => sharedPreferences),
-          sessionControllerProvider.overrideWith(
-            (ref) => ref.watch(authSessionProvider.notifier),
-          ),
-        ],
-        child: const App(),
-      ),
-    );
-  }, (error, stack) {
-    talker.handle(error, stack, 'Uncaught async error');
-  });
+          ],
+          overrides: [
+            sharedPreferencesProvider.overrideWith((ref) => sharedPreferences),
+            sessionControllerProvider.overrideWith(
+              (ref) => ref.watch(authSessionProvider.notifier),
+            ),
+          ],
+          child: const App(),
+        ),
+      );
+    },
+    (error, stack) {
+      talker.handle(error, stack, 'Uncaught async error');
+    },
+  );
 }
