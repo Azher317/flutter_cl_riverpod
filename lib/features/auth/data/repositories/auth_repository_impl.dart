@@ -30,13 +30,8 @@ class AuthRepositoryImpl with SafeRepositoryCall implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> logout() async {
-    try {
-      await _localDataSource.clearSession();
-      return const Right(null);
-    } on CacheException catch (e) {
-      return Left(CacheFailure(e.message));
-    }
+  Future<Either<Failure, void>> logout() {
+    return guard(_localDataSource.clearSession);
   }
 
   @override
