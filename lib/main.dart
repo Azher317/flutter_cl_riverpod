@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talker_riverpod_logger/talker_riverpod_logger.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
-const String appName = 'Azher';
+const String appName = 'Starter';
 
 Future<void> main() async {
   await runZonedGuarded(
