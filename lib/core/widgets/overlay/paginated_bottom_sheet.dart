@@ -57,17 +57,15 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
       return null;
     }, [search.debounced]);
 
-    String labelOf(T item) => labelBuilder?.call(item) ?? localizedName(item, settings);
+    String labelOf(T item) =>
+        labelBuilder?.call(item) ?? localizedName(item, settings);
 
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(BorderSize.medium),
-          topRight: Radius.circular(BorderSize.medium),
-        ),
+        // borderRadius: AppShapes.overlayTop,
         child: Scaffold(
           extendBody: true,
           extendBodyBehindAppBar: true,
@@ -96,10 +94,7 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                       width: 0.5,
                     ),
                     color: context.colorScheme.surfaceContainerLowest,
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(BorderSize.medium),
-                      topRight: Radius.circular(BorderSize.medium),
-                    ),
+                    // borderRadius: AppShapes.overlayTop,
                   ),
                   padding: Insets.mediumAll,
                   child: Column(
@@ -120,8 +115,7 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                             children: [
                               // Add custom items if provided
                               ...?customItems,
-                              if (customItems != null)
-                                const Divider(thickness: 0.5),
+                              if (customItems != null) const Divider(),
                               // Then show the regular list
                               Expanded(
                                 child: PagedListView.separated(
@@ -152,7 +146,7 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                                         },
                                       ),
                                   separatorBuilder: (context, index) {
-                                    return const Divider(thickness: 0.5);
+                                    return const Divider();
                                   },
                                 ),
                               ),

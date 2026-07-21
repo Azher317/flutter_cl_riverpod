@@ -1,6 +1,4 @@
-import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
-import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/break_line.dart';
 import 'package:flutter/material.dart';
 
@@ -13,24 +11,16 @@ Future<dynamic> customModalBottomSheet(
   double? width,
   required Widget child,
 }) {
+  // Surface, shape and clipping come from `bottomSheetTheme`; everything left
+  // here is behaviour or sizing.
   return showModalBottomSheet(
     context: context,
-    clipBehavior: Clip.hardEdge,
     isScrollControlled: isScrollControlled,
     scrollControlDisabledMaxHeightRatio: 0.75,
     isDismissible: isDismissible,
     enableDrag: isDismissible,
     useRootNavigator: true,
-    showDragHandle: false,
-
-    backgroundColor: context.colorScheme.surface,
     useSafeArea: true,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(BorderSize.medium),
-        topRight: Radius.circular(BorderSize.medium),
-      ),
-    ),
     builder: (context) => SizedBox(
       height: height ?? MediaQuery.of(context).size.height * 0.75,
       width: width ?? context.width,

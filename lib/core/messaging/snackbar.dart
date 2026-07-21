@@ -19,40 +19,28 @@ class AppMessenger {
     final status = Theme.of(context).appStatusColors;
     final (Color bg, Color fg, icon) = switch (type) {
       MessageType.success => (
-        status.successContainer,
-        status.onSuccessContainer,
+        status.success,
+        status.onSuccess,
         Icons.check_circle_rounded,
       ),
-      MessageType.error => (
-        scheme.errorContainer,
-        scheme.onErrorContainer,
-        Icons.error_rounded,
-      ),
+      MessageType.error => (scheme.error, scheme.onError, Icons.error_rounded),
       MessageType.warning => (
         status.warning,
         status.onWarning,
         Icons.warning_rounded,
       ),
-      MessageType.info => (
-        scheme.secondaryContainer,
-        scheme.onSecondaryContainer,
-        Icons.info_rounded,
-      ),
+      MessageType.info => (status.info, status.onInfo, Icons.info_rounded),
     };
 
     state
       ..removeCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
-          behavior: SnackBarBehavior.floating,
+          // Behaviour, elevation, insets and shape come from `snackBarTheme`;
+          // only what varies per MessageType is set here.
           backgroundColor: bg,
-          elevation: 6,
           duration: const Duration(seconds: 3),
-          margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-          ),
           dismissDirection: DismissDirection.horizontal,
           content: Row(
             children: [
@@ -63,11 +51,9 @@ class AppMessenger {
                   text,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    color: fg,
-                    fontWeight: FontWeight.w500,
-                    height: 1.35,
-                  ),
+                  // Weight and height come from the theme's contentTextStyle;
+                  // only the per-type foreground is applied here.
+                  style: TextStyle(color: fg),
                 ),
               ),
             ],
