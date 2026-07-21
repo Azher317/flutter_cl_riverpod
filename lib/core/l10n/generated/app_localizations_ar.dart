@@ -167,4 +167,121 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get welcomeAgain => 'مرحباً بك مرة أخرى';
+
+  @override
+  String get previewTitle => 'معاينة';
+
+  @override
+  String get previewTodayTitle => 'اليوم';
+
+  @override
+  String get previewTodaySubtitle => 'البطاقات ومربعات الاختيار وشريط التلميح.';
+
+  @override
+  String get previewWinterTip =>
+      'في فصل الشتاء يتباطأ نمو نباتاتك وتحتاج إلى ماء أقل.';
+
+  @override
+  String get previewLivingRoom => 'غرفة المعيشة';
+
+  @override
+  String get previewKitchen => 'المطبخ';
+
+  @override
+  String get previewBalcony => 'الشرفة';
+
+  @override
+  String get previewWater => 'سقاية';
+
+  @override
+  String get previewFeed => 'تسميد';
+
+  @override
+  String get previewDetailTitle => 'التفاصيل';
+
+  @override
+  String get previewDetailSubtitle =>
+      'خطوط العناوين وصورة العرض وبطاقات المعلومات.';
+
+  @override
+  String get previewPlantName => 'مونستيرا يونيك';
+
+  @override
+  String get previewPlantBody =>
+      'مونستيرا مبرقشة نادرة بأوراق عميقة التشقق, يزداد انشقاقها كلما نضج النبات. ضعها في ضوء ساطع غير مباشر — فأشعة الشمس المباشرة تحرق المساحات الفاتحة — واسقها فقط عند جفاف الطبقة العليا من التربة. وهي نبتة متسلقة بطبعها, لذا يساعد عمود الطحلب على إبقاء الأوراق الجديدة كبيرة بدل أن تصغر. امسح الأوراق شهرياً وسمّدها كل ريّتين خلال الربيع والصيف.';
+
+  @override
+  String get previewMostPopular => 'الأكثر رواجاً';
+
+  @override
+  String get previewMostPopularBody => 'هذا النبات من الأكثر مبيعاً في المتجر';
+
+  @override
+  String get previewEasyCare => 'سهل العناية';
+
+  @override
+  String get previewEasyCareBody => 'ينمو جيداً حتى مع الإهمال';
+
+  @override
+  String get previewFaux => 'يتوفر صناعي';
+
+  @override
+  String get previewFauxBody => 'المظهر نفسه دون أي عناية';
+
+  @override
+  String get previewComponentsTitle => 'العناصر';
+
+  @override
+  String get previewComponentsSubtitle =>
+      'حقول الإدخال والأزرار والمؤشرات كما يعرضها الثيم.';
+
+  @override
+  String get previewAssist => 'مساعدة';
+
+  @override
+  String get previewFilter => 'تصفية';
+
+  @override
+  String get previewSuggestion => 'اقتراح';
+
+  @override
+  String get previewFilledButton => 'زر ممتلئ';
+
+  @override
+  String get previewOutlinedButton => 'زر محدد';
+
+  @override
+  String get previewTextButton => 'زر نصي';
+
+  @override
+  String get previewOverlaysTitle => 'النوافذ المنبثقة';
+
+  @override
+  String get previewOverlaysSubtitle =>
+      'الحوار والتنبيهات والنافذة السفلية. اضغط لإظهار كل منها.';
+
+  @override
+  String get previewDialog => 'حوار';
+
+  @override
+  String get previewBottomSheet => 'نافذة سفلية';
+
+  @override
+  String get previewDialogTitle => 'حذف النبات؟';
+
+  @override
+  String get previewDialogBody => 'هذا الحوار للعرض فقط ولا يقوم بأي إجراء.';
+
+  @override
+  String get previewRooms => 'الغرف';
+
+  @override
+  String previewPlantCount(Object n) {
+    return '$n نباتات';
+  }
+
+  @override
+  String previewSnackMessage(Object type) {
+    return 'رسالة $type.';
+  }
 }

@@ -167,4 +167,121 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcomeAgain => 'Welcome again';
+
+  @override
+  String get previewTitle => 'Preview';
+
+  @override
+  String get previewTodayTitle => 'Today';
+
+  @override
+  String get previewTodaySubtitle => 'Cards, checkboxes and the tip banner.';
+
+  @override
+  String get previewWinterTip =>
+      'During the winter your plants slow down and need less water.';
+
+  @override
+  String get previewLivingRoom => 'Living Room';
+
+  @override
+  String get previewKitchen => 'Kitchen';
+
+  @override
+  String get previewBalcony => 'Balcony';
+
+  @override
+  String get previewWater => 'Water';
+
+  @override
+  String get previewFeed => 'Feed';
+
+  @override
+  String get previewDetailTitle => 'Detail';
+
+  @override
+  String get previewDetailSubtitle =>
+      'Hero typography, image block and info chips.';
+
+  @override
+  String get previewPlantName => 'Monstera Unique';
+
+  @override
+  String get previewPlantBody =>
+      'A rare variegated monstera with deeply fenestrated leaves, each one splitting a little further as the plant matures. Give it bright indirect light — direct sun scorches the pale patches — and water only once the top inch of soil has dried out. It climbs by nature, so a moss pole keeps the newer leaves growing large instead of shrinking back. Wipe the leaves down monthly and feed every other watering through spring and summer.';
+
+  @override
+  String get previewMostPopular => 'Most Popular';
+
+  @override
+  String get previewMostPopularBody => 'This is a popular plant in store';
+
+  @override
+  String get previewEasyCare => 'Easy Care';
+
+  @override
+  String get previewEasyCareBody => 'Thrives on being forgotten';
+
+  @override
+  String get previewFaux => 'Faux Available';
+
+  @override
+  String get previewFauxBody => 'Get the look, zero upkeep';
+
+  @override
+  String get previewComponentsTitle => 'Components';
+
+  @override
+  String get previewComponentsSubtitle =>
+      'Inputs, buttons and indicators as the theme renders them.';
+
+  @override
+  String get previewAssist => 'Assist';
+
+  @override
+  String get previewFilter => 'Filter';
+
+  @override
+  String get previewSuggestion => 'Suggestion';
+
+  @override
+  String get previewFilledButton => 'Filled button';
+
+  @override
+  String get previewOutlinedButton => 'Outlined button';
+
+  @override
+  String get previewTextButton => 'Text button';
+
+  @override
+  String get previewOverlaysTitle => 'Overlays';
+
+  @override
+  String get previewOverlaysSubtitle =>
+      'Dialog, snackbars and the modal sheet. Tap to raise each one.';
+
+  @override
+  String get previewDialog => 'Dialog';
+
+  @override
+  String get previewBottomSheet => 'Bottom sheet';
+
+  @override
+  String get previewDialogTitle => 'Delete plant?';
+
+  @override
+  String get previewDialogBody => 'This placeholder dialog does nothing.';
+
+  @override
+  String get previewRooms => 'Rooms';
+
+  @override
+  String previewPlantCount(Object n) {
+    return '$n plants';
+  }
+
+  @override
+  String previewSnackMessage(Object type) {
+    return 'A $type message.';
+  }
 }
