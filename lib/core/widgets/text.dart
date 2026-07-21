@@ -1,4 +1,3 @@
-import 'package:app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomText extends StatelessWidget {
@@ -28,15 +27,20 @@ class CustomText extends StatelessWidget {
   });
 
   /// Same typography as [CustomText] for [TextField], [InputDecoration.hintStyle], etc.
-  static TextStyle textStyle({
+  ///
+  /// Derived from the theme's `bodyMedium` rather than naming a font family, so
+  /// the body face follows the active locale (see `AppFontScheme`).
+  static TextStyle textStyle(
+    BuildContext context, {
     double? fontSize,
     FontWeight? fontWeight,
     Color? color,
     double? height = 1,
     TextDecoration? decoration,
   }) {
-    return TextStyle(
-      fontFamily: AppTheme.fontFamily,
+    final base = Theme.of(context).textTheme.bodyMedium ?? const TextStyle();
+
+    return base.copyWith(
       fontSize: fontSize ?? 14,
       fontWeight: fontWeight ?? FontWeight.w500,
       color: color,
@@ -61,6 +65,7 @@ class CustomText extends StatelessWidget {
       maxLines: maxLines ?? 100,
       overflow: overflow,
       style: CustomText.textStyle(
+        context,
         fontSize: fontSize,
         fontWeight: fontWeight,
         color: color,

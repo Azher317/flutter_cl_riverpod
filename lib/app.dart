@@ -3,6 +3,7 @@ import 'package:app/core/l10n/kurdish/kurdish_material_localization_delegate.dar
 import 'package:app/core/l10n/kurdish/kurdish_widget_localization_delegate.dart';
 import 'package:app/core/messaging/snackbar.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
+import 'package:app/core/theme/app_fonts.dart';
 import 'package:app/core/theme/app_theme.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/main.dart';
@@ -18,6 +19,10 @@ class App extends ConsumerWidget {
     final themeMode = ref.watch(settingsProvider.select((s) => s.themeMode));
     final localeCode = ref.watch(settingsProvider.select((s) => s.locale));
     final router = ref.watch(routerProvider);
+
+    // Font families follow the active script, so changing the language swaps
+    // the typography along with the strings.
+    final fonts = AppFontScheme.of(localeCode);
 
     return MaterialApp.router(
       title: appName,
@@ -35,8 +40,8 @@ class App extends ConsumerWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       // Theme
       themeMode: themeMode,
-      darkTheme: AppTheme.dark(),
-      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(fonts: fonts),
+      theme: AppTheme.light(fonts: fonts),
     );
   }
 }

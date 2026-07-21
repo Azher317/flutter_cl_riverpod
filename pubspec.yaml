@@ -78,7 +78,7 @@ dependency_overrides:
   # `talker: ^5.1.17` from pub.dev rather than on their sibling in the fork, so
   # without the `talker` override the unpatched core is pulled in silently.
   # The fork keeps version 5.1.17, so `pub get` output looks identical either
-  # way — verify with `flutter pub deps -s list | grep -i talker` (must say git).
+  # way — verify with `grep -A4 '^  talker:' pubspec.lock` (must show the git url).
   talker:
     git:
       url: https://github.com/Azher317/talker.git
@@ -101,9 +101,36 @@ flutter:
   assets:
     - assets/images/svg/
     - assets/images/png/
+    # Placeholder photo for the preview home screen — remove with it.
+    - assets/images/jpeg/
+  # PLACEHOLDER FONTS — template defaults, not brand fonts. Two families per
+  # script: a display face and a body face. Swap these (and the constants in
+  # lib/core/theme/app_fonts.dart, which must match these `family:` keys
+  # character-for-character) when starting an actual app.
   fonts:
-    - family: NotoSansArabic
+    # ── Latin ────────────────────────────────────────────────────────────
+    - family: PlayfairDisplay # display / headline / title
       fonts:
-        - asset: assets/fonts/NotoSansArabic-Regular.ttf
-        - asset: assets/fonts/NotoSansArabic-Bold.ttf
+        - asset: assets/fonts/PlayfairDisplay-Regular.ttf
+        - asset: assets/fonts/PlayfairDisplay-Bold.ttf
+          weight: 700
+    - family: WorkSans # body / label
+      fonts:
+        - asset: assets/fonts/WorkSans-Regular.ttf
+        - asset: assets/fonts/WorkSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/WorkSans-SemiBold.ttf
+          weight: 600
+    # ── Arabic ───────────────────────────────────────────────────────────
+    - family: ArefRuqaa # display / headline / title
+      fonts:
+        - asset: assets/fonts/ArefRuqaa-Regular.ttf
+        - asset: assets/fonts/ArefRuqaa-Bold.ttf
+          weight: 700
+    - family: Tajawal # body / label
+      fonts:
+        - asset: assets/fonts/Tajawal-Regular.ttf
+        - asset: assets/fonts/Tajawal-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Tajawal-Bold.ttf
           weight: 700
