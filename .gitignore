@@ -31,3 +31,18 @@ android/app/.cxx/
 
 # Tooling output
 custom_lint.log
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# IDE
+.idea/
+android/.idea/
+
+# Flutter generated (machine-specific absolute paths)
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Kotlin build daemon logs
+android/.kotlin/
