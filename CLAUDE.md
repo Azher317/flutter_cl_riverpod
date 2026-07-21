@@ -95,8 +95,10 @@ Cross-cutting, feature-agnostic helpers live under `lib/core/utils/`: `either.da
 `pubspec.yaml` pins `talker`, `talker_flutter`, and `talker_dio_logger` to a patched fork via `dependency_overrides` (git ref `v1.2-patched`). **All three overrides are required** — the flutter/dio packages depend on `talker: ^5.1.17` from pub.dev, not on their sibling in the fork, so without the `talker` override the unpatched core is pulled in silently. The fork keeps version `5.1.17`, so `pub get` output looks identical either way. Verify the fork is actually used with:
 
 ```bash
-flutter pub deps -s list | grep -i talker    # must say git, not hosted
+grep -A4 '^  talker:' pubspec.lock    # must show url: https://github.com/Azher317/talker.git
 ```
+
+(`flutter pub deps -s list` prints versions only — it can *not* distinguish the fork from pub.dev. `dart pub deps --json` works too: each of `talker`, `talker_flutter`, `talker_dio_logger` must report `"source": "git"`.)
 
 ## Notes
 - New projects cloned from this template: follow the setup checklist in [README.md](README.md) (rename package via `change_app_package_name`, replace `package:app`, deep-link hosts, custom_lint activation, assetlinks).
