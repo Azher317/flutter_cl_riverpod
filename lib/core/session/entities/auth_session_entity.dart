@@ -1,4 +1,4 @@
-import 'package:app/features/auth/domain/entities/user_entity.dart';
+import 'package:app/core/session/entities/user_entity.dart';
 
 /// An authenticated session: the [token] and the [user] it belongs to.
 ///

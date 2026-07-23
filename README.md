@@ -70,10 +70,39 @@ Re-run `build_runner` after touching any `@riverpod`, `@freezed`, or `.arb` file
 
 ### E. Strip the demo content
 
-The template ships a preview home screen so a fresh clone runs. Delete it and its asset:
+Of the three slices in [lib/features/](lib/features/), **two are real and one is scaffolding.**
 
-- [lib/features/home/presentation/screens/home_screen.dart](lib/features/home/presentation/screens/home_screen.dart) — replace with your own screen
-- `assets/images/jpeg/monstera.jpeg` and the `- assets/images/jpeg/` line in [pubspec.yaml](pubspec.yaml)
+**Keep `auth`.** It is the login + session slice the rest of the app is built on — the
+router's redirect, the `Authenticator` interceptor that attaches the bearer token, and the
+401→logout handler all read from it. Edit its UI and its flow to match your API; don't
+delete it.
+
+**Keep `splash`.** It's the screen the router holds on while the session restores from
+cache. It exists because `auth` does.
+
+**Delete `home`.** It's a theme-preview gallery that exists so a fresh clone has something
+to render. Once step D's colours, fonts and strings are in place it has served its purpose:
+
+```bash
+rm -rf lib/features/home
+rm assets/images/jpeg/monstera.jpeg
+```
+
+Then remove the `- assets/images/jpeg/` line from [pubspec.yaml](pubspec.yaml), and fix the
+three things that deletion breaks:
+
+1. **The route.** [app_router.dart](lib/router/app_router.dart) imports `HomeScreen` and
+   builds it for `RouteNames.home`. Point that `GoRoute` at your own screen.
+2. **Keep the `RouteNames.home` constant itself** — the post-login redirect and
+   `customAppBar`'s back-button fallback
+   ([custom_app_bar.dart](lib/core/widgets/custom_app_bar.dart)) both navigate to it.
+3. **The dead strings.** Every `preview*` key in `app_en.arb` / `app_ar.arb` belonged to the
+   gallery, along with `switchTheme` and `changeLanguage`. Delete them from **both** files
+   (`logout` and `cancel` are generic — keep those if your own UI uses them), then re-run
+   `build_runner`.
+
+`flutter analyze` after this should be clean; that's the check that you caught every
+reference.
 
 ---
 

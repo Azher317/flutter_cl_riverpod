@@ -1,3 +1,4 @@
+import 'package:app/core/theme/extra_colors.dart';
 import 'package:flutter/material.dart';
 
 extension ThemeExtension on BuildContext {
@@ -6,4 +7,6 @@ extension ThemeExtension on BuildContext {
   ColorScheme get colorScheme => theme.colorScheme;
 
   TextTheme get textTheme => theme.textTheme;
+
+  AppStatusColors get appStatusColors => theme.appStatusColors;
 }

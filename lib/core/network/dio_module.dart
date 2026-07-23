@@ -25,7 +25,7 @@ Dio dio(Ref ref) {
       ApiHeaders.accept: ApiHeaders.applicationJson,
       ApiHeaders.contentType: ApiHeaders.applicationJson,
     }
-    ..interceptors.add(Authenticator(ref.read(sessionControllerProvider)))
+    ..interceptors.add(Authenticator(ref))
     ..interceptors.add(
       InterceptorsWrapper(
         onError: (e, handler) async {

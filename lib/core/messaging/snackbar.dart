@@ -1,4 +1,3 @@
-import 'package:app/core/theme/extra_colors.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +15,7 @@ class AppMessenger {
     if (state == null || context == null) return;
 
     final scheme = context.colorScheme;
-    final status = Theme.of(context).appStatusColors;
+    final status = context.appStatusColors;
     final (Color bg, Color fg, icon) = switch (type) {
       MessageType.success => (
         status.success,

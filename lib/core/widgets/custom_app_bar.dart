@@ -1,6 +1,6 @@
+import 'package:app/core/utils/constants/route_names.dart';
 import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
-import 'package:app/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,8 +18,7 @@ AppBar customAppBar(
     forceMaterialTransparency: true,
     leadingWidth: 69,
     leading: Padding(
-      padding:
-          padding ?? const EdgeInsets.symmetric(horizontal: Insets.medium),
+      padding: padding ?? const EdgeInsets.symmetric(horizontal: Insets.medium),
       child: _leadingButton(context, leading),
     ),
     title: title,
@@ -47,10 +46,9 @@ Widget _leadingButton(BuildContext context, LeadingButton leading) {
 }
 
 void _onBack(BuildContext context) {
-  final router = GoRouter.of(context);
-  if (router.canPop()) {
-    router.pop();
+  if (context.canPop()) {
+    context.pop();
   } else {
-    router.go(RoutesDocument.home);
+    context.go(RouteNames.home);
   }
 }

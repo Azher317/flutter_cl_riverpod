@@ -35,8 +35,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final isLoading = loginState.isLoading;
 
     ref.listen<AsyncValue<void>>(loginProvider, (previous, next) {
-      // On success, LoginNotifier updates authSessionProvider, and the router's
-      // redirect navigates to home — no imperative navigation needed here.
+      // On success, LoginNotifier hands the session to the core Session
+      // notifier, and the router's redirect navigates to home — no imperative
+      // navigation needed here.
       if (next is AsyncError) {
         final error = next.error;
         if (error is Failure) {

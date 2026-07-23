@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:app/core/messaging/snackbar.dart';
+import 'package:app/core/session/session_provider.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
+import 'package:app/core/utils/constants/route_names.dart';
 import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/overlay/custom_modal_bottom_sheet.dart';
-import 'package:app/features/auth/presentation/notifiers/auth_session_provider.dart';
-import 'package:app/router/app_router.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -42,7 +42,7 @@ class HomeScreen extends ConsumerWidget {
         ),
         leading: kDebugMode
             ? IconButton(
-                onPressed: () => context.push(RoutesDocument.logs),
+                onPressed: () => context.push(RouteNames.logs),
                 icon: const Icon(Icons.bug_report),
                 tooltip: 'Log viewer (debug only)',
               )
@@ -67,7 +67,7 @@ class HomeScreen extends ConsumerWidget {
           ),
           IconButton(
             onPressed: () =>
-                unawaited(ref.read(authSessionProvider.notifier).logout()),
+                unawaited(ref.read(sessionControllerProvider).logout()),
             icon: const Icon(Icons.logout),
             tooltip: context.l10n.logout,
           ),

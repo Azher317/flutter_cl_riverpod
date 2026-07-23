@@ -8,9 +8,16 @@ part of 'session_provider.dart';
 
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
+/// UI-facing view of the session: the user, auth-status and logout — never the
+/// token. Delegates to the core [Session] notifier ([sessionProvider]). The
+/// network layer reads the token from `sessionProvider` directly instead.
 
 @ProviderFor(sessionController)
 const sessionControllerProvider = SessionControllerProvider._();
+
+/// UI-facing view of the session: the user, auth-status and logout — never the
+/// token. Delegates to the core [Session] notifier ([sessionProvider]). The
+/// network layer reads the token from `sessionProvider` directly instead.
 
 final class SessionControllerProvider
     extends
@@ -20,6 +27,9 @@ final class SessionControllerProvider
           SessionController
         >
     with $Provider<SessionController> {
+  /// UI-facing view of the session: the user, auth-status and logout — never the
+  /// token. Delegates to the core [Session] notifier ([sessionProvider]). The
+  /// network layer reads the token from `sessionProvider` directly instead.
   const SessionControllerProvider._()
     : super(
         from: null,
@@ -54,4 +64,4 @@ final class SessionControllerProvider
   }
 }
 
-String _$sessionControllerHash() => r'0039bd475c509d99ae14fa735937f9e454aa6b22';
+String _$sessionControllerHash() => r'9c26932746ac885170ebbebb8c4e338f16471eab';
