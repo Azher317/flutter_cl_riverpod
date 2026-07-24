@@ -4,6 +4,7 @@ import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/buttons/filled_loading_button.dart';
 import 'package:app/core/widgets/column_padded.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,14 +30,14 @@ class CustomDialog extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(titleText, style: context.textTheme.displaySmall),
+            CustomText(titleText, style: context.textTheme.displaySmall),
             ...children,
             Row(
               children: [
                 FilledLoadingButton(
                   isLoading: isLoading,
                   onPressed: onAdd,
-                  child: const Text('إضافة'),
+                  child: const CustomText('إضافة'),
                 ),
                 const SizedBox(width: Insets.small),
                 FilledButton(
@@ -45,7 +46,7 @@ class CustomDialog extends HookConsumerWidget {
                     backgroundColor: context.colorScheme.error,
                     foregroundColor: context.colorScheme.onError,
                   ),
-                  child: const Text('الغاء'),
+                  child: const CustomText('الغاء'),
                 ),
               ],
             ),

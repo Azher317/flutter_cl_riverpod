@@ -14,13 +14,11 @@ class CustomDatePickerFormField extends HookConsumerWidget {
     this.validator,
     this.firstDate,
     this.lastDate,
-    this.initialDate,
     this.labelText = 'YYYY/MM/DD',
   });
 
   final ValueNotifier<DateTime?> selectedDateNotifier;
   final String? Function(String?)? validator;
-  final DateTime? initialDate;
   final DateTime? firstDate, lastDate;
   final String labelText;
 
@@ -60,11 +58,13 @@ class CustomDatePickerFormField extends HookConsumerWidget {
                     DateTime.now().month,
                     DateTime.now().day,
                   ),
-              lastDate: DateTime(
-                DateTime.now().year + 10,
-                DateTime.now().month,
-                DateTime.now().day,
-              ),
+              lastDate:
+                  lastDate ??
+                  DateTime(
+                    DateTime.now().year + 10,
+                    DateTime.now().month,
+                    DateTime.now().day,
+                  ),
             );
             if (pickedDate != null) {
               selectedDateNotifier.value = pickedDate;

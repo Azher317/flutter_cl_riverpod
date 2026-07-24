@@ -1,6 +1,7 @@
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/state_ui/state_message.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class DefaultErrorWidget extends StatelessWidget {
@@ -23,7 +24,10 @@ class DefaultErrorWidget extends StatelessWidget {
       title: context.l10n.defaultErrorMessage,
       action: onRetry == null
           ? null
-          : FilledButton(onPressed: onRetry, child: Text(context.l10n.retry)),
+          : FilledButton(
+              onPressed: onRetry,
+              child: CustomText(context.l10n.retry),
+            ),
     );
   }
 }

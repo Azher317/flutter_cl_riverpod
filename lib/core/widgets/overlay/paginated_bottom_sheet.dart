@@ -8,6 +8,7 @@ import 'package:app/core/utils/hooks/use_debounced_search.dart';
 import 'package:app/core/widgets/break_line.dart';
 import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:app/core/widgets/svg_prefix_icon.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -78,7 +79,7 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
               const SizedBox(height: Insets.medium),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Insets.medium),
-                child: Text(
+                child: CustomText(
                   titleText,
                   style: context.textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w700,
@@ -133,7 +134,7 @@ class PaginatedBottomSheet<T> extends HookConsumerWidget {
                                           // taller rows.
                                           return RepaintBoundary(
                                             child: ListTile(
-                                              title: Text(labelOf(item)),
+                                              title: CustomText(labelOf(item)),
                                               subtitle: subtitleBuilder?.call(
                                                 item,
                                               ),

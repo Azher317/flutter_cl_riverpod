@@ -19,8 +19,8 @@ class BreakLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        height: 3,
-        width: 120,
+        height: width,
+        width: height,
         decoration: BoxDecoration(
           color: color ?? context.colorScheme.outlineVariant,
           borderRadius: BorderRadius.all(

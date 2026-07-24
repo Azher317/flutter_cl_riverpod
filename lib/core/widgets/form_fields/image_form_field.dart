@@ -4,6 +4,7 @@ import 'package:app/core/media/image_service.dart';
 import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/widgets/column_padded.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 
@@ -82,7 +83,7 @@ class ImageFormField extends StatelessWidget {
                               : MainAxisAlignment.center,
                           children: [
                             if (hintText != null) ...[
-                              Text(
+                              CustomText(
                                 hintText!,
                                 style: theme.inputDecorationTheme.hintStyle,
                               ),
@@ -95,12 +96,12 @@ class ImageFormField extends StatelessWidget {
                         ),
                       ),
                       if (text != null) ...[
-                        Text(text!, style: theme.textTheme.displaySmall),
+                        CustomText(text!, style: theme.textTheme.displaySmall),
                       ],
                       if (field.hasError)
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
+                          child: CustomText(
                             field.errorText!,
                             style: theme.textTheme.bodySmall!.copyWith(
                               color: theme.colorScheme.error,
@@ -133,7 +134,7 @@ class ImageFormField extends StatelessWidget {
                     ),
                   ),
                   if (text != null) ...[
-                    Text(text!, style: theme.textTheme.displaySmall),
+                    CustomText(text!, style: theme.textTheme.displaySmall),
                   ],
                 ],
               ),

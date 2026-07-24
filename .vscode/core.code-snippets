@@ -1,0 +1,55 @@
+{
+  "clr-core-exception": {
+    "scope": "dart",
+    "prefix": "clr-core-exception",
+    "description": "Core · typed app exception for lib/core/errors/exceptions.dart. Thrown inside the data layer only; guard() translates it to a Failure. Add the mirroring Failure with clr-core-failure and map the pair in SafeRepositoryCall.",
+    "body": [
+      "/// ${2:When this is thrown.}",
+      "class ${1:Thing}Exception implements Exception {",
+      "  const ${1}Exception(this.message);",
+      "  final String message;",
+      "}$0"
+    ]
+  },
+  "clr-core-failure": {
+    "scope": "dart",
+    "prefix": "clr-core-failure",
+    "description": "Core · Failure subclass for lib/core/errors/failures.dart. Failure is sealed, so adding one breaks TWO exhaustive switches until you extend them: guard() in core/errors/safe_repository_call.dart and localizeFailure() in core/messaging/failure_messenger.dart (which also needs a new .arb key in en AND ar).",
+    "body": [
+      "// TODO(wire-up): map the mirroring exception in guard()",
+      "// (core/errors/safe_repository_call.dart) and add a localized branch in",
+      "// localizeFailure() (core/messaging/failure_messenger.dart). Delete this line.",
+      "class ${1:Thing}Failure extends Failure {",
+      "  const ${1}Failure(super.message);",
+      "}$0"
+    ]
+  },
+  "clr-core-endpoint": {
+    "scope": "dart",
+    "prefix": "clr-core-endpoint",
+    "description": "Core · endpoint constant for the Endpoints class in lib/core/network/endpoints.dart. Paths live in exactly one place; for parameterized routes interpolate the id (e.g. '/orders/$id').",
+    "body": [
+      "static const String ${1:thing} = '/${2:path}';$0"
+    ]
+  },
+  "clr-core-route": {
+    "scope": "dart",
+    "prefix": "clr-core-route",
+    "description": "Core · GoRoute entry for the routes list in lib/router/app_router.dart. Add the matching path constant to RoutesDocument first: static const String x = '/x';",
+    "body": [
+      "GoRoute(",
+      "  path: RoutesDocument.${1:thing},",
+      "  builder: (context, state) => const ${2:Thing}Screen(),",
+      "),$0"
+    ]
+  },
+  "clr-core-provider": {
+    "scope": "dart",
+    "prefix": "clr-core-provider",
+    "description": "Core · plain @riverpod function provider. Riverpod 3 takes a bare Ref (NOT the old generated XxxRef). ref.watch dependencies so the provider rebuilds with them. Needs a part '<file>.g.dart'; directive.",
+    "body": [
+      "@riverpod",
+      "${1:Thing} ${1/(.*)/${1:/camelcase}/}(Ref ref) => ${2:throw UnimplementedError()};$0"
+    ]
+  }
+}

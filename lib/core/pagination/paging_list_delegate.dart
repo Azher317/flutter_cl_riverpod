@@ -4,6 +4,7 @@ import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/column_padded.dart';
 import 'package:app/core/widgets/state_ui/empty_state.dart';
 import 'package:app/core/widgets/state_ui/state_message.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
@@ -30,7 +31,7 @@ extension PagingListDelegateX<ItemType> on PagingController<int, ItemType> {
           title: context.l10n.defaultErrorMessage,
           action: FilledButton(
             onPressed: refresh,
-            child: Text(context.l10n.retry),
+            child: CustomText(context.l10n.retry),
           ),
         );
       },
@@ -41,7 +42,7 @@ extension PagingListDelegateX<ItemType> on PagingController<int, ItemType> {
             padding: Insets.smallAll,
             child: ColumnPadded(
               children: [
-                Text(
+                CustomText(
                   context.l10n.defaultErrorMessage,
                   textAlign: TextAlign.center,
                 ),
@@ -58,7 +59,7 @@ extension PagingListDelegateX<ItemType> on PagingController<int, ItemType> {
           title: context.l10n.noItemsFoundError,
           action: FilledButton(
             onPressed: refresh,
-            child: Text(context.l10n.retry),
+            child: CustomText(context.l10n.retry),
           ),
         );
       },

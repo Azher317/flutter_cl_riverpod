@@ -7,6 +7,7 @@ import 'package:app/core/utils/validation/validation_regex.dart';
 import 'package:app/core/widgets/buttons/filled_loading_button.dart';
 import 'package:app/core/widgets/form_body.dart';
 import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:app/features/auth/presentation/notifiers/login_notifier.dart';
 import 'package:app/features/auth/presentation/widgets/password_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           FilledLoadingButton(
             onPressed: submit,
             isLoading: isLoading,
-            child: Text(context.l10n.login),
+            child: CustomText(context.l10n.login),
           ),
         ],
       ),

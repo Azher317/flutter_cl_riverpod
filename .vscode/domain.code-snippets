@@ -1,0 +1,104 @@
+{
+  "clr-domain-entity": {
+    "scope": "dart",
+    "prefix": "clr-domain-entity",
+    "description": "Domain · plain entity: const ctor, final fields, hand-written ==/hashCode/toString. Type the name in PascalCase WITHOUT the Entity suffix (User -> UserEntity). No imports, no Flutter, no JSON — entities stay pure Dart.",
+    "body": [
+      "class ${1:Thing}Entity {",
+      "  const ${1}Entity({",
+      "    required this.${2:id},",
+      "    required this.${3:name},",
+      "  });",
+      "",
+      "  final ${4:String} $2;",
+      "  final ${5:String} $3;",
+      "",
+      "  @override",
+      "  bool operator ==(Object other) =>",
+      "      identical(this, other) ||",
+      "      other is ${1}Entity &&",
+      "          runtimeType == other.runtimeType &&",
+      "          $2 == other.$2 &&",
+      "          $3 == other.$3;",
+      "",
+      "  @override",
+      "  int get hashCode => Object.hash($2, $3);",
+      "",
+      "  @override",
+      "  String toString() => '${1}Entity($2: \\$$2, $3: \\$$3)';$0",
+      "}"
+    ]
+  },
+  "clr-domain-repo": {
+    "scope": "dart",
+    "prefix": "clr-domain-repo",
+    "description": "Domain · abstract repository contract. Every method returns Future<Either<Failure, T>>. Type feature and entity in snake_case (order_item -> OrderItem).",
+    "body": [
+      "import 'package:app/core/errors/failures.dart';",
+      "import 'package:app/core/utils/either.dart';",
+      "import 'package:app/features/${1:feature}/domain/entities/${2:thing}_entity.dart';",
+      "",
+      "abstract class ${1/(.*)/${1:/pascalcase}/}Repository {",
+      "  Future<Either<Failure, ${2/(.*)/${1:/pascalcase}/}Entity>> ${3:getThing}($4);$0",
+      "}"
+    ]
+  },
+  "clr-domain-params": {
+    "scope": "dart",
+    "prefix": "clr-domain-params",
+    "description": "Domain · plain params class for a multi-arg usecase. Type the name in PascalCase WITHOUT the Params suffix (Login -> LoginParams). Skip this for no-arg calls — use NoParamsUseCase instead.",
+    "body": [
+      "class ${1:Action}Params {",
+      "  const ${1}Params({",
+      "    required this.${2:field},",
+      "  });",
+      "",
+      "  final ${3:String} $2;$0",
+      "}"
+    ]
+  },
+  "clr-domain-usecase": {
+    "scope": "dart",
+    "prefix": "clr-domain-usecase",
+    "description": "Domain · usecase implementing UseCase<T, Params>. One usecase per operation; the single call() only delegates to the repository. Type feature/entity/action in snake_case.",
+    "body": [
+      "import 'package:app/core/errors/failures.dart';",
+      "import 'package:app/core/usecase/usecase.dart';",
+      "import 'package:app/core/utils/either.dart';",
+      "import 'package:app/features/${1:feature}/domain/entities/${2:thing}_entity.dart';",
+      "import 'package:app/features/$1/domain/params/${3:action}_params.dart';",
+      "import 'package:app/features/$1/domain/repositories/${1}_repository.dart';",
+      "",
+      "class ${3/(.*)/${1:/pascalcase}/}UseCase implements UseCase<${2/(.*)/${1:/pascalcase}/}Entity, ${3/(.*)/${1:/pascalcase}/}Params> {",
+      "  const ${3/(.*)/${1:/pascalcase}/}UseCase(this._repository);",
+      "",
+      "  final ${1/(.*)/${1:/pascalcase}/}Repository _repository;",
+      "",
+      "  @override",
+      "  Future<Either<Failure, ${2/(.*)/${1:/pascalcase}/}Entity>> call(${3/(.*)/${1:/pascalcase}/}Params params) =>",
+      "      _repository.${4:doThing}(params);$0",
+      "}"
+    ]
+  },
+  "clr-domain-usecase-noparams": {
+    "scope": "dart",
+    "prefix": "clr-domain-usecase-noparams",
+    "description": "Domain · usecase implementing NoParamsUseCase<T> for an operation that takes no arguments. Type feature/entity in snake_case; type the usecase name in PascalCase without the UseCase suffix.",
+    "body": [
+      "import 'package:app/core/errors/failures.dart';",
+      "import 'package:app/core/usecase/usecase.dart';",
+      "import 'package:app/core/utils/either.dart';",
+      "import 'package:app/features/${1:feature}/domain/entities/${2:thing}_entity.dart';",
+      "import 'package:app/features/$1/domain/repositories/${1}_repository.dart';",
+      "",
+      "class ${3:GetThing}UseCase implements NoParamsUseCase<${2/(.*)/${1:/pascalcase}/}Entity> {",
+      "  const ${3}UseCase(this._repository);",
+      "",
+      "  final ${1/(.*)/${1:/pascalcase}/}Repository _repository;",
+      "",
+      "  @override",
+      "  Future<Either<Failure, ${2/(.*)/${1:/pascalcase}/}Entity>> call() => _repository.${4:getThing}();$0",
+      "}"
+    ]
+  }
+}

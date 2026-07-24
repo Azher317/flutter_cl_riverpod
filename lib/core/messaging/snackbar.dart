@@ -1,4 +1,5 @@
 import 'package:app/core/utils/extensions/theme_extentions.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 enum MessageType { success, error, warning, info }
@@ -46,13 +47,12 @@ class AppMessenger {
               Icon(icon, color: fg, size: 20),
               const SizedBox(width: 12),
               Expanded(
-                child: Text(
+                child: CustomText(
                   text,
                   maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
                   // Weight and height come from the theme's contentTextStyle;
                   // only the per-type foreground is applied here.
-                  style: TextStyle(color: fg),
+                  color: fg,
                 ),
               ),
             ],

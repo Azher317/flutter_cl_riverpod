@@ -8,6 +8,7 @@ import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/overlay/custom_modal_bottom_sheet.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -36,7 +37,7 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: CustomText(
           context.l10n.previewTitle,
           style: context.textTheme.titleLarge,
         ),
@@ -116,7 +117,7 @@ class _TodaySection extends StatelessWidget {
                 ),
                 const SizedBox(width: Insets.small),
                 Expanded(
-                  child: Text(
+                  child: CustomText(
                     context.l10n.previewWinterTip,
                     style: context.textTheme.bodyMedium?.copyWith(
                       color: context.colorScheme.onSecondaryContainer,
@@ -163,7 +164,7 @@ class _RoomCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
+            CustomText(
               room,
               style: context.textTheme.titleMedium?.copyWith(
                 color: context.colorScheme.primary,
@@ -178,8 +179,8 @@ class _RoomCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(action, style: context.textTheme.bodyLarge),
-                      Text(
+                      CustomText(action, style: context.textTheme.bodyLarge),
+                      CustomText(
                         plant,
                         style: context.textTheme.bodySmall?.copyWith(
                           color: context.colorScheme.onSurfaceVariant,
@@ -242,14 +243,14 @@ class _DetailPreview extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
+                    CustomText(
                       context.l10n.previewPlantName,
                       style: context.textTheme.titleLarge?.copyWith(
                         color: context.colorScheme.primary,
                       ),
                     ),
                     const SizedBox(height: Insets.small),
-                    Text(
+                    CustomText(
                       context.l10n.previewPlantBody,
                       style: context.textTheme.bodyMedium,
                     ),
@@ -284,8 +285,8 @@ class _DetailPreview extends StatelessWidget {
                         color: context.colorScheme.onSecondaryContainer,
                       ),
                       const SizedBox(height: Insets.extraSmall),
-                      Text(title, style: context.textTheme.titleSmall),
-                      Text(body, style: context.textTheme.bodySmall),
+                      CustomText(title, style: context.textTheme.titleSmall),
+                      CustomText(body, style: context.textTheme.bodySmall),
                     ],
                   ),
                 );
@@ -318,16 +319,16 @@ class _ComponentGallery extends StatelessWidget {
             children: <Widget>[
               ActionChip(
                 avatar: const Icon(Icons.info_outline, size: IconSize.small),
-                label: Text(context.l10n.previewAssist),
+                label: CustomText(context.l10n.previewAssist),
                 onPressed: () {},
               ),
               FilterChip(
-                label: Text(context.l10n.previewFilter),
+                label: CustomText(context.l10n.previewFilter),
                 selected: true,
                 onSelected: (_) {},
               ),
               InputChip(
-                label: Text(context.l10n.previewSuggestion),
+                label: CustomText(context.l10n.previewSuggestion),
                 onPressed: () {},
               ),
             ],
@@ -335,27 +336,27 @@ class _ComponentGallery extends StatelessWidget {
           const SizedBox(height: Insets.medium),
           FilledButton(
             onPressed: () {},
-            child: Text(context.l10n.previewFilledButton),
+            child: CustomText(context.l10n.previewFilledButton),
           ),
           const SizedBox(height: Insets.small),
           OutlinedButton(
             onPressed: () {},
-            child: Text(context.l10n.previewOutlinedButton),
+            child: CustomText(context.l10n.previewOutlinedButton),
           ),
           const SizedBox(height: Insets.small),
           Align(
             child: TextButton(
               onPressed: () {},
-              child: Text(context.l10n.previewTextButton),
+              child: CustomText(context.l10n.previewTextButton),
             ),
           ),
           const SizedBox(height: Insets.medium),
           // Platform names are proper nouns — untranslated on purpose.
           SegmentedButton<int>(
             segments: const <ButtonSegment<int>>[
-              ButtonSegment<int>(value: 0, label: Text('Android')),
-              ButtonSegment<int>(value: 1, label: Text('Web')),
-              ButtonSegment<int>(value: 2, label: Text('Linux')),
+              ButtonSegment<int>(value: 0, label: CustomText('Android')),
+              ButtonSegment<int>(value: 1, label: CustomText('Web')),
+              ButtonSegment<int>(value: 2, label: CustomText('Linux')),
             ],
             selected: const <int>{0},
             onSelectionChanged: (_) {},
@@ -391,12 +392,12 @@ class _OverlayGallery extends StatelessWidget {
         children: <Widget>[
           OutlinedButton(
             onPressed: () => unawaited(_showDialog(context)),
-            child: Text(context.l10n.previewDialog),
+            child: CustomText(context.l10n.previewDialog),
           ),
           const SizedBox(height: Insets.small),
           OutlinedButton(
             onPressed: () => unawaited(_showSheet(context)),
-            child: Text(context.l10n.previewBottomSheet),
+            child: CustomText(context.l10n.previewBottomSheet),
           ),
           const SizedBox(height: Insets.medium),
           // One per MessageType: the theme owns the shape, AppMessenger still
@@ -407,7 +408,7 @@ class _OverlayGallery extends StatelessWidget {
             children: <Widget>[
               for (final MessageType type in MessageType.values)
                 ActionChip(
-                  label: Text(type.name),
+                  label: CustomText(type.name),
                   onPressed: () => AppMessenger.show(
                     context.l10n.previewSnackMessage(type.name),
                     type: type,
@@ -423,12 +424,12 @@ class _OverlayGallery extends StatelessWidget {
   Future<void> _showDialog(BuildContext context) => showDialog<void>(
     context: context,
     builder: (BuildContext context) => AlertDialog(
-      title: Text(context.l10n.previewDialogTitle),
-      content: Text(context.l10n.previewDialogBody),
+      title: CustomText(context.l10n.previewDialogTitle),
+      content: CustomText(context.l10n.previewDialogBody),
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(context.l10n.cancel),
+          child: CustomText(context.l10n.cancel),
         ),
       ],
     ),
@@ -441,7 +442,10 @@ class _OverlayGallery extends StatelessWidget {
     child: ListView(
       padding: Insets.mediumAll,
       children: <Widget>[
-        Text(context.l10n.previewRooms, style: context.textTheme.titleMedium),
+        CustomText(
+          context.l10n.previewRooms,
+          style: context.textTheme.titleMedium,
+        ),
         const Divider(),
         for (final String room in <String>[
           context.l10n.previewLivingRoom,
@@ -450,8 +454,8 @@ class _OverlayGallery extends StatelessWidget {
         ])
           ListTile(
             leading: const Icon(Icons.local_florist_outlined),
-            title: Text(room),
-            subtitle: Text(context.l10n.previewPlantCount(3)),
+            title: CustomText(room),
+            subtitle: CustomText(context.l10n.previewPlantCount(3)),
             onTap: () {},
           ),
       ],
@@ -476,8 +480,8 @@ class _Section extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(title, style: context.textTheme.titleLarge),
-        Text(
+        CustomText(title, style: context.textTheme.titleLarge),
+        CustomText(
           subtitle,
           style: context.textTheme.bodySmall?.copyWith(
             color: context.colorScheme.onSurfaceVariant,

@@ -1,5 +1,6 @@
 import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/column_padded.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:flutter/material.dart';
 
 class LabeledField extends StatelessWidget {
@@ -13,7 +14,7 @@ class LabeledField extends StatelessWidget {
     return ColumnPadded(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        CustomText(
           label,
           style: context.textTheme.bodyMedium?.copyWith(
             color: context.colorScheme.onSurface,

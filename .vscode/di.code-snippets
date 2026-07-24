@@ -1,0 +1,36 @@
+{
+  "clr-di-providers": {
+    "scope": "dart",
+    "prefix": "clr-di-providers",
+    "description": "DI · the feature's di/<feature>_providers.dart: repository provider + first usecase provider, wiring datasource -> repository -> usecase. Always ref.watch the dependency, never ref.read. Riverpod 3 takes a bare Ref. Type feature/usecase in snake_case.",
+    "body": [
+      "import 'package:app/features/${1:feature}/data/datasources/${1}_remote_data_source.dart';",
+      "import 'package:app/features/$1/data/repositories/${1}_repository_impl.dart';",
+      "import 'package:app/features/$1/domain/repositories/${1}_repository.dart';",
+      "import 'package:app/features/$1/domain/usecases/${2:action}_usecase.dart';",
+      "import 'package:riverpod_annotation/riverpod_annotation.dart';",
+      "",
+      "part '$TM_FILENAME_BASE.g.dart';",
+      "",
+      "@riverpod",
+      "${1/(.*)/${1:/pascalcase}/}Repository ${1/(.*)/${1:/camelcase}/}Repository(Ref ref) =>",
+      "    ${1/(.*)/${1:/pascalcase}/}RepositoryImpl(",
+      "      remoteDataSource: ref.watch(${1/(.*)/${1:/camelcase}/}RemoteDataSourceProvider),",
+      "    );",
+      "",
+      "@riverpod",
+      "${2/(.*)/${1:/pascalcase}/}UseCase ${2/(.*)/${1:/camelcase}/}UseCase(Ref ref) =>",
+      "    ${2/(.*)/${1:/pascalcase}/}UseCase(ref.watch(${1/(.*)/${1:/camelcase}/}RepositoryProvider));$0"
+    ]
+  },
+  "clr-di-usecase": {
+    "scope": "dart",
+    "prefix": "clr-di-usecase",
+    "description": "DI · one usecase provider, to append to an existing di/<feature>_providers.dart. Type the usecase in PascalCase without the UseCase suffix, and the feature in camelCase.",
+    "body": [
+      "@riverpod",
+      "${1:DoThing}UseCase ${1/(.*)/${1:/camelcase}/}UseCase(Ref ref) =>",
+      "    ${1}UseCase(ref.watch(${2:feature}RepositoryProvider));$0"
+    ]
+  }
+}
