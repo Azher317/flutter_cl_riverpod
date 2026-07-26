@@ -20,6 +20,7 @@
   "loginSuccess": "تم تسجيل الدخول بنجاح",
   "noConnection": "لا يوجد اتصال بالإنترنت, يرجى التحقق من الشبكة",
   "noItemsFoundError": "لا يوجد عناصر",
+  "notifications": "الإشعارات",
   "password": "كلمة المرور",
   "phone": "رقم الهاتف",
   "select": "اختر",

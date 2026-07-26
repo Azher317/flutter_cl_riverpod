@@ -224,6 +224,12 @@ abstract class AppLocalizations {
   /// **'No items found'**
   String get noItemsFoundError;
 
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
   /// No description provided for @password.
   ///
   /// In en, this message translates to:

@@ -725,8 +725,8 @@
     "semantic_hash": "8f16b7d8ed1cb5496e767634cb29f4c7"
   },
   ".claude/settings.json": {
-    "mtime": 1785068339.0400727,
-    "ast_hash": "e33187cd9e5f3dce279b7168cf22eb21",
+    "mtime": 1785079990.8897448,
+    "ast_hash": "3a37c11fc398ea5c545be7127bfb9465",
     "semantic_hash": ""
   },
   ".vscode/settings.json": {
@@ -1292,6 +1292,16 @@
   "bin/setup-hooks.sh": {
     "mtime": 1785078564.69245,
     "ast_hash": "0ae59bbbc71aa655d14eee40f9f76c66",
+    "semantic_hash": ""
+  },
+  "bin/graphify-watch-ensure.sh": {
+    "mtime": 1785079967.0305145,
+    "ast_hash": "5b33963c11693052e7d870bf008d54c3",
+    "semantic_hash": ""
+  },
+  "COMMANDS.md": {
+    "mtime": 1785080119.2943428,
+    "ast_hash": "dd1c5aa22b5e2b08044aec5cd54cd493",
     "semantic_hash": ""
   }
 }

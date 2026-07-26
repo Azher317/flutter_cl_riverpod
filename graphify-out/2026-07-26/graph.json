@@ -88,6 +88,36 @@
   },
   "nodes": [
     {
+      "label": "pre-commit",
+      "file_type": "code",
+      "source_file": ".githooks/pre-commit",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "githooks_pre_commit",
+      "community": 113,
+      "community_name": "pre-commit",
+      "norm_label": "pre-commit"
+    },
+    {
+      "label": "pre-commit script",
+      "file_type": "code",
+      "source_file": ".githooks/pre-commit",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "githooks_pre_commit__entry",
+      "community": 113,
+      "community_name": "pre-commit",
+      "norm_label": "pre-commit script"
+    },
+    {
       "label": "app/build.gradle",
       "file_type": "code",
       "source_file": "android/app/build.gradle",
@@ -456,8 +486,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "dart_io",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 56,
+      "community_name": "Login Notifier",
       "norm_label": "dart:io"
     },
     {
@@ -467,9 +497,39 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_flutter_widgets_dart",
-      "community": 89,
-      "community_name": "Failure Messenger",
+      "community": 69,
+      "community_name": "Phone Number Form Field",
       "norm_label": "package:flutter/widgets.dart"
+    },
+    {
+      "label": "graphify-watch-ensure.sh",
+      "file_type": "code",
+      "source_file": "bin/graphify-watch-ensure.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "bin_graphify_watch_ensure",
+      "community": 77,
+      "community_name": "Freezed Models",
+      "norm_label": "graphify-watch-ensure.sh"
+    },
+    {
+      "label": "graphify-watch-ensure.sh script",
+      "file_type": "code",
+      "source_file": "bin/graphify-watch-ensure.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "bin_graphify_watch_ensure_sh__entry",
+      "community": 77,
+      "community_name": "Freezed Models",
+      "norm_label": "graphify-watch-ensure.sh script"
     },
     {
       "label": "rename.sh",
@@ -530,6 +590,36 @@
       "community": 108,
       "community_name": "deep_link.sh script",
       "norm_label": "run.sh script"
+    },
+    {
+      "label": "setup-hooks.sh",
+      "file_type": "code",
+      "source_file": "bin/setup-hooks.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      },
+      "_origin": "ast",
+      "id": "bin_setup_hooks",
+      "community": 105,
+      "community_name": "setup-hooks.sh",
+      "norm_label": "setup-hooks.sh"
+    },
+    {
+      "label": "setup-hooks.sh script",
+      "file_type": "code",
+      "source_file": "bin/setup-hooks.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      },
+      "_origin": "ast",
+      "id": "bin_setup_hooks_sh__entry",
+      "community": 105,
+      "community_name": "setup-hooks.sh",
+      "norm_label": "setup-hooks.sh script"
     },
     {
       "label": "uninstall.sh",
@@ -857,8 +947,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_messaging_snackbar_dart",
-      "community": 89,
-      "community_name": "Failure Messenger",
+      "community": 69,
+      "community_name": "Phone Number Form Field",
       "norm_label": "package:app/core/messaging/snackbar.dart"
     },
     {
@@ -934,8 +1024,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_flutter_material_dart",
-      "community": 79,
-      "community_name": "App Colors",
+      "community": 54,
+      "community_name": "Windows Native (C++)",
       "norm_label": "package:flutter/material.dart"
     },
     {
@@ -1220,8 +1310,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_errors_network_error_mapper",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "network_error_mapper.dart"
     },
     {
@@ -1231,8 +1321,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_errors_network_error_mapper_networkerrormapper",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "networkerrormapper"
     },
     {
@@ -1242,8 +1332,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_errors_network_error_mapper",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "_"
     },
     {
@@ -1253,8 +1343,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_errors_network_error_mapper_toexception",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "toexception"
     },
     {
@@ -1264,8 +1354,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_errors_network_error_mapper_messagefrom",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "messagefrom"
     },
     {
@@ -1275,8 +1365,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_errors_exceptions_dart",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "package:app/core/errors/exceptions.dart"
     },
     {
@@ -1286,8 +1376,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_dio_dio_dart",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "package:dio/dio.dart"
     },
     {
@@ -2540,8 +2630,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_intl_intl_dart",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 87,
+      "community_name": "package:intl/intl.dart",
       "norm_label": "package:intl/intl.dart"
     },
     {
@@ -3563,8 +3653,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "app_localizations_dart",
-      "community": 3,
-      "community_name": "App Localizations (Arabic)",
+      "community": 2,
+      "community_name": "App Localizations (English)",
       "norm_label": "app_localizations.dart"
     },
     {
@@ -5741,8 +5831,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "list",
-      "community": 71,
-      "community_name": "Auth Session Entity",
+      "community": 23,
+      "community_name": "Session Cache Model",
       "norm_label": "list"
     },
     {
@@ -7644,8 +7734,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_messaging_failure_messenger",
-      "community": 89,
-      "community_name": "Failure Messenger",
+      "community": 69,
+      "community_name": "Phone Number Form Field",
       "norm_label": "failure_messenger.dart"
     },
     {
@@ -7655,8 +7745,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_messaging_failure_messenger_failurex",
-      "community": 89,
-      "community_name": "Failure Messenger",
+      "community": 69,
+      "community_name": "Phone Number Form Field",
       "norm_label": "failurex"
     },
     {
@@ -7666,8 +7756,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_messaging_failure_messenger_localizefailure",
-      "community": 89,
-      "community_name": "Failure Messenger",
+      "community": 69,
+      "community_name": "Phone Number Form Field",
       "norm_label": "localizefailure"
     },
     {
@@ -7677,8 +7767,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_messaging_failure_messenger_showfailure",
-      "community": 89,
-      "community_name": "Failure Messenger",
+      "community": 69,
+      "community_name": "Phone Number Form Field",
       "norm_label": "showfailure"
     },
     {
@@ -8062,8 +8152,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_consumer",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "api_consumer.dart"
     },
     {
@@ -8073,8 +8163,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_consumer_apiconsumer",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "apiconsumer"
     },
     {
@@ -8084,8 +8174,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_consumer_dioconsumer",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "dioconsumer"
     },
     {
@@ -8106,8 +8196,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "apiconsumerprovider",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "apiconsumerprovider"
     },
     {
@@ -8117,8 +8207,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_consumer_dio",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "_dio"
     },
     {
@@ -8128,8 +8218,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "dio",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "dio"
     },
     {
@@ -8139,8 +8229,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_consumer_post",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "post"
     },
     {
@@ -8150,8 +8240,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_consumer_put",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "put"
     },
     {
@@ -8161,8 +8251,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_consumer_delete",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "delete"
     },
     {
@@ -8172,8 +8262,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_consumer_send",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "_send"
     },
     {
@@ -8194,8 +8284,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_network_dio_module_dart",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "package:app/core/network/dio_module.dart"
     },
     {
@@ -8205,8 +8295,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_riverpod_annotation_riverpod_annotation_dart",
-      "community": 41,
-      "community_name": "Form Validator Locale",
+      "community": 75,
+      "community_name": "User Entity",
       "norm_label": "package:riverpod_annotation/riverpod_annotation.dart"
     },
     {
@@ -8216,8 +8306,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_network_api_consumer_apiconsumerprovider",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "apiconsumerprovider"
     },
     {
@@ -8227,8 +8317,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_network_api_consumer",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "_"
     },
     {
@@ -8238,8 +8328,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_network_api_consumer_debuggetcreatesourcehash",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "debuggetcreatesourcehash"
     },
     {
@@ -8249,8 +8339,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_network_api_consumer_create",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "create"
     },
     {
@@ -8260,8 +8350,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_network_api_consumer_overridewithvalue",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "overridewithvalue"
     },
     {
@@ -8348,8 +8438,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_headers",
-      "community": 64,
-      "community_name": "Web Manifest",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "api_headers.dart"
     },
     {
@@ -8359,8 +8449,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_headers_apiheaders",
-      "community": 64,
-      "community_name": "Web Manifest",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "apiheaders"
     },
     {
@@ -8370,8 +8460,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_headers_authorization",
-      "community": 64,
-      "community_name": "Web Manifest",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "authorization"
     },
     {
@@ -8381,8 +8471,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "static_const_string",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "static const string"
     },
     {
@@ -8392,8 +8482,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_headers_acceptlanguage",
-      "community": 64,
-      "community_name": "Web Manifest",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "acceptlanguage"
     },
     {
@@ -8403,8 +8493,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_headers_contenttype",
-      "community": 64,
-      "community_name": "Web Manifest",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "contenttype"
     },
     {
@@ -8414,8 +8504,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_headers_accept",
-      "community": 64,
-      "community_name": "Web Manifest",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "accept"
     },
     {
@@ -8425,8 +8515,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_headers_bearer",
-      "community": 64,
-      "community_name": "Web Manifest",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "bearer"
     },
     {
@@ -8436,8 +8526,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_api_headers_applicationjson",
-      "community": 64,
-      "community_name": "Web Manifest",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "applicationjson"
     },
     {
@@ -8447,8 +8537,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_network_api_headers",
-      "community": 64,
-      "community_name": "Web Manifest",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "_"
     },
     {
@@ -8535,8 +8625,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_network_clients_lib_dart",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 56,
+      "community_name": "Login Notifier",
       "norm_label": "package:app/core/network/clients_lib.dart"
     },
     {
@@ -8557,8 +8647,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_clients_lib",
-      "community": 41,
-      "community_name": "Form Validator Locale",
+      "community": 75,
+      "community_name": "User Entity",
       "norm_label": "clients_lib.dart"
     },
     {
@@ -8568,8 +8658,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_network_http_lib_dart",
-      "community": 41,
-      "community_name": "Form Validator Locale",
+      "community": 75,
+      "community_name": "User Entity",
       "norm_label": "package:app/core/network/http_lib.dart"
     },
     {
@@ -8645,8 +8735,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_file_multipart_convertor",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 56,
+      "community_name": "Login Notifier",
       "norm_label": "file_multipart_convertor.dart"
     },
     {
@@ -8656,8 +8746,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_file_multipart_convertor_filejsonconvertor",
-      "community": 60,
-      "community_name": "App Router",
+      "community": 73,
+      "community_name": "Paginated State",
       "norm_label": "filejsonconvertor"
     },
     {
@@ -8678,8 +8768,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "file",
-      "community": 60,
-      "community_name": "App Router",
+      "community": 73,
+      "community_name": "Paginated State",
       "norm_label": "file"
     },
     {
@@ -8689,8 +8779,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "multipartfile",
-      "community": 60,
-      "community_name": "App Router",
+      "community": 73,
+      "community_name": "Paginated State",
       "norm_label": "multipartfile"
     },
     {
@@ -8700,8 +8790,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_file_multipart_convertor_fromjson",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 56,
+      "community_name": "Login Notifier",
       "norm_label": "fromjson"
     },
     {
@@ -8711,8 +8801,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_file_multipart_convertor_tojson",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 56,
+      "community_name": "Login Notifier",
       "norm_label": "tojson"
     },
     {
@@ -8733,8 +8823,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_nullable_date_time_convertor_nullabledatetimeconvertor",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 60,
+      "community_name": "App Router",
       "norm_label": "nullabledatetimeconvertor"
     },
     {
@@ -8854,8 +8944,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_nullable_string_convertor",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 71,
+      "community_name": "Auth Session Entity",
       "norm_label": "nullable_string_convertor.dart"
     },
     {
@@ -8865,8 +8955,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_nullable_string_convertor_nullablestringconvertor",
-      "community": 60,
-      "community_name": "App Router",
+      "community": 71,
+      "community_name": "Auth Session Entity",
       "norm_label": "nullablestringconvertor"
     },
     {
@@ -8876,8 +8966,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_nullable_string_convertor_nulldata",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 71,
+      "community_name": "Auth Session Entity",
       "norm_label": "nulldata"
     },
     {
@@ -8887,8 +8977,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_nullable_string_convertor_fromjson",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 71,
+      "community_name": "Auth Session Entity",
       "norm_label": "fromjson"
     },
     {
@@ -8898,8 +8988,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_nullable_string_convertor_tojson",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 71,
+      "community_name": "Auth Session Entity",
       "norm_label": "tojson"
     },
     {
@@ -8964,8 +9054,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_xfile_multipart_convertor",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "xfile_multipart_convertor.dart"
     },
     {
@@ -8986,8 +9076,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_xfile_multipart_convertor_fromjson",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "fromjson"
     },
     {
@@ -8997,8 +9087,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_convertors_xfile_multipart_convertor_tojson",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "tojson"
     },
     {
@@ -9008,8 +9098,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_json_annotation_json_annotation_dart",
-      "community": 85,
-      "community_name": "File Multipart Converter",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "package:json_annotation/json_annotation.dart"
     },
     {
@@ -9360,8 +9450,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_endpoints",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "endpoints.dart"
     },
     {
@@ -9371,8 +9461,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_endpoints_endpoints",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "endpoints"
     },
     {
@@ -9382,8 +9472,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_endpoints_login",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "login"
     },
     {
@@ -9393,8 +9483,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_network_endpoints",
-      "community": 91,
-      "community_name": "Nullable DateTime Converter",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "_"
     },
     {
@@ -9404,8 +9494,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_http_lib",
-      "community": 42,
-      "community_name": "Login Screen",
+      "community": 7,
+      "community_name": "API Headers",
       "norm_label": "http_lib.dart"
     },
     {
@@ -9415,8 +9505,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_paginated",
-      "community": 71,
-      "community_name": "Auth Session Entity",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "paginated.dart"
     },
     {
@@ -9426,8 +9516,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_paginated_paginated",
-      "community": 71,
-      "community_name": "Auth Session Entity",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "paginated"
     },
     {
@@ -9459,8 +9549,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_paginated_result",
-      "community": 71,
-      "community_name": "Auth Session Entity",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "result"
     },
     {
@@ -9470,8 +9560,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_paginated_total",
-      "community": 71,
-      "community_name": "Auth Session Entity",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "total"
     },
     {
@@ -9481,8 +9571,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "int_get",
-      "community": 68,
-      "community_name": "Paginated Dropdown Field",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "int get"
     },
     {
@@ -9492,8 +9582,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_paginated_defaultlimitsize",
-      "community": 71,
-      "community_name": "Auth Session Entity",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "defaultlimitsize"
     },
     {
@@ -9503,8 +9593,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_paginated_firstpage",
-      "community": 71,
-      "community_name": "Auth Session Entity",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "firstpage"
     },
     {
@@ -9514,8 +9604,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_paginated_additems",
-      "community": 71,
-      "community_name": "Auth Session Entity",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "additems"
     },
     {
@@ -9547,8 +9637,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_network_paginated_response_paginatedresponse",
-      "community": 71,
-      "community_name": "Auth Session Entity",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "paginatedresponse"
     },
     {
@@ -10031,8 +10121,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_pagination_paging_lib",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "paging_lib.dart"
     },
     {
@@ -10042,8 +10132,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_pagination_pagination_controller_dart",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "package:app/core/pagination/pagination_controller.dart"
     },
     {
@@ -10053,8 +10143,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_pagination_paging_list_delegate_dart",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "package:app/core/pagination/paging_list_delegate.dart"
     },
     {
@@ -10108,8 +10198,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_utils_constants_sizes_dart",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 35,
+      "community_name": "Default Error Widget",
       "norm_label": "package:app/core/utils/constants/sizes.dart"
     },
     {
@@ -10141,8 +10231,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_widgets_state_ui_state_message_dart",
-      "community": 23,
-      "community_name": "Session Cache Model",
+      "community": 68,
+      "community_name": "Paginated Dropdown Field",
       "norm_label": "package:app/core/widgets/state_ui/state_message.dart"
     },
     {
@@ -10185,8 +10275,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "annotation_freezed",
-      "community": 77,
-      "community_name": "Freezed Models",
+      "community": 27,
+      "community_name": "Network DI Providers",
       "norm_label": "@freezed"
     },
     {
@@ -10262,8 +10352,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_utils_annotations_json_serializable_dart",
-      "community": 104,
-      "community_name": "CI & Dependencies",
+      "community": 25,
+      "community_name": "User Model",
       "norm_label": "package:app/core/utils/annotations/json_serializable.dart"
     },
     {
@@ -10680,8 +10770,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_auth_session_entity",
-      "community": 68,
-      "community_name": "Paginated Dropdown Field",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "auth_session_entity.dart"
     },
     {
@@ -10691,8 +10781,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_auth_session_entity_authsessionentity",
-      "community": 68,
-      "community_name": "Paginated Dropdown Field",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "authsessionentity"
     },
     {
@@ -10702,8 +10792,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_auth_session_entity_token",
-      "community": 68,
-      "community_name": "Paginated Dropdown Field",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "token"
     },
     {
@@ -10713,8 +10803,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_auth_session_entity_user",
-      "community": 68,
-      "community_name": "Paginated Dropdown Field",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "user"
     },
     {
@@ -10724,8 +10814,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_auth_session_entity_operator",
-      "community": 68,
-      "community_name": "Paginated Dropdown Field",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "operator"
     },
     {
@@ -10735,8 +10825,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_auth_session_entity_hashcode",
-      "community": 68,
-      "community_name": "Paginated Dropdown Field",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "hashcode"
     },
     {
@@ -10746,8 +10836,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_auth_session_entity_tostring",
-      "community": 68,
-      "community_name": "Paginated Dropdown Field",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "tostring"
     },
     {
@@ -10757,8 +10847,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity",
-      "community": 73,
-      "community_name": "Paginated State",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "user_entity.dart"
     },
     {
@@ -10768,8 +10858,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity_userentity",
-      "community": 68,
-      "community_name": "Paginated Dropdown Field",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "userentity"
     },
     {
@@ -10779,8 +10869,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity_id",
-      "community": 73,
-      "community_name": "Paginated State",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "id"
     },
     {
@@ -10790,8 +10880,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity_role",
-      "community": 73,
-      "community_name": "Paginated State",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "role"
     },
     {
@@ -10801,8 +10891,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity_name",
-      "community": 73,
-      "community_name": "Paginated State",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "name"
     },
     {
@@ -10812,8 +10902,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity_phone",
-      "community": 73,
-      "community_name": "Paginated State",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "phone"
     },
     {
@@ -10823,8 +10913,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity_profileimg",
-      "community": 73,
-      "community_name": "Paginated State",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "profileimg"
     },
     {
@@ -10834,8 +10924,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity_createdat",
-      "community": 73,
-      "community_name": "Paginated State",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "createdat"
     },
     {
@@ -10845,8 +10935,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity_operator",
-      "community": 73,
-      "community_name": "Paginated State",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "operator"
     },
     {
@@ -10856,8 +10946,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_session_entities_user_entity_tostring",
-      "community": 73,
-      "community_name": "Paginated State",
+      "community": 24,
+      "community_name": "Login Request Model",
       "norm_label": "tostring"
     },
     {
@@ -11263,8 +11353,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_settings_app_settings_provider_dart_lib_core_settings_app_settings_provider_appsettings",
-      "community": 77,
-      "community_name": "Freezed Models",
+      "community": 15,
+      "community_name": "Component Themes",
       "norm_label": "appsettings"
     },
     {
@@ -11274,8 +11364,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "appsettings",
-      "community": 77,
-      "community_name": "Freezed Models",
+      "community": 15,
+      "community_name": "Component Themes",
       "norm_label": "appsettings"
     },
     {
@@ -11461,8 +11551,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_settings_app_settings_provider_freezed_dart_lib_core_settings_app_settings_provider_appsettings",
-      "community": 77,
-      "community_name": "Freezed Models",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "_appsettings"
     },
     {
@@ -11472,8 +11562,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_settings_app_settings_provider_appsettingspatterns",
-      "community": 77,
-      "community_name": "Freezed Models",
+      "community": 15,
+      "community_name": "Component Themes",
       "norm_label": "appsettingspatterns"
     },
     {
@@ -12055,8 +12145,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_shared_preferences_shared_preferences_dart",
-      "community": 76,
-      "community_name": "Custom Modal Bottom Sheet",
+      "community": 61,
+      "community_name": "Dio Authenticator Interceptor",
       "norm_label": "package:shared_preferences/shared_preferences.dart"
     },
     {
@@ -12154,8 +12244,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_storage_storage_keys",
-      "community": 69,
-      "community_name": "Phone Number Form Field",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "storage_keys.dart"
     },
     {
@@ -12165,8 +12255,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_storage_storage_keys_securestoragekeys",
-      "community": 69,
-      "community_name": "Phone Number Form Field",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "securestoragekeys"
     },
     {
@@ -12176,8 +12266,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_storage_storage_keys_preferencekeys",
-      "community": 69,
-      "community_name": "Phone Number Form Field",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "preferencekeys"
     },
     {
@@ -12187,8 +12277,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_storage_storage_keys_authsession",
-      "community": 69,
-      "community_name": "Phone Number Form Field",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "authsession"
     },
     {
@@ -12198,8 +12288,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_storage_storage_keys_settings",
-      "community": 69,
-      "community_name": "Phone Number Form Field",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "settings"
     },
     {
@@ -12209,8 +12299,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_storage_storage_keys",
-      "community": 69,
-      "community_name": "Phone Number Form Field",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "_"
     },
     {
@@ -13188,8 +13278,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_theme_theme_change",
-      "community": 79,
-      "community_name": "App Colors",
+      "community": 54,
+      "community_name": "Windows Native (C++)",
       "norm_label": "theme_change.dart"
     },
     {
@@ -13199,8 +13289,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_theme_theme_change_themex",
-      "community": 79,
-      "community_name": "App Colors",
+      "community": 54,
+      "community_name": "Windows Native (C++)",
       "norm_label": "themex"
     },
     {
@@ -13210,8 +13300,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_theme_theme_change",
-      "community": 79,
-      "community_name": "App Colors",
+      "community": 54,
+      "community_name": "Windows Native (C++)",
       "norm_label": "_"
     },
     {
@@ -13221,8 +13311,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_theme_theme_change_getoppositethememode",
-      "community": 79,
-      "community_name": "App Colors",
+      "community": 54,
+      "community_name": "Windows Native (C++)",
       "norm_label": "getoppositethememode"
     },
     {
@@ -13375,8 +13465,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_annotations_annotations_lib",
-      "community": 104,
-      "community_name": "CI & Dependencies",
+      "community": 25,
+      "community_name": "User Model",
       "norm_label": "annotations_lib.dart"
     },
     {
@@ -13386,8 +13476,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_utils_annotations_freezed_dart",
-      "community": 104,
-      "community_name": "CI & Dependencies",
+      "community": 25,
+      "community_name": "User Model",
       "norm_label": "package:app/core/utils/annotations/freezed.dart"
     },
     {
@@ -13452,8 +13542,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_annotations_json_serializable_jsonserializable",
-      "community": 77,
-      "community_name": "Freezed Models",
+      "community": 63,
+      "community_name": "Auth Providers & Usecases",
       "norm_label": "jsonserializable"
     },
     {
@@ -13584,8 +13674,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_constants_route_names",
-      "community": 67,
-      "community_name": "Paginated Response Model",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "route_names.dart"
     },
     {
@@ -13595,8 +13685,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_constants_route_names_routenames",
-      "community": 67,
-      "community_name": "Paginated Response Model",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "routenames"
     },
     {
@@ -13606,8 +13696,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_constants_route_names_splash",
-      "community": 67,
-      "community_name": "Paginated Response Model",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "splash"
     },
     {
@@ -13617,8 +13707,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_constants_route_names_home",
-      "community": 67,
-      "community_name": "Paginated Response Model",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "home"
     },
     {
@@ -13628,8 +13718,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_constants_route_names_login",
-      "community": 67,
-      "community_name": "Paginated Response Model",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "login"
     },
     {
@@ -13639,8 +13729,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_constants_route_names_logs",
-      "community": 67,
-      "community_name": "Paginated Response Model",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "logs"
     },
     {
@@ -13650,8 +13740,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_core_utils_constants_route_names",
-      "community": 67,
-      "community_name": "Paginated Response Model",
+      "community": 9,
+      "community_name": "Session Controller",
       "norm_label": "_"
     },
     {
@@ -14167,8 +14257,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_common_extensions_formstatex",
-      "community": 55,
-      "community_name": "Failure Types",
+      "community": 14,
+      "community_name": "Sizing & Border Tokens",
       "norm_label": "formstatex"
     },
     {
@@ -14178,8 +14268,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "globalkey",
-      "community": 55,
-      "community_name": "Failure Types",
+      "community": 14,
+      "community_name": "Sizing & Border Tokens",
       "norm_label": "globalkey"
     },
     {
@@ -14420,8 +14510,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_date_time_extensions",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "date_time_extensions.dart"
     },
     {
@@ -14431,8 +14521,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_date_time_extensions_datetimex",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "datetimex"
     },
     {
@@ -14442,8 +14532,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "datetime",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "datetime"
     },
     {
@@ -14453,8 +14543,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_date_time_extensions_timeofdayx",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "timeofdayx"
     },
     {
@@ -14464,8 +14554,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "timeofday",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "timeofday?"
     },
     {
@@ -14475,8 +14565,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_date_time_extensions_formatdate",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "formatdate"
     },
     {
@@ -14486,8 +14576,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_date_time_extensions_formattime",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "formattime"
     },
     {
@@ -14497,8 +14587,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_date_time_extensions_formatdow",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "formatdow"
     },
     {
@@ -14508,8 +14598,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_date_time_extensions_format",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "format"
     },
     {
@@ -14519,8 +14609,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_date_time_extensions_formattimeago",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "formattimeago"
     },
     {
@@ -14530,8 +14620,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_extensions_date_time_extensions_format24hour",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "format24hour"
     },
     {
@@ -14541,8 +14631,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_timeago_timeago_dart",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 67,
+      "community_name": "Paginated Response Model",
       "norm_label": "package:timeago/timeago.dart"
     },
     {
@@ -14673,8 +14763,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_formatters_price_formatter",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 87,
+      "community_name": "package:intl/intl.dart",
       "norm_label": "price_formatter.dart"
     },
     {
@@ -14684,8 +14774,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_formatters_price_formatter_priceformatter",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 87,
+      "community_name": "package:intl/intl.dart",
       "norm_label": "priceformatter"
     },
     {
@@ -14695,8 +14785,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "textinputformatter",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 87,
+      "community_name": "package:intl/intl.dart",
       "norm_label": "textinputformatter"
     },
     {
@@ -14706,8 +14796,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_formatters_price_formatter_formatter",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 87,
+      "community_name": "package:intl/intl.dart",
       "norm_label": "_formatter"
     },
     {
@@ -14717,8 +14807,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "numberformat",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 87,
+      "community_name": "package:intl/intl.dart",
       "norm_label": "numberformat"
     },
     {
@@ -14728,8 +14818,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_formatters_price_formatter_formateditupdate",
-      "community": 12,
-      "community_name": "Form State & Layout",
+      "community": 87,
+      "community_name": "package:intl/intl.dart",
       "norm_label": "formateditupdate"
     },
     {
@@ -14772,8 +14862,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_hooks_use_debounced_search",
-      "community": 65,
-      "community_name": "Phone Number JSON Converter",
+      "community": 64,
+      "community_name": "Web Manifest",
       "norm_label": "use_debounced_search.dart"
     },
     {
@@ -14783,8 +14873,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_hooks_use_debounced_search_debouncedsearch",
-      "community": 65,
-      "community_name": "Phone Number JSON Converter",
+      "community": 64,
+      "community_name": "Web Manifest",
       "norm_label": "debouncedsearch"
     },
     {
@@ -14794,8 +14884,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_hooks_use_debounced_search_controller",
-      "community": 65,
-      "community_name": "Phone Number JSON Converter",
+      "community": 64,
+      "community_name": "Web Manifest",
       "norm_label": "controller"
     },
     {
@@ -14805,8 +14895,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "texteditingcontroller",
-      "community": 65,
-      "community_name": "Phone Number JSON Converter",
+      "community": 64,
+      "community_name": "Web Manifest",
       "norm_label": "texteditingcontroller"
     },
     {
@@ -14816,8 +14906,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_hooks_use_debounced_search_value",
-      "community": 65,
-      "community_name": "Phone Number JSON Converter",
+      "community": 64,
+      "community_name": "Web Manifest",
       "norm_label": "value"
     },
     {
@@ -14827,8 +14917,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_hooks_use_debounced_search_debounced",
-      "community": 65,
-      "community_name": "Phone Number JSON Converter",
+      "community": 64,
+      "community_name": "Web Manifest",
       "norm_label": "debounced"
     },
     {
@@ -14838,8 +14928,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_utils_hooks_use_debounced_search_usedebouncedsearch",
-      "community": 65,
-      "community_name": "Phone Number JSON Converter",
+      "community": 64,
+      "community_name": "Web Manifest",
       "norm_label": "usedebouncedsearch"
     },
     {
@@ -14849,8 +14939,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_utils_hooks_use_debounce_dart",
-      "community": 65,
-      "community_name": "Phone Number JSON Converter",
+      "community": 64,
+      "community_name": "Web Manifest",
       "norm_label": "package:app/core/utils/hooks/use_debounce.dart"
     },
     {
@@ -15036,8 +15126,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_widgets_image_image_svg_dart",
-      "community": 21,
-      "community_name": "App Messenger / Snackbar",
+      "community": 34,
+      "community_name": "Custom Date Picker Field",
       "norm_label": "package:app/core/widgets/image/image_svg.dart"
     },
     {
@@ -15179,8 +15269,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "widget",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 83,
+      "community_name": "Debounced Search Hook",
       "norm_label": "widget"
     },
     {
@@ -15311,8 +15401,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "icondata",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "icondata"
     },
     {
@@ -15366,8 +15456,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_flutter_svg_svg_dart",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "package:flutter_svg/svg.dart"
     },
     {
@@ -15564,8 +15654,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_controlled_height_screen",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 83,
+      "community_name": "Debounced Search Hook",
       "norm_label": "controlled_height_screen.dart"
     },
     {
@@ -15575,8 +15665,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_controlled_height_screen_controlledheightscreen",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 83,
+      "community_name": "Debounced Search Hook",
       "norm_label": "controlledheightscreen"
     },
     {
@@ -15586,8 +15676,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_controlled_height_screen_padding",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 83,
+      "community_name": "Debounced Search Hook",
       "norm_label": "padding"
     },
     {
@@ -15597,8 +15687,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "edgeinsets",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 83,
+      "community_name": "Debounced Search Hook",
       "norm_label": "edgeinsets?"
     },
     {
@@ -15608,8 +15698,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_controlled_height_screen_child",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 83,
+      "community_name": "Debounced Search Hook",
       "norm_label": "child"
     },
     {
@@ -15619,8 +15709,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_controlled_height_screen_build",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 83,
+      "community_name": "Debounced Search Hook",
       "norm_label": "build"
     },
     {
@@ -15630,8 +15720,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_custom_app_bar",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 35,
+      "community_name": "Default Error Widget",
       "norm_label": "custom_app_bar.dart"
     },
     {
@@ -15641,8 +15731,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_custom_app_bar_leadingbutton",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 35,
+      "community_name": "Default Error Widget",
       "norm_label": "leadingbutton"
     },
     {
@@ -15652,8 +15742,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_custom_app_bar_iselevated",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 35,
+      "community_name": "Default Error Widget",
       "norm_label": "iselevated"
     },
     {
@@ -15663,8 +15753,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_custom_app_bar_customappbar",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 35,
+      "community_name": "Default Error Widget",
       "norm_label": "customappbar"
     },
     {
@@ -15674,8 +15764,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_custom_app_bar_onback",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 35,
+      "community_name": "Default Error Widget",
       "norm_label": "_onback"
     },
     {
@@ -15685,8 +15775,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "route_routenames_home",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 35,
+      "community_name": "Default Error Widget",
       "norm_label": "routenames.home"
     },
     {
@@ -15696,8 +15786,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_utils_constants_route_names_dart",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 55,
+      "community_name": "Failure Types",
       "norm_label": "package:app/core/utils/constants/route_names.dart"
     },
     {
@@ -15707,8 +15797,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_go_router_go_router_dart",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 35,
+      "community_name": "Default Error Widget",
       "norm_label": "package:go_router/go_router.dart"
     },
     {
@@ -15718,8 +15808,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_directional_icon",
-      "community": 21,
-      "community_name": "App Messenger / Snackbar",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "directional_icon.dart"
     },
     {
@@ -15729,8 +15819,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_directional_icon_directionalicon",
-      "community": 21,
-      "community_name": "App Messenger / Snackbar",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "directionalicon"
     },
     {
@@ -15740,8 +15830,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_directional_icon_icon",
-      "community": 21,
-      "community_name": "App Messenger / Snackbar",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "icon"
     },
     {
@@ -15751,8 +15841,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_directional_icon_iconcolor",
-      "community": 21,
-      "community_name": "App Messenger / Snackbar",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "iconcolor"
     },
     {
@@ -15762,8 +15852,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_directional_icon_iconsize",
-      "community": 21,
-      "community_name": "App Messenger / Snackbar",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "iconsize"
     },
     {
@@ -15773,8 +15863,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_directional_icon_img",
-      "community": 21,
-      "community_name": "App Messenger / Snackbar",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "img"
     },
     {
@@ -15784,8 +15874,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_directional_icon_build",
-      "community": 21,
-      "community_name": "App Messenger / Snackbar",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "build"
     },
     {
@@ -16070,8 +16160,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_widgets_form_fields_custom_text_form_field_dart",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "package:app/core/widgets/form_fields/custom_text_form_field.dart"
     },
     {
@@ -16224,8 +16314,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "alignmentgeometry",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "alignmentgeometry"
     },
     {
@@ -16345,8 +16435,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_l10n_localized_name_dart",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "package:app/core/l10n/localized_name.dart"
     },
     {
@@ -16554,8 +16644,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "focusnode",
-      "community": 6,
-      "community_name": "Kurdish Cupertino Localizations",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "focusnode?"
     },
     {
@@ -16730,8 +16820,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_form_fields_image_form_field_imageformfield",
-      "community": 40,
-      "community_name": "Password Text Form Field",
+      "community": 31,
+      "community_name": "Auth Remote Data Source",
       "norm_label": "imageformfield"
     },
     {
@@ -17027,8 +17117,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "boxfit",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "boxfit"
     },
     {
@@ -17159,8 +17249,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "image_png.dart"
     },
     {
@@ -17170,8 +17260,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_imagepng",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "imagepng"
     },
     {
@@ -17181,8 +17271,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_img",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "img"
     },
     {
@@ -17192,8 +17282,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_size",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "size"
     },
     {
@@ -17203,8 +17293,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_height",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "height"
     },
     {
@@ -17214,8 +17304,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_width",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "width"
     },
     {
@@ -17225,8 +17315,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_borderradius",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "borderradius"
     },
     {
@@ -17236,8 +17326,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_alignment",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "alignment"
     },
     {
@@ -17247,8 +17337,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_fit",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "fit"
     },
     {
@@ -17258,8 +17348,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_isfileimage",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "isfileimage"
     },
     {
@@ -17269,8 +17359,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_png_build",
-      "community": 52,
-      "community_name": "Default Response Model",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "build"
     },
     {
@@ -17280,8 +17370,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "image_svg.dart"
     },
     {
@@ -17291,8 +17381,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg_imagesvg",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "imagesvg"
     },
     {
@@ -17302,8 +17392,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg_img",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "img"
     },
     {
@@ -17313,8 +17403,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg_size",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "size"
     },
     {
@@ -17324,8 +17414,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg_height",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "height"
     },
     {
@@ -17335,8 +17425,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg_width",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "width"
     },
     {
@@ -17346,8 +17436,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg_color",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "color"
     },
     {
@@ -17357,8 +17447,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg_borderradius",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "borderradius"
     },
     {
@@ -17368,8 +17458,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg_fit",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "fit"
     },
     {
@@ -17379,8 +17469,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_image_image_svg_build",
-      "community": 54,
-      "community_name": "Windows Native (C++)",
+      "community": 6,
+      "community_name": "Kurdish Cupertino Localizations",
       "norm_label": "build"
     },
     {
@@ -17390,8 +17480,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_custom_dialog",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 23,
+      "community_name": "Session Cache Model",
       "norm_label": "custom_dialog.dart"
     },
     {
@@ -17412,8 +17502,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_custom_dialog_children",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 23,
+      "community_name": "Session Cache Model",
       "norm_label": "children"
     },
     {
@@ -17423,8 +17513,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_custom_dialog_titletext",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 23,
+      "community_name": "Session Cache Model",
       "norm_label": "titletext"
     },
     {
@@ -17434,8 +17524,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_custom_dialog_isloading",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 23,
+      "community_name": "Session Cache Model",
       "norm_label": "isloading"
     },
     {
@@ -17445,8 +17535,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_custom_dialog_onadd",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 23,
+      "community_name": "Session Cache Model",
       "norm_label": "onadd"
     },
     {
@@ -17456,8 +17546,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_custom_dialog_build",
-      "community": 83,
-      "community_name": "Debounced Search Hook",
+      "community": 23,
+      "community_name": "Session Cache Model",
       "norm_label": "build"
     },
     {
@@ -17467,8 +17557,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_widgets_buttons_filled_loading_button_dart",
-      "community": 38,
-      "community_name": "App Root Widget",
+      "community": 23,
+      "community_name": "Session Cache Model",
       "norm_label": "package:app/core/widgets/buttons/filled_loading_button.dart"
     },
     {
@@ -17577,8 +17667,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_paginated_bottom_sheet",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "paginated_bottom_sheet.dart"
     },
     {
@@ -17599,8 +17689,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_paginated_bottom_sheet_pagingcontroller",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "pagingcontroller"
     },
     {
@@ -17610,8 +17700,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_paginated_bottom_sheet_titletext",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "titletext"
     },
     {
@@ -17621,8 +17711,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_paginated_bottom_sheet_customitems",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "customitems"
     },
     {
@@ -17632,8 +17722,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_overlay_paginated_bottom_sheet_build",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "build"
     },
     {
@@ -17643,8 +17733,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_utils_hooks_use_debounced_search_dart",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "package:app/core/utils/hooks/use_debounced_search.dart"
     },
     {
@@ -17654,8 +17744,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "package_app_core_widgets_svg_prefix_icon_dart",
-      "community": 34,
-      "community_name": "Custom Date Picker Field",
+      "community": 81,
+      "community_name": "paginated_bottom_sheet.dart",
       "norm_label": "package:app/core/widgets/svg_prefix_icon.dart"
     },
     {
@@ -17665,8 +17755,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_default_error_widget",
-      "community": 23,
-      "community_name": "Session Cache Model",
+      "community": 68,
+      "community_name": "Paginated Dropdown Field",
       "norm_label": "default_error_widget.dart"
     },
     {
@@ -17676,8 +17766,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_default_error_widget_defaulterrorwidget",
-      "community": 23,
-      "community_name": "Session Cache Model",
+      "community": 68,
+      "community_name": "Paginated Dropdown Field",
       "norm_label": "defaulterrorwidget"
     },
     {
@@ -17687,8 +17777,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_default_error_widget_error",
-      "community": 23,
-      "community_name": "Session Cache Model",
+      "community": 68,
+      "community_name": "Paginated Dropdown Field",
       "norm_label": "error"
     },
     {
@@ -17698,8 +17788,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_default_error_widget_stacktrace",
-      "community": 23,
-      "community_name": "Session Cache Model",
+      "community": 68,
+      "community_name": "Paginated Dropdown Field",
       "norm_label": "stacktrace"
     },
     {
@@ -17709,8 +17799,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "stacktrace",
-      "community": 23,
-      "community_name": "Session Cache Model",
+      "community": 68,
+      "community_name": "Paginated Dropdown Field",
       "norm_label": "stacktrace"
     },
     {
@@ -17720,8 +17810,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_default_error_widget_onretry",
-      "community": 23,
-      "community_name": "Session Cache Model",
+      "community": 68,
+      "community_name": "Paginated Dropdown Field",
       "norm_label": "onretry"
     },
     {
@@ -17731,8 +17821,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_default_error_widget_build",
-      "community": 23,
-      "community_name": "Session Cache Model",
+      "community": 68,
+      "community_name": "Paginated Dropdown Field",
       "norm_label": "build"
     },
     {
@@ -17742,8 +17832,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_empty_state",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "empty_state.dart"
     },
     {
@@ -17753,8 +17843,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_empty_state_emptystate",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "emptystate"
     },
     {
@@ -17764,8 +17854,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_empty_state_title",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "title"
     },
     {
@@ -17775,8 +17865,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_empty_state_message",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "message"
     },
     {
@@ -17786,8 +17876,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_empty_state_icon",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "icon"
     },
     {
@@ -17797,8 +17887,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_empty_state_action",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "action"
     },
     {
@@ -17808,8 +17898,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_core_widgets_state_ui_empty_state_build",
-      "community": 35,
-      "community_name": "Default Error Widget",
+      "community": 42,
+      "community_name": "Login Screen",
       "norm_label": "build"
     },
     {
@@ -18391,8 +18481,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_data_models_login_request_model_dart_lib_features_auth_data_models_login_request_model_loginrequestmodel",
-      "community": 77,
-      "community_name": "Freezed Models",
+      "community": 26,
+      "community_name": "Home Screen",
       "norm_label": "loginrequestmodel"
     },
     {
@@ -18644,8 +18734,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_data_models_user_model_dart_lib_features_auth_data_models_user_model_usermodel",
-      "community": 77,
-      "community_name": "Freezed Models",
+      "community": 27,
+      "community_name": "Network DI Providers",
       "norm_label": "usermodel"
     },
     {
@@ -19326,8 +19416,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "users_azher_developer_personal_flutter_flutter_cl_riverpod_lib_features_auth_presentation_notifiers_login_notifier_loginprovider",
-      "community": 75,
-      "community_name": "User Entity",
+      "community": 38,
+      "community_name": "App Root Widget",
       "norm_label": "loginprovider"
     },
     {
@@ -19392,8 +19482,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_screens_login_screen_loginscreen",
-      "community": 75,
-      "community_name": "User Entity",
+      "community": 38,
+      "community_name": "App Root Widget",
       "norm_label": "loginscreen"
     },
     {
@@ -19403,8 +19493,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "statefulhookconsumerwidget",
-      "community": 75,
-      "community_name": "User Entity",
+      "community": 38,
+      "community_name": "App Root Widget",
       "norm_label": "statefulhookconsumerwidget"
     },
     {
@@ -19414,8 +19504,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_screens_login_screen_loginscreenstate",
-      "community": 75,
-      "community_name": "User Entity",
+      "community": 38,
+      "community_name": "App Root Widget",
       "norm_label": "_loginscreenstate"
     },
     {
@@ -19425,8 +19515,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "consumerstate",
-      "community": 75,
-      "community_name": "User Entity",
+      "community": 38,
+      "community_name": "App Root Widget",
       "norm_label": "consumerstate"
     },
     {
@@ -19447,8 +19537,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_screens_login_screen_build",
-      "community": 75,
-      "community_name": "User Entity",
+      "community": 38,
+      "community_name": "App Root Widget",
       "norm_label": "build"
     },
     {
@@ -19513,8 +19603,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_widgets_password_text_form_field",
-      "community": 6,
-      "community_name": "Kurdish Cupertino Localizations",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "password_text_form_field.dart"
     },
     {
@@ -19546,8 +19636,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_widgets_password_text_form_field_controller",
-      "community": 6,
-      "community_name": "Kurdish Cupertino Localizations",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "controller"
     },
     {
@@ -19557,8 +19647,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_widgets_password_text_form_field_label",
-      "community": 6,
-      "community_name": "Kurdish Cupertino Localizations",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "label"
     },
     {
@@ -19568,8 +19658,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_widgets_password_text_form_field_hint",
-      "community": 6,
-      "community_name": "Kurdish Cupertino Localizations",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "hint"
     },
     {
@@ -19579,8 +19669,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_widgets_password_text_form_field_focusnode",
-      "community": 6,
-      "community_name": "Kurdish Cupertino Localizations",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "focusnode"
     },
     {
@@ -19590,8 +19680,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_widgets_password_text_form_field_isobscure",
-      "community": 6,
-      "community_name": "Kurdish Cupertino Localizations",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "isobscure"
     },
     {
@@ -19601,8 +19691,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_widgets_password_text_form_field_createstate",
-      "community": 6,
-      "community_name": "Kurdish Cupertino Localizations",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "createstate"
     },
     {
@@ -19612,8 +19702,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_auth_presentation_widgets_password_text_form_field_build",
-      "community": 6,
-      "community_name": "Kurdish Cupertino Localizations",
+      "community": 52,
+      "community_name": "Default Response Model",
       "norm_label": "build"
     },
     {
@@ -19887,8 +19977,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_splash_presentation_screens_splash_screen",
-      "community": 79,
-      "community_name": "App Colors",
+      "community": 54,
+      "community_name": "Windows Native (C++)",
       "norm_label": "splash_screen.dart"
     },
     {
@@ -19898,8 +19988,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_splash_presentation_screens_splash_screen_splashscreen",
-      "community": 31,
-      "community_name": "Auth Remote Data Source",
+      "community": 54,
+      "community_name": "Windows Native (C++)",
       "norm_label": "splashscreen"
     },
     {
@@ -19909,8 +19999,8 @@
       "source_location": null,
       "_origin": "ast",
       "id": "lib_features_splash_presentation_screens_splash_screen_build",
-      "community": 79,
-      "community_name": "App Colors",
+      "community": 54,
+      "community_name": "Windows Native (C++)",
       "norm_label": "build"
     },
     {
@@ -21758,8 +21848,8 @@
       "contributor": null,
       "community": 102,
       "norm_label": "ci analyze-and-test job",
-      "id": "github_workflows_ci_analyzeandtest",
-      "community_name": "export.sh script"
+      "community_name": "export.sh script",
+      "id": "github_workflows_ci_analyzeandtest"
     },
     {
       "label": "l10n.yaml localization config",
@@ -21772,8 +21862,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "l10n.yaml localization config",
-      "id": "l10n_config",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "l10n_config"
     },
     {
       "label": "Talker patched fork dependency_overrides",
@@ -21786,8 +21876,8 @@
       "contributor": null,
       "community": 102,
       "norm_label": "talker patched fork dependency_overrides",
-      "id": "pubspec_talker_fork_override",
-      "community_name": "export.sh script"
+      "community_name": "export.sh script",
+      "id": "pubspec_talker_fork_override"
     },
     {
       "label": "flutter_riverpod dependency",
@@ -21800,8 +21890,8 @@
       "contributor": null,
       "community": 102,
       "norm_label": "flutter_riverpod dependency",
-      "id": "pubspec_flutter_riverpod",
-      "community_name": "export.sh script"
+      "community_name": "export.sh script",
+      "id": "pubspec_flutter_riverpod"
     },
     {
       "label": "go_router dependency",
@@ -21814,8 +21904,8 @@
       "contributor": null,
       "community": 145,
       "norm_label": "go_router dependency",
-      "id": "pubspec_go_router",
-      "community_name": "settingsProvider"
+      "community_name": "settingsProvider",
+      "id": "pubspec_go_router"
     },
     {
       "label": "dio dependency",
@@ -21828,8 +21918,8 @@
       "contributor": null,
       "community": 140,
       "norm_label": "dio dependency",
-      "id": "pubspec_dio",
-      "community_name": "Generated Member"
+      "community_name": "Generated Member",
+      "id": "pubspec_dio"
     },
     {
       "label": "freezed / freezed_annotation",
@@ -21842,8 +21932,8 @@
       "contributor": null,
       "community": 144,
       "norm_label": "freezed / freezed_annotation",
-      "id": "pubspec_freezed",
-      "community_name": "sessionRepositoryProvider"
+      "community_name": "sessionRepositoryProvider",
+      "id": "pubspec_freezed"
     },
     {
       "label": "flutter_hooks dependency",
@@ -21856,8 +21946,8 @@
       "contributor": null,
       "community": 142,
       "norm_label": "flutter_hooks dependency",
-      "id": "pubspec_flutter_hooks",
-      "community_name": "sessionControllerProvider"
+      "community_name": "sessionControllerProvider",
+      "id": "pubspec_flutter_hooks"
     },
     {
       "label": "infinite_scroll_pagination dependency",
@@ -21870,8 +21960,8 @@
       "contributor": null,
       "community": 146,
       "norm_label": "infinite_scroll_pagination dependency",
-      "id": "pubspec_infinite_scroll_pagination",
-      "community_name": "Nullable String Param"
+      "community_name": "Nullable String Param",
+      "id": "pubspec_infinite_scroll_pagination"
     },
     {
       "label": "form_validator dependency",
@@ -21884,8 +21974,8 @@
       "contributor": null,
       "community": 143,
       "norm_label": "form_validator dependency",
-      "id": "pubspec_form_validator",
-      "community_name": "sessionProvider"
+      "community_name": "sessionProvider",
+      "id": "pubspec_form_validator"
     },
     {
       "label": "Placeholder font families",
@@ -21898,8 +21988,8 @@
       "contributor": null,
       "community": 141,
       "norm_label": "placeholder font families",
-      "id": "pubspec_flutter_fonts",
-      "community_name": "Generated build"
+      "community_name": "Generated build",
+      "id": "pubspec_flutter_fonts"
     },
     {
       "label": "Layer Rules (Architecture Invariants)",
@@ -21912,8 +22002,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "layer rules (architecture invariants)",
-      "id": "claude_claude_layer_invariants",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_claude_layer_invariants"
     },
     {
       "label": "auth Reference Slice",
@@ -21926,8 +22016,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "auth reference slice",
-      "id": "claude_claude_auth_reference_slice",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_claude_auth_reference_slice"
     },
     {
       "label": "Session as Core Concern",
@@ -21940,8 +22030,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "session as core concern",
-      "id": "claude_claude_session_core_concern",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_claude_session_core_concern"
     },
     {
       "label": "Local sealed Either",
@@ -21954,8 +22044,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "local sealed either",
-      "id": "claude_claude_local_either",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_claude_local_either"
     },
     {
       "label": "No Feature Imports Another Feature",
@@ -21968,8 +22058,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "no feature imports another feature",
-      "id": "claude_claude_no_cross_feature_import",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_claude_no_cross_feature_import"
     },
     {
       "label": "check_arch.sh CI Boundary Enforcement",
@@ -21982,8 +22072,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "check_arch.sh ci boundary enforcement",
-      "id": "claude_claude_check_arch",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_claude_check_arch"
     },
     {
       "label": "Riverpod Provider Naming Rule",
@@ -21996,8 +22086,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "riverpod provider naming rule",
-      "id": "claude_claude_provider_naming",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_claude_provider_naming"
     },
     {
       "label": "Usecase Provider Seam",
@@ -22010,8 +22100,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "usecase provider seam",
-      "id": "claude_claude_usecase_seam",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_claude_usecase_seam"
     },
     {
       "label": "Declarative Navigation on Session Change",
@@ -22024,8 +22114,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "declarative navigation on session change",
-      "id": "claude_claude_declarative_nav",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_claude_declarative_nav"
     },
     {
       "label": "Two-Step Error Translation",
@@ -22038,8 +22128,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "two-step error translation",
-      "id": "claude_rules_data_layer_error_handling",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_data_layer_error_handling"
     },
     {
       "label": "NetworkErrorMapper (transport to exception)",
@@ -22052,8 +22142,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "networkerrormapper (transport to exception)",
-      "id": "claude_rules_data_layer_network_error_mapper",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_data_layer_network_error_mapper"
     },
     {
       "label": "SafeRepositoryCall guard() mixin",
@@ -22066,8 +22156,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "saferepositorycall guard() mixin",
-      "id": "claude_rules_data_layer_safe_repository_call",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_data_layer_safe_repository_call"
     },
     {
       "label": "Central Failure Presenter (failure_messenger)",
@@ -22080,8 +22170,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "central failure presenter (failure_messenger)",
-      "id": "claude_rules_data_layer_failure_messenger",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_data_layer_failure_messenger"
     },
     {
       "label": "Two Exhaustive Failure Switches",
@@ -22094,8 +22184,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "two exhaustive failure switches",
-      "id": "claude_rules_data_layer_exhaustive_switches",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_data_layer_exhaustive_switches"
     },
     {
       "label": "Generated Asset Constants (gen_assets)",
@@ -22108,8 +22198,8 @@
       "contributor": null,
       "community": 118,
       "norm_label": "generated asset constants (gen_assets)",
-      "id": "claude_rules_assets_gen_assets",
-      "community_name": "android build.gradle"
+      "community_name": "android build.gradle",
+      "id": "claude_rules_assets_gen_assets"
     },
     {
       "label": "Shared Core Utilities",
@@ -22122,8 +22212,8 @@
       "contributor": null,
       "community": 119,
       "norm_label": "shared core utilities",
-      "id": "claude_rules_core_utils_shared_utilities",
-      "community_name": "settings.gradle"
+      "community_name": "settings.gradle",
+      "id": "claude_rules_core_utils_shared_utilities"
     },
     {
       "label": "Shared Freezed/JsonSerializable Annotation Presets",
@@ -22136,8 +22226,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "shared freezed/jsonserializable annotation presets",
-      "id": "claude_rules_core_utils_annotations",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_core_utils_annotations"
     },
     {
       "label": "Localization (ARB + gen-l10n)",
@@ -22150,8 +22240,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "localization (arb + gen-l10n)",
-      "id": "claude_rules_l10n_localization",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_l10n_localization"
     },
     {
       "label": "Hand-written Kurdish Delegate",
@@ -22164,8 +22254,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "hand-written kurdish delegate",
-      "id": "claude_rules_l10n_kurdish_delegate",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_l10n_kurdish_delegate"
     },
     {
       "label": "Global Talker AppLogger",
@@ -22178,8 +22268,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "global talker applogger",
-      "id": "claude_rules_observability_app_logger",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_observability_app_logger"
     },
     {
       "label": "Pagination Hooks (usePagingController)",
@@ -22192,8 +22282,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "pagination hooks (usepagingcontroller)",
-      "id": "claude_rules_pagination_paging_controller",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_pagination_paging_controller"
     },
     {
       "label": "Paginated / PaginatedResponse Wire Shape",
@@ -22206,8 +22296,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "paginated / paginatedresponse wire shape",
-      "id": "claude_rules_pagination_paginated",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_pagination_paginated"
     },
     {
       "label": "Widget Authoring Rules",
@@ -22220,8 +22310,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "widget authoring rules",
-      "id": "claude_rules_presentation_widget_authoring",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_presentation_widget_authoring"
     },
     {
       "label": "Core vs Feature Widget Placement",
@@ -22234,8 +22324,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "core vs feature widget placement",
-      "id": "claude_rules_presentation_core_vs_feature",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_presentation_core_vs_feature"
     },
     {
       "label": "Talker Patched Fork Override",
@@ -22248,8 +22338,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "talker patched fork override",
-      "id": "claude_rules_pubspec_talker_fork",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_pubspec_talker_fork"
     },
     {
       "label": "Session-driven go_router Redirects",
@@ -22262,8 +22352,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "session-driven go_router redirects",
-      "id": "claude_rules_routing_router",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_routing_router"
     },
     {
       "label": "RouteNames Constants in core",
@@ -22276,8 +22366,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "routenames constants in core",
-      "id": "claude_rules_routing_route_names",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_routing_route_names"
     },
     {
       "label": "Session Notifier (sessionProvider)",
@@ -22290,8 +22380,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "session notifier (sessionprovider)",
-      "id": "claude_rules_session_networking_session",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_session_networking_session"
     },
     {
       "label": "SessionController (token-free UI access)",
@@ -22304,8 +22394,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "sessioncontroller (token-free ui access)",
-      "id": "claude_rules_session_networking_session_controller",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_session_networking_session_controller"
     },
     {
       "label": "Token Access Split (UI vs Network)",
@@ -22318,8 +22408,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "token access split (ui vs network)",
-      "id": "claude_rules_session_networking_token_split",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_session_networking_token_split"
     },
     {
       "label": "Dio Module (Authenticator + 401 logout)",
@@ -22332,8 +22422,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "dio module (authenticator + 401 logout)",
-      "id": "claude_rules_session_networking_dio_module",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_session_networking_dio_module"
     },
     {
       "label": "Manual ApiConsumer/DioConsumer (no Retrofit)",
@@ -22346,8 +22436,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "manual apiconsumer/dioconsumer (no retrofit)",
-      "id": "claude_rules_session_networking_api_consumer",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_session_networking_api_consumer"
     },
     {
       "label": "keepAlive Provider Lifetime Rule",
@@ -22360,8 +22450,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "keepalive provider lifetime rule",
-      "id": "claude_rules_session_networking_keepalive",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_session_networking_keepalive"
     },
     {
       "label": "AppTheme Two-Phase Assembly",
@@ -22374,8 +22464,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "apptheme two-phase assembly",
-      "id": "claude_rules_theming_app_theme",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_theming_app_theme"
     },
     {
       "label": "ColorScheme / AppStatusColors",
@@ -22388,8 +22478,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "colorscheme / appstatuscolors",
-      "id": "claude_rules_theming_color_scheme",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_theming_color_scheme"
     },
     {
       "label": "AppFontScheme (locale-based faces)",
@@ -22402,8 +22492,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "appfontscheme (locale-based faces)",
-      "id": "claude_rules_theming_font_scheme",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_rules_theming_font_scheme"
     },
     {
       "label": "add-feature Scaffolding Checklist",
@@ -22416,8 +22506,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "add-feature scaffolding checklist",
-      "id": "claude_skills_add_feature_skill_checklist",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_skills_add_feature_skill_checklist"
     },
     {
       "label": "clr-* Snippet Library",
@@ -22430,8 +22520,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "clr-* snippet library",
-      "id": "claude_skills_add_feature_skill_clr_snippets",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_skills_add_feature_skill_clr_snippets"
     },
     {
       "label": "Vertical Slice Layer Chain (domain to presentation)",
@@ -22444,8 +22534,8 @@
       "contributor": null,
       "community": 13,
       "norm_label": "vertical slice layer chain (domain to presentation)",
-      "id": "claude_skills_add_feature_skill_vertical_slice",
-      "community_name": "App Settings Provider"
+      "community_name": "App Settings Provider",
+      "id": "claude_skills_add_feature_skill_vertical_slice"
     },
     {
       "label": "Flutter Clean Architecture + Riverpod Starter",
@@ -22458,8 +22548,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "flutter clean architecture + riverpod starter",
-      "id": "readme_project_overview",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_project_overview"
     },
     {
       "label": "Setup Checklist (A-H)",
@@ -22472,8 +22562,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "setup checklist (a-h)",
-      "id": "readme_setup_checklist",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_setup_checklist"
     },
     {
       "label": "Step A: Clone and Detach from Template",
@@ -22486,8 +22576,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "step a: clone and detach from template",
-      "id": "readme_detach_from_template",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_detach_from_template"
     },
     {
       "label": "Step B: Rename the App",
@@ -22500,8 +22590,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "step b: rename the app",
-      "id": "readme_rename_app",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_rename_app"
     },
     {
       "label": "Talker Patched Fork Override",
@@ -22514,8 +22604,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "talker patched fork override",
-      "id": "readme_talker_fork",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_talker_fork"
     },
     {
       "label": "Step E: Strip the Demo Content",
@@ -22528,8 +22618,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "step e: strip the demo content",
-      "id": "readme_strip_demo_content",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_strip_demo_content"
     },
     {
       "label": "Step F: Deep Links / App Links",
@@ -22542,8 +22632,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "step f: deep links / app links",
-      "id": "readme_deep_links",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_deep_links"
     },
     {
       "label": "Step G: Release Signing",
@@ -22556,8 +22646,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "step g: release signing",
-      "id": "readme_release_signing",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_release_signing"
     },
     {
       "label": "Step H: Flutter Web on Google Cloud Storage",
@@ -22570,8 +22660,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "step h: flutter web on google cloud storage",
-      "id": "readme_flutter_web_gcs",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_flutter_web_gcs"
     },
     {
       "label": "Handy Scripts (bin/)",
@@ -22584,8 +22674,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "handy scripts (bin/)",
-      "id": "readme_handy_scripts",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "readme_handy_scripts"
     },
     {
       "label": "Dart & Flutter Style Guide",
@@ -22598,8 +22688,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "dart & flutter style guide",
-      "id": "docs_dart_style_guide",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_dart_style_guide"
     },
     {
       "label": "Style Deferrals to Project Rules",
@@ -22612,8 +22702,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "style deferrals to project rules",
-      "id": "docs_dart_style_project_deferrals",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_dart_style_project_deferrals"
     },
     {
       "label": "Effective Dart Baseline",
@@ -22626,8 +22716,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "effective dart baseline",
-      "id": "docs_dart_style_effective_dart",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_dart_style_effective_dart"
     },
     {
       "label": "Widget Composition Over Inheritance",
@@ -22640,8 +22730,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "widget composition over inheritance",
-      "id": "docs_dart_style_widget_composition",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_dart_style_widget_composition"
     },
     {
       "label": "Overflow-Safe Layout",
@@ -22654,8 +22744,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "overflow-safe layout",
-      "id": "docs_dart_style_layout_overflow_safe",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_dart_style_layout_overflow_safe"
     },
     {
       "label": "Accessibility Guidance",
@@ -22668,8 +22758,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "accessibility guidance",
-      "id": "docs_dart_style_accessibility",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_dart_style_accessibility"
     },
     {
       "label": "Shared Widgets Catalogue",
@@ -22682,8 +22772,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "shared widgets catalogue",
-      "id": "docs_widgets_catalogue",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_catalogue"
     },
     {
       "label": "CustomText",
@@ -22696,8 +22786,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "customtext",
-      "id": "docs_widgets_customtext",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_customtext"
     },
     {
       "label": "customAppBar",
@@ -22710,8 +22800,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "customappbar",
-      "id": "docs_widgets_customappbar",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_customappbar"
     },
     {
       "label": "FormBody",
@@ -22724,8 +22814,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "formbody",
-      "id": "docs_widgets_formbody",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_formbody"
     },
     {
       "label": "ColumnPadded",
@@ -22738,8 +22828,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "columnpadded",
-      "id": "docs_widgets_columnpadded",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_columnpadded"
     },
     {
       "label": "ControlledHeightScreen",
@@ -22752,8 +22842,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "controlledheightscreen",
-      "id": "docs_widgets_controlledheightscreen",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_controlledheightscreen"
     },
     {
       "label": "DirectionalIcon",
@@ -22766,8 +22856,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "directionalicon",
-      "id": "docs_widgets_directionalicon",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_directionalicon"
     },
     {
       "label": "BreakLine",
@@ -22780,8 +22870,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "breakline",
-      "id": "docs_widgets_breakline",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_breakline"
     },
     {
       "label": "AccountAvatar",
@@ -22794,8 +22884,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "accountavatar",
-      "id": "docs_widgets_accountavatar",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_accountavatar"
     },
     {
       "label": "SvgPrefixIcon",
@@ -22808,8 +22898,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "svgprefixicon",
-      "id": "docs_widgets_svgprefixicon",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_svgprefixicon"
     },
     {
       "label": "FilledLoadingButton",
@@ -22822,8 +22912,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "filledloadingbutton",
-      "id": "docs_widgets_filledloadingbutton",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_filledloadingbutton"
     },
     {
       "label": "RoundedButton",
@@ -22836,8 +22926,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "roundedbutton",
-      "id": "docs_widgets_roundedbutton",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_roundedbutton"
     },
     {
       "label": "CustomTextFormField",
@@ -22850,8 +22940,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "customtextformfield",
-      "id": "docs_widgets_customtextformfield",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_customtextformfield"
     },
     {
       "label": "CustomDropdownButtonFormField",
@@ -22864,8 +22954,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "customdropdownbuttonformfield",
-      "id": "docs_widgets_customdropdownbuttonformfield",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_customdropdownbuttonformfield"
     },
     {
       "label": "CustomPaginatedDropdownFormField",
@@ -22878,8 +22968,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "custompaginateddropdownformfield",
-      "id": "docs_widgets_custompaginateddropdownformfield",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_custompaginateddropdownformfield"
     },
     {
       "label": "CustomDatePickerFormField",
@@ -22892,8 +22982,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "customdatepickerformfield",
-      "id": "docs_widgets_customdatepickerformfield",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_customdatepickerformfield"
     },
     {
       "label": "CustomTimePickerFormField",
@@ -22906,8 +22996,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "customtimepickerformfield",
-      "id": "docs_widgets_customtimepickerformfield",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_customtimepickerformfield"
     },
     {
       "label": "ImageFormField",
@@ -22920,8 +23010,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "imageformfield",
-      "id": "docs_widgets_imageformfield",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_imageformfield"
     },
     {
       "label": "LabeledField",
@@ -22934,8 +23024,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "labeledfield",
-      "id": "docs_widgets_labeledfield",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_labeledfield"
     },
     {
       "label": "ImageSvg",
@@ -22948,8 +23038,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "imagesvg",
-      "id": "docs_widgets_imagesvg",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_imagesvg"
     },
     {
       "label": "ImagePng",
@@ -22962,8 +23052,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "imagepng",
-      "id": "docs_widgets_imagepng",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_imagepng"
     },
     {
       "label": "CachedImage",
@@ -22976,8 +23066,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "cachedimage",
-      "id": "docs_widgets_cachedimage",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_cachedimage"
     },
     {
       "label": "customModalBottomSheet",
@@ -22990,8 +23080,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "custommodalbottomsheet",
-      "id": "docs_widgets_custommodalbottomsheet",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_custommodalbottomsheet"
     },
     {
       "label": "PaginatedBottomSheet",
@@ -23004,8 +23094,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "paginatedbottomsheet",
-      "id": "docs_widgets_paginatedbottomsheet",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_paginatedbottomsheet"
     },
     {
       "label": "CustomDialog",
@@ -23018,8 +23108,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "customdialog",
-      "id": "docs_widgets_customdialog",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_customdialog"
     },
     {
       "label": "StateMessage",
@@ -23032,8 +23122,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "statemessage",
-      "id": "docs_widgets_statemessage",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_statemessage"
     },
     {
       "label": "EmptyState",
@@ -23046,8 +23136,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "emptystate",
-      "id": "docs_widgets_emptystate",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_emptystate"
     },
     {
       "label": "DefaultErrorWidget",
@@ -23060,8 +23150,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "defaulterrorwidget",
-      "id": "docs_widgets_defaulterrorwidget",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_defaulterrorwidget"
     },
     {
       "label": "Hooks-Based Widgets Rules",
@@ -23074,8 +23164,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "hooks-based widgets rules",
-      "id": "docs_widgets_hooks_based_widgets",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "docs_widgets_hooks_based_widgets"
     },
     {
       "label": "Analyzer & Linter Configuration",
@@ -23088,8 +23178,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "analyzer & linter configuration",
-      "id": "analysis_options_config",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "analysis_options_config"
     },
     {
       "label": "Const Lint Promotion to Warning",
@@ -23102,8 +23192,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "const lint promotion to warning",
-      "id": "analysis_options_const_promotion",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "analysis_options_const_promotion"
     },
     {
       "label": "Strict Casts / Inference / Raw Types",
@@ -23116,8 +23206,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "strict casts / inference / raw types",
-      "id": "analysis_options_strict_language",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "analysis_options_strict_language"
     },
     {
       "label": "custom_lint Analyzer Plugin",
@@ -23130,8 +23220,8 @@
       "contributor": null,
       "community": 11,
       "norm_label": "custom_lint analyzer plugin",
-      "id": "analysis_options_custom_lint_plugin",
-      "community_name": "Architecture Invariants"
+      "community_name": "Architecture Invariants",
+      "id": "analysis_options_custom_lint_plugin"
     },
     {
       "label": "DevTools Options",
@@ -23144,8 +23234,8 @@
       "contributor": null,
       "community": 120,
       "norm_label": "devtools options",
-      "id": "devtools_options_config",
-      "community_name": "Custom App Bar (fn)"
+      "community_name": "Custom App Bar (fn)",
+      "id": "devtools_options_config"
     },
     {
       "label": "Untranslated Messages Report",
@@ -23158,8 +23248,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "untranslated messages report",
-      "id": "untranslated_messages_file",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "untranslated_messages_file"
     },
     {
       "label": "Flutter Web Entry (index.html)",
@@ -23172,8 +23262,8 @@
       "contributor": null,
       "community": 53,
       "norm_label": "flutter web entry (index.html)",
-      "id": "web_index_html_entry",
-      "community_name": "Image SVG Widget"
+      "community_name": "Image SVG Widget",
+      "id": "web_index_html_entry"
     },
     {
       "label": "Monstera Plant Photo (monstera.jpeg)",
@@ -23186,8 +23276,8 @@
       "contributor": null,
       "community": 96,
       "norm_label": "monstera plant photo (monstera.jpeg)",
-      "id": "assets_images_jpeg_monstera_image",
-      "community_name": "App Text Theme"
+      "community_name": "App Text Theme",
+      "id": "assets_images_jpeg_monstera_image"
     },
     {
       "label": "Large Leafy Potted Houseplant",
@@ -23200,8 +23290,8 @@
       "contributor": null,
       "community": 96,
       "norm_label": "large leafy potted houseplant",
-      "id": "assets_images_jpeg_monstera_potted_plant",
-      "community_name": "App Text Theme"
+      "community_name": "App Text Theme",
+      "id": "assets_images_jpeg_monstera_potted_plant"
     },
     {
       "label": "Cylindrical Wooden Planter Pot",
@@ -23214,8 +23304,8 @@
       "contributor": null,
       "community": 96,
       "norm_label": "cylindrical wooden planter pot",
-      "id": "assets_images_jpeg_monstera_wooden_pot",
-      "community_name": "App Text Theme"
+      "community_name": "App Text Theme",
+      "id": "assets_images_jpeg_monstera_wooden_pot"
     },
     {
       "label": "Sunlit Minimalist Interior Corner",
@@ -23228,11 +23318,22 @@
       "contributor": null,
       "community": 96,
       "norm_label": "sunlit minimalist interior corner",
-      "id": "assets_images_jpeg_monstera_interior_scene",
-      "community_name": "App Text Theme"
+      "community_name": "App Text Theme",
+      "id": "assets_images_jpeg_monstera_interior_scene"
     }
   ],
   "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".githooks/pre-commit",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "githooks_pre_commit",
+      "target": "githooks_pre_commit__entry",
+      "confidence_score": 1.0
+    },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
@@ -23729,6 +23830,17 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "bin/graphify-watch-ensure.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "bin_graphify_watch_ensure",
+      "target": "bin_graphify_watch_ensure_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "bin/rename.sh",
       "source_location": "L1",
       "weight": 1.0,
@@ -23746,6 +23858,17 @@
       "_origin": "ast",
       "source": "bin_run",
       "target": "bin_run_sh__entry",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "bin/setup-hooks.sh",
+      "source_location": "L1",
+      "weight": 1.0,
+      "_origin": "ast",
+      "source": "bin_setup_hooks",
+      "target": "bin_setup_hooks_sh__entry",
       "confidence_score": 1.0
     },
     {
@@ -52158,5 +52281,5 @@
       "source_file": "analysis_options.yaml"
     }
   ],
-  "built_at_commit": "e7edeea0d9fa5c8bba60f5aa9c36413bdf1db47a"
+  "built_at_commit": "a7c39af4e26b5985a0b83149960ee3554cfb88e5"
 }

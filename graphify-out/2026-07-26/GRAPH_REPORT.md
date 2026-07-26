@@ -1,16 +1,16 @@
 # Graph Report - flutter_cl_riverpod  (2026-07-26)
 
 ## Corpus Check
-- 205 files · ~59,304 words
+- 208 files · ~59,877 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 2069 nodes · 2593 edges · 140 communities (98 shown, 42 thin omitted)
+- 2075 nodes · 2596 edges · 141 communities (97 shown, 44 thin omitted)
 - Extraction: 99% EXTRACTED · 1% INFERRED · 0% AMBIGUOUS · INFERRED: 31 edges (avg confidence: 0.77)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e7edeea0`
+- Built from commit: `a7c39af4`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -96,11 +96,11 @@
 - Pagination Hooks
 - App Colors
 - Color Schemes
+- paginated_bottom_sheet.dart
 - Debounced Search Hook
-- File Multipart Converter
 - JSON Serializable Annotations
+- package:intl/intl.dart
 - App Localizations Delegate
-- Failure Messenger
 - Network Converters Barrel
 - Nullable DateTime Converter
 - Async Screen State Pattern
@@ -114,7 +114,7 @@
 - check_arch.sh (CI arch gate)
 - export.sh script
 - Avatar Image Composition
-- CI & Dependencies
+- setup-hooks.sh
 - Annotations Barrel
 - Assets Rule
 - deep_link.sh script
@@ -122,6 +122,7 @@
 - run.sh script
 - uninstall.sh script
 - SVG Prefix Icon
+- pre-commit
 - Kurdish Material Delegate (impl)
 - android build.gradle
 - settings.gradle
@@ -187,7 +188,7 @@
 - **Paginated Picker Sheet Flow** — docs_widgets_custompaginateddropdownformfield, docs_widgets_paginatedbottomsheet, docs_widgets_custommodalbottomsheet [EXTRACTED 1.00]
 - **Const-First Lint Enforcement** — analysis_options_const_promotion, analysis_options_strict_language, docs_dart_style_widget_composition [INFERRED 0.75]
 
-## Communities (140 total, 42 thin omitted)
+## Communities (141 total, 44 thin omitted)
 
 ### Community 0 - "Kurdish Material Localizations"
 Cohesion: 0.01
@@ -199,11 +200,11 @@ Nodes (98): app_localizations_ar.dart, app_localizations_en.dart, appName, badRe
 
 ### Community 2 - "App Localizations (English)"
 Cohesion: 0.02
-Nodes (88): appName, badRequest, cancel, changeLanguage, conflict, crop, darkMode, defaultErrorMessage (+80 more)
+Nodes (89): app_localizations.dart, appName, badRequest, cancel, changeLanguage, conflict, crop, darkMode (+81 more)
 
 ### Community 3 - "App Localizations (Arabic)"
 Cohesion: 0.02
-Nodes (89): app_localizations.dart, appName, badRequest, cancel, changeLanguage, conflict, crop, darkMode (+81 more)
+Nodes (88): appName, badRequest, cancel, changeLanguage, conflict, crop, darkMode, defaultErrorMessage (+80 more)
 
 ### Community 4 - "Windows Runner Plugins (C++)"
 Cohesion: 0.06
@@ -214,20 +215,20 @@ Cohesion: 0.13
 Nodes (18): SafeRepositoryCall, call, NoParamsUseCase, AuthRepositoryImpl, login, _remoteDataSource, AuthRepository, login (+10 more)
 
 ### Community 6 - "Kurdish Cupertino Localizations"
-Cohesion: 0.07
-Nodes (29): FocusNode?, build, CachedImage, _CachedImageState, cacheKey, createState, devicePixelRatioCap, _errorBox (+21 more)
+Cohesion: 0.05
+Nodes (43): AlignmentGeometry, BoxFit, build, CachedImage, _CachedImageState, cacheKey, createState, devicePixelRatioCap (+35 more)
 
 ### Community 7 - "API Headers"
-Cohesion: 0.20
-Nodes (16): Exception, BadRequestException, CacheException, ConflictException, ForbiddenException, InvalidCredentialsException, message, NetworkException (+8 more)
+Cohesion: 0.06
+Nodes (40): apiConsumerProvider, Dio, Exception, BadRequestException, CacheException, ConflictException, ForbiddenException, InvalidCredentialsException (+32 more)
 
 ### Community 8 - "macOS Runner Plugins"
 Cohesion: 0.04
 Nodes (45): CupertinoLocalizations, GlobalCupertinoLocalizations, alertDialogLabel, anteMeridiemAbbreviation, backButtonLabel, cancelButtonLabel, clearButtonLabel, collapsedHint (+37 more)
 
 ### Community 9 - "Session Controller"
-Cohesion: 0.13
-Nodes (14): @immutable, AppFonts, AppFontScheme, arabic, arefRuqaa, body, display, latin (+6 more)
+Cohesion: 0.05
+Nodes (37): @immutable, accept, acceptLanguage, ApiHeaders, applicationJson, authorization, bearer, contentType (+29 more)
 
 ### Community 10 - "Phone Number Model"
 Cohesion: 0.06
@@ -238,8 +239,8 @@ Cohesion: 0.06
 Nodes (40): Analyzer & Linter Configuration, Const Lint Promotion to Warning, custom_lint Analyzer Plugin, Strict Casts / Inference / Raw Types, Accessibility Guidance, Effective Dart Baseline, Dart & Flutter Style Guide, Overflow-Safe Layout (+32 more)
 
 ### Community 12 - "Form State & Layout"
-Cohesion: 0.05
-Nodes (36): DateTime, copyWith, countryCode, _countryCodesRegex, countryISOCode, _fullPhoneNumber, initialCountryCode, iraqiPhoneNumber (+28 more)
+Cohesion: 0.10
+Nodes (19): copyWith, countryCode, _countryCodesRegex, countryISOCode, _fullPhoneNumber, initialCountryCode, iraqiPhoneNumber, iraqiPhoneNumberStarter (+11 more)
 
 ### Community 13 - "App Settings Provider"
 Cohesion: 0.07
@@ -247,11 +248,11 @@ Nodes (37): auth Reference Slice, check_arch.sh CI Boundary Enforcement, Declara
 
 ### Community 14 - "Sizing & Border Tokens"
 Cohesion: 0.06
-Nodes (31): AutovalidateMode?, CrossAxisAlignment, build, children, ColumnPadded, crossAxisAlignment, mainAxisAlignment, mainAxisSize (+23 more)
+Nodes (33): AutovalidateMode?, CrossAxisAlignment, GlobalKey, FormStateX, build, children, ColumnPadded, crossAxisAlignment (+25 more)
 
 ### Community 15 - "Component Themes"
 Cohesion: 0.06
-Nodes (30): build, fromJson, toJson, _, key, locale, setLocale, toggleLocale (+22 more)
+Nodes (33): AppSettings, AppSettings, build, fromJson, toJson, _, key, locale (+25 more)
 
 ### Community 16 - "Linux Runner (GTK)"
 Cohesion: 0.06
@@ -274,8 +275,8 @@ Cohesion: 0.09
 Nodes (24): copyButtonLabel, cutButtonLabel, delegate, isSupported, _KurdishMaterialLocalizationsDelegate, KurdishWidgetLocalizations, load, lookUpButtonLabel (+16 more)
 
 ### Community 21 - "App Messenger / Snackbar"
-Cohesion: 0.06
-Nodes (31): Color?, double?, borderRadius, BreakLine, build, color, height, width (+23 more)
+Cohesion: 0.08
+Nodes (24): Color?, double?, borderRadius, BreakLine, build, color, height, width (+16 more)
 
 ### Community 22 - "Localization Extensions"
 Cohesion: 0.09
@@ -286,20 +287,20 @@ Cohesion: 0.08
 Nodes (26): ItemType, AppMessenger, key, MessageType, show, defaultListDelegate, _pageLoader, build (+18 more)
 
 ### Community 24 - "Login Request Model"
-Cohesion: 0.08
-Nodes (26): bool get, class SessionControllerProvider, isSignedIn, logout, SessionController, user, build, isSignedIn (+18 more)
+Cohesion: 0.05
+Nodes (41): bool get, class SessionControllerProvider, AuthSessionEntity, hashCode, operator, token, toString, user (+33 more)
 
 ### Community 25 - "User Model"
-Cohesion: 0.10
-Nodes (20): fromJson, SessionCacheModel, _, _SessionCacheModel, fromEntity, toEntity, SessionCacheModel, class (+12 more)
+Cohesion: 0.09
+Nodes (22): fromJson, SessionCacheModel, _, _SessionCacheModel, fromEntity, toEntity, package:app/core/utils/annotations/freezed.dart, package:app/core/utils/annotations/json_serializable.dart (+14 more)
 
 ### Community 26 - "Home Screen"
-Cohesion: 0.11
-Nodes (19): fromJson, _, _LoginRequestModel, LoginRequestModel, String phoneNumber, String, class, hashCode, identical (+11 more)
+Cohesion: 0.10
+Nodes (20): fromJson, LoginRequestModel, _, _LoginRequestModel, LoginRequestModel, String phoneNumber, String, class, hashCode (+12 more)
 
 ### Community 27 - "Network DI Providers"
-Cohesion: 0.11
-Nodes (18): fromJson, _, _UserModel, toEntity, UserModel, class, hashCode, identical (+10 more)
+Cohesion: 0.10
+Nodes (20): @freezed, fromJson, UserModel, _, _UserModel, toEntity, UserModel, class (+12 more)
 
 ### Community 28 - "Pagination Controller Hook"
 Cohesion: 0.12
@@ -315,7 +316,7 @@ Nodes (17): FontWeight?, build, color, decoration, fontSize, fontWeight, height,
 
 ### Community 31 - "Auth Remote Data Source"
 Cohesion: 0.13
-Nodes (18): CustomTextFormField, CustomText, build, child, _ComponentGallery, _DetailPreview, _OverlayGallery, room (+10 more)
+Nodes (18): CustomTextFormField, ImageFormField, CustomText, build, child, _ComponentGallery, _DetailPreview, _OverlayGallery (+10 more)
 
 ### Community 32 - "Asset Generation Script"
 Cohesion: 0.11
@@ -326,12 +327,12 @@ Cohesion: 0.13
 Nodes (14): buffer, _collectAssets, dir, main, names, outFile, outputPath, parts (+6 more)
 
 ### Community 34 - "Custom Date Picker Field"
-Cohesion: 0.05
-Nodes (41): dart:async, DateTime? firstDate,, HookConsumerWidget, ValueNotifierUpdated, debounced, build, CustomDatePickerFormField, labelText (+33 more)
+Cohesion: 0.07
+Nodes (32): dart:async, DateTime? firstDate,, HookConsumerWidget, ValueNotifierUpdated, debounced, build, CustomDatePickerFormField, labelText (+24 more)
 
 ### Community 35 - "Default Error Widget"
-Cohesion: 0.09
-Nodes (20): EdgeInsets?, IconData, build, child, ControlledHeightScreen, padding, action, build (+12 more)
+Cohesion: 0.12
+Nodes (14): customAppBar, isElevated, LeadingButton, _onBack, action, build, icon, iconColor (+6 more)
 
 ### Community 36 - "Custom App Bar"
 Cohesion: 0.15
@@ -342,24 +343,24 @@ Cohesion: 0.13
 Nodes (14): FormValidatorLocale, AppFormValidatorLocale, context, email, ip, ipv6, maxLength, minLength (+6 more)
 
 ### Community 38 - "App Root Widget"
-Cohesion: 0.22
-Nodes (8): AsyncValue, createState, package:app/core/messaging/failure_messenger.dart, package:app/core/utils/validation/validation_regex.dart, package:app/core/widgets/buttons/filled_loading_button.dart, package:app/core/widgets/form_body.dart, package:app/features/auth/presentation/notifiers/login_notifier.dart, package:app/features/auth/presentation/widgets/password_text_form_field.dart
+Cohesion: 0.16
+Nodes (13): AsyncValue, ConsumerState, build, createState, LoginScreen, _LoginScreenState, package:app/core/messaging/failure_messenger.dart, package:app/core/utils/validation/validation_regex.dart (+5 more)
 
 ### Community 39 - "Shared Widgets Catalogue"
 Cohesion: 0.14
 Nodes (13): class FlutterSecureStorageProvider, FlutterSecureStorage, FlutterSecureStorage get, androidOptions, iosOptions, secureStorage, package:flutter_secure_storage/flutter_secure_storage.dart, _ (+5 more)
 
 ### Community 40 - "Password Text Form Field"
-Cohesion: 0.14
-Nodes (13): CroppedFile?, build, height, hintText, icon, image, ImageFormField, imgheight (+5 more)
+Cohesion: 0.15
+Nodes (12): CroppedFile?, build, height, hintText, icon, image, imgheight, imgwidth (+4 more)
 
 ### Community 41 - "Form Validator Locale"
-Cohesion: 0.14
-Nodes (12): dart:convert, firstBuild, fromJson, jsonDecode, jsonEncode, key, ObjectPreferenceProvider, toJson (+4 more)
+Cohesion: 0.18
+Nodes (10): dart:convert, firstBuild, fromJson, jsonDecode, jsonEncode, key, ObjectPreferenceProvider, toJson (+2 more)
 
 ### Community 42 - "Login Screen"
-Cohesion: 0.12
-Nodes (15): apiConsumerProvider, Dio, ApiConsumer, delete, _dio, DioConsumer, post, put (+7 more)
+Cohesion: 0.13
+Nodes (13): IconData, build, DirectionalIcon, icon, iconColor, iconSize, img, action (+5 more)
 
 ### Community 43 - "Secure Storage Provider"
 Cohesion: 0.14
@@ -398,24 +399,24 @@ Cohesion: 0.17
 Nodes (11): AppStatusColorsX, copyWith, info, lerp, of, onInfo, onSuccess, onWarning (+3 more)
 
 ### Community 52 - "Default Response Model"
-Cohesion: 0.17
-Nodes (11): AlignmentGeometry, alignment, borderRadius, build, fit, height, ImagePng, img (+3 more)
+Cohesion: 0.20
+Nodes (9): FocusNode?, build, controller, createState, focusNode, hint, isObscure, label (+1 more)
 
 ### Community 53 - "Image SVG Widget"
 Cohesion: 0.17
 Nodes (12): Step F: Deep Links / App Links, Step A: Clone and Detach from Template, Step H: Flutter Web on Google Cloud Storage, Handy Scripts (bin/), Flutter Clean Architecture + Riverpod Starter, Step G: Release Signing, Step B: Rename the App, Setup Checklist (A-H) (+4 more)
 
 ### Community 54 - "Windows Native (C++)"
-Cohesion: 0.17
-Nodes (11): BoxFit, borderRadius, build, color, fit, height, ImageSvg, img (+3 more)
+Cohesion: 0.25
+Nodes (6): getOppositeThemeMode, ThemeX, build, SplashScreen, package:flutter/material.dart, _
 
 ### Community 55 - "Failure Types"
-Cohesion: 0.14
-Nodes (13): GlobalKey, GoRouter, FormStateX, refreshNotifier, _rootNavigatorKey, router, _shellNavigatorKey, NavigatorState (+5 more)
+Cohesion: 0.15
+Nodes (12): GoRouter, refreshNotifier, _rootNavigatorKey, router, _shellNavigatorKey, NavigatorState, package:app/core/utils/constants/route_names.dart, package:app/features/auth/presentation/screens/login_screen.dart (+4 more)
 
 ### Community 56 - "Login Notifier"
-Cohesion: 0.18
-Nodes (10): Interceptor, Authenticator, onRequest, _ref, DioRefX, SecureStorageRefX, SharedPreferencesRefX, package:app/core/network/api_headers.dart (+2 more)
+Cohesion: 0.12
+Nodes (14): dart:io, Interceptor, Authenticator, onRequest, _ref, fromJson, toJson, DioRefX (+6 more)
 
 ### Community 57 - "Status Colors Extension"
 Cohesion: 0.26
@@ -430,112 +431,108 @@ Cohesion: 0.18
 Nodes (10): background_color, description, display, icons, name, orientation, prefer_related_applications, short_name (+2 more)
 
 ### Community 60 - "App Router"
-Cohesion: 0.17
-Nodes (12): class, File, JsonConverter, FileJsonConvertor, fromJson, NullablePhoneNumberConvertor, PhoneNumberConvertor, toJson (+4 more)
+Cohesion: 0.22
+Nodes (9): class, JsonConverter, NullableDateTimeConvertor, fromJson, NullablePhoneNumberConvertor, PhoneNumberConvertor, toJson, XFileMultipartConvertor (+1 more)
 
 ### Community 61 - "Dio Authenticator Interceptor"
-Cohesion: 0.17
-Nodes (11): class SharedPreferencesProvider, sharedPreferences, SharedPreferences, SharedPreferences get, sharedPreferencesProvider, _, create, debugGetCreateSourceHash (+3 more)
+Cohesion: 0.15
+Nodes (12): class SharedPreferencesProvider, sharedPreferences, package:shared_preferences/shared_preferences.dart, SharedPreferences, SharedPreferences get, sharedPreferencesProvider, _, create (+4 more)
 
 ### Community 62 - "Paginated Bottom Sheet"
 Cohesion: 0.20
 Nodes (9): double size,, AccountAvatar, build, _cameraPlaceholder, _framed, imageUrl, isEditiable, verifiedSize (+1 more)
 
 ### Community 63 - "Auth Providers & Usecases"
-Cohesion: 0.20
-Nodes (9): int?, count, fromJson, pageNumber, pageSize, result, total, totalPages (+1 more)
+Cohesion: 0.10
+Nodes (19): int?, int get, addItems, defaultLimitSize, firstPage, Paginated, count, fromJson (+11 more)
 
 ### Community 64 - "Web Manifest"
-Cohesion: 0.22
-Nodes (8): accept, acceptLanguage, ApiHeaders, applicationJson, authorization, bearer, contentType, _
+Cohesion: 0.25
+Nodes (7): controller, debounced, DebouncedSearch, useDebouncedSearch, value, package:app/core/utils/hooks/use_debounce.dart, TextEditingController
 
 ### Community 65 - "Phone Number JSON Converter"
-Cohesion: 0.11
-Nodes (16): controller, debounced, DebouncedSearch, useDebouncedSearch, value, build, controller, focusNode (+8 more)
+Cohesion: 0.20
+Nodes (9): build, controller, focusNode, onChanged, onCountryCodeChanged, PhoneNumberFormField, package:app/core/l10n/locale.dart, package:country_code_picker/country_code_picker.dart (+1 more)
 
 ### Community 66 - "Account Avatar"
 Cohesion: 0.22
 Nodes (8): AppStatusColors get, ColorScheme get, appStatusColors, colorScheme, textTheme, theme, TextTheme get, ThemeData get
 
 ### Community 67 - "Paginated Response Model"
-Cohesion: 0.29
-Nodes (6): home, login, logs, RouteNames, splash, _
+Cohesion: 0.17
+Nodes (11): DateTime, DateTimeX, format, format24Hour, formatDate, formatDOW, formatTime, formatTimeago (+3 more)
 
 ### Community 68 - "Paginated Dropdown Field"
-Cohesion: 0.22
-Nodes (8): int get, AuthSessionEntity, hashCode, operator, token, toString, user, UserEntity
+Cohesion: 0.25
+Nodes (7): build, DefaultErrorWidget, error, onRetry, stackTrace, package:app/core/widgets/state_ui/state_message.dart, StackTrace
 
 ### Community 69 - "Phone Number Form Field"
 Cohesion: 0.33
-Nodes (5): authSession, PreferenceKeys, SecureStorageKeys, settings, _
+Nodes (5): FailureX, localizeFailure, showFailure, package:app/core/messaging/snackbar.dart, package:flutter/widgets.dart
 
 ### Community 70 - "Theme Extensions"
 Cohesion: 0.22
 Nodes (7): freezedRequest, freezedResponse, package:app/core/network/convertors/convertors_lib.dart, package:app/core/network/default_response.dart, package:app/core/network/paginated_response.dart, package:app/core/utils/annotations/annotations_lib.dart, package:freezed_annotation/freezed_annotation.dart
 
 ### Community 71 - "Auth Session Entity"
-Cohesion: 0.22
-Nodes (8): addItems, defaultLimitSize, firstPage, Paginated, PaginatedResponse, result, total, List
+Cohesion: 0.40
+Nodes (4): fromJson, NullableStringConvertor, nullData, toJson
 
 ### Community 72 - "Freezed Annotations"
 Cohesion: 0.22
 Nodes (8): AppLogger, error, handle, routeTalker, talker, warning, package:talker_flutter/talker_flutter.dart, _
 
 ### Community 73 - "Paginated State"
-Cohesion: 0.22
-Nodes (8): createdAt, id, name, operator, phone, profileImg, role, toString
+Cohesion: 0.67
+Nodes (3): File, FileJsonConvertor, MultipartFile
 
 ### Community 74 - "App Logger"
 Cohesion: 0.12
 Nodes (15): isDark, isLight, localize, ThemeModeCheck, ThemeModeL10n, context, customModalBottomSheet, isDismissible (+7 more)
 
 ### Community 75 - "User Entity"
-Cohesion: 0.13
-Nodes (14): ConsumerState, build, login, build, LoginScreen, _LoginScreenState, package:app/features/auth/di/auth_providers.dart, StatefulHookConsumerWidget (+6 more)
+Cohesion: 0.17
+Nodes (10): build, login, package:app/core/network/http_lib.dart, package:app/features/auth/di/auth_providers.dart, package:riverpod_annotation/riverpod_annotation.dart, _, create, debugGetCreateSourceHash (+2 more)
 
 ### Community 76 - "Custom Modal Bottom Sheet"
-Cohesion: 0.12
-Nodes (15): ChangeNotifier, appName, main, runZonedGuarded, dispose, RouterRefreshNotifier, _sub, package:app/app.dart (+7 more)
-
-### Community 77 - "Freezed Models"
-Cohesion: 0.32
-Nodes (8): @freezed, AppSettings, AppSettings, _AppSettings, jsonSerializable, LoginRequestModel, UserModel, AppSettingsPatterns
+Cohesion: 0.13
+Nodes (14): ChangeNotifier, appName, main, runZonedGuarded, dispose, RouterRefreshNotifier, _sub, package:app/app.dart (+6 more)
 
 ### Community 79 - "App Colors"
-Cohesion: 0.13
-Nodes (12): AppColors, brand, info, success, warning, getOppositeThemeMode, ThemeX, build (+4 more)
+Cohesion: 0.25
+Nodes (7): AppColors, brand, info, success, warning, static const Color, _
 
 ### Community 80 - "Color Schemes"
 Cohesion: 0.25
 Nodes (7): AppColorSchemes, brand, info, success, warning, package:app/core/theme/colors/app_colors.dart, _
 
-### Community 83 - "Debounced Search Hook"
-Cohesion: 0.10
-Nodes (19): build, child, FilledLoadingButton, isLoading, onPressed, customAppBar, isElevated, LeadingButton (+11 more)
+### Community 81 - "paginated_bottom_sheet.dart"
+Cohesion: 0.18
+Nodes (9): build, customItems, pagingController, titleText, package:app/core/l10n/localized_name.dart, package:app/core/pagination/pagination_controller.dart, package:app/core/pagination/paging_list_delegate.dart, package:app/core/utils/hooks/use_debounced_search.dart (+1 more)
 
-### Community 85 - "File Multipart Converter"
-Cohesion: 0.13
-Nodes (13): dart:io, messageFrom, NetworkErrorMapper, toException, fromJson, toJson, fromJson, toJson (+5 more)
+### Community 83 - "Debounced Search Hook"
+Cohesion: 0.14
+Nodes (12): EdgeInsets?, build, child, FilledLoadingButton, isLoading, onPressed, build, child (+4 more)
 
 ### Community 86 - "JSON Serializable Annotations"
 Cohesion: 0.29
 Nodes (6): DefaultResponse, filedRename, jsonEnum, jsonSerializableRequest, jsonSerializableResponse, jsonSerializableResponseGeneric
 
+### Community 87 - "package:intl/intl.dart"
+Cohesion: 0.29
+Nodes (6): formatEditUpdate, _formatter, PriceFormatter, NumberFormat, package:intl/intl.dart, TextInputFormatter
+
 ### Community 88 - "App Localizations Delegate"
 Cohesion: 0.40
 Nodes (6): AppLocalizations, _AppLocalizationsDelegate, AppLocalizationsAr, AppLocalizationsEn, of, LocalizationsDelegate
-
-### Community 89 - "Failure Messenger"
-Cohesion: 0.33
-Nodes (5): FailureX, localizeFailure, showFailure, package:app/core/messaging/snackbar.dart, package:flutter/widgets.dart
 
 ### Community 90 - "Network Converters Barrel"
 Cohesion: 0.33
 Nodes (5): package:app/core/network/convertors/nullable_date_time_convertor.dart, package:app/core/network/convertors/nullable_phone_number_convertor.dart, package:app/core/network/convertors/nullable_string_convertor.dart, package:app/core/network/convertors/nullable_uri_convertor.dart, package:app/core/network/convertors/xfile_multipart_convertor.dart
 
 ### Community 91 - "Nullable DateTime Converter"
-Cohesion: 0.14
-Nodes (12): fromJson, NullableDateTimeConvertor, nullData, toJson, fromJson, nullData, toJson, Endpoints (+4 more)
+Cohesion: 0.40
+Nodes (4): fromJson, nullData, toJson, package:app/core/utils/extensions/string_extensions.dart
 
 ### Community 92 - "Async Screen State Pattern"
 Cohesion: 0.40
@@ -566,24 +563,24 @@ Cohesion: 0.67
 Nodes (3): CI analyze-and-test job, flutter_riverpod dependency, Talker patched fork dependency_overrides
 
 ## Knowledge Gaps
-- **1298 isolated node(s):** `deep_link.sh script`, `pngDir`, `svgDir`, `outputPath`, `pngs` (+1293 more)
+- **1300 isolated node(s):** `deep_link.sh script`, `pngDir`, `svgDir`, `outputPath`, `pngs` (+1295 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **42 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **44 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `UserEntity` connect `Paginated Dropdown Field` to `Paginated State`?**
-  _High betweenness centrality (0.004) - this node is a cross-community bridge._
-- **Why does `Settings` connect `Pagination Controller Hook` to `Component Themes`?**
-  _High betweenness centrality (0.003) - this node is a cross-community bridge._
+- **Why does `sharedPreferences` connect `Dio Authenticator Interceptor` to `Pagination Controller Hook`?**
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `Shared Widgets Catalogue` (e.g. with `Widget Composition Over Inheritance` and `l10n.yaml localization config`) actually correct?**
   _`Shared Widgets Catalogue` has 2 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `deep_link.sh script`, `pngDir`, `svgDir` to the rest of the system?**
-  _1298 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _1300 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Kurdish Material Localizations` be split into smaller, more focused modules?**
   _Cohesion score 0.011235955056179775 - nodes in this community are weakly interconnected._
 - **Should `App Localizations (AR+EN)` be split into smaller, more focused modules?**
   _Cohesion score 0.020202020202020204 - nodes in this community are weakly interconnected._
 - **Should `App Localizations (English)` be split into smaller, more focused modules?**
+  _Cohesion score 0.022222222222222223 - nodes in this community are weakly interconnected._
+- **Should `App Localizations (Arabic)` be split into smaller, more focused modules?**
   _Cohesion score 0.02247191011235955 - nodes in this community are weakly interconnected._

@@ -74,6 +74,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noItemsFoundError => 'لا يوجد عناصر';
 
   @override
+  String get notifications => 'الإشعارات';
+
+  @override
   String get password => 'كلمة المرور';
 
   @override

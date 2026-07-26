@@ -74,6 +74,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noItemsFoundError => 'No items found';
 
   @override
+  String get notifications => 'Notifications';
+
+  @override
   String get password => 'Password';
 
   @override

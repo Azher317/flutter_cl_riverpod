@@ -20,6 +20,7 @@
   "loginSuccess": "Logged in successfully",
   "noConnection": "No internet connection, please check your network",
   "noItemsFoundError": "No items found",
+  "notifications": "Notifications",
   "password": "Password",
   "phone": "Phone",
   "pickDate": "Pick date",

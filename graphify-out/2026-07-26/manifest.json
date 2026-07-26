@@ -1010,8 +1010,8 @@
     "semantic_hash": ""
   },
   "README.md": {
-    "mtime": 1784726099.8150775,
-    "ast_hash": "3ae695f202c7792f53d959897925b69a",
+    "mtime": 1785078616.8687513,
+    "ast_hash": "a050d8d775203d32950b632dd0773a7b",
     "semantic_hash": ""
   },
   "analysis_options.yaml": {
@@ -1282,6 +1282,21 @@
   "web/icons/Icon-maskable-512.png": {
     "mtime": 1783548557.916482,
     "ast_hash": "301a7604d45b3e739efc881eb04896ea",
+    "semantic_hash": ""
+  },
+  ".githooks/pre-commit": {
+    "mtime": 1785078560.328775,
+    "ast_hash": "c35612b95ba00a38b12743d29b28acbb",
+    "semantic_hash": ""
+  },
+  "bin/setup-hooks.sh": {
+    "mtime": 1785078564.69245,
+    "ast_hash": "0ae59bbbc71aa655d14eee40f9f76c66",
+    "semantic_hash": ""
+  },
+  "bin/graphify-watch-ensure.sh": {
+    "mtime": 1785079967.0305145,
+    "ast_hash": "5b33963c11693052e7d870bf008d54c3",
     "semantic_hash": ""
   }
 }
