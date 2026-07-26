@@ -1,0 +1,30 @@
+#!/bin/sh
+# Tracked pre-commit hook. Activated by: bin/setup-hooks.sh (sets core.hooksPath=.githooks).
+# Because this file is committed, it travels with every clone of the repo.
+
+# 1) Block a commit if it breaks an import boundary.
+if ! bin/check_arch.sh; then
+  echo
+  echo "Commit blocked: fix the architecture violation above."
+  exit 1
+fi
+
+# 2) graphify: rebuild the knowledge graph from the working tree and stage it so
+# graphify-out/ ships INSIDE this commit (AST-only, no LLM/API cost). Runs only
+# after the arch guard passes. Never blocks the commit on graph failure.
+# Bypass everything below with: GRAPHIFY_SKIP_HOOK=1 git commit ...
+if [ "${GRAPHIFY_SKIP_HOOK:-0}" != "1" ]; then
+  # Deterministic community clustering (louvain order is PYTHONHASHSEED-sensitive).
+  export PYTHONHASHSEED=0
+  GRAPHIFY_BIN=$(command -v graphify 2>/dev/null || echo "$HOME/.local/bin/graphify")
+  if [ -x "$GRAPHIFY_BIN" ]; then
+    echo "[graphify hook] rebuilding graph..."
+    if "$GRAPHIFY_BIN" update . >/dev/null; then
+      git add graphify-out/
+    else
+      echo "[graphify hook] rebuild failed; committing without graph update." >&2
+    fi
+  else
+    echo "[graphify hook] graphify not installed; skipping graph update." >&2
+  fi
+fi
