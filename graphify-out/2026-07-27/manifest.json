@@ -1304,6 +1304,16 @@
     "ast_hash": "b9f5571cf9dfbd441ef1591ef3a231e0",
     "semantic_hash": ""
   },
+  ".claude/skills/dart-add-unit-test/SKILL.md": {
+    "mtime": 1785109015.5699713,
+    "ast_hash": "d986a960e9badf2b49637dd02358b841",
+    "semantic_hash": ""
+  },
+  ".claude/skills/dart-build-cli-app/SKILL.md": {
+    "mtime": 1785109015.5705423,
+    "ast_hash": "b6e20a6534a28b000a3d0460aa6bea25",
+    "semantic_hash": ""
+  },
   ".claude/skills/dart-collect-coverage/SKILL.md": {
     "mtime": 1785109015.571395,
     "ast_hash": "0857cd12435d77d804df67ac670dc7d1",
@@ -1314,14 +1324,34 @@
     "ast_hash": "2c31e5a57c37773f7beb93cb2538cdcb",
     "semantic_hash": ""
   },
+  ".claude/skills/dart-generate-test-mocks/SKILL.md": {
+    "mtime": 1785109015.572498,
+    "ast_hash": "80186eb83b2e10d825abeb46dff569d8",
+    "semantic_hash": ""
+  },
+  ".claude/skills/dart-migrate-to-checks-package/SKILL.md": {
+    "mtime": 1785109015.5729215,
+    "ast_hash": "16bbe8193d65fd35a56e09d776d9b238",
+    "semantic_hash": ""
+  },
   ".claude/skills/dart-resolve-package-conflicts/SKILL.md": {
-    "mtime": 1785111932.9450982,
-    "ast_hash": "693240e03392ca2c7519efb9924d9636",
+    "mtime": 1785109015.5733194,
+    "ast_hash": "54d1cc3800f64c5ef38153a821934e9a",
     "semantic_hash": ""
   },
   ".claude/skills/dart-run-static-analysis/SKILL.md": {
-    "mtime": 1785111920.102573,
-    "ast_hash": "cd018e71bc37106e029229cb510d2dac",
+    "mtime": 1785109015.5741858,
+    "ast_hash": "5ac5a43bef001cf9155d8d8004c6da3c",
+    "semantic_hash": ""
+  },
+  ".claude/skills/dart-setup-ffi-assets/SKILL.md": {
+    "mtime": 1785109015.5748625,
+    "ast_hash": "183cb7189dd5203b7c26a375b6d66ae6",
+    "semantic_hash": ""
+  },
+  ".claude/skills/dart-use-ffigen/SKILL.md": {
+    "mtime": 1785109015.5753262,
+    "ast_hash": "2da30943cb22ca3865021e8fab21e8e0",
     "semantic_hash": ""
   },
   ".claude/skills/dart-use-pattern-matching/SKILL.md": {
@@ -1349,6 +1379,11 @@
     "ast_hash": "0268529aca7b57ec90d325e3e4e60618",
     "semantic_hash": ""
   },
+  ".claude/skills/flutter-apply-architecture-best-practices/SKILL.md": {
+    "mtime": 1785109015.5788407,
+    "ast_hash": "028255574719f035ca5a18208b401f1b",
+    "semantic_hash": ""
+  },
   ".claude/skills/flutter-build-responsive-layout/SKILL.md": {
     "mtime": 1785109015.579423,
     "ast_hash": "8a37634a5def06d47c1dcf60db9f5eab",
@@ -1359,34 +1394,24 @@
     "ast_hash": "0227d262dd3e6f0f9f68db65754fd877",
     "semantic_hash": ""
   },
+  ".claude/skills/flutter-implement-json-serialization/SKILL.md": {
+    "mtime": 1785109015.5809364,
+    "ast_hash": "af90e41997cc917368381fce352cfd4e",
+    "semantic_hash": ""
+  },
   ".claude/skills/flutter-setup-declarative-routing/SKILL.md": {
-    "mtime": 1785111903.6090047,
-    "ast_hash": "331d1936975eee67213dc5f6873754bd",
+    "mtime": 1785109015.5817428,
+    "ast_hash": "504977d8957249afaaa9a5c95219880e",
     "semantic_hash": ""
   },
   ".claude/skills/flutter-setup-localization/SKILL.md": {
-    "mtime": 1785111876.7403975,
-    "ast_hash": "200f93876c31582edc947af4fcec8e41",
+    "mtime": 1785109015.5827363,
+    "ast_hash": "3e240c27963f9a6f839306fb80d91e4d",
     "semantic_hash": ""
   },
-  ".claude/agents/architecture-auditor.md": {
-    "mtime": 1785112337.4417586,
-    "ast_hash": "db565f10b7be4e6af7081e602d9a0d78",
-    "semantic_hash": ""
-  },
-  ".claude/agents/debug-investigator.md": {
-    "mtime": 1785109793.22603,
-    "ast_hash": "d6a3900de728d06ad3ae65cfb5287655",
-    "semantic_hash": ""
-  },
-  ".claude/agents/test-runner.md": {
-    "mtime": 1785109790.6979356,
-    "ast_hash": "5479f888055b321b7b5134cfd04cddf5",
-    "semantic_hash": ""
-  },
-  ".claude/skills/add-feature/SKILL.md": {
-    "mtime": 1785111574.677157,
-    "ast_hash": "bc0b19849da59262a7801e40b8a83f74",
+  ".claude/skills/flutter-use-http-package/SKILL.md": {
+    "mtime": 1785109015.5835717,
+    "ast_hash": "8171aee8fb2232ea758d0ae4115409f2",
     "semantic_hash": ""
   }
 }
