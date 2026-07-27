@@ -1,17 +1,61 @@
 include: package:flutter_lints/flutter.yaml
+# Alternative to hand-picking: `include: package:very_good_analysis/analysis_options.yaml`
+# (opinionated preset). We hand-pick below so every rule is explainable.
 
 analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
 
+  language:
+    strict-casts: true        # no silent dynamic -> T downcasts
+    strict-inference: true    # fail when a type can't be inferred
+    strict-raw-types: true    # no raw List/Map without type args
+
   errors:
     invalid_annotation_target: ignore
     unused_element: ignore
     depend_on_referenced_packages: ignore
-    use_build_context_synchronously: ignore
     require_trailing_commas: true
-    deprecated_member_use: ignore
+    deprecated_member_use: ignore          # left ignored (user's call)
+    # --- promote const lints from info -> warning (the headline ask) ---
+    prefer_const_constructors: warning
+    prefer_const_constructors_in_immutables: warning
+    prefer_const_declarations: warning
+    prefer_const_literals_to_create_immutables: warning
+    # --- re-enabled crash guard ---
+    use_build_context_synchronously: warning
 
   plugins:
     - custom_lint
+
+linter:
+  rules:
+    # Part 1 — const family
+    prefer_const_constructors: true
+    prefer_const_constructors_in_immutables: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: true
+    # Part 2 — correctness
+    always_declare_return_types: true
+    avoid_dynamic_calls: true
+    cancel_subscriptions: true
+    close_sinks: true
+    unawaited_futures: true
+    avoid_slow_async_io: true
+    null_check_on_nullable_type_parameter: true
+    throw_in_finally: true
+    # Part 3 — Flutter performance
+    use_key_in_widget_constructors: true
+    sized_box_for_whitespace: true
+    avoid_unnecessary_containers: true
+    sized_box_shrink_expand: true
+    # Part 4 — readability / consistency
+    prefer_final_locals: true
+    prefer_final_in_for_each: true
+    directives_ordering: true
+    prefer_single_quotes: true
+    sort_child_properties_last: true
+    unnecessary_lambdas: true
+    unnecessary_parenthesis: true
+    avoid_redundant_argument_values: true

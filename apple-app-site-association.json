@@ -1,25 +1,19 @@
 {
-    "applinks": {
-      "apps": [],
-      "details": [
-        {
-          "appIDs": [
-            "J6U9YWDMNY.com.albaramej.juzahios"
-          ],
-          "paths": [
-            "*"
-          ],
-          "components": [
-            {
-              "/": "/*"
-            }
-          ]
-        }
-      ]
-    },
-    "webcredentials": {
-      "apps": [
-        "J6U9YWDMNY.com.albaramej.juzahios"
-      ]
-    }
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["TEAMID.com.example.app"],
+        "paths": ["*"],
+        "components": [
+          {
+            "/": "/*"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["TEAMID.com.example.app"]
   }
+}

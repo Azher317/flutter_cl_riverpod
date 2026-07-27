@@ -5,6 +5,12 @@
   "crop": "Crop",
   "darkMode": "Dark Mode",
   "defaultErrorMessage": "An error occurred, please try again later",
+  "badRequest": "Invalid request, please check your input",
+  "conflict": "This conflicts with existing data",
+  "forbidden": "You don't have permission to perform this action",
+  "notFound": "The requested item was not found",
+  "serverError": "A server error occurred, please try again later",
+  "sessionExpired": "Your session has expired, please sign in again",
   "fieldRequired": "This field is required",
   "invalidCredentials": "Invalid phone number or password",
   "invalidFieldValue": "Invalid field value",
@@ -14,9 +20,11 @@
   "loginSuccess": "Logged in successfully",
   "noConnection": "No internet connection, please check your network",
   "noItemsFoundError": "No items found",
+  "notifications": "Notifications",
   "password": "Password",
   "phone": "Phone",
   "pickDate": "Pick date",
+  "logout": "Logout",
   "relocate": "Relocate",
   "retry": "Retry",
   "search": "Search",
@@ -52,5 +60,55 @@
   "validatorUrl": "The field is not a valid URL address",
   "validatorUseArabicOrKurdishLetters": "Please use Arabic or Kurdish letters",
   "validatorUseEnglishLetters": "Please use English letters",
-  "welcomeAgain": "Welcome again"
+  "welcomeAgain": "Welcome again",
+
+  "previewTitle": "Preview",
+  "@previewTitle": {
+    "description": "TODO(placeholder): every `preview*` key below belongs to the placeholder home screen. Delete this whole block along with lib/features/home/presentation/screens/home_screen.dart."
+  },
+  "previewTodayTitle": "Today",
+  "previewTodaySubtitle": "Cards, checkboxes and the tip banner.",
+  "previewWinterTip": "During the winter your plants slow down and need less water.",
+  "previewLivingRoom": "Living Room",
+  "previewKitchen": "Kitchen",
+  "previewBalcony": "Balcony",
+  "previewWater": "Water",
+  "previewFeed": "Feed",
+  "previewDetailTitle": "Detail",
+  "previewDetailSubtitle": "Hero typography, image block and info chips.",
+  "previewPlantName": "Monstera Unique",
+  "previewPlantBody": "A rare variegated monstera with deeply fenestrated leaves, each one splitting a little further as the plant matures. Give it bright indirect light — direct sun scorches the pale patches — and water only once the top inch of soil has dried out. It climbs by nature, so a moss pole keeps the newer leaves growing large instead of shrinking back. Wipe the leaves down monthly and feed every other watering through spring and summer.",
+  "previewMostPopular": "Most Popular",
+  "previewMostPopularBody": "This is a popular plant in store",
+  "previewEasyCare": "Easy Care",
+  "previewEasyCareBody": "Thrives on being forgotten",
+  "previewFaux": "Faux Available",
+  "previewFauxBody": "Get the look, zero upkeep",
+  "previewComponentsTitle": "Components",
+  "previewComponentsSubtitle": "Inputs, buttons and indicators as the theme renders them.",
+  "previewAssist": "Assist",
+  "previewFilter": "Filter",
+  "previewSuggestion": "Suggestion",
+  "previewFilledButton": "Filled button",
+  "previewOutlinedButton": "Outlined button",
+  "previewTextButton": "Text button",
+  "previewOverlaysTitle": "Overlays",
+  "previewOverlaysSubtitle": "Dialog, snackbars and the modal sheet. Tap to raise each one.",
+  "previewDialog": "Dialog",
+  "previewBottomSheet": "Bottom sheet",
+  "previewDialogTitle": "Delete plant?",
+  "previewDialogBody": "This placeholder dialog does nothing.",
+  "previewRooms": "Rooms",
+  "previewPlantCount": "{n} plants",
+  "@previewPlantCount": {
+    "placeholders": {
+      "n": {}
+    }
+  },
+  "previewSnackMessage": "A {type} message.",
+  "@previewSnackMessage": {
+    "placeholders": {
+      "type": {}
+    }
+  }
 }

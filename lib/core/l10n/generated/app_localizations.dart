@@ -134,6 +134,42 @@ abstract class AppLocalizations {
   /// **'An error occurred, please try again later'**
   String get defaultErrorMessage;
 
+  /// No description provided for @badRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid request, please check your input'**
+  String get badRequest;
+
+  /// No description provided for @conflict.
+  ///
+  /// In en, this message translates to:
+  /// **'This conflicts with existing data'**
+  String get conflict;
+
+  /// No description provided for @forbidden.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have permission to perform this action'**
+  String get forbidden;
+
+  /// No description provided for @notFound.
+  ///
+  /// In en, this message translates to:
+  /// **'The requested item was not found'**
+  String get notFound;
+
+  /// No description provided for @serverError.
+  ///
+  /// In en, this message translates to:
+  /// **'A server error occurred, please try again later'**
+  String get serverError;
+
+  /// No description provided for @sessionExpired.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session has expired, please sign in again'**
+  String get sessionExpired;
+
   /// No description provided for @fieldRequired.
   ///
   /// In en, this message translates to:
@@ -188,6 +224,12 @@ abstract class AppLocalizations {
   /// **'No items found'**
   String get noItemsFoundError;
 
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
   /// No description provided for @password.
   ///
   /// In en, this message translates to:
@@ -205,6 +247,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pick date'**
   String get pickDate;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
 
   /// No description provided for @relocate.
   ///
@@ -361,6 +409,222 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome again'**
   String get welcomeAgain;
+
+  /// TODO(placeholder): every `preview*` key below belongs to the placeholder home screen. Delete this whole block along with lib/features/home/presentation/screens/home_screen.dart.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get previewTitle;
+
+  /// No description provided for @previewTodayTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get previewTodayTitle;
+
+  /// No description provided for @previewTodaySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards, checkboxes and the tip banner.'**
+  String get previewTodaySubtitle;
+
+  /// No description provided for @previewWinterTip.
+  ///
+  /// In en, this message translates to:
+  /// **'During the winter your plants slow down and need less water.'**
+  String get previewWinterTip;
+
+  /// No description provided for @previewLivingRoom.
+  ///
+  /// In en, this message translates to:
+  /// **'Living Room'**
+  String get previewLivingRoom;
+
+  /// No description provided for @previewKitchen.
+  ///
+  /// In en, this message translates to:
+  /// **'Kitchen'**
+  String get previewKitchen;
+
+  /// No description provided for @previewBalcony.
+  ///
+  /// In en, this message translates to:
+  /// **'Balcony'**
+  String get previewBalcony;
+
+  /// No description provided for @previewWater.
+  ///
+  /// In en, this message translates to:
+  /// **'Water'**
+  String get previewWater;
+
+  /// No description provided for @previewFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'Feed'**
+  String get previewFeed;
+
+  /// No description provided for @previewDetailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Detail'**
+  String get previewDetailTitle;
+
+  /// No description provided for @previewDetailSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Hero typography, image block and info chips.'**
+  String get previewDetailSubtitle;
+
+  /// No description provided for @previewPlantName.
+  ///
+  /// In en, this message translates to:
+  /// **'Monstera Unique'**
+  String get previewPlantName;
+
+  /// No description provided for @previewPlantBody.
+  ///
+  /// In en, this message translates to:
+  /// **'A rare variegated monstera with deeply fenestrated leaves, each one splitting a little further as the plant matures. Give it bright indirect light — direct sun scorches the pale patches — and water only once the top inch of soil has dried out. It climbs by nature, so a moss pole keeps the newer leaves growing large instead of shrinking back. Wipe the leaves down monthly and feed every other watering through spring and summer.'**
+  String get previewPlantBody;
+
+  /// No description provided for @previewMostPopular.
+  ///
+  /// In en, this message translates to:
+  /// **'Most Popular'**
+  String get previewMostPopular;
+
+  /// No description provided for @previewMostPopularBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This is a popular plant in store'**
+  String get previewMostPopularBody;
+
+  /// No description provided for @previewEasyCare.
+  ///
+  /// In en, this message translates to:
+  /// **'Easy Care'**
+  String get previewEasyCare;
+
+  /// No description provided for @previewEasyCareBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Thrives on being forgotten'**
+  String get previewEasyCareBody;
+
+  /// No description provided for @previewFaux.
+  ///
+  /// In en, this message translates to:
+  /// **'Faux Available'**
+  String get previewFaux;
+
+  /// No description provided for @previewFauxBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Get the look, zero upkeep'**
+  String get previewFauxBody;
+
+  /// No description provided for @previewComponentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Components'**
+  String get previewComponentsTitle;
+
+  /// No description provided for @previewComponentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Inputs, buttons and indicators as the theme renders them.'**
+  String get previewComponentsSubtitle;
+
+  /// No description provided for @previewAssist.
+  ///
+  /// In en, this message translates to:
+  /// **'Assist'**
+  String get previewAssist;
+
+  /// No description provided for @previewFilter.
+  ///
+  /// In en, this message translates to:
+  /// **'Filter'**
+  String get previewFilter;
+
+  /// No description provided for @previewSuggestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggestion'**
+  String get previewSuggestion;
+
+  /// No description provided for @previewFilledButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Filled button'**
+  String get previewFilledButton;
+
+  /// No description provided for @previewOutlinedButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Outlined button'**
+  String get previewOutlinedButton;
+
+  /// No description provided for @previewTextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Text button'**
+  String get previewTextButton;
+
+  /// No description provided for @previewOverlaysTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Overlays'**
+  String get previewOverlaysTitle;
+
+  /// No description provided for @previewOverlaysSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dialog, snackbars and the modal sheet. Tap to raise each one.'**
+  String get previewOverlaysSubtitle;
+
+  /// No description provided for @previewDialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Dialog'**
+  String get previewDialog;
+
+  /// No description provided for @previewBottomSheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom sheet'**
+  String get previewBottomSheet;
+
+  /// No description provided for @previewDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete plant?'**
+  String get previewDialogTitle;
+
+  /// No description provided for @previewDialogBody.
+  ///
+  /// In en, this message translates to:
+  /// **'This placeholder dialog does nothing.'**
+  String get previewDialogBody;
+
+  /// No description provided for @previewRooms.
+  ///
+  /// In en, this message translates to:
+  /// **'Rooms'**
+  String get previewRooms;
+
+  /// No description provided for @previewPlantCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} plants'**
+  String previewPlantCount(Object n);
+
+  /// No description provided for @previewSnackMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'A {type} message.'**
+  String previewSnackMessage(Object type);
 }
 
 class _AppLocalizationsDelegate

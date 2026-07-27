@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:app/core/extensions/common_extensions.dart';
-import 'package:app/core/extensions/theme_extentions.dart';
 import 'package:app/core/media/image_service.dart';
-import 'package:app/core/theme/sizes.dart';
-import 'package:app/core/widgets/flex_padded.dart';
+import 'package:app/core/utils/constants/sizes.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
+import 'package:app/core/widgets/column_padded.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 
@@ -22,17 +22,18 @@ class ImageFormField extends StatelessWidget {
     required this.onChanged,
   });
 
-  ImageFormField.notifier(ValueNotifier<CroppedFile?> notifier,
-      {super.key,
-      required this.height,
-      this.width,
-      required this.imgheight,
-      this.imgwidth,
-      this.text,
-      this.hintText,
-      this.icon})
-      : image = notifier.value,
-        onChanged = notifier.update;
+  ImageFormField.notifier(
+    ValueNotifier<CroppedFile?> notifier, {
+    super.key,
+    required this.height,
+    this.width,
+    required this.imgheight,
+    this.imgwidth,
+    this.text,
+    this.hintText,
+    this.icon,
+  }) : image = notifier.value,
+       onChanged = notifier.update;
 
   final CroppedFile? image;
   final ValueChanged<CroppedFile> onChanged;
@@ -66,30 +67,25 @@ class ImageFormField extends StatelessWidget {
                     });
                   },
                   child: ColumnPadded(
-                    gap: 4,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    spacing: Insets.extraSmall,
                     children: [
                       Container(
                         width: width ?? height,
                         height: height,
-                        padding: EdgeInsets.symmetric(horizontal: 11),
+                        padding: const EdgeInsets.symmetric(horizontal: 11),
                         decoration: BoxDecoration(
-                            border:
-                                Border.all(color: theme.colorScheme.outline),
-                            borderRadius: BorderSize.smallRadius),
+                          border: Border.all(color: theme.colorScheme.outline),
+                          borderRadius: BorderSize.smallRadius,
+                        ),
                         child: Row(
                           mainAxisAlignment: hintText != null
                               ? MainAxisAlignment.spaceBetween
                               : MainAxisAlignment.center,
                           children: [
                             if (hintText != null) ...[
-                              Text(
+                              CustomText(
                                 hintText!,
-                                style: context.textTheme.bodyLarge?.copyWith(
-                                  color: context.colorScheme.onSurfaceVariant,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                                style: theme.inputDecorationTheme.hintStyle,
                               ),
                             ],
                             Icon(
@@ -100,21 +96,18 @@ class ImageFormField extends StatelessWidget {
                         ),
                       ),
                       if (text != null) ...[
-                        Text(
-                          text!,
-                          style: theme.textTheme.titleLarge,
-                        ),
+                        CustomText(text!, style: theme.textTheme.displaySmall),
                       ],
                       if (field.hasError)
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
+                          child: CustomText(
                             field.errorText!,
                             style: theme.textTheme.bodySmall!.copyWith(
                               color: theme.colorScheme.error,
                             ),
                           ),
-                        )
+                        ),
                     ],
                   ),
                 );
@@ -137,18 +130,12 @@ class ImageFormField extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderSize.smallRadius,
-                      child: Image.file(
-                        File(image!.path),
-                        fit: BoxFit.cover,
-                      ),
+                      child: Image.file(File(image!.path), fit: BoxFit.cover),
                     ),
                   ),
                   if (text != null) ...[
-                    Text(
-                      text!,
-                      style: theme.textTheme.titleLarge,
-                    ),
-                  ]
+                    CustomText(text!, style: theme.textTheme.displaySmall),
+                  ],
                 ],
               ),
             ),

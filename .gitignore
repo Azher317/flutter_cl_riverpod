@@ -4,8 +4,7 @@
 .dart_tool/
 .packages
 build/
-# If you're building an application, you may want to check-in your pubspec.lock
-pubspec.lock
+
 
 # Directory created by dartdoc
 # If you don't generate documentation locally you can remove this line.
@@ -21,3 +20,28 @@ doc/api/
 *.js.map
 
 .fake
+
+# IDE module files
+*.iml
+
+# Native build caches
+android/app/.cxx/
+**/*.cxx/
+
+# Tooling output
+custom_lint.log
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# IDE
+.idea/
+android/.idea/
+
+# Flutter generated (machine-specific absolute paths)
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Kotlin build daemon logs
+android/.kotlin/

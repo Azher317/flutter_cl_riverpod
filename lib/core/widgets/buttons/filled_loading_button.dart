@@ -1,4 +1,4 @@
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 
 class FilledLoadingButton extends StatelessWidget {

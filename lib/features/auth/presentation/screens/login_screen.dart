@@ -1,41 +1,59 @@
 import 'package:app/core/errors/failures.dart';
-import 'package:app/core/extensions/common_extensions.dart';
+import 'package:app/core/messaging/failure_messenger.dart';
 import 'package:app/core/messaging/snackbar.dart';
-import 'package:app/core/theme/sizes.dart';
+import 'package:app/core/utils/constants/sizes.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
+import 'package:app/core/utils/validation/validation_regex.dart';
+import 'package:app/core/widgets/buttons/filled_loading_button.dart';
+import 'package:app/core/widgets/form_body.dart';
+import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
+import 'package:app/core/widgets/text.dart';
 import 'package:app/features/auth/presentation/notifiers/login_notifier.dart';
+import 'package:app/features/auth/presentation/widgets/password_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class LoginScreen extends HookConsumerWidget {
+class LoginScreen extends StatefulHookConsumerWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  @override
+  Widget build(BuildContext context) {
+    final formKey = useMemoized(GlobalKey<FormState>.new);
+
     final phoneController = useTextEditingController();
     final passwordController = useTextEditingController();
-    final formKey = useMemoized(() => GlobalKey<FormState>());
+
+    final phoneFocus = useFocusNode();
+    final passwordFocus = useFocusNode();
 
     final loginState = ref.watch(loginProvider);
     final isLoading = loginState.isLoading;
 
     ref.listen<AsyncValue<void>>(loginProvider, (previous, next) {
-      // On success, LoginNotifier updates authSessionProvider, and the router's
-      // redirect navigates to home — no imperative navigation needed here.
+      // On success, LoginNotifier hands the session to the core Session
+      // notifier, and the router's redirect navigates to home — no imperative
+      // navigation needed here.
       if (next is AsyncError) {
         final error = next.error;
-        final message = switch (error) {
-          InvalidCredentialsFailure() => context.l10n.invalidCredentials,
-          NetworkFailure() => context.l10n.noConnection,
-          Failure() => error.message,
-          _ => context.l10n.defaultErrorMessage,
-        };
-        AppMessenger.show(message, type: MessageType.error);
+        if (error is Failure) {
+          context.showFailure(error);
+        } else {
+          AppMessenger.show(
+            context.l10n.defaultErrorMessage,
+            type: MessageType.error,
+          );
+        }
       }
     });
 
     void submit() {
-      if (formKey.currentState?.validate() != true) return;
+      if (formKey.isNotValid()) return;
       ref
           .read(loginProvider.notifier)
           .login(
@@ -45,52 +63,34 @@ class LoginScreen extends HookConsumerWidget {
     }
 
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: Insets.largeAll,
-            child: Form(
-              key: formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextFormField(
-                    controller: phoneController,
-                    keyboardType: TextInputType.phone,
-                    decoration: InputDecoration(
-                      labelText: context.l10n.phone,
-                    ),
-                    validator: (value) => (value == null || value.isEmpty)
-                        ? context.l10n.fieldRequired
-                        : null,
-                  ),
-                  SizedBox(height: Insets.medium),
-                  TextFormField(
-                    controller: passwordController,
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: context.l10n.password,
-                    ),
-                    validator: (value) => (value == null || value.isEmpty)
-                        ? context.l10n.fieldRequired
-                        : null,
-                  ),
-                  SizedBox(height: Insets.large),
-                  FilledButton(
-                    onPressed: isLoading ? null : submit,
-                    child: isLoading
-                        ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        : Text(context.l10n.login),
-                  ),
-                ],
-              ),
-            ),
+      body: FormBody(
+        centered: true,
+        spacing: Insets.medium,
+        formKey: formKey,
+        children: [
+          CustomTextFormField(
+            controller: phoneController,
+            hintText: '7xxxxxxxxx',
+            inputFormatters: [englishDigitsOnly],
+            focusNode: phoneFocus,
+            onFieldSubmitted: (_) {
+              FocusScope.of(context).requestFocus(passwordFocus);
+            },
+            validator: context.validator.required().phone().build(),
           ),
-        ),
+          PasswordFormField(
+            controller: passwordController,
+            validator: context.validator.minLength(6).build(),
+            focusNode: passwordFocus,
+            onFieldSubmitted: (value) => submit(),
+          ),
+          const SizedBox(height: 56),
+          FilledLoadingButton(
+            onPressed: submit,
+            isLoading: isLoading,
+            child: CustomText(context.l10n.login),
+          ),
+        ],
       ),
     );
   }

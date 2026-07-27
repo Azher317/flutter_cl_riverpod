@@ -1,4 +1,4 @@
-import 'package:app/core/annotations/json_serializable.dart';
+import 'package:app/core/utils/annotations/json_serializable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'login_request_model.freezed.dart';

@@ -1,39 +1,79 @@
-import 'dart:developer';
-
-import 'package:app/core/models/_models.dart';
+import 'package:app/core/errors/failures.dart';
+import 'package:app/core/network/paginated.dart';
+import 'package:app/core/observability/app_logger.dart';
+import 'package:app/core/utils/either.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-typedef PageChanged<T> = Future<PaginatedResponse<T>> Function(int pageKey);
+/// Fetch a page, signalling failure by throwing.
+typedef PageChanged<T> = Future<Paginated<T>> Function(int pageKey);
+
+/// Fetch a page as the project-standard [Either] — the [Left] failure is
+/// surfaced on the controller instead of being thrown.
+typedef PageChangedEither<T> =
+    Future<Either<Failure, Paginated<T>>> Function(int pageKey);
+
+/// Handles a single page request for [pageKey] against [controller].
+typedef _PageRequestHandler<T> =
+    Future<void> Function(PagingController<int, T> controller, int pageKey);
+
+/// Creates a [PagingController] wired to a [PageChanged] fetch function that
+/// throws on failure.
+const usePagingController = _PagingControllerHookCreator();
+
+/// Creates a [PagingController] wired to a [PageChangedEither] fetch function
+/// that returns the project-standard [Either].
+const usePagingControllerEither = _PagingControllerHookCreatorEither();
 
 class _PagingControllerHookCreator {
   const _PagingControllerHookCreator();
 
   PagingController<int, ItemType> call<ItemType>({
-    int page = 1,
-    int perPage = 25,
+    int page = firstPage,
     required PageChanged<ItemType> listen,
     List<Object?>? keys,
   }) {
-    return use(_PagingControllerHook<ItemType>(page, perPage, listen, keys));
+    return use(
+      _PagingControllerHook<ItemType>(
+        page: page,
+        onRequest: (controller, pageKey) =>
+            controller.appendPageFrom(listen, pageKey),
+        keys: keys,
+      ),
+    );
   }
 }
 
-const usePagingController = _PagingControllerHookCreator();
+class _PagingControllerHookCreatorEither {
+  const _PagingControllerHookCreatorEither();
+
+  PagingController<int, ItemType> call<ItemType>({
+    int page = firstPage,
+    required PageChangedEither<ItemType> listen,
+    List<Object?>? keys,
+  }) {
+    return use(
+      _PagingControllerHook<ItemType>(
+        page: page,
+        onRequest: (controller, pageKey) =>
+            controller.appendPageFromEither(listen, pageKey),
+        keys: keys,
+      ),
+    );
+  }
+}
 
 class _PagingControllerHook<ItemType>
     extends Hook<PagingController<int, ItemType>> {
-  const _PagingControllerHook(
-    this.page,
-    this.perPage,
-    this.listen, [
-    List<Object?>? keys,
-  ]) : super(keys: keys);
+  const _PagingControllerHook({
+    required this.page,
+    required this.onRequest,
+    super.keys,
+  });
 
   final int page;
-  final int perPage;
-  final PageChanged<ItemType> listen;
+  final _PageRequestHandler<ItemType> onRequest;
 
   @override
   _PagingControllerHookState<ItemType> createState() {
@@ -41,11 +81,26 @@ class _PagingControllerHook<ItemType>
   }
 }
 
-class _PagingControllerHookState<ItemType> extends HookState<
-    PagingController<int, ItemType>, _PagingControllerHook<ItemType>> {
-  late final _controller =
-      PagingController<int, ItemType>(firstPageKey: hook.page)
-        ..listen(callback: hook.listen, perPage: hook.perPage);
+class _PagingControllerHookState<ItemType>
+    extends
+        HookState<
+          PagingController<int, ItemType>,
+          _PagingControllerHook<ItemType>
+        > {
+  late final _controller = PagingController<int, ItemType>(
+    firstPageKey: hook.page,
+  );
+
+  @override
+  void initHook() {
+    // Register exactly one page-request listener, but route each request
+    // through the `hook` getter — which always returns the *current* hook — so
+    // the fetch closure (and any state it captures, e.g. a search query) is
+    // read at request time, not frozen at construction.
+    _controller.addPageRequestListener(
+      (pageKey) => hook.onRequest(_controller, pageKey),
+    );
+  }
 
   @override
   PagingController<int, ItemType> build(BuildContext context) => _controller;
@@ -58,22 +113,34 @@ class _PagingControllerHookState<ItemType> extends HookState<
 }
 
 extension PagingControllerX<ItemType> on PagingController<int, ItemType> {
-  void listen({required PageChanged<ItemType> callback, required int perPage}) {
-    addPageRequestListener((int pageKey) async {
-      try {
-        final page = await callback(pageKey);
+  /// Runs a throwing [PageChanged] for [pageKey], appending the page or
+  /// surfacing the error.
+  Future<void> appendPageFrom(PageChanged<ItemType> callback, int pageKey) async {
+    try {
+      addItems(await callback(pageKey), pageKey);
+    } catch (e, stackTrace) {
+      AppLogger.handle(e, stackTrace);
+      error = e;
+    }
+  }
 
-        final isLastPage = page.result.length < perPage;
-        if (isLastPage) {
-          appendLastPage(page.result);
-        } else {
-          final nextPageKey = pageKey + 1;
-          appendPage(page.result, nextPageKey);
-        }
-      } catch (e, stackTrace) {
-        log(toString(), error: error, stackTrace: stackTrace);
-        error = e;
-      }
-    });
+  /// Runs an [Either]-returning [PageChangedEither] for [pageKey], mapping
+  /// [Left] onto [error] and [Right] onto [addItems].
+  Future<void> appendPageFromEither(
+    PageChangedEither<ItemType> callback,
+    int pageKey,
+  ) async {
+    try {
+      (await callback(pageKey)).fold(
+        (failure) {
+          AppLogger.handle(failure, StackTrace.current);
+          error = failure;
+        },
+        (page) => addItems(page, pageKey),
+      );
+    } catch (e, stackTrace) {
+      AppLogger.handle(e, stackTrace);
+      error = e;
+    }
   }
 }

@@ -66,7 +66,6 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: focusedBorder,
       ),
       validator: validator,
-      autovalidateMode: AutovalidateMode.onUserInteraction,
       // textDirection: TextDirection.ltr,
       // textAlign: TextAlign.left,
       maxLines: maxLines,
