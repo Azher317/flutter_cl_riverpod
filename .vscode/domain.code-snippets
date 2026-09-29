@@ -60,7 +60,7 @@
   "clr-domain-usecase": {
     "scope": "dart",
     "prefix": "clr-domain-usecase",
-    "description": "Domain · usecase implementing UseCase<T, Params>. One usecase per operation; the single call() only delegates to the repository. Type feature/entity/action in snake_case.",
+    "description": "Domain · usecase. Tab through: UseCase name, Entity, Repository, repository method.",
     "body": [
       "import 'package:app/core/errors/failures.dart';",
       "import 'package:app/core/usecase/usecase.dart';",
@@ -69,14 +69,14 @@
       "import 'package:app/features/$1/domain/params/${3:action}_params.dart';",
       "import 'package:app/features/$1/domain/repositories/${1}_repository.dart';",
       "",
-      "class ${3/(.*)/${1:/pascalcase}/}UseCase implements UseCase<${2/(.*)/${1:/pascalcase}/}Entity, ${3/(.*)/${1:/pascalcase}/}Params> {",
-      "  const ${3/(.*)/${1:/pascalcase}/}UseCase(this._repository);",
+      "class $1 implements UseCase<,> {",
+      "  const $1(this._repository);",
       "",
-      "  final ${1/(.*)/${1:/pascalcase}/}Repository _repository;",
+      "  final ReplaceWithRepo _repository;",
       "",
       "  @override",
-      "  Future<Either<Failure, ${2/(.*)/${1:/pascalcase}/}Entity>> call(${3/(.*)/${1:/pascalcase}/}Params params) =>",
-      "      _repository.${4:doThing}(params);$0",
+      "  Future<Either<Failure, >> call(ReplaceWithParams params) =>",
+      "      _repository.${4:changeMe}(params);",
       "}"
     ]
   },
