@@ -17,31 +17,37 @@ entities ([auth_session_entity.dart](../../lib/core/session/entities/auth_sessio
 [user_entity.dart](../../lib/core/session/entities/user_entity.dart)). No override, no
 throwing session provider — it's self-contained core.
 
-**Access is split so the token never leaks to UI:**
+**Access is split so the token never leaks to features:**
 
-- **UI** reads `SessionController`
-  ([session_controller.dart](../../lib/core/session/session_controller.dart)) via
-  `sessionControllerProvider` — `user`, `isSignedIn`, `logout()`. **No token.** This is
-  the only session type presentation ever touches.
+- **Features read** the session through `currentUserProvider` (`UserEntity?`) and
+  `isSignedInProvider` (`bool`), both in
+  [session_notifier.dart](../../lib/core/session/session_notifier.dart). **No token.**
+  These are the only session reads presentation ever makes.
+- **Features write** only through `ref.read(sessionProvider.notifier)` —
+  `setSession(...)` after login, `logout()`. Never `ref.watch`/`ref.read` of
+  `sessionProvider` itself.
 - **The network layer** reads the token straight from `sessionProvider`'s `AsyncValue`
   (`ref.read(sessionProvider).value?.token`) inside the Dio `Authenticator`
-  ([authenticator.dart](../../lib/core/network/authenticator.dart)). `core/network` is
-  allowed to see the token; presentation is not, because it never reads `sessionProvider`
-  — only the router does (for redirects).
+  ([authenticator.dart](../../lib/core/network/authenticator.dart)). `core/network` and
+  `lib/router` (redirects) are the only readers of `sessionProvider`'s state.
 
-`sessionControllerProvider`
-([session_provider.dart](../../lib/core/session/session_provider.dart)) delegates to the
-`Session` notifier (which implements `SessionController`). The router watches
-`sessionProvider`'s raw `AsyncValue` for `isLoading` vs signed-out.
+Both read providers are `keepAlive` and derive from `sessionProvider` with `select`, so
+they rebuild exactly when the user or signed-in flag changes — on login, logout and
+cache restore. `isSignedInProvider` is `false` while the session restores; the router
+watches `sessionProvider`'s raw `AsyncValue` for `isLoading` and holds on splash, so
+screens never see that state. Any user-scoped provider watches `currentUserProvider`
+(or is autoDispose) so it rebuilds/clears when the session drops to `null` — `logout()`
+can't invalidate feature providers itself without `core/` importing features.
 
 **A feature that authenticates produces a session and hands it over** — it does not own
 session state. `auth`'s `LoginNotifier` calls `loginUseCase`, then
 `ref.read(sessionProvider.notifier).setSession(entity)`. That's the only write path
-besides `logout()`. Everything else is read-only through the two interfaces above.
+besides `logout()`. Everything else is read-only through the two derived providers above.
 
 **One provider throws until overridden — `sharedPreferencesProvider`.** Any test
 touching `dioProvider`, `settingsProvider`, or anything downstream must supply that
-override; the session providers no longer need one (they resolve from core).
+override; the session providers don't need one (they resolve from core). Tests override
+`sessionRepositoryProvider` with an in-memory fake to control the cached session.
 
 **`@riverpod` is auto-dispose by default (Riverpod 3).** A plain `@riverpod` provider
 resets its state the moment nothing listens — e.g. after you navigate off the screen

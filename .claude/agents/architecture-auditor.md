@@ -20,6 +20,10 @@ to investigate and report findings back to the main agent.
 - The dependency rule points inward: domain must not import from data or presentation;
   data must not import from presentation.
 - Authentication is separated from session management (session is a cross-cutting concern).
+  Features read the session through `currentUserProvider` / `isSignedInProvider` and
+  change it only through `ref.read(sessionProvider.notifier)` (`setSession` / `logout`).
+  Only `lib/core/network/**` (token) and `lib/router/**` (redirect) read
+  `sessionProvider`'s state.
 - State management is Riverpod 3.x with codegen (@riverpod). Prefer AsyncNotifier/Notifier
   over legacy StateNotifier unless the file predates the migration.
 - Models use Freezed + json_serializable, each with a `.toEntity()`, NOT hand-written
@@ -47,7 +51,19 @@ to investigate and report findings back to the main agent.
    repos are the only callers of `guard()`, rule 7).
 4. Check that providers/notifiers don't contain business logic that belongs in use cases,
    and that notifiers/screens go through a `@riverpod` usecase provider (rule 14).
-5. `bin/check_arch.sh` already mechanically enforces rules 1, 2, 3, 5 — don't re-report
+5. Check session access (`bin/check_arch.sh` does not cover these):
+   - Any file under `lib/features/` that reads `sessionProvider` state —
+     `ref.watch(sessionProvider)` / `ref.read(sessionProvider)` not followed by
+     `.notifier`, `sessionProvider.select(...)`, `sessionProvider.future`, or any
+     `.token` access. Features use `currentUserProvider` / `isSignedInProvider`.
+   - Any user-scoped provider (holds per-user data) that neither watches
+     `currentUserProvider` nor is autoDispose (i.e. `@Riverpod(keepAlive: true)`
+     without that watch) — it will leak the previous user's data after logout.
+   - Any `ref.watch(<x>Provider.notifier)` used to derive reactive state (returned
+     from a provider or read for display). A notifier instance doesn't change when
+     its state does, so the watcher never rebuilds; watch the provider (or a
+     `select` on it) instead.
+6. `bin/check_arch.sh` already mechanically enforces rules 1, 2, 3, 5 — don't re-report
    what it covers unless you find a gap; focus on the rules it can't check.
 
 ## How to report

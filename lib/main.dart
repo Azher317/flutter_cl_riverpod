@@ -14,8 +14,15 @@ import 'package:timeago/timeago.dart' as timeago;
 const String appName = 'Starter';
 
 Future<void> main() async {
-  enableFlutterDriverExtension();
-
+  // Flutter Driver's text-entry emulation hijacks the real text input
+  // channel, silently breaking normal keyboard input — only enable it when
+  // a driver/integration test run explicitly asks for it.
+  const enableDriverExtension = bool.fromEnvironment(
+    'ENABLE_FLUTTER_DRIVER_EXTENSION',
+  );
+  if (enableDriverExtension) {
+    enableFlutterDriverExtension();
+  }
   await runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();

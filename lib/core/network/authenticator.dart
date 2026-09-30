@@ -4,7 +4,8 @@ import 'package:app/core/session/session_notifier.dart';
 
 /// Attaches the bearer token to every request. Reads the current token from
 /// the core [sessionProvider] at request time — the network layer is allowed
-/// to see the token; UI is not (it uses `SessionController`, which has none).
+/// to see the token; features are not (they read `currentUserProvider` /
+/// `isSignedInProvider`, which never expose it).
 class Authenticator extends Interceptor {
   final Ref _ref;
   Authenticator(this._ref);

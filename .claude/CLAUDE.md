@@ -14,7 +14,7 @@ session restores from cache.
 `auth` is also the **reference slice**: when scaffolding a new feature, copy its *shape*
 — layer order, file naming, the `Either` contract — never its symbols. Copying the shape
 is not importing the feature: no feature imports another. Cross-feature session access
-goes through `sessionControllerProvider` (rule 3).
+goes through `currentUserProvider` / `isSignedInProvider` (rule 3).
 
 Layer detail lives in [.claude/rules/](rules/) — those files are path-scoped and load
 automatically when a matching file is opened (`theming.md` for `lib/core/theme/**`,
@@ -51,17 +51,20 @@ Hard invariants. Rules 1, 2, 3 and 5 are enforced in CI by
 
 1. **`lib/core/**` must not import `package:app/features/`.** If `core/` ever needs
    something a feature owns, invert it: an interface in `core/` + a throwing provider +
-   an override at the composition root. *Currently holds.* (Session used to work this
-   way; it now lives entirely in `core/session/`, so no override is needed.)
+   an override at the composition root. *Currently holds.* (Session lives entirely in
+   `core/session/`, so it needs no override.)
 2. **`lib/core/**` should not import `package:app/router/`.** `router/` imports every
    feature screen, so a `core/ → router/` edge is rule 1 with an extra hop. Route paths
    live in [route_names.dart](../lib/core/utils/constants/route_names.dart) so `core/`
    can name a destination without importing the route table. *Currently holds.*
-3. **No feature imports another feature.** Session state is read through
-   `sessionControllerProvider` ([core/session/](../lib/core/session/)) — it exposes
-   `user`, `isSignedIn` and `logout()` (the token is network-only — the Dio
-   `Authenticator` reads it from `sessionProvider` directly; UI never sees it). Session
-   is core, so no feature imports `auth` for it. Only
+3. **No feature imports another feature.** Features read the session through
+   `currentUserProvider` / `isSignedInProvider`
+   ([session_notifier.dart](../lib/core/session/session_notifier.dart)) — reactive and
+   token-free — and change it only through `ref.read(sessionProvider.notifier)`
+   (`setSession` / `logout`). Features never read `sessionProvider`'s *state*: that's
+   where the token lives, and only `core/network` (token) and `lib/router` (redirect)
+   read it. Any user-scoped provider watches `currentUserProvider` so it clears on
+   logout. Session is core, so no feature imports `auth` for it. Only
    `lib/router/` imports `features/*` at all, and only for the *screens* it composes.
    A feature may import its own files; only feature-A → feature-B is a violation
    (checked by [bin/check_arch.sh](../bin/check_arch.sh)).
@@ -133,7 +136,7 @@ These are the ones the numbered rules above don't already cover.
 | Don't | Why | Do instead |
 |---|---|---|
 | Add `dartz` / `fpdart` | The project has a local sealed `Either` with `fold`/`isLeft`/`isRight` | Import [either.dart](../lib/core/utils/either.dart) |
-| Reach into another feature's `data/`, `domain/` or notifiers | Couples two slices that should stay independently deletable | Session → `ref.read(sessionControllerProvider)` (UI only; **no token**). Never read `sessionProvider` from a feature — only `core/network` (token) and the router (redirect) may. Anything else → duplicate the small piece, or promote it to `core/` behind an interface |
+| Reach into another feature's `data/`, `domain/` or notifiers | Couples two slices that should stay independently deletable | Session → watch `currentUserProvider` / `isSignedInProvider` (**no token**); change it via `ref.read(sessionProvider.notifier)` (`setSession` / `logout`). Never read `sessionProvider`'s state from a feature — only `core/network` (token) and the router (redirect) may. Anything else → duplicate the small piece, or promote it to `core/` behind an interface |
 
 ---
 

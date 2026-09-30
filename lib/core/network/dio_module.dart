@@ -4,7 +4,7 @@ import 'package:app/core/network/api_headers.dart';
 import 'package:app/core/network/authenticator.dart';
 import 'package:app/core/network/clients_lib.dart';
 import 'package:app/core/observability/app_logger.dart';
-import 'package:app/core/session/session_provider.dart';
+import 'package:app/core/session/session_notifier.dart';
 import 'package:flutter/foundation.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 
@@ -35,7 +35,7 @@ Dio dio(Ref ref) {
             if (pendingLogout == null) {
               pendingLogout = Completer<void>();
               try {
-                await ref.read(sessionControllerProvider).logout();
+                await ref.read(sessionProvider.notifier).logout();
               } finally {
                 pendingLogout!.complete();
                 pendingLogout = null;

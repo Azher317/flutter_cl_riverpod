@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:app/core/messaging/snackbar.dart';
-import 'package:app/core/session/session_provider.dart';
+import 'package:app/core/session/session_notifier.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
 import 'package:app/core/utils/constants/route_names.dart';
 import 'package:app/core/utils/constants/sizes.dart';
@@ -68,7 +68,7 @@ class HomeScreen extends ConsumerWidget {
           ),
           IconButton(
             onPressed: () =>
-                unawaited(ref.read(sessionControllerProvider).logout()),
+                unawaited(ref.read(sessionProvider.notifier).logout()),
             icon: const Icon(Icons.logout),
             tooltip: context.l10n.logout,
           ),

@@ -26,7 +26,7 @@ metadata:
 
 **No imperative `context.go(...)` / `context.push(...)` after login or logout.**
 Update the session (`ref.read(sessionProvider.notifier).setSession(...)` on login;
-`logout()` via `sessionControllerProvider`), and the router **redirects on session
+`ref.read(sessionProvider.notifier).logout()` on logout), and the router **redirects on session
 change** automatically. Imperative navigation here fights the redirect and creates
 inconsistent stacks. Imperative `context.go`/`push` is fine for ordinary in-app
 navigation between non-session-gated screens.

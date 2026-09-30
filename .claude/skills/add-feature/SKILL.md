@@ -8,7 +8,8 @@ description: Scaffold a new vertical slice (domain → data → di → presentat
 Ordered checklist. Placeholders are shown against their real `auth` counterparts.
 `auth` is the **reference slice**: copy its *shape* — layer order, file naming, the
 `Either` contract — never its symbols. No feature imports another; if the new feature
-needs the session, inject `sessionControllerProvider` from `core/session/`.
+needs the session, watch `currentUserProvider` / `isSignedInProvider` from
+`core/session/` and log out via `ref.read(sessionProvider.notifier).logout()`.
 
 | # | Step | File | Rule |
 |---|---|---|---|
