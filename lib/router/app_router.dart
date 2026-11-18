@@ -4,6 +4,7 @@ import 'package:app/core/utils/constants/route_names.dart';
 import 'package:app/features/auth/presentation/screens/login_screen.dart';
 import 'package:app/features/home/presentation/screens/home_screen.dart';
 import 'package:app/features/splash/presentation/screens/splash_screen.dart';
+import 'package:app/router/page_transitions.dart';
 import 'package:app/router/router_refresh_notifier.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -60,23 +61,30 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(
         path: RouteNames.splash,
-        builder: (context, state) => const SplashScreen(),
+        pageBuilder: (context, state) =>
+            appPage(context, state, const SplashScreen()),
       ),
       GoRoute(
         path: RouteNames.home,
-        builder: (context, state) => const HomeScreen(),
+        pageBuilder: (context, state) =>
+            appPage(context, state, const HomeScreen()),
       ),
       GoRoute(
         path: RouteNames.login,
-        builder: (context, state) => const LoginScreen(),
+        pageBuilder: (context, state) =>
+            appPage(context, state, const LoginScreen()),
       ),
       if (kDebugMode)
         GoRoute(
           path: RouteNames.logs,
-          builder: (context, state) => TalkerScreen(
-            talker: talker,
-            appBarTitle: 'Debug',
-            showMonitorButton: false,
+          pageBuilder: (context, state) => appPage(
+            context,
+            state,
+            TalkerScreen(
+              talker: talker,
+              appBarTitle: 'Debug',
+              showMonitorButton: false,
+            ),
           ),
         ),
     ],

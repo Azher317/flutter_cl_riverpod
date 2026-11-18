@@ -21,8 +21,8 @@ automatically when a matching file is opened (`theming.md` for `lib/core/theme/*
 `data-layer.md` for `lib/features/*/data/**`, `pubspec.md` for `pubspec.yaml`, and so on).
 Scaffolding a new vertical slice is the **`add-feature` skill**: it carries the ordered
 checklist and the `clr-*` snippet catalogue. The shared-widget catalogue lives in
-[docs/widgets.md](../docs/widgets.md); general Dart/Flutter style defaults (additive,
-never overriding the rules here) live in [docs/dart-style.md](../docs/dart-style.md).
+[docs/guides/widgets.md](../docs/guides/widgets.md); general Dart/Flutter style defaults (additive,
+never overriding the rules here) live in [docs/guides/dart-style.md](../docs/guides/dart-style.md).
 
 ## Commands
 
@@ -46,7 +46,7 @@ flutter run
 
 ## Layer rules
 
-Hard invariants. Rules 1, 2, 3 and 5 are enforced in CI by
+Hard invariants. Rules 1, 2, 3, 5 and 16 are enforced in CI by
 [bin/check_arch.sh](../bin/check_arch.sh) (run it locally before pushing).
 
 1. **`lib/core/**` must not import `package:app/features/`.** If `core/` ever needs
@@ -108,6 +108,14 @@ Hard invariants. Rules 1, 2, 3 and 5 are enforced in CI by
     datasource or repository directly. That seam is where the `Either` contract lives.
 15. **No imperative `context.go(...)` after login/logout.** Update the session; the
     router redirects on session change (`RouterRefreshNotifier` + `redirect`).
+16. **`lib/core/` is infrastructure only; shared business code lives in `lib/shared/`.**
+    `core/` holds what any app needs whatever it sells (network, session, theme, l10n,
+    widgets, storage). Business vocabulary that two or more features use (a product
+    card entity, a governorates list, store config) goes in `lib/shared/<topic>/`,
+    with the same `domain/` · `data/` · `di/` layering as a feature but no screens.
+    `shared/` may import `core/` only; features and `router/` may import `shared/`;
+    `core/` never imports `shared/`. Code used by one feature stays in that feature.
+    (Checked by [bin/check_arch.sh](../bin/check_arch.sh).)
 
 ### Feature layout (`lib/features/<feature>/`)
 - `domain/` — `entities/` (pure), `repositories/` (abstract), `usecases/`, `params/`.
@@ -136,19 +144,7 @@ These are the ones the numbered rules above don't already cover.
 | Don't | Why | Do instead |
 |---|---|---|
 | Add `dartz` / `fpdart` | The project has a local sealed `Either` with `fold`/`isLeft`/`isRight` | Import [either.dart](../lib/core/utils/either.dart) |
-| Reach into another feature's `data/`, `domain/` or notifiers | Couples two slices that should stay independently deletable | Session → watch `currentUserProvider` / `isSignedInProvider` (**no token**); change it via `ref.read(sessionProvider.notifier)` (`setSession` / `logout`). Never read `sessionProvider`'s state from a feature — only `core/network` (token) and the router (redirect) may. Anything else → duplicate the small piece, or promote it to `core/` behind an interface |
-
----
-
-## graphify
-
-This project has a knowledge graph at graphify-out/ with god nodes, community structure, and cross-file relationships.
-
-Rules:
-- For codebase questions, first run `graphify query "<question>"` when graphify-out/graph.json exists. Use `graphify path "<A>" "<B>"` for relationships and `graphify explain "<concept>"` for focused concepts. These return a scoped subgraph, usually much smaller than GRAPH_REPORT.md or raw grep output.
-- If graphify-out/wiki/index.md exists, use it for broad navigation instead of raw source browsing.
-- Read graphify-out/GRAPH_REPORT.md only for broad architecture review or when query/path/explain do not surface enough context.
-- After modifying code, run `graphify update .` to keep the graph current (AST-only, no API cost).
+| Reach into another feature's `data/`, `domain/` or notifiers | Couples two slices that should stay independently deletable | Session → watch `currentUserProvider` / `isSignedInProvider` (**no token**); change it via `ref.read(sessionProvider.notifier)` (`setSession` / `logout`). Never read `sessionProvider`'s state from a feature — only `core/network` (token) and the router (redirect) may. Anything else → duplicate the small piece, or move it to `lib/shared/` (rule 16) |
 
 ---
 

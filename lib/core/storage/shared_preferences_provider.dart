@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 part 'shared_preferences_provider.g.dart';
 
+// keepAlive: App-lifetime service: storage.
 @Riverpod(keepAlive: true)
 SharedPreferences sharedPreferences(Ref ref) => throw UnimplementedError();
 

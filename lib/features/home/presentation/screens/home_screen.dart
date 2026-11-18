@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:app/core/messaging/snackbar.dart';
 import 'package:app/core/session/session_notifier.dart';
-import 'package:app/core/settings/app_settings_provider.dart';
+import 'package:app/core/settings/appearance_actions.dart';
 import 'package:app/core/utils/constants/route_names.dart';
 import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
@@ -32,8 +32,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final settings = ref.watch(settingsProvider);
-    final isArabic = settings.locale?.languageCode == 'ar';
+    final isArabic = Localizations.localeOf(context).languageCode == 'ar';
 
     return Scaffold(
       appBar: AppBar(
@@ -49,22 +48,32 @@ class HomeScreen extends ConsumerWidget {
               )
             : null,
         actions: <Widget>[
-          IconButton(
-            onPressed: () =>
-                ref.read(settingsProvider.notifier).toggleThemeMode(context),
-            icon: Icon(
-              settings.themeMode.isDark ? Icons.light_mode : Icons.dark_mode,
+          // Theme and language both change through AppearanceActions, so
+          // each plays the same circular reveal from the tap.
+          TapOrigin(
+            builder: (context, origin) => IconButton(
+              onPressed: () =>
+                  unawaited(ref.toggleThemeMode(context, origin: origin())),
+              icon: Icon(
+                context.theme.brightness == Brightness.dark
+                    ? Icons.light_mode
+                    : Icons.dark_mode,
+              ),
+              tooltip: context.l10n.switchTheme,
             ),
-            tooltip: context.l10n.switchTheme,
           ),
-          IconButton(
-            onPressed: () => unawaited(
-              ref
-                  .read(settingsProvider.notifier)
-                  .setLocale(Locale(isArabic ? 'en' : 'ar')),
+          TapOrigin(
+            builder: (context, origin) => IconButton(
+              onPressed: () => unawaited(
+                ref.changeLocale(
+                  context,
+                  Locale(isArabic ? 'en' : 'ar'),
+                  origin: origin(),
+                ),
+              ),
+              icon: const Icon(Icons.translate),
+              tooltip: context.l10n.changeLanguage,
             ),
-            icon: const Icon(Icons.translate),
-            tooltip: context.l10n.changeLanguage,
           ),
           IconButton(
             onPressed: () =>
@@ -435,7 +444,7 @@ class _OverlayGallery extends StatelessWidget {
     ),
   );
 
-  Future<void> _showSheet(BuildContext context) => customModalBottomSheet(
+  Future<void> _showSheet(BuildContext context) => customModalBottomSheet<void>(
     context,
     height: 280,
     showDragHandle: true,

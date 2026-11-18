@@ -51,7 +51,6 @@
   "validatorUseArabicOrKurdishLetters": "رجاءً أدخل حروف عربية أو كردية",
   "validatorUseEnglishLetters": "رجاءً أدخل حروف إنجليزية",
   "welcomeAgain": "مرحباً بك مرة أخرى",
-
   "previewTitle": "معاينة",
   "previewTodayTitle": "اليوم",
   "previewTodaySubtitle": "البطاقات ومربعات الاختيار وشريط التلميح.",
@@ -87,5 +86,15 @@
   "previewDialogBody": "هذا الحوار للعرض فقط ولا يقوم بأي إجراء.",
   "previewRooms": "الغرف",
   "previewPlantCount": "{n} نباتات",
-  "previewSnackMessage": "رسالة {type}."
+  "previewSnackMessage": "رسالة {type}.",
+  "otpCodeField": "رمز التحقق",
+  "otpResendIn": "إعادة إرسال الرمز خلال",
+  "otpResend": "إعادة إرسال الرمز",
+  "permissionTitle": "السماح بالوصول؟",
+  "permissionRequiredTitle": "هذه الميزة تحتاج إلى إذن",
+  "permissionContinue": "متابعة",
+  "permissionNotNow": "ليس الآن",
+  "permissionDeniedTitle": "الإذن متوقف",
+  "permissionDeniedBody": "يمكنك تفعيله من الإعدادات.",
+  "permissionOpenSettings": "فتح الإعدادات"
 }

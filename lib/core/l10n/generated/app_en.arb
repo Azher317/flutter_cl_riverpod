@@ -61,7 +61,6 @@
   "validatorUseArabicOrKurdishLetters": "Please use Arabic or Kurdish letters",
   "validatorUseEnglishLetters": "Please use English letters",
   "welcomeAgain": "Welcome again",
-
   "previewTitle": "Preview",
   "@previewTitle": {
     "description": "TODO(placeholder): every `preview*` key below belongs to the placeholder home screen. Delete this whole block along with lib/features/home/presentation/screens/home_screen.dart."
@@ -110,5 +109,15 @@
     "placeholders": {
       "type": {}
     }
-  }
+  },
+  "otpCodeField": "Verification code",
+  "otpResendIn": "Resend code in",
+  "otpResend": "Resend code",
+  "permissionTitle": "Allow access?",
+  "permissionRequiredTitle": "This feature needs access",
+  "permissionContinue": "Continue",
+  "permissionNotNow": "Not now",
+  "permissionDeniedTitle": "Access is turned off",
+  "permissionDeniedBody": "You can turn it on in Settings.",
+  "permissionOpenSettings": "Open Settings"
 }

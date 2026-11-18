@@ -10,6 +10,7 @@ import 'package:talker_dio_logger/talker_dio_logger.dart';
 
 part 'dio_module.g.dart';
 
+// keepAlive: App-lifetime service: Dio.
 @Riverpod(keepAlive: true)
 Dio dio(Ref ref) {
   final dio = Dio();

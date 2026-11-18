@@ -10,11 +10,7 @@ void main() {
 
   DioException badResponse(int status, {Object? data}) => DioException(
     requestOptions: options,
-    response: Response(
-      requestOptions: options,
-      statusCode: status,
-      data: data,
-    ),
+    response: Response(requestOptions: options, statusCode: status, data: data),
     type: DioExceptionType.badResponse,
   );
 

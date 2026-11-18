@@ -74,6 +74,7 @@ class SessionRepositoryImpl implements SessionRepository {
   }
 }
 
+// keepAlive: App-lifetime service: session.
 @Riverpod(keepAlive: true)
 SessionRepository sessionRepository(Ref ref) =>
     SessionRepositoryImpl(ref.secureStorage);

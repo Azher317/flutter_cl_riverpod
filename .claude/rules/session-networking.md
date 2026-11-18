@@ -57,6 +57,18 @@ dio, storage, settings, any app-lifetime cache — needs `@Riverpod(keepAlive: t
 Feature notifiers and per-screen providers stay plain `@riverpod` unless their state
 must survive navigation.
 
+**`keepAlive` is the exception, not the default.** Allowed only for:
+- app-lifetime services: Dio, storage, settings, session, push, the router;
+- small caches the whole app reads and that are expensive to refetch (store config,
+  lookups such as governorates), and only when they watch `currentUserIdProvider` (or
+  `currentUserProvider`) if they are user-scoped, so logout clears them.
+
+Never for screen data (lists, details, forms): those auto-dispose, and Riverpod refetches
+them when the screen opens again. A kept-alive provider is never freed for the whole
+process. If a screen must survive a short trip away, use `ref.keepAlive()` with a timer
+inside the provider, not the annotation. Each `keepAlive: true` carries a one-line
+comment saying which case above it is.
+
 Dio is configured in [dio_module.dart](../../lib/core/network/dio_module.dart): base URL
 from `ApiDocument`, an `Authenticator` interceptor attaching the bearer token, and a
 401 interceptor that triggers **exactly one** logout across concurrent requests
@@ -70,3 +82,11 @@ Inject `apiConsumerProvider`; reach raw Dio via `ref.dio` only if you must.
 
 [api_document.dart](../../lib/core/network/api_document.dart) still points at a demo API
 — change it first in a new project.
+
+## Push notifications
+
+Push is plumbing in `core/push/` with no provider inside; an app plugs FCM or OneSignal
+in through one adapter and one registrar ([docs/guides/push.md](../../docs/guides/push.md)). The token
+follows the session (`PushController` watches `isSignedInProvider`), and taps open
+through the router via `PushHost`. Never import a push package outside the adapter, and
+never ask for the notification permission on launch.

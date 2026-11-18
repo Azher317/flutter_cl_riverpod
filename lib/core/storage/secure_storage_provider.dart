@@ -3,6 +3,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 part 'secure_storage_provider.g.dart';
 
+// keepAlive: App-lifetime service: storage.
 @Riverpod(keepAlive: true)
 FlutterSecureStorage flutterSecureStorage(Ref ref) {
   const androidOptions = AndroidOptions(encryptedSharedPreferences: true);

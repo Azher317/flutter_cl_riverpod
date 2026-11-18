@@ -6,6 +6,7 @@ import 'package:app/core/storage/shared_preferences_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:talker_riverpod_logger/talker_riverpod_logger.dart';
@@ -25,7 +26,10 @@ Future<void> main() async {
   }
   await runZonedGuarded(
     () async {
-      WidgetsFlutterBinding.ensureInitialized();
+      final binding = WidgetsFlutterBinding.ensureInitialized();
+      // Hold the native splash until SplashHost's first frame matches it
+      // (SplashHost removes it).
+      FlutterNativeSplash.preserve(widgetsBinding: binding);
 
       FlutterError.onError = (details) {
         talker.handle(details.exception, details.stack, 'FlutterError');
@@ -36,6 +40,11 @@ Future<void> main() async {
         return true;
       };
 
+      // Startup work that doesn't depend on each other runs together, so the
+      // first frame waits for the slowest step, not the sum of all of them:
+      //   final (prefs, _) = await (SharedPreferences.getInstance(),
+      //       Firebase.initializeApp()).wait;
+      // Keep only ordered steps sequential (e.g. a storage wipe before reads).
       final sharedPreferences = await SharedPreferences.getInstance();
 
       timeago.setLocaleMessages(
@@ -45,14 +54,17 @@ Future<void> main() async {
 
       runApp(
         ProviderScope(
+          // Debug only: the observer runs on every provider event, which is
+          // pure overhead in a release build.
           observers: [
-            TalkerRiverpodObserver(
-              talker: talker,
-              settings: const TalkerRiverpodLoggerSettings(
-                printProviderAdded: false,
-                printProviderUpdated: false,
+            if (kDebugMode)
+              TalkerRiverpodObserver(
+                talker: talker,
+                settings: const TalkerRiverpodLoggerSettings(
+                  printProviderAdded: false,
+                  printProviderUpdated: false,
+                ),
               ),
-            ),
           ],
           overrides: [
             sharedPreferencesProvider.overrideWith((ref) => sharedPreferences),

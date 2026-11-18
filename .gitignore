@@ -45,3 +45,6 @@ android/.idea/
 
 # Kotlin build daemon logs
 android/.kotlin/
+
+# graphify output (run graphify by hand if you want it; never commit the graph)
+graphify-out/
