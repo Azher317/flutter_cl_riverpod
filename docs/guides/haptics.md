@@ -1,7 +1,7 @@
 # Haptics
 
 The single source of truth for vibration feedback. Code:
-[lib/core/feedback/app_haptics.dart](../lib/core/feedback/app_haptics.dart).
+[lib/core/feedback/app_haptics.dart](../../lib/core/feedback/app_haptics.dart).
 
 ## The rule
 
@@ -54,7 +54,7 @@ a test in `test/core/feedback/app_haptics_test.dart`.
 
 ## Testing
 
-`recordHaptics(tester)` ([test/helpers/haptics.dart](../test/helpers/haptics.dart))
+`recordHaptics(tester)` ([test/helpers/haptics.dart](../../test/helpers/haptics.dart))
 records every haptic sent and fails on any that isn't one of the four kinds:
 
 ```dart

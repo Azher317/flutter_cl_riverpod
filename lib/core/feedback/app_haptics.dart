@@ -6,7 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 /// What a haptic means. Each kind always means the same thing, everywhere.
-/// When to use which (and when not to vibrate at all): docs/haptics.md.
+/// When to use which (and when not to vibrate at all): docs/guides/haptics.md.
 enum HapticKind {
   /// A choice changed: tab, switch, segmented control, radio, stepper step,
   /// theme / language picked.

@@ -1,7 +1,7 @@
 # Permissions
 
 **Opt-in.** The structure ships the flow (`ensurePermission`) and an interface
-([lib/core/permissions/](../lib/core/permissions/)), but no plugin. Apps that never ask
+([lib/core/permissions/](../../lib/core/permissions/)), but no plugin. Apps that never ask
 for a permission carry nothing.
 
 ## Before adding any permission: ask the app owner

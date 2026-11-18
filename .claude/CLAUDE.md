@@ -21,8 +21,8 @@ automatically when a matching file is opened (`theming.md` for `lib/core/theme/*
 `data-layer.md` for `lib/features/*/data/**`, `pubspec.md` for `pubspec.yaml`, and so on).
 Scaffolding a new vertical slice is the **`add-feature` skill**: it carries the ordered
 checklist and the `clr-*` snippet catalogue. The shared-widget catalogue lives in
-[docs/widgets.md](../docs/widgets.md); general Dart/Flutter style defaults (additive,
-never overriding the rules here) live in [docs/dart-style.md](../docs/dart-style.md).
+[docs/guides/widgets.md](../docs/guides/widgets.md); general Dart/Flutter style defaults (additive,
+never overriding the rules here) live in [docs/guides/dart-style.md](../docs/guides/dart-style.md).
 
 ## Commands
 

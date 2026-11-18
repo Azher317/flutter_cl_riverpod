@@ -6,7 +6,7 @@ paths:
 # Permissions
 
 Runtime permissions (camera, location, notifications, …) follow
-[docs/permissions.md](../../docs/permissions.md):
+[docs/guides/permissions.md](../../docs/guides/permissions.md):
 
 1. **Ask Azher first, for every permission: optional or required?** Don't add a
    permission, an `ensurePermission` call, or a Podfile / Info.plist / manifest entry
@@ -16,4 +16,4 @@ Runtime permissions (camera, location, notifications, …) follow
 3. Refusal never blocks the app: optional features show their alternative; required
    ones stay unavailable with a short note.
 4. The structure ships no permission plugin (opt-in). Setting it up in an app is the
-   checklist in docs/permissions.md.
+   checklist in docs/guides/permissions.md.

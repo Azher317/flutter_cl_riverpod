@@ -50,7 +50,7 @@ report "dio used outside core/network/" \
   "$(grep -rln 'package:dio/dio.dart' lib --include='*.dart' \
       | grep -vE 'core/network/|network_error_mapper' || true)"
 
-report "HapticFeedback used outside AppHaptics (see docs/haptics.md)" \
+report "HapticFeedback used outside AppHaptics (see docs/guides/haptics.md)" \
   "$(grep -rn 'HapticFeedback\.' lib --include='*.dart' \
       | grep -v 'lib/core/feedback/app_haptics.dart' || true)"
 

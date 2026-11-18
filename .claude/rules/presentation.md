@@ -6,7 +6,7 @@ paths:
 
 # Widget authoring rules
 
-Building UI? Read [docs/widgets.md](../../docs/widgets.md) for the shared-widget catalogue
+Building UI? Read [docs/guides/widgets.md](../../docs/guides/widgets.md) for the shared-widget catalogue
 before authoring.
 
 1. **Theme over hardcoding.** No `Color(0x...)`, no `TextStyle(fontFamily: ...)`, no
@@ -49,7 +49,7 @@ before authoring.
    past that splits its sections into `widgets/` files (private `_Section` classes
    moved out as public, feature-local widgets).
 10. **Motion and haptics** follow [motion-feedback.md](motion-feedback.md) and
-    [docs/haptics.md](../../docs/haptics.md).
+    [docs/guides/haptics.md](../../docs/guides/haptics.md).
 11. **Phone numbers** are always `PhoneFormField` and sent as
     `PhoneFormField.valueOf(text)`; the format (Iraqi-only or international) is
     `AppConfig.phoneFormat`, chosen once per app.
@@ -86,7 +86,7 @@ before authoring.
 | `Image.network(...)` | No cache, no placeholder, no error/retry | `CachedImage(url)` |
 | Raw `showModalBottomSheet` | Misses root navigator, safe area, sizing defaults, the backdrop lean | `customModalBottomSheet(context, child: ...)` |
 | `CircularProgressIndicator` as a screen's loading state | Layout jumps when data arrives | `AppSkeleton` around the real widgets with placeholder data |
-| `HapticFeedback.*` / a vibration plugin | Inconsistent meanings, no throttle | `AppHaptics.*` per [docs/haptics.md](../../docs/haptics.md) |
+| `HapticFeedback.*` / a vibration plugin | Inconsistent meanings, no throttle | `AppHaptics.*` per [docs/guides/haptics.md](../../docs/guides/haptics.md) |
 | `settings.setThemeMode` / `setLocale` from a widget | Skips the reveal | `ref.changeThemeMode` / `ref.changeLocale` |
 | `CustomDialog` | Unrefactored, hardcoded Arabic labels | `showDialog` + `AlertDialog` (already themed) |
 | Hardcoded colour / font / radius in a widget | Breaks dark mode and rebranding | `context.colorScheme.*`, `context.textTheme.*`, `Insets`/`BorderSize` |

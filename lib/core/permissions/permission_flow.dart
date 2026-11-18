@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// How much a feature needs a permission. Decided per permission by the app
-/// owner, never by the developer or an agent alone (docs/permissions.md).
+/// owner, never by the developer or an agent alone (docs/guides/permissions.md).
 enum PermissionNeed {
   /// The feature has another way (type the code, pick an address). Refusing
   /// is fine: the screen shows that other way. Never asks twice in a row.

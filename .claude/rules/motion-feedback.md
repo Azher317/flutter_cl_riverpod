@@ -25,7 +25,7 @@ paths:
 4. **Durations and curves come from `Time` and `Motion`** in
    [sizes.dart](../../lib/core/utils/constants/sizes.dart). No inline `Duration(...)`
    or `Cubic(...)` in widgets.
-5. **Haptics only through `AppHaptics`**, following [docs/haptics.md](../../docs/haptics.md).
+5. **Haptics only through `AppHaptics`**, following [docs/guides/haptics.md](../../docs/guides/haptics.md).
    Plain buttons never vibrate. Never `HapticFeedback.*` directly.
 6. **Never `AnimationStyle.noAnimation` on `MaterialApp.themeAnimationStyle`**: it
    remounts the whole app. Use a zero duration (`ThemeX.changeAnimation`).

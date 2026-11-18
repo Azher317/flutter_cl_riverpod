@@ -22,7 +22,7 @@ class PushMessage {
 
 /// Everything the app needs from a push provider, behind one seam. The
 /// structure ships [NoPushMessaging]; an app with notifications writes one
-/// adapter (FCM or OneSignal, docs/push.md) and overrides
+/// adapter (FCM or OneSignal, docs/guides/push.md) and overrides
 /// `pushMessagingProvider` in `main.dart`. Nothing outside the adapter
 /// imports the provider's package.
 abstract interface class PushMessaging {

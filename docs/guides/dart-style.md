@@ -8,11 +8,11 @@ rule. Where the two meet, the project wins — see the deferrals below.
 
 | Generic advice (ignore here) | This project's rule | Source |
 |---|---|---|
-| Prefer built-in state (`ValueNotifier`/`ChangeNotifier`/`setState`) | State is **Riverpod** `@riverpod` notifiers holding `AsyncValue` | [CLAUDE.md](../.claude/CLAUDE.md) rule 14 |
+| Prefer built-in state (`ValueNotifier`/`ChangeNotifier`/`setState`) | State is **Riverpod** `@riverpod` notifiers holding `AsyncValue` | [CLAUDE.md](../../.claude/CLAUDE.md) rule 14 |
 | Manual constructor DI / `provider` | DI is `@riverpod` provider functions in each feature's `di/` | CLAUDE.md rule 14 |
-| `logging` pkg / `dart:developer` `log` | All logging flows through Talker + `AppLogger` | [observability.md](../.claude/rules/observability.md) |
-| `Image.network` + loading/error builders; `cached_network_image` | Use `CachedImage`; `Image.network` is a listed anti-pattern | [presentation.md](../.claude/rules/presentation.md) |
-| `google_fonts` for fonts | Bundled fonts via `AppFontScheme.of(locale)` | [theming.md](../.claude/rules/theming.md) |
+| `logging` pkg / `dart:developer` `log` | All logging flows through Talker + `AppLogger` | [observability.md](../../.claude/rules/observability.md) |
+| `Image.network` + loading/error builders; `cached_network_image` | Use `CachedImage`; `Image.network` is a listed anti-pattern | [presentation.md](../../.claude/rules/presentation.md) |
+| `google_fonts` for fonts | Bundled fonts via `AppFontScheme.of(locale)` | [theming.md](../../.claude/rules/theming.md) |
 | `try-catch` / custom exceptions ad hoc | Layered `Either<Failure,T>` + `guard()`; presentation sees only `Failure` | CLAUDE.md rules 6–10 |
 | Hand-rolled `ThemeExtension`/`ColorScheme.fromSeed` tutorials | Already built: `AppStatusColors`, seeded schemes | theming.md |
 
@@ -48,7 +48,7 @@ any references to tools that don't exist here (`dart_format`, `dart_fix`, `analy
 - **Private `Widget` classes over private helper methods that return a `Widget`.**
 - Break large `build()` methods into smaller widget classes.
 - `const` constructors and `const` call sites wherever possible
-  (already promoted to warnings — [presentation.md](../.claude/rules/presentation.md) rule 5).
+  (already promoted to warnings — [presentation.md](../../.claude/rules/presentation.md) rule 5).
 - Don't do network calls or heavy computation inside `build()`.
 - Use `compute()` to move expensive work (e.g. big JSON parses) off the UI isolate.
 

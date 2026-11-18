@@ -5,10 +5,10 @@ OneSignal; an app without notifications changes nothing.
 
 | Piece | File | What it does |
 |---|---|---|
-| `PushMessaging` | [push_messaging.dart](../lib/core/push/push_messaging.dart) | The seam to the provider: init, token, refreshes, taps, launch tap. Default `NoPushMessaging`. |
+| `PushMessaging` | [push_messaging.dart](../../lib/core/push/push_messaging.dart) | The seam to the provider: init, token, refreshes, taps, launch tap. Default `NoPushMessaging`. |
 | `PushTokenRegistrar` | same | Tells your backend about the token. Default `NoPushTokenRegistrar`. |
-| `PushController` | [push_providers.dart](../lib/core/push/push_providers.dart) | Sends the token while signed in (launch, sign-in, refresh); withdraws it right after sign-out; queues a tapped notification's route. |
-| `PushHost` | [push_host.dart](../lib/core/push/push_host.dart) | In `app.dart`: starts the controller and opens the queued route through the router once the splash is gone. |
+| `PushController` | [push_providers.dart](../../lib/core/push/push_providers.dart) | Sends the token while signed in (launch, sign-in, refresh); withdraws it right after sign-out; queues a tapped notification's route. |
+| `PushHost` | [push_host.dart](../../lib/core/push/push_host.dart) | In `app.dart`: starts the controller and opens the queued route through the router once the splash is gone. |
 
 ## Turning it on in an app
 

@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'permission_service.g.dart';
 
 /// Runtime permissions an app may ask for. Add one only when an app needs it
-/// (and ask the app owner first: forced or optional — docs/permissions.md).
+/// (and ask the app owner first: forced or optional — docs/guides/permissions.md).
 enum AppPermission {
   camera,
   photos,
@@ -34,7 +34,7 @@ enum AppPermissionStatus {
 /// the prompt in the explain / settings flow.
 ///
 /// OPT-IN: the structure ships no plugin. An app that needs permissions adds
-/// `permission_handler`, writes the adapter from docs/permissions.md and
+/// `permission_handler`, writes the adapter from docs/guides/permissions.md and
 /// overrides [permissionServiceProvider] in `main.dart`.
 abstract interface class PermissionService {
   Future<AppPermissionStatus> status(AppPermission permission);
@@ -53,7 +53,7 @@ class UnconfiguredPermissionService implements PermissionService {
   const UnconfiguredPermissionService();
 
   static Never _fail() => throw StateError(
-    'Permissions are not set up in this app. Follow docs/permissions.md '
+    'Permissions are not set up in this app. Follow docs/guides/permissions.md '
     '(add permission_handler, the adapter, and override '
     'permissionServiceProvider in main.dart).',
   );
