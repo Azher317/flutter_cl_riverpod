@@ -26,7 +26,10 @@ void main() {
     final loading = tester.getSize(find.byType(SizedBox).last);
     await pumpApp(
       tester,
-      const AppSkeleton(enabled: false, child: SizedBox(width: 120, height: 40)),
+      const AppSkeleton(
+        enabled: false,
+        child: SizedBox(width: 120, height: 40),
+      ),
     );
     expect(tester.getSize(find.byType(SizedBox).last), loading);
   });

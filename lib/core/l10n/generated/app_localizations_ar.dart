@@ -296,4 +296,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get otpResend => 'إعادة إرسال الرمز';
+
+  @override
+  String get permissionTitle => 'السماح بالوصول؟';
+
+  @override
+  String get permissionRequiredTitle => 'هذه الميزة تحتاج إلى إذن';
+
+  @override
+  String get permissionContinue => 'متابعة';
+
+  @override
+  String get permissionNotNow => 'ليس الآن';
+
+  @override
+  String get permissionDeniedTitle => 'الإذن متوقف';
+
+  @override
+  String get permissionDeniedBody => 'يمكنك تفعيله من الإعدادات.';
+
+  @override
+  String get permissionOpenSettings => 'فتح الإعدادات';
 }

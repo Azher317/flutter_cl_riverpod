@@ -112,5 +112,12 @@
   },
   "otpCodeField": "Verification code",
   "otpResendIn": "Resend code in",
-  "otpResend": "Resend code"
+  "otpResend": "Resend code",
+  "permissionTitle": "Allow access?",
+  "permissionRequiredTitle": "This feature needs access",
+  "permissionContinue": "Continue",
+  "permissionNotNow": "Not now",
+  "permissionDeniedTitle": "Access is turned off",
+  "permissionDeniedBody": "You can turn it on in Settings.",
+  "permissionOpenSettings": "Open Settings"
 }

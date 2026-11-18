@@ -89,5 +89,12 @@
   "previewSnackMessage": "رسالة {type}.",
   "otpCodeField": "رمز التحقق",
   "otpResendIn": "إعادة إرسال الرمز خلال",
-  "otpResend": "إعادة إرسال الرمز"
+  "otpResend": "إعادة إرسال الرمز",
+  "permissionTitle": "السماح بالوصول؟",
+  "permissionRequiredTitle": "هذه الميزة تحتاج إلى إذن",
+  "permissionContinue": "متابعة",
+  "permissionNotNow": "ليس الآن",
+  "permissionDeniedTitle": "الإذن متوقف",
+  "permissionDeniedBody": "يمكنك تفعيله من الإعدادات.",
+  "permissionOpenSettings": "فتح الإعدادات"
 }

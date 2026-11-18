@@ -39,7 +39,8 @@
     "body": [
       "GoRoute(",
       "  path: RoutesDocument.${1:thing},",
-      "  builder: (context, state) => const ${2:Thing}Screen(),",
+      "  pageBuilder: (context, state) =>",
+      "      appPage(context, state, const ${2:Thing}Screen()),",
       "),$0"
     ]
   },

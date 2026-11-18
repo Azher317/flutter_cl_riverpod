@@ -296,4 +296,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get otpResend => 'Resend code';
+
+  @override
+  String get permissionTitle => 'Allow access?';
+
+  @override
+  String get permissionRequiredTitle => 'This feature needs access';
+
+  @override
+  String get permissionContinue => 'Continue';
+
+  @override
+  String get permissionNotNow => 'Not now';
+
+  @override
+  String get permissionDeniedTitle => 'Access is turned off';
+
+  @override
+  String get permissionDeniedBody => 'You can turn it on in Settings.';
+
+  @override
+  String get permissionOpenSettings => 'Open Settings';
 }

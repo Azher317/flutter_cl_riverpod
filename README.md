@@ -118,8 +118,7 @@ Deep links let a tapped web URL (`https://myshop.com/order/12`) open your app in
 
 1. **[android/app/src/main/AndroidManifest.xml](android/app/src/main/AndroidManifest.xml)** — delete the whole `<!-- Deep linking -->` block: the `flutter_deeplinking_enabled` `<meta-data>` line *and* the `<intent-filter android:autoVerify="false">` that follows it (the one containing the `http`/`https` `<data>` lines). Keep the *first* intent-filter with `MAIN`/`LAUNCHER` — that one is your app's launcher icon.
 2. **[ios/Runner/Info.plist](ios/Runner/Info.plist)** — delete the `FlutterDeepLinkingEnabled` key with its `<true/>`, and the `CFBundleURLTypes` key with its whole `<array>…</array>` (that's the custom `starter://` scheme).
-3. **Delete the hosting files** at the repo root: `assetslinks.json` and `apple-app-site-association.json`.
-4. **Delete `bin/deep_link.sh`** and its line from the *Handy scripts* section below.
+3. **Delete `bin/deep_link.sh`** and its line from the *Handy scripts* section below.
 
 Nothing else references them — no imports to fix, no code to touch. Then `flutter run` to confirm the app still launches.
 
@@ -127,7 +126,7 @@ Keep the custom URL scheme (step 2's `CFBundleURLTypes`) only if some other flow
 
 </details>
 
-If you *do* want them, both platforms need the same thing: a file hosted on your domain that names your app.
+If you *do* want them, both platforms need the same thing: a file hosted **on your website** (not in the app; the app never reads it) that names your app. The two templates are below; give them to whoever runs the website.
 
 **Android** — in [android/app/src/main/AndroidManifest.xml](android/app/src/main/AndroidManifest.xml), set your host in the `<!-- Deep linking -->` intent-filter (both `http` and `https`) and flip `android:autoVerify` to `"true"`. Get the signing fingerprint:
 
@@ -136,9 +135,48 @@ keytool -list -v -alias androiddebugkey -keystore ~/.android/debug.keystore   # 
 keytool -list -v -alias <your-key-name> -keystore <path-to-release-keystore>  # release
 ```
 
-Put both `SHA256` values and your package name into [assetslinks.json](assetslinks.json), then host it at `https://<host>/.well-known/assetlinks.json` — real HTTPS, `application/json`, no redirects. Guide: [Deploy assetlinks.json in minutes](https://medium.com/androiddevelopers/android-app-links-deploy-assetlinks-json-in-minutes-d7082dffcac).
+Put both `SHA256` values and your package name into this template, then host it at `https://<host>/.well-known/assetlinks.json` — real HTTPS, `application/json`, no redirects.
 
-**iOS** — open `ios/Runner.xcworkspace` in Xcode → Runner target → *Signing & Capabilities* → **+ Capability** → **Associated Domains** → add `applinks:<host>` (this creates `Runner.entitlements`). Put your `TEAMID.bundleid` into [apple-app-site-association.json](apple-app-site-association.json) and host it at `https://<host>/.well-known/apple-app-site-association` (no file extension, `application/json`).
+```json
+[
+    {
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.example.app",
+            "sha256_cert_fingerprints": [
+                "REPLACE_WITH_DEBUG_SHA256_FINGERPRINT",
+                "REPLACE_WITH_RELEASE_SHA256_FINGERPRINT"
+            ]
+        }
+    }
+]
+```
+ Guide: [Deploy assetlinks.json in minutes](https://medium.com/androiddevelopers/android-app-links-deploy-assetlinks-json-in-minutes-d7082dffcac).
+
+**iOS** — open `ios/Runner.xcworkspace` in Xcode → Runner target → *Signing & Capabilities* → **+ Capability** → **Associated Domains** → add `applinks:<host>` (this creates `Runner.entitlements`). Put your `TEAMID.bundleid` into this template and host it at `https://<host>/.well-known/apple-app-site-association` (no file extension, `application/json`).
+
+```json
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": ["TEAMID.com.example.app"],
+        "paths": ["*"],
+        "components": [
+          {
+            "/": "/*"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["TEAMID.com.example.app"]
+  }
+}
+```
 
 Test an installed build:
 
@@ -150,15 +188,10 @@ bin/deep_link.sh <host> <application-id>      # e.g. bin/deep_link.sh myshop.com
 
 Release builds currently sign with the **debug** key (see the `buildTypes.release` TODO in [android/app/build.gradle](android/app/build.gradle)) — the Play Store rejects that. Generate an upload keystore and wire up `android/key.properties` following the official guide: <https://docs.flutter.dev/deployment/android>.
 
-### H. Optional — Flutter Web on Google Cloud Storage
+### H. Optional — other platforms
 
-The structure ships Android and iOS only. Add web first with `flutter create --platforms=web .`
-(the same works for `macos`, `linux`, `windows`). Then, only if assets are served from a GCS bucket:
-
-```bash
-gcloud init
-gsutil cors set cors.json gs://<your-bucket>
-```
+The structure ships Android and iOS only. Add another with
+`flutter create --platforms=web .` (or `macos`, `linux`, `windows`).
 
 ---
 

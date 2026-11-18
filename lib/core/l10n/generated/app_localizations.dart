@@ -643,6 +643,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Resend code'**
   String get otpResend;
+
+  /// No description provided for @permissionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow access?'**
+  String get permissionTitle;
+
+  /// No description provided for @permissionRequiredTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This feature needs access'**
+  String get permissionRequiredTitle;
+
+  /// No description provided for @permissionContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get permissionContinue;
+
+  /// No description provided for @permissionNotNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get permissionNotNow;
+
+  /// No description provided for @permissionDeniedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Access is turned off'**
+  String get permissionDeniedTitle;
+
+  /// No description provided for @permissionDeniedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'You can turn it on in Settings.'**
+  String get permissionDeniedBody;
+
+  /// No description provided for @permissionOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get permissionOpenSettings;
 }
 
 class _AppLocalizationsDelegate

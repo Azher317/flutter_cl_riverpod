@@ -82,3 +82,11 @@ Inject `apiConsumerProvider`; reach raw Dio via `ref.dio` only if you must.
 
 [api_document.dart](../../lib/core/network/api_document.dart) still points at a demo API
 — change it first in a new project.
+
+## Push notifications
+
+Push is plumbing in `core/push/` with no provider inside; an app plugs FCM or OneSignal
+in through one adapter and one registrar ([docs/push.md](../../docs/push.md)). The token
+follows the session (`PushController` watches `isSignedInProvider`), and taps open
+through the router via `PushHost`. Never import a push package outside the adapter, and
+never ask for the notification permission on launch.

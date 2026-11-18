@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:app/core/l10n/generated/app_localizations.dart';
 import 'package:app/core/l10n/kurdish/kurdish_material_localization_delegate.dart';
 import 'package:app/core/l10n/kurdish/kurdish_widget_localization_delegate.dart';
 import 'package:app/core/messaging/snackbar.dart';
+import 'package:app/core/push/push_host.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
 import 'package:app/core/theme/app_fonts.dart';
 import 'package:app/core/theme/app_theme.dart';
@@ -64,12 +67,20 @@ class App extends ConsumerWidget {
           builder: (context, child) => SplashHost(
             routeChanges: router.routerDelegate,
             location: () => router.routerDelegate.currentConfiguration.uri.path,
-            child: ThemeRevealHost(
-            child: AnnotatedRegion<SystemUiOverlayStyle>(
-              value: Theme.of(context).brightness == Brightness.dark
-                  ? SystemUiOverlayStyle.light
-                  : SystemUiOverlayStyle.dark,
-                child: child ?? const SizedBox.shrink(),
+            // Push: token sync with the session and taps opened through the
+            // router (does nothing until an app plugs in a provider).
+            child: PushHost(
+              routeChanges: router.routerDelegate,
+              location: () =>
+                  router.routerDelegate.currentConfiguration.uri.path,
+              open: (route) => unawaited(router.push(route)),
+              child: ThemeRevealHost(
+                child: AnnotatedRegion<SystemUiOverlayStyle>(
+                  value: Theme.of(context).brightness == Brightness.dark
+                      ? SystemUiOverlayStyle.light
+                      : SystemUiOverlayStyle.dark,
+                  child: child ?? const SizedBox.shrink(),
+                ),
               ),
             ),
           ),

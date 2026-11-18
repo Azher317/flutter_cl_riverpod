@@ -30,16 +30,12 @@ void main() {
     expect(find.text('sheet'), findsOneWidget);
   }
 
-  testWidgets('a phone sheet leans the screen behind it back', (
-    tester,
-  ) async {
+  testWidgets('a phone sheet leans the screen behind it back', (tester) async {
     await openSheet(tester);
     expect(find.byType(SheetBackdropLean), findsOneWidget);
   });
 
-  testWidgets('reduced motion: the screen behind stays still', (
-    tester,
-  ) async {
+  testWidgets('reduced motion: the screen behind stays still', (tester) async {
     await openSheet(tester, disableAnimations: true);
     expect(find.byType(SheetBackdropLean), findsNothing);
   });
