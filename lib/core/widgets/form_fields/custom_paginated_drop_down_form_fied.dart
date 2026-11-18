@@ -76,7 +76,7 @@ class CustomPaginatedDropdownFormField<T> extends HookConsumerWidget {
             ),
       validator: validator,
       onTap: () async {
-        await customModalBottomSheet(
+        await customModalBottomSheet<void>(
           context,
           child: PaginatedBottomSheet<T>(
             titleText: '${context.l10n.select} ${labelText ?? hintText}',

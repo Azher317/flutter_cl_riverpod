@@ -166,7 +166,7 @@ gsutil cors set cors.json gs://<your-bucket>
 ```bash
 bin/setup-hooks.sh                          # activate tracked git hooks (core.hooksPath -> .githooks)
 bin/run.sh                                  # build_runner build --delete-conflicting-outputs
-bin/rename.sh <bundle-id> "<App Name>"      # rename bundle id + app name on both platforms
+bin/rename.sh <bundle-id> "<App Name>" [iraqi|international]   # bundle id + app name; asks the phone format (AppConfig)
 bin/uninstall.sh <application-id>           # remove the app from booted simulator + connected device
 bin/deep_link.sh <host> <application-id>    # fire a test deep link at the Android device
 dart run app:gen_assets                     # regenerate asset constants

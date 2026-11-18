@@ -1,12 +1,12 @@
 import 'package:app/core/errors/failures.dart';
+import 'package:app/core/feedback/app_haptics.dart';
 import 'package:app/core/messaging/failure_messenger.dart';
 import 'package:app/core/messaging/snackbar.dart';
 import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
-import 'package:app/core/utils/validation/validation_regex.dart';
 import 'package:app/core/widgets/buttons/filled_loading_button.dart';
 import 'package:app/core/widgets/form_body.dart';
-import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
+import 'package:app/core/widgets/form_fields/phone_form_field.dart';
 import 'package:app/core/widgets/text.dart';
 import 'package:app/features/auth/presentation/notifiers/login_notifier.dart';
 import 'package:app/features/auth/presentation/widgets/password_text_form_field.dart';
@@ -31,6 +31,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     final phoneFocus = useFocusNode();
     final passwordFocus = useFocusNode();
+    // International phone format only (AppConfig.phoneFormat).
+    final dialCode = useRef(PhoneFormField.initialDialCode);
 
     final loginState = ref.watch(loginProvider);
     final isLoading = loginState.isLoading;
@@ -53,11 +55,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     });
 
     void submit() {
-      if (formKey.isNotValid()) return;
+      if (formKey.isNotValid()) {
+        AppHaptics.error();
+        return;
+      }
       ref
           .read(loginProvider.notifier)
           .login(
-            phone: phoneController.text,
+            phone: PhoneFormField.valueOf(
+              phoneController.text,
+              dialCode: dialCode.value,
+            ),
             password: passwordController.text,
           );
     }
@@ -68,15 +76,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         spacing: Insets.medium,
         formKey: formKey,
         children: [
-          CustomTextFormField(
+          PhoneFormField(
             controller: phoneController,
-            hintText: '7xxxxxxxxx',
-            inputFormatters: [englishDigitsOnly],
             focusNode: phoneFocus,
-            onFieldSubmitted: (_) {
-              FocusScope.of(context).requestFocus(passwordFocus);
-            },
-            validator: context.validator.required().phone().build(),
+            textInputAction: TextInputAction.next,
+            onCountryChanged: (code) => dialCode.value = code,
+            onFieldSubmitted: (_) =>
+                FocusScope.of(context).requestFocus(passwordFocus),
           ),
           PasswordFormField(
             controller: passwordController,

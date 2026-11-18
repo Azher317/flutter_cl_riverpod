@@ -287,4 +287,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String previewSnackMessage(Object type) {
     return 'رسالة $type.';
   }
+
+  @override
+  String get otpCodeField => 'رمز التحقق';
+
+  @override
+  String get otpResendIn => 'إعادة إرسال الرمز خلال';
+
+  @override
+  String get otpResend => 'إعادة إرسال الرمز';
 }

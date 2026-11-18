@@ -625,6 +625,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'A {type} message.'**
   String previewSnackMessage(Object type);
+
+  /// No description provided for @otpCodeField.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification code'**
+  String get otpCodeField;
+
+  /// No description provided for @otpResendIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code in'**
+  String get otpResendIn;
+
+  /// No description provided for @otpResend.
+  ///
+  /// In en, this message translates to:
+  /// **'Resend code'**
+  String get otpResend;
 }
 
 class _AppLocalizationsDelegate

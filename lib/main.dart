@@ -45,14 +45,17 @@ Future<void> main() async {
 
       runApp(
         ProviderScope(
+          // Debug only: the observer runs on every provider event, which is
+          // pure overhead in a release build.
           observers: [
-            TalkerRiverpodObserver(
-              talker: talker,
-              settings: const TalkerRiverpodLoggerSettings(
-                printProviderAdded: false,
-                printProviderUpdated: false,
+            if (kDebugMode)
+              TalkerRiverpodObserver(
+                talker: talker,
+                settings: const TalkerRiverpodLoggerSettings(
+                  printProviderAdded: false,
+                  printProviderUpdated: false,
+                ),
               ),
-            ),
           ],
           overrides: [
             sharedPreferencesProvider.overrideWith((ref) => sharedPreferences),

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class IconSize {
@@ -22,21 +24,28 @@ class BorderSize {
   static const double extraLarge = 48.0;
   static const double full = 100.0;
 
-  static const BorderRadius noneRadius =
-      BorderRadius.all(Radius.circular(none));
+  static const BorderRadius noneRadius = BorderRadius.all(
+    Radius.circular(none),
+  );
   static const BorderRadius xxsRadius = BorderRadius.all(Radius.circular(xxs));
-  static const BorderRadius extraSmallRadius =
-      BorderRadius.all(Radius.circular(extraSmall));
-  static const BorderRadius smallRadius =
-      BorderRadius.all(Radius.circular(small));
-  static const BorderRadius mediumRadius =
-      BorderRadius.all(Radius.circular(medium));
-  static const BorderRadius largeRadius =
-      BorderRadius.all(Radius.circular(large));
-  static const BorderRadius extraLargeRadius =
-      BorderRadius.all(Radius.circular(extraLarge));
-  static const BorderRadius fullRadius =
-      BorderRadius.all(Radius.circular(full));
+  static const BorderRadius extraSmallRadius = BorderRadius.all(
+    Radius.circular(extraSmall),
+  );
+  static const BorderRadius smallRadius = BorderRadius.all(
+    Radius.circular(small),
+  );
+  static const BorderRadius mediumRadius = BorderRadius.all(
+    Radius.circular(medium),
+  );
+  static const BorderRadius largeRadius = BorderRadius.all(
+    Radius.circular(large),
+  );
+  static const BorderRadius extraLargeRadius = BorderRadius.all(
+    Radius.circular(extraLarge),
+  );
+  static const BorderRadius fullRadius = BorderRadius.all(
+    Radius.circular(full),
+  );
 }
 
 class Insets {
@@ -77,4 +86,60 @@ class Time {
   static const Duration medium = Duration(milliseconds: 500);
   static const Duration large = Duration(milliseconds: 700);
   static const Duration extraLarge = Duration(seconds: 1);
+
+  /// The theme / language circular reveal ([ThemeRevealHost]).
+  static const Duration reveal = Duration(milliseconds: 700);
+
+  /// Sheets slide up over this…
+  static const Duration sheetEnter = Duration(milliseconds: 350);
+
+  /// …and down over this.
+  static const Duration sheetExit = Duration(milliseconds: 250);
+
+  /// A field's error shake ([FieldShake]).
+  static const Duration shake = Duration(milliseconds: 350);
+
+  /// The OTP caret blink period.
+  static const Duration blink = Duration(seconds: 1);
+
+  /// One step of a countdown (resend code).
+  static const Duration tick = Duration(seconds: 1);
+
+  /// The shortest gap between two haptics of the same kind ([AppHaptics]),
+  /// so fast repeated taps don't stack.
+  static const Duration hapticGap = Duration(milliseconds: 100);
+}
+
+/// Curves and motion constants. Pair a curve with a [Time]; never write a
+/// `Cubic` inline in a widget.
+class Motion {
+  const Motion._();
+
+  static const Curve standard = Easing.standard;
+
+  /// Entering: sheets, dialogs, snackbars.
+  static const Curve emphasizedDecelerate = Easing.emphasizedDecelerate;
+
+  /// Leaving.
+  static const Curve emphasizedAccelerate = Easing.emphasizedAccelerate;
+  static const Curve linear = Curves.linear;
+
+  /// A hard on/off step (the OTP caret blink).
+  static const Curve step = Threshold(0.5);
+
+  /// How far the screen behind an open bottom sheet leans back (3°, in
+  /// radians): its bottom edge recedes, the top edge stays.
+  static const double sheetLeanTilt = 3 * math.pi / 180;
+
+  /// The perspective depth of that lean (the `Matrix4` w-per-z entry).
+  static const double sheetLeanPerspective = 0.001;
+}
+
+/// Fixed layout measures.
+class Layout {
+  const Layout._();
+
+  /// A window at least this wide is laid out as a tablet: sheets don't
+  /// lean the screen behind them there.
+  static const double tabletBreakpoint = 600;
 }

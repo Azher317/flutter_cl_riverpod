@@ -1,7 +1,5 @@
-// ignore_for_file: avoid_build_context_in_providers
 import 'package:app/core/storage/object_preference_provider.dart';
 import 'package:app/core/storage/storage_keys.dart';
-import 'package:app/core/theme/theme_change.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -22,8 +20,6 @@ abstract class AppSettings with _$AppSettings {
 
   factory AppSettings.fromJson(Map<String, dynamic> json) =>
       _$AppSettingsFromJson(json);
-
-  void setLocale(String s) {}
 }
 
 @Riverpod(keepAlive: true)
@@ -41,18 +37,11 @@ class Settings extends _$Settings with ObjectPreferenceProvider<AppSettings> {
   @override
   AppSettings build() => firstBuild(const AppSettings());
 
-  Future<void> toggleThemeMode(BuildContext context) => update(
-    (state) => state.copyWith(
-      themeMode: ThemeX.getOppositeThemeMode(state.themeMode, context),
-    ),
-  );
+  /// UI goes through `ref.changeThemeMode` / `ref.toggleThemeMode`
+  /// (appearance_actions.dart) so every change plays the same reveal.
+  Future<void> setThemeMode(ThemeMode mode) =>
+      update((state) => state.copyWith(themeMode: mode));
 
   Future<void> setLocale(Locale? locale) =>
       update((state) => state.copyWith(localeCode: locale?.languageCode));
-
-  Future<void> toggleLocale() => update(
-    (state) => state.copyWith(
-      localeCode: state.locale?.languageCode == 'en' ? 'ar' : 'en',
-    ),
-  );
 }

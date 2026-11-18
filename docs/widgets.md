@@ -18,6 +18,20 @@ widgets live in [.claude/rules/presentation.md](../.claude/rules/presentation.md
 | [`AccountAvatar`](../lib/core/widgets/account_avatar.dart) | Circular avatar: `CachedImage` when `imageUrl != null`, camera placeholder otherwise, optional edit badge. | For user avatars. `size` 56, `verifiedSize` 20, `isEditiable` false, `onTap`. |
 | [`SvgPrefixIcon`](../lib/core/widgets/svg_prefix_icon.dart) | 24×24 SVG sized and directionally padded for use as a field `prefixIcon`. | For `CustomTextFormField(prefixIcon: ...)`. Defaults to `colorScheme.primary`. |
 
+## `animation/`
+
+| Widget | What it is | Notes |
+|---|---|---|
+| [`ReduceMotionScope`](../lib/core/widgets/animation/reduce_motion_scope.dart) | Makes iOS Reduce Motion (and Android "Remove animations") reach `context.reduceMotion`, live. | Already above `MaterialApp` in `app.dart`. Don't add another. |
+| [`FieldShake`](../lib/core/widgets/animation/field_shake.dart) | Shakes its child once each time `trigger` changes to a new non-zero value. | Bump an error counter on each rejected submit. Skipped under reduced motion. |
+
+## Appearance (theme / language)
+
+| API | What it is | Notes |
+|---|---|---|
+| [`ref.changeThemeMode` / `ref.toggleThemeMode` / `ref.changeLocale`](../lib/core/settings/appearance_actions.dart) | The only way UI changes theme or language: circular reveal from `origin` + `selection` haptic. | Wrap the control in `TapOrigin(builder: (context, origin) => …)` and pass `origin: origin()`. |
+| [`ThemeRevealHost`](../lib/core/theme/theme_reveal.dart) | Screenshots the old frame and uncovers the new theme/locale under a growing circle. | Already in `MaterialApp.builder`. |
+
 ## `buttons/`
 
 | Widget | What it is | Notes |
@@ -32,6 +46,9 @@ supplies fill, borders, hint style and content padding for **all** of these.
 
 | Widget | What it is | Notes |
 |---|---|---|
+| [`PhoneFormField`](../lib/core/widgets/form_fields/phone_form_field.dart) | Every phone field. Iraqi-only (`07XX XXX XXXX`, live grouping, Arabic digits, pasted `+964` handled) or international (country picker), per `AppConfig.phoneFormat`. | Send `PhoneFormField.valueOf(text)`. Flags a wrong number only when complete or unfocused. Prefill with `PhoneFormField.initialText(saved)`. |
+| [`OtpField`](../lib/core/widgets/form_fields/otp_field.dart) | N-cell one-time-code field (6 by default) on one hidden `TextField`: paste and OS code autofill work; Arabic digits accepted. | `onCompleted` verifies; set `hasError` and bump `errorTrigger` on a wrong code (shake + error haptic; next keystroke starts over). |
+| [`ResendCountdown`](../lib/core/widgets/form_fields/resend_countdown.dart) | "Resend code in 00:45", then a Resend button. | `availableAt` from the server, else now + `OtpField.resendCooldown` (45 s). |
 | [`CustomTextFormField`](../lib/core/widgets/form_fields/custom_text_form_field.dart) | The base text field every other field composes. | Required `controller`, `hintText`. Override `enabledBorder`/`focusedBorder`/`fillColor`/`contentPadding` only when you need to deviate from the theme. |
 | [`CustomDropdownButtonFormField<T>`](../lib/core/widgets/form_fields/custom_drop_down_button.dart) | Themed `DropdownButtonFormField`, `autovalidateMode` fixed to `onUserInteraction`. | For a small static option list. |
 | [`CustomPaginatedDropdownFormField<T>`](../lib/core/widgets/form_fields/custom_paginated_drop_down_form_fied.dart) | Read-only field that opens a searchable paged picker sheet and writes the choice into a `ValueNotifier<T?>`. | For server-backed lookups. Required `pagingController`, `hintText`, `valueNotifier`. Pass `labelBuilder` for type safety — the fallback is the `dynamic` [`localizedName`](../lib/core/l10n/localized_name.dart). |

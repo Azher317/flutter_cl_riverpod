@@ -26,10 +26,8 @@ before authoring.
    [custom_text_form_field.dart](../../lib/core/widgets/form_fields/custom_text_form_field.dart)
    is core while
    [password_text_form_field.dart](../../lib/features/auth/presentation/widgets/password_text_form_field.dart)
-   (owns the auth-specific obscure toggle and the `typeYourPasswordHere` string) and
-   [phone_number_form_field.dart](../../lib/features/auth/presentation/widgets/phone_number_form_field.dart)
-   (country picker + Iraqi-number validation) live in the feature. Both *compose*
-   `CustomTextFormField` — feature widgets wrap core widgets, they never fork them.
+   (owns the auth-specific obscure toggle and the `typeYourPasswordHere` string) lives
+   in the feature. Feature widgets wrap core widgets, they never fork them.
    A feature widget that turns out to be generic gets moved to `core/` and stripped
    of its feature vocabulary, not copied.
 5. **Const-correctness.** `prefer_const_constructors`,
@@ -47,6 +45,17 @@ before authoring.
    `await` with a `mounted` check.
 8. **Keys.** `use_key_in_widget_constructors` is on — every public widget takes
    `super.key`.
+9. **Size.** Keep a file under ~300 lines and one screen per file. A screen that grows
+   past that splits its sections into `widgets/` files (private `_Section` classes
+   moved out as public, feature-local widgets).
+10. **Motion and haptics** follow [motion-feedback.md](motion-feedback.md) and
+    [docs/haptics.md](../../docs/haptics.md).
+11. **Phone numbers** are always `PhoneFormField` and sent as
+    `PhoneFormField.valueOf(text)`; the format (Iraqi-only or international) is
+    `AppConfig.phoneFormat`, chosen once per app.
+12. **MediaQuery reads are narrow.** `MediaQuery.sizeOf(context)` / `paddingOf` /
+    `viewInsetsOf` (or `context.width/height`), never `MediaQuery.of(context).x`: the
+    latter rebuilds the widget on every keyboard, inset or text-scale change.
 
 ## Anti-patterns (widgets & assets)
 
@@ -54,7 +63,9 @@ before authoring.
 |---|---|---|
 | `SvgPicture.asset('assets/images/svg/x.svg')` | Bypasses the one place the path is built | `ImageSvg(img: SvgAssets.x)` |
 | `Image.network(...)` | No cache, no placeholder, no error/retry | `CachedImage(url)` |
-| Raw `showModalBottomSheet` | Misses root navigator, safe area, sizing defaults | `customModalBottomSheet(context, child: ...)` |
+| Raw `showModalBottomSheet` | Misses root navigator, safe area, sizing defaults, the backdrop lean | `customModalBottomSheet(context, child: ...)` |
+| `HapticFeedback.*` / a vibration plugin | Inconsistent meanings, no throttle | `AppHaptics.*` per [docs/haptics.md](../../docs/haptics.md) |
+| `settings.setThemeMode` / `setLocale` from a widget | Skips the reveal | `ref.changeThemeMode` / `ref.changeLocale` |
 | `CustomDialog` | Unrefactored, hardcoded Arabic labels | `showDialog` + `AlertDialog` (already themed) |
 | Hardcoded colour / font / radius in a widget | Breaks dark mode and rebranding | `context.colorScheme.*`, `context.textTheme.*`, `Insets`/`BorderSize` |
 | String literal shown to a user | Untranslatable | `context.l10n.<key>`, added to both `.arb` files |

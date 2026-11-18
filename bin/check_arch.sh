@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Enforces CLAUDE.md layer rules 1, 2, 3, 5. Run in CI and locally.
+# Enforces CLAUDE.md layer rules 1, 2, 3, 5, plus the haptics and sheet rules
+# (.claude/rules/motion-feedback.md). Run in CI and locally.
 set -uo pipefail
 
 fail=0
@@ -38,6 +39,14 @@ report "cross-feature import (or non-router importer of a feature)" \
 report "dio used outside core/network/" \
   "$(grep -rln 'package:dio/dio.dart' lib --include='*.dart' \
       | grep -vE 'core/network/|network_error_mapper' || true)"
+
+report "HapticFeedback used outside AppHaptics (see docs/haptics.md)" \
+  "$(grep -rn 'HapticFeedback\.' lib --include='*.dart' \
+      | grep -v 'lib/core/feedback/app_haptics.dart' || true)"
+
+report "showModalBottomSheet used directly (use customModalBottomSheet)" \
+  "$(grep -rn 'showModalBottomSheet' lib --include='*.dart' \
+      | grep -vE '^[^:]+:[0-9]+:\s*///?' || true)"
 
 if [[ "$fail" -eq 0 ]]; then
   echo "✅ all import boundaries hold"

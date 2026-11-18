@@ -52,6 +52,7 @@ dependencies:
   talker_riverpod_logger: ^5.1.17
 
   # Utils
+  clock: ^1.1.2 # AppHaptics' throttle; fake-able in tests (withClock)
   form_validator: ^2.1.1
   infinite_scroll_pagination: ^4.0.0
   image_picker: ^1.0.4

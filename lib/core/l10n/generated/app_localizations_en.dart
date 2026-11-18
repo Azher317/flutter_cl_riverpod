@@ -287,4 +287,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String previewSnackMessage(Object type) {
     return 'A $type message.';
   }
+
+  @override
+  String get otpCodeField => 'Verification code';
+
+  @override
+  String get otpResendIn => 'Resend code in';
+
+  @override
+  String get otpResend => 'Resend code';
 }
