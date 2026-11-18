@@ -14,6 +14,10 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  # lib/main.dart enables the driver extension behind a dart-define, so this
+  # is a runtime dependency, not a dev one.
+  flutter_driver:
+    sdk: flutter
 
   intl: ^0.20.2
 
@@ -65,8 +69,6 @@ dependencies:
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter
-  flutter_driver:
     sdk: flutter
   custom_lint:
   riverpod_lint: '>=3.0.0 <3.1.0'

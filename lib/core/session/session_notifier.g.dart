@@ -18,6 +18,7 @@ part of 'session_notifier.dart';
 ///   ([setSession] after login, [logout]).
 /// - Only `core/network` (the token) and `lib/router` (the redirect) read this
 ///   provider's state directly.
+// keepAlive: App-lifetime service: session.
 
 @ProviderFor(Session)
 const sessionProvider = SessionProvider._();
@@ -32,6 +33,7 @@ const sessionProvider = SessionProvider._();
 ///   ([setSession] after login, [logout]).
 /// - Only `core/network` (the token) and `lib/router` (the redirect) read this
 ///   provider's state directly.
+// keepAlive: App-lifetime service: session.
 final class SessionProvider
     extends $AsyncNotifierProvider<Session, AuthSessionEntity?> {
   /// The single source of truth for the current session — a **core** concern,
@@ -44,6 +46,7 @@ final class SessionProvider
   ///   ([setSession] after login, [logout]).
   /// - Only `core/network` (the token) and `lib/router` (the redirect) read this
   ///   provider's state directly.
+  // keepAlive: App-lifetime service: session.
   const SessionProvider._()
     : super(
         from: null,
@@ -75,6 +78,7 @@ String _$sessionHash() => r'6496fc1e8e6df6c54e6d9db6fbe0a23d130d7525';
 ///   ([setSession] after login, [logout]).
 /// - Only `core/network` (the token) and `lib/router` (the redirect) read this
 ///   provider's state directly.
+// keepAlive: App-lifetime service: session.
 
 abstract class _$Session extends $AsyncNotifier<AuthSessionEntity?> {
   FutureOr<AuthSessionEntity?> build();
@@ -98,18 +102,21 @@ abstract class _$Session extends $AsyncNotifier<AuthSessionEntity?> {
 
 /// The signed-in user, or `null` when signed out or still restoring.
 /// Reactive: rebuilds on login/logout. Never exposes the token.
+// keepAlive: App-lifetime service: session.
 
 @ProviderFor(currentUser)
 const currentUserProvider = CurrentUserProvider._();
 
 /// The signed-in user, or `null` when signed out or still restoring.
 /// Reactive: rebuilds on login/logout. Never exposes the token.
+// keepAlive: App-lifetime service: session.
 
 final class CurrentUserProvider
     extends $FunctionalProvider<UserEntity?, UserEntity?, UserEntity?>
     with $Provider<UserEntity?> {
   /// The signed-in user, or `null` when signed out or still restoring.
   /// Reactive: rebuilds on login/logout. Never exposes the token.
+  // keepAlive: App-lifetime service: session.
   const CurrentUserProvider._()
     : super(
         from: null,
@@ -148,6 +155,7 @@ String _$currentUserHash() => r'a9e866e444a13094de996ae860a777d9a12367a8';
 /// Whether a session exists. `false` while restoring from cache — the router
 /// holds on splash using `sessionProvider.isLoading`, so screens never see
 /// that ambiguous state.
+// keepAlive: App-lifetime service: session.
 
 @ProviderFor(isSignedIn)
 const isSignedInProvider = IsSignedInProvider._();
@@ -155,12 +163,14 @@ const isSignedInProvider = IsSignedInProvider._();
 /// Whether a session exists. `false` while restoring from cache — the router
 /// holds on splash using `sessionProvider.isLoading`, so screens never see
 /// that ambiguous state.
+// keepAlive: App-lifetime service: session.
 
 final class IsSignedInProvider extends $FunctionalProvider<bool, bool, bool>
     with $Provider<bool> {
   /// Whether a session exists. `false` while restoring from cache — the router
   /// holds on splash using `sessionProvider.isLoading`, so screens never see
   /// that ambiguous state.
+  // keepAlive: App-lifetime service: session.
   const IsSignedInProvider._()
     : super(
         from: null,

@@ -46,7 +46,7 @@ flutter run
 
 ## Layer rules
 
-Hard invariants. Rules 1, 2, 3 and 5 are enforced in CI by
+Hard invariants. Rules 1, 2, 3, 5 and 16 are enforced in CI by
 [bin/check_arch.sh](../bin/check_arch.sh) (run it locally before pushing).
 
 1. **`lib/core/**` must not import `package:app/features/`.** If `core/` ever needs
@@ -108,6 +108,14 @@ Hard invariants. Rules 1, 2, 3 and 5 are enforced in CI by
     datasource or repository directly. That seam is where the `Either` contract lives.
 15. **No imperative `context.go(...)` after login/logout.** Update the session; the
     router redirects on session change (`RouterRefreshNotifier` + `redirect`).
+16. **`lib/core/` is infrastructure only; shared business code lives in `lib/shared/`.**
+    `core/` holds what any app needs whatever it sells (network, session, theme, l10n,
+    widgets, storage). Business vocabulary that two or more features use (a product
+    card entity, a governorates list, store config) goes in `lib/shared/<topic>/`,
+    with the same `domain/` · `data/` · `di/` layering as a feature but no screens.
+    `shared/` may import `core/` only; features and `router/` may import `shared/`;
+    `core/` never imports `shared/`. Code used by one feature stays in that feature.
+    (Checked by [bin/check_arch.sh](../bin/check_arch.sh).)
 
 ### Feature layout (`lib/features/<feature>/`)
 - `domain/` — `entities/` (pure), `repositories/` (abstract), `usecases/`, `params/`.
@@ -136,7 +144,7 @@ These are the ones the numbered rules above don't already cover.
 | Don't | Why | Do instead |
 |---|---|---|
 | Add `dartz` / `fpdart` | The project has a local sealed `Either` with `fold`/`isLeft`/`isRight` | Import [either.dart](../lib/core/utils/either.dart) |
-| Reach into another feature's `data/`, `domain/` or notifiers | Couples two slices that should stay independently deletable | Session → watch `currentUserProvider` / `isSignedInProvider` (**no token**); change it via `ref.read(sessionProvider.notifier)` (`setSession` / `logout`). Never read `sessionProvider`'s state from a feature — only `core/network` (token) and the router (redirect) may. Anything else → duplicate the small piece, or promote it to `core/` behind an interface |
+| Reach into another feature's `data/`, `domain/` or notifiers | Couples two slices that should stay independently deletable | Session → watch `currentUserProvider` / `isSignedInProvider` (**no token**); change it via `ref.read(sessionProvider.notifier)` (`setSession` / `logout`). Never read `sessionProvider`'s state from a feature — only `core/network` (token) and the router (redirect) may. Anything else → duplicate the small piece, or move it to `lib/shared/` (rule 16) |
 
 ---
 

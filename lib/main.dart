@@ -40,6 +40,11 @@ Future<void> main() async {
         return true;
       };
 
+      // Startup work that doesn't depend on each other runs together, so the
+      // first frame waits for the slowest step, not the sum of all of them:
+      //   final (prefs, _) = await (SharedPreferences.getInstance(),
+      //       Firebase.initializeApp()).wait;
+      // Keep only ordered steps sequential (e.g. a storage wipe before reads).
       final sharedPreferences = await SharedPreferences.getInstance();
 
       timeago.setLocaleMessages(

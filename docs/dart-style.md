@@ -31,6 +31,17 @@ any references to tools that don't exist here (`dart_format`, `dart_fix`, `analy
 - `PascalCase` types, `camelCase` members, `snake_case` files. No abbreviations.
 - Prefer immutable data structures.
 
+## Comments
+
+- A comment says **why**, not what: the constraint, the bug it avoids, the decision
+  behind a non-obvious line. If the code already says it, no comment.
+- Public APIs get a `///` doc: one sentence on what it is, then how to use it.
+- Never point to things outside the repo or only one project knows ("board 14b",
+  "see me-update.md", ticket numbers, people's names, dates of a chat). Write the reason
+  itself; the reference rots and makes the code unportable to the next app.
+- No emoji, no ASCII banners, no change logs ("was X, now Y"); git keeps history.
+- Aim for a few comment lines per screen of code, not a third of the file.
+
 ## Flutter widgets
 
 - Composition over inheritance; compose small widgets rather than deep nesting.

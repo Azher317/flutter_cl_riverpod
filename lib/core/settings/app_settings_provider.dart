@@ -22,6 +22,7 @@ abstract class AppSettings with _$AppSettings {
       _$AppSettingsFromJson(json);
 }
 
+// keepAlive: App-lifetime service: settings.
 @Riverpod(keepAlive: true)
 class Settings extends _$Settings with ObjectPreferenceProvider<AppSettings> {
   @override

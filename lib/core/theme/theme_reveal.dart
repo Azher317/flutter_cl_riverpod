@@ -16,6 +16,7 @@ part 'theme_reveal.g.dart';
 /// `true` while a circular reveal runs. The app then switches the theme with
 /// no blend (`ThemeX.changeAnimation`), so the circle uncovers the final
 /// colours, never a half-blended mix.
+// keepAlive: App-lifetime: read by MaterialApp for the whole run.
 @Riverpod(keepAlive: true)
 class ThemeRevealActive extends _$ThemeRevealActive {
   @override

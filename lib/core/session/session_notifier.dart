@@ -19,6 +19,7 @@ part 'session_notifier.g.dart';
 ///   ([setSession] after login, [logout]).
 /// - Only `core/network` (the token) and `lib/router` (the redirect) read this
 ///   provider's state directly.
+// keepAlive: App-lifetime service: session.
 @Riverpod(keepAlive: true)
 class Session extends _$Session {
   @override
@@ -49,6 +50,7 @@ class Session extends _$Session {
 
 /// The signed-in user, or `null` when signed out or still restoring.
 /// Reactive: rebuilds on login/logout. Never exposes the token.
+// keepAlive: App-lifetime service: session.
 @Riverpod(keepAlive: true)
 UserEntity? currentUser(Ref ref) =>
     ref.watch(sessionProvider.select((s) => s.value?.user));
@@ -56,6 +58,7 @@ UserEntity? currentUser(Ref ref) =>
 /// Whether a session exists. `false` while restoring from cache — the router
 /// holds on splash using `sessionProvider.isLoading`, so screens never see
 /// that ambiguous state.
+// keepAlive: App-lifetime service: session.
 @Riverpod(keepAlive: true)
 bool isSignedIn(Ref ref) =>
     ref.watch(sessionProvider.select((s) => s.value != null));

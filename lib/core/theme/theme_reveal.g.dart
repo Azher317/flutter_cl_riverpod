@@ -11,6 +11,7 @@ part of 'theme_reveal.dart';
 /// `true` while a circular reveal runs. The app then switches the theme with
 /// no blend (`ThemeX.changeAnimation`), so the circle uncovers the final
 /// colours, never a half-blended mix.
+// keepAlive: App-lifetime: read by MaterialApp for the whole run.
 
 @ProviderFor(ThemeRevealActive)
 const themeRevealActiveProvider = ThemeRevealActiveProvider._();
@@ -18,11 +19,13 @@ const themeRevealActiveProvider = ThemeRevealActiveProvider._();
 /// `true` while a circular reveal runs. The app then switches the theme with
 /// no blend (`ThemeX.changeAnimation`), so the circle uncovers the final
 /// colours, never a half-blended mix.
+// keepAlive: App-lifetime: read by MaterialApp for the whole run.
 final class ThemeRevealActiveProvider
     extends $NotifierProvider<ThemeRevealActive, bool> {
   /// `true` while a circular reveal runs. The app then switches the theme with
   /// no blend (`ThemeX.changeAnimation`), so the circle uncovers the final
   /// colours, never a half-blended mix.
+  // keepAlive: App-lifetime: read by MaterialApp for the whole run.
   const ThemeRevealActiveProvider._()
     : super(
         from: null,
@@ -55,6 +58,7 @@ String _$themeRevealActiveHash() => r'768569c18aa10dd67fa083a1cfd85238472147b7';
 /// `true` while a circular reveal runs. The app then switches the theme with
 /// no blend (`ThemeX.changeAnimation`), so the circle uncovers the final
 /// colours, never a half-blended mix.
+// keepAlive: App-lifetime: read by MaterialApp for the whole run.
 
 abstract class _$ThemeRevealActive extends $Notifier<bool> {
   bool build();
