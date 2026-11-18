@@ -96,6 +96,24 @@ class Time {
   /// …and down over this.
   static const Duration sheetExit = Duration(milliseconds: 250);
 
+  /// Content entering ([StaggeredEnter]).
+  static const Duration enter = Duration(milliseconds: 300);
+
+  /// The delay between two staggered items.
+  static const Duration stagger = Duration(milliseconds: 50);
+
+  /// One loop of the skeleton shimmer.
+  static const Duration shimmer = Duration(milliseconds: 1200);
+
+  /// The in-app splash stays at least this long, so it never flickers.
+  static const Duration splashMinimum = Duration(milliseconds: 600);
+
+  /// The splash's exit over the first screen.
+  static const Duration splashExit = Duration(milliseconds: 400);
+
+  /// Page push / pop ([FadeThroughPage]).
+  static const Duration page = Duration(milliseconds: 300);
+
   /// A field's error shake ([FieldShake]).
   static const Duration shake = Duration(milliseconds: 350);
 
@@ -142,4 +160,7 @@ class Layout {
   /// A window at least this wide is laid out as a tablet: sheets don't
   /// lean the screen behind them there.
   static const double tabletBreakpoint = 600;
+
+  /// The splash logo, in the native splash and the in-app splash alike.
+  static const double splashLogoSize = 120;
 }

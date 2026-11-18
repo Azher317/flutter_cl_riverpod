@@ -23,6 +23,7 @@ widgets live in [.claude/rules/presentation.md](../.claude/rules/presentation.md
 | Widget | What it is | Notes |
 |---|---|---|
 | [`ReduceMotionScope`](../lib/core/widgets/animation/reduce_motion_scope.dart) | Makes iOS Reduce Motion (and Android "Remove animations") reach `context.reduceMotion`, live. | Already above `MaterialApp` in `app.dart`. Don't add another. |
+| [`StaggeredEnter`](../lib/core/widgets/animation/staggered_enter.dart) | Fades and slides an item in, delayed by its `index`. | Wrap each item of a list that just loaded; not for later pages. Instant with reduced motion. |
 | [`FieldShake`](../lib/core/widgets/animation/field_shake.dart) | Shakes its child once each time `trigger` changes to a new non-zero value. | Bump an error counter on each rejected submit. Skipped under reduced motion. |
 
 ## Appearance (theme / language)
@@ -100,6 +101,7 @@ showDialog<void>(
 
 | Widget | What it is | Notes |
 |---|---|---|
+| [`AppSkeleton`](../lib/core/widgets/state_ui/app_skeleton.dart) | The loading look: the real widgets drawn as shimmering bones while `enabled`. | Feed the real widgets placeholder data; see "Loading states" in presentation.md. |
 | [`StateMessage`](../lib/core/widgets/state_ui/state_message.dart) | Base layout: centred icon + title (+ optional message + action). | Use directly for a state the two presets don't cover. |
 | [`EmptyState`](../lib/core/widgets/state_ui/empty_state.dart) | Preset: `Icons.inbox_outlined` + title. | The empty-list state. Required `title` — e.g. `context.l10n.noItemsFoundError`. |
 | [`DefaultErrorWidget`](../lib/core/widgets/state_ui/default_error_widget.dart) | Preset: error icon in `colorScheme.error` + localized generic message + optional retry. | The whole-screen error state. Takes `(error, stackTrace)` positionally so it drops straight into `AsyncValue.when`; shows the localized generic message rather than `error.toString()`. |
@@ -112,7 +114,11 @@ showDialog<void>(
 final state = ref.watch(itemsProvider);
 
 return state.when(
-  loading: () => const Center(child: CircularProgressIndicator()),
+  // The real list, fed placeholders, drawn as bones (presentation.md).
+  loading: () => AppSkeleton(
+    enabled: true,
+    child: ItemsList(items: ItemEntity.placeholders(6)),
+  ),
   error: (error, stackTrace) => DefaultErrorWidget(
     error,
     stackTrace,
@@ -120,7 +126,7 @@ return state.when(
   ),
   data: (items) => items.isEmpty
       ? EmptyState(title: context.l10n.noItemsFoundError)
-      : ListView(children: [for (final item in items) ItemTile(item)]),
+      : ItemsList(items: items),
 );
 ```
 

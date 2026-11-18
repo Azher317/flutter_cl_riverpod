@@ -57,6 +57,27 @@ before authoring.
     `viewInsetsOf` (or `context.width/height`), never `MediaQuery.of(context).x`: the
     latter rebuilds the widget on every keyboard, inset or text-scale change.
 
+## Loading states (skeletons)
+
+1. **A screen that loads data shows a skeleton, not a spinner.** Spinners are for
+   actions (a button submitting), not for content.
+2. **The skeleton is the real screen.** Wrap the real widgets in
+   `AppSkeleton(enabled: …)` and feed them placeholder data
+   (`Entity.placeholder()` / `Entity.placeholders(n)`, defined next to the entity in
+   the feature's `presentation/` layer, never in `domain/`). Never hand-draw a second
+   layout of grey boxes: it drifts from the real one, and the screen jumps when data
+   arrives.
+3. **Same size as the data.** Placeholder text has a realistic length (a name ~12
+   characters, a title ~30), lists show as many rows as fit one screen (usually 5–8),
+   images keep their real aspect ratio. When data arrives, nothing moves; the bones
+   simply turn into content.
+4. **Only the part that loads.** App bar, tabs, filters and already-known content stay
+   real; only the region waiting for data is skeletonized. Pull-to-refresh and
+   pagination keep the old data on screen (`enabled: state.isLoading && !state.hasValue`).
+5. **Hand-made bones only when placeholder data can't produce the layout** (a map, a
+   chart). Then use `Bone` widgets from `skeletonizer` sized from the same constants as
+   the real widget, and add a widget test comparing the two sizes.
+
 ## Anti-patterns (widgets & assets)
 
 | Don't | Why | Do instead |
@@ -64,6 +85,7 @@ before authoring.
 | `SvgPicture.asset('assets/images/svg/x.svg')` | Bypasses the one place the path is built | `ImageSvg(img: SvgAssets.x)` |
 | `Image.network(...)` | No cache, no placeholder, no error/retry | `CachedImage(url)` |
 | Raw `showModalBottomSheet` | Misses root navigator, safe area, sizing defaults, the backdrop lean | `customModalBottomSheet(context, child: ...)` |
+| `CircularProgressIndicator` as a screen's loading state | Layout jumps when data arrives | `AppSkeleton` around the real widgets with placeholder data |
 | `HapticFeedback.*` / a vibration plugin | Inconsistent meanings, no throttle | `AppHaptics.*` per [docs/haptics.md](../../docs/haptics.md) |
 | `settings.setThemeMode` / `setLocale` from a widget | Skips the reveal | `ref.changeThemeMode` / `ref.changeLocale` |
 | `CustomDialog` | Unrefactored, hardcoded Arabic labels | `showDialog` + `AlertDialog` (already themed) |

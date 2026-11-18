@@ -9,6 +9,7 @@ import 'package:app/core/theme/theme_change.dart';
 import 'package:app/core/theme/theme_reveal.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/widgets/animation/reduce_motion_scope.dart';
+import 'package:app/core/widgets/branding/splash_host.dart';
 import 'package:app/main.dart';
 import 'package:app/router/app_router.dart';
 import 'package:flutter/material.dart';
@@ -58,12 +59,18 @@ class App extends ConsumerWidget {
           ),
           // ThemeRevealHost wraps routes, sheets and dialogs alike; the
           // status-bar icons follow the active theme on every screen.
-          builder: (context, child) => ThemeRevealHost(
+          // SplashHost draws the splash over everything until it has
+          // handed over to the first screen.
+          builder: (context, child) => SplashHost(
+            routeChanges: router.routerDelegate,
+            location: () => router.routerDelegate.currentConfiguration.uri.path,
+            child: ThemeRevealHost(
             child: AnnotatedRegion<SystemUiOverlayStyle>(
               value: Theme.of(context).brightness == Brightness.dark
                   ? SystemUiOverlayStyle.light
                   : SystemUiOverlayStyle.dark,
-              child: child ?? const SizedBox.shrink(),
+                child: child ?? const SizedBox.shrink(),
+              ),
             ),
           ),
         ),

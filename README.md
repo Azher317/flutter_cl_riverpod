@@ -152,7 +152,8 @@ Release builds currently sign with the **debug** key (see the `buildTypes.releas
 
 ### H. Optional — Flutter Web on Google Cloud Storage
 
-Only if assets are served from a GCS bucket:
+The structure ships Android and iOS only. Add web first with `flutter create --platforms=web .`
+(the same works for `macos`, `linux`, `windows`). Then, only if assets are served from a GCS bucket:
 
 ```bash
 gcloud init
