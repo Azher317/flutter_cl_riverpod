@@ -24,6 +24,8 @@ widgets live in [.claude/rules/presentation.md](../../.claude/rules/presentation
 |---|---|---|
 | [`ReduceMotionScope`](../../lib/core/widgets/animation/reduce_motion_scope.dart) | Makes iOS Reduce Motion (and Android "Remove animations") reach `context.reduceMotion`, live. | Already above `MaterialApp` in `app.dart`. Don't add another. |
 | [`StaggeredEnter`](../../lib/core/widgets/animation/staggered_enter.dart) | Fades and slides an item in, delayed by its `index`. | Wrap each item of a list that just loaded; not for later pages. Instant with reduced motion. |
+| [`TabSwitcher`](../../lib/core/widgets/animation/tab_switcher.dart) | The body under a tab bar: each tab is built the first time it is chosen (its data loads then) and kept alive; switching slides, mirrored in RTL. | Sized to the current tab, so it works inside a scrolling column. Instant with reduced motion. |
+| [`PullStretch`](../../lib/core/widgets/layout/pull_stretch.dart) | A header whose background stretches into the gap when the page is pulled down, so no white strip shows. | First item of the scroll view. |
 | [`FieldShake`](../../lib/core/widgets/animation/field_shake.dart) | Shakes its child once each time `trigger` changes to a new non-zero value. | Bump an error counter on each rejected submit. Skipped under reduced motion. |
 
 ## Appearance (theme / language)
@@ -50,6 +52,7 @@ supplies fill, borders, hint style and content padding for **all** of these.
 | [`PhoneFormField`](../../lib/core/widgets/form_fields/phone_form_field.dart) | Every phone field. Iraqi-only (`07XX XXX XXXX`, live grouping, Arabic digits, pasted `+964` handled) or international (country picker), per `AppConfig.phoneFormat`. | Send `PhoneFormField.valueOf(text)`. Flags a wrong number only when complete or unfocused. Prefill with `PhoneFormField.initialText(saved)`. |
 | [`OtpField`](../../lib/core/widgets/form_fields/otp_field.dart) | N-cell one-time-code field (6 by default) on one hidden `TextField`: paste and OS code autofill work; Arabic digits accepted. | `onCompleted` verifies; set `hasError` and bump `errorTrigger` on a wrong code (shake + error haptic; next keystroke starts over). |
 | [`ResendCountdown`](../../lib/core/widgets/form_fields/resend_countdown.dart) | "Resend code in 00:45", then a Resend button. | `availableAt` from the server, else now + `OtpField.resendCooldown` (45 s). |
+| [`AppSearchField`](../../lib/core/widgets/form_fields/app_search_field.dart) | The search box: keeps its pill shape on focus, closes the keyboard on a tap elsewhere, clear button while it has text. | Pair with `useDebouncedSearch()`. |
 | [`CustomTextFormField`](../../lib/core/widgets/form_fields/custom_text_form_field.dart) | The one text field; every other field is built on it. Text sits on the layout's start side, also when `textDirection` forces LTR (phones, prices). | Required `hintText`. Missing an option? Add a parameter here; `check_arch.sh` blocks a raw `TextFormField` in features. |
 | [`PasswordFormField`](../../lib/core/widgets/form_fields/password_form_field.dart) | Password field with a show/hide button. | Built on `CustomTextFormField`. |
 | [`CustomDropdownButtonFormField<T>`](../../lib/core/widgets/form_fields/custom_drop_down_button.dart) | Themed `DropdownButtonFormField`, `autovalidateMode` fixed to `onUserInteraction`. | For a small static option list. |
@@ -148,7 +151,7 @@ ref.listen<AsyncValue<void>>(loginProvider, (previous, next) {
 ```
 
 `DefaultErrorWidget` when the screen's *content* failed to load; `context.showFailure(failure)`
-when an *action* failed on a screen that still renders. `AppMessenger.show(String, type:)` is
+when an *action* failed on a screen that still renders. `AppMessenger.show(String, type:, action:)` is
 the escape hatch for non-`Failure` messages.
 
 **Paged list**

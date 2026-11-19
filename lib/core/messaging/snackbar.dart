@@ -9,7 +9,14 @@ class AppMessenger {
 
   static final key = GlobalKey<ScaffoldMessengerState>();
 
-  static void show(String? text, {MessageType type = MessageType.info}) {
+  /// Shows [text]. With an [action] ("Undo", "Retry") it stays 5 s instead
+  /// of 3 s, and still goes away by itself: Flutter would otherwise keep a
+  /// snackbar with an action on screen until it is swiped away.
+  static void show(
+    String? text, {
+    MessageType type = MessageType.info,
+    SnackBarAction? action,
+  }) {
     if (text == null || text.isEmpty) return;
     final state = key.currentState;
     final context = key.currentContext;
@@ -39,7 +46,9 @@ class AppMessenger {
           // Behaviour, elevation, insets and shape come from `snackBarTheme`;
           // only what varies per MessageType is set here.
           backgroundColor: bg,
-          duration: const Duration(seconds: 3),
+          duration: Duration(seconds: action == null ? 3 : 5),
+          action: action,
+          persist: false,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           dismissDirection: DismissDirection.horizontal,
           content: Row(

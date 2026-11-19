@@ -33,6 +33,7 @@ class CustomTextFormField extends StatelessWidget {
     this.textDirection,
     this.autofillHints,
     this.errorText,
+    this.onTapOutside,
   });
 
   final TextEditingController? controller;
@@ -65,6 +66,9 @@ class CustomTextFormField extends StatelessWidget {
   /// Shown instead of the validator's message while non-null.
   final String? errorText;
 
+  /// Called on a tap outside the field, e.g. to close the keyboard.
+  final TapRegionCallback? onTapOutside;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -82,6 +86,7 @@ class CustomTextFormField extends StatelessWidget {
       ),
       validator: validator,
       forceErrorText: errorText,
+      onTapOutside: onTapOutside,
       autofillHints: autofillHints,
       textDirection: textDirection,
       // The layout's start as a fixed side: `TextAlign.start` would follow
