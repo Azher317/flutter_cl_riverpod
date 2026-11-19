@@ -7,6 +7,8 @@ import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/debug/debug_logs_tile.dart';
+import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
+import 'package:app/core/widgets/overlay/app_dialog.dart';
 import 'package:app/core/widgets/overlay/custom_modal_bottom_sheet.dart';
 import 'package:app/core/widgets/text.dart';
 import 'package:flutter/material.dart';
@@ -314,7 +316,7 @@ class _ComponentGallery extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          TextField(decoration: InputDecoration(hintText: context.l10n.search)),
+          CustomTextFormField(controller: null, hintText: context.l10n.search),
           const SizedBox(height: Insets.medium),
           Wrap(
             spacing: Insets.small,
@@ -424,8 +426,8 @@ class _OverlayGallery extends StatelessWidget {
     );
   }
 
-  Future<void> _showDialog(BuildContext context) => showDialog<void>(
-    context: context,
+  Future<void> _showDialog(BuildContext context) => showAppDialog<void>(
+    context,
     builder: (BuildContext context) => AlertDialog(
       title: CustomText(context.l10n.previewDialogTitle),
       content: CustomText(context.l10n.previewDialogBody),

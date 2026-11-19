@@ -3,6 +3,7 @@ import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/utils/formatters/ascii_digits_formatter.dart';
 import 'package:app/core/utils/formatters/iraqi_phone.dart';
+import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -93,7 +94,7 @@ class PhoneFormField extends HookWidget {
     final wrong =
         digits.isNotEmpty && !isValidText(text) && (complete || !focused);
 
-    return TextFormField(
+    return CustomTextFormField(
       controller: controller,
       focusNode: focus,
       keyboardType: TextInputType.phone,
@@ -104,26 +105,24 @@ class PhoneFormField extends HookWidget {
       inputFormatters: const [
         if (iraqi) IraqiPhoneInputFormatter() else AsciiDigitsFormatter(),
       ],
-      forceErrorText: wrong ? l10n.validatorPhoneNumber : errorText,
+      errorText: wrong ? l10n.validatorPhoneNumber : errorText,
       validator: (value) => (value ?? '').trim().isEmpty
           ? l10n.validatorRequired
           : isValidText(value!)
           ? null
           : l10n.validatorPhoneNumber,
       onFieldSubmitted: onFieldSubmitted,
-      decoration: InputDecoration(
-        hintText: iraqi ? '07XX XXX XXXX' : l10n.phone,
-        prefixIcon: iraqi
-            ? const Icon(Icons.phone_outlined)
-            : CountryCodePicker(
-                onChanged: (code) =>
-                    onCountryChanged?.call(code.dialCode ?? initialDialCode),
-                initialSelection: _initialCountry,
-                showFlag: false,
-                padding: EdgeInsets.zero,
-                textStyle: context.textTheme.bodyMedium,
-              ),
-      ),
+      hintText: iraqi ? '07XX XXX XXXX' : l10n.phone,
+      prefixIcon: iraqi
+          ? const Icon(Icons.phone_outlined)
+          : CountryCodePicker(
+              onChanged: (code) =>
+                  onCountryChanged?.call(code.dialCode ?? initialDialCode),
+              initialSelection: _initialCountry,
+              showFlag: false,
+              padding: EdgeInsets.zero,
+              textStyle: context.textTheme.bodyMedium,
+            ),
     );
   }
 }

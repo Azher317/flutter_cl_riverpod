@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
-# Enforces CLAUDE.md layer rules 1, 2, 3, 5, 16, the Insets tokens, plus the haptics and sheet rules
-# (.claude/rules/motion-feedback.md). Run in CI and locally.
+# Enforces CLAUDE.md layer rules 1, 2, 3, 5, 16, the Insets tokens, the haptics and sheet
+# rules (.claude/rules/motion-feedback.md), shared widgets over hand-built ones
+# (.claude/rules/presentation.md) and logging through AppLogger
+# (.claude/rules/observability.md). Runs on every commit (pre-commit hook) and in CI.
 set -uo pipefail
 
 fail=0
 
 report() {
   if [[ -n "$2" ]]; then
-    echo "❌ $1"
+    echo "FAIL: $1"
     echo "$2" | sed 's/^/    /'
     fail=1
   fi
@@ -58,7 +60,37 @@ report "showModalBottomSheet used directly (use customModalBottomSheet)" \
   "$(grep -rn 'showModalBottomSheet' lib --include='*.dart' \
       | grep -vE '^[^:]+:[0-9]+:\s*///?' || true)"
 
+# Screens and shared business code use the shared widgets instead of building
+# their own. Each message names the widget to use.
+feature_dirs="lib/features $( [ -d lib/shared ] && echo lib/shared )"
+no_comments() { grep -vE '^[^:]+:[0-9]+:\s*///?' || true; }
+
+report "raw TextFormField/TextField in a feature (use CustomTextFormField or PhoneFormField, lib/core/widgets/form_fields)" \
+  "$(grep -rnE '\b(TextFormField|TextField)\(' $feature_dirs --include='*.dart' | no_comments)"
+
+report "showDatePicker in a feature (use CustomDatePickerFormField, lib/core/widgets/form_fields)" \
+  "$(grep -rn 'showDatePicker(' $feature_dirs --include='*.dart' | no_comments)"
+
+report "showTimePicker in a feature (use CustomTimePickerFormField, lib/core/widgets/form_fields)" \
+  "$(grep -rn 'showTimePicker(' $feature_dirs --include='*.dart' | no_comments)"
+
+report "showDialog in a feature (use showAppDialog or showConfirmDialog, lib/core/widgets/overlay/app_dialog.dart)" \
+  "$(grep -rnE '(^|[^_A-Za-z0-9])showDialog\b' $feature_dirs --include='*.dart' | no_comments)"
+
+# A reusable (public) widget kind defined inside a feature is hidden from the
+# next feature. It lives in lib/core/widgets (no business words) or
+# lib/shared. Private `_Something` pieces of one screen are fine.
+report "Field/Button/Dialog/Sheet/Card widget defined in a feature (move it to lib/core/widgets or lib/shared, or improve the existing one)" \
+  "$(grep -rnE '^(abstract |final |base |sealed )?class [A-Z][A-Za-z0-9_]*(Field|Button|Dialog|Sheet|Card)\b' lib/features --include='*.dart' \
+      | grep -vE '\.(g|freezed)\.dart:' || true)"
+
+# Logging goes through AppLogger; only the logging wiring touches talker.
+report "talker used directly (use AppLogger, lib/core/observability/app_logger.dart)" \
+  "$(grep -rnE '\b(talker|routeTalker)\.' lib --include='*.dart' \
+      | grep -vE '^lib/core/observability/app_logger\.dart:|^lib/core/network/dio_module\.dart:|^lib/router/' \
+      | no_comments)"
+
 if [[ "$fail" -eq 0 ]]; then
-  echo "✅ all import boundaries hold"
+  echo "OK: all architecture checks hold"
 fi
 exit "$fail"

@@ -3,6 +3,7 @@ import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
+/// A password field with a show/hide button, built on [CustomTextFormField].
 class PasswordFormField extends StatefulWidget {
   const PasswordFormField({
     super.key,

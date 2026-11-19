@@ -50,10 +50,11 @@ supplies fill, borders, hint style and content padding for **all** of these.
 | [`PhoneFormField`](../../lib/core/widgets/form_fields/phone_form_field.dart) | Every phone field. Iraqi-only (`07XX XXX XXXX`, live grouping, Arabic digits, pasted `+964` handled) or international (country picker), per `AppConfig.phoneFormat`. | Send `PhoneFormField.valueOf(text)`. Flags a wrong number only when complete or unfocused. Prefill with `PhoneFormField.initialText(saved)`. |
 | [`OtpField`](../../lib/core/widgets/form_fields/otp_field.dart) | N-cell one-time-code field (6 by default) on one hidden `TextField`: paste and OS code autofill work; Arabic digits accepted. | `onCompleted` verifies; set `hasError` and bump `errorTrigger` on a wrong code (shake + error haptic; next keystroke starts over). |
 | [`ResendCountdown`](../../lib/core/widgets/form_fields/resend_countdown.dart) | "Resend code in 00:45", then a Resend button. | `availableAt` from the server, else now + `OtpField.resendCooldown` (45 s). |
-| [`CustomTextFormField`](../../lib/core/widgets/form_fields/custom_text_form_field.dart) | The base text field every other field composes. | Required `controller`, `hintText`. Override `enabledBorder`/`focusedBorder`/`fillColor`/`contentPadding` only when you need to deviate from the theme. |
+| [`CustomTextFormField`](../../lib/core/widgets/form_fields/custom_text_form_field.dart) | The one text field; every other field is built on it. Text sits on the layout's start side, also when `textDirection` forces LTR (phones, prices). | Required `hintText`. Missing an option? Add a parameter here; `check_arch.sh` blocks a raw `TextFormField` in features. |
+| [`PasswordFormField`](../../lib/core/widgets/form_fields/password_form_field.dart) | Password field with a show/hide button. | Built on `CustomTextFormField`. |
 | [`CustomDropdownButtonFormField<T>`](../../lib/core/widgets/form_fields/custom_drop_down_button.dart) | Themed `DropdownButtonFormField`, `autovalidateMode` fixed to `onUserInteraction`. | For a small static option list. |
 | [`CustomPaginatedDropdownFormField<T>`](../../lib/core/widgets/form_fields/custom_paginated_drop_down_form_fied.dart) | Read-only field that opens a searchable paged picker sheet and writes the choice into a `ValueNotifier<T?>`. | For server-backed lookups. Required `pagingController`, `hintText`, `valueNotifier`. Pass `labelBuilder` for type safety — the fallback is the `dynamic` [`localizedName`](../../lib/core/l10n/localized_name.dart). |
-| [`CustomDatePickerFormField`](../../lib/core/widgets/form_fields/custom_date_picker_form_field.dart) | Read-only field opening `showDatePicker`, bound to a `ValueNotifier<DateTime?>`. |`labelText` defaults to the literal `'YYYY/MM/DD'`. |
+| [`CustomDatePickerFormField`](../../lib/core/widgets/form_fields/custom_date_picker_form_field.dart) | Read-only field opening `showDatePicker`, bound to a `ValueNotifier<DateTime?>`. | Required `labelText` (localized). `check_arch.sh` blocks a raw `showDatePicker` in features. |
 | [`CustomTimePickerFormField`](../../lib/core/widgets/form_fields/custom_time_picker_form_field.dart) | Same, for `TimeOfDay` via `showTimePicker`. | `labelText` is required — pass a localized string. |
 | [`ImageFormField`](../../lib/core/widgets/form_fields/image_form_field.dart) | Pick + crop an image (`cropImage` from [image_service.dart](../../lib/core/media/image_service.dart)) with `FormField` validation. | `ImageFormField.notifier(myNotifier, ...)` binds a `ValueNotifier<CroppedFile?>` directly. |
 | [`LabeledField`](../../lib/core/widgets/form_fields/labeled_field.dart) | Bold label above a group of widgets. | For a field group needing a caption that `labelText` can't express. |
@@ -76,14 +77,14 @@ interpolate `assets/images/svg/$img.svg` / `assets/images/png/$img.png` themselv
 |---|---|---|
 | [`customModalBottomSheet(...)`](../../lib/core/widgets/overlay/custom_modal_bottom_sheet.dart) | `showModalBottomSheet` with root navigator, safe area, 75%-height default, optional drag handle. | Surface/shape/clip come from `bottomSheetTheme`; only sizing and behaviour are arguments. |
 | [`PaginatedBottomSheet<T>`](../../lib/core/widgets/overlay/paginated_bottom_sheet.dart) | Searchable, paginated picker list (debounced search + `RefreshIndicator` + `defaultListDelegate`). | Pass as the `child:` of `customModalBottomSheet`. It does **not** create the controller — the caller owns it. |
-| [`CustomDialog`](../../lib/core/widgets/overlay/custom_dialog.dart) | Title + children + add/cancel row. | ⚠️ Marked `//TODO this widget need refactoring` and hardcodes Arabic button labels. For a plain dialog use `showDialog` + `AlertDialog` (see below). |
+| [`showAppDialog` / `showConfirmDialog`](../../lib/core/widgets/overlay/app_dialog.dart) | The one way to open a dialog; `showConfirmDialog` returns `true` only on confirm. | `check_arch.sh` blocks a raw `showDialog` in features. |
+| [`CustomDialog`](../../lib/core/widgets/overlay/custom_dialog.dart) | Title + any content + localized Add / Cancel row. | For a form inside a dialog. Open it with `showAppDialog`. |
 
-`AlertDialog` is already themed via `dialogTheme`, so plain `showDialog` is a valid entry
-point with no wrapper:
+`AlertDialog` is themed via `dialogTheme`:
 
 ```dart
-showDialog<void>(
-  context: context,
+showAppDialog<void>(
+  context,
   builder: (BuildContext context) => AlertDialog(
     title: Text(context.l10n.someTitle),
     content: Text(context.l10n.someBody),
