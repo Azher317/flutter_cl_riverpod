@@ -11,7 +11,13 @@ TextAlign _alignOf(WidgetTester tester) =>
 void main() {
   testWidgets('Arabic: a forced-LTR phone field sits on the right like the '
       'others', (tester) async {
-    await pumpApp(tester, PhoneFormField(controller: TextEditingController()));
+    await pumpApp(
+      tester,
+      Directionality(
+        textDirection: TextDirection.rtl,
+        child: PhoneFormField(controller: TextEditingController()),
+      ),
+    );
     expect(_alignOf(tester), TextAlign.right);
   });
 

@@ -63,6 +63,13 @@ class _RevealAppState extends State<_RevealApp> {
   );
 }
 
+/// Language-change tests need Arabic and English; a one-language app skips
+/// them.
+final _noLanguagePair = !{'ar', 'en'}.every(
+  (code) =>
+      AppLocalizations.supportedLocales.any((l) => l.languageCode == code),
+);
+
 void main() {
   Brightness brightness(WidgetTester tester) =>
       Theme.of(tester.element(find.text('inc'))).brightness;
@@ -88,7 +95,7 @@ void main() {
     await tester.tap(find.text('english'));
     await tester.pumpAndSettle();
     expect(direction(tester), TextDirection.ltr);
-  });
+  }, skip: _noLanguagePair);
 
   testWidgets('a change keeps the app state underneath', (tester) async {
     await tester.pumpWidget(
@@ -101,5 +108,5 @@ void main() {
     await tester.tap(find.text('english'));
     await tester.pumpAndSettle();
     expect(find.text('count 1'), findsOneWidget);
-  });
+  }, skip: _noLanguagePair);
 }
