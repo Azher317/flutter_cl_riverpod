@@ -6,9 +6,7 @@ import 'package:talker_flutter/talker_flutter.dart';
 /// Global rather than provider-held because some call sites (e.g.
 /// [PagingControllerX]) have no [Ref] to read a provider from.
 final talker = TalkerFlutter.init(
-  settings: TalkerSettings(
-    
-  ),
+  settings: TalkerSettings(),
   // Riverpod add/update/dispose/fail logs are noisy by default; start with
   // them off in the "Packages settings" sheet, toggle back on when needed.
   filter: TalkerFilter(
@@ -26,9 +24,7 @@ final talker = TalkerFlutter.init(
 /// HTTP/error entries in the log viewer — [TalkerScreen] renders [talker]'s
 /// history, not this one.
 final routeTalker = TalkerFlutter.init(
-  settings: TalkerSettings(
-    useHistory: false,
-  ),
+  settings: TalkerSettings(useHistory: false),
 );
 
 /// Thin wrapper around [talker] so manual call sites depend on this

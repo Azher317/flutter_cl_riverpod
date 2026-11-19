@@ -16,7 +16,7 @@ const kurdishLocaleDatePatterns = {
   'E': 'ccc',
   'EEEE': 'cccc',
   'LLL': 'LLL',
-// #enddocregion Date
+  // #enddocregion Date
   'LLLL': 'LLLL',
   'M': 'L.',
   'Md': 'd.M.',
@@ -80,7 +80,7 @@ const kuDateSymbols2 = {
     'ل',
     'ت.ی',
     'ت.د',
-    'ک.ی'
+    'ک.ی',
   ],
   'STANDALONENARROWMONTHS': [
     'ک.د',
@@ -94,7 +94,7 @@ const kuDateSymbols2 = {
     'ل',
     'ت.ی',
     'ت.د',
-    'ک.ی'
+    'ک.ی',
   ],
   'MONTHS': [
     'کانونی دووەم',
@@ -159,7 +159,7 @@ const kuDateSymbols2 = {
     'چوارشەممە',
     'پێنجشەممە',
     'هەینی',
-    'شەممە'
+    'شەممە',
   ],
   'STANDALONEWEEKDAYS': [
     'یەکشەممە',
@@ -168,7 +168,7 @@ const kuDateSymbols2 = {
     'چوارشەممە',
     'پێنجشەممە',
     'هەینی',
-    'شەممە'
+    'شەممە',
   ],
   'SHORTWEEKDAYS': [
     'یەکشەم',
@@ -177,7 +177,7 @@ const kuDateSymbols2 = {
     'چوارشەم',
     'پێنجشەم',
     'هەینی',
-    'شەممە'
+    'شەممە',
   ],
   'STANDALONESHORTWEEKDAYS': [
     'یەکشەم',
@@ -186,36 +186,21 @@ const kuDateSymbols2 = {
     'چوارشەم',
     'پێنجشەم',
     'هەینی',
-    'شەممە'
+    'شەممە',
   ],
   'NARROWWEEKDAYS': ['ی', 'د', 'س', 'چ', 'پ', 'ه', 'ش'],
   'STANDALONENARROWWEEKDAYS': ['ی', 'د', 'س', 'چ', 'پ', 'ه', 'ش'],
   'SHORTQUARTERS': ['چ١', 'چ٢', 'چ٣', 'چ٤'],
   'QUARTERS': ['چارەکی یەکەم', 'چارەکی دووەم', 'چارەکی سێیەم', 'چارەکی چوارەم'],
   'AMPMS': ['پ.ن', 'د.ن'],
-  'DATEFORMATS': [
-    'EEEE، d MMMM y',
-    'd MMMM y',
-    'dd‏/MM‏/y',
-    'd‏/M‏/y',
-  ],
-  'TIMEFORMATS': [
-    'h:mm:ss a zzzz',
-    'h:mm:ss a z',
-    'h:mm:ss a',
-    'h:mm a',
-  ],
+  'DATEFORMATS': ['EEEE، d MMMM y', 'd MMMM y', 'dd‏/MM‏/y', 'd‏/M‏/y'],
+  'TIMEFORMATS': ['h:mm:ss a zzzz', 'h:mm:ss a z', 'h:mm:ss a', 'h:mm a'],
   'AVAILABLEFORMATS': null,
-  'DATETIMEFORMATS': [
-    '{1} {0}',
-    '{1} {0}',
-    '{1} {0}',
-    '{1} {0}',
-  ],
+  'DATETIMEFORMATS': ['{1} {0}', '{1} {0}', '{1} {0}', '{1} {0}'],
   'ZERODIGIT': '٠',
   'FIRSTDAYOFWEEK': 5,
   'WEEKENDRANGE': [4, 5],
-  'FIRSTWEEKCUTOFFDAY': 3
+  'FIRSTWEEKCUTOFFDAY': 3,
 };
 
 // #docregion Delegate
@@ -286,12 +271,12 @@ class KurdishCupertinoLocalizations extends GlobalCupertinoLocalizations {
     required super.weekdayFormat,
   });
 
-// #docregion Getters
+  // #docregion Getters
 
   @override
   String get alertDialogLabel => r'ئاگادارکردنەوە';
 
-// #enddocregion Getters
+  // #enddocregion Getters
 
   @override
   String get anteMeridiemAbbreviation => r'پ.ن';

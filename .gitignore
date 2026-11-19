@@ -48,3 +48,10 @@ android/.kotlin/
 
 # graphify output (run graphify by hand if you want it; never commit the graph)
 graphify-out/
+
+# Per-app secrets (each app has its own; examples are committed)
+android/key.properties
+android/secrets.properties
+ios/Flutter/Secrets.xcconfig
+*.jks
+*.keystore

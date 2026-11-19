@@ -89,6 +89,20 @@ void main() {
       expect(e, isA<NetworkException>());
     });
 
+    test('a 5xx never carries the server text', () {
+      final e = NetworkErrorMapper.toException(
+        badResponse(
+          500,
+          data: {'message': 'NullReference at Foo, Authorization: Bearer abc'},
+        ),
+      );
+      expect((e as ServerException).message, isEmpty);
+      final html = NetworkErrorMapper.toException(
+        badResponse(502, data: '<html>Bearer abc</html>'),
+      );
+      expect((html as ServerException).message, isEmpty);
+    });
+
     test('cancel -> ServerException', () {
       final e = NetworkErrorMapper.toException(
         DioException(requestOptions: options, type: DioExceptionType.cancel),
@@ -107,10 +121,39 @@ void main() {
       );
     });
 
-    test('reads a plain string body', () {
+    test('reads {error: {message}} from a nested body', () {
+      expect(
+        NetworkErrorMapper.messageFrom(
+          badResponse(
+            400,
+            data: {
+              'error': {'message': 'nested'},
+            },
+          ),
+        ),
+        'nested',
+      );
+    });
+
+    test('never returns a plain string body', () {
       expect(
         NetworkErrorMapper.messageFrom(badResponse(400, data: 'oops')),
-        'oops',
+        isNull,
+      );
+    });
+
+    test('never returns markup or an over-long message', () {
+      expect(
+        NetworkErrorMapper.messageFrom(
+          badResponse(400, data: {'message': '<html>crash</html>'}),
+        ),
+        isNull,
+      );
+      expect(
+        NetworkErrorMapper.messageFrom(
+          badResponse(400, data: {'message': 'x' * 201}),
+        ),
+        isNull,
       );
     });
 

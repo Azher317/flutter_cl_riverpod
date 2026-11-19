@@ -3,9 +3,9 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 part 'secure_storage_provider.g.dart';
 
-// keepAlive: App-lifetime service: storage.
-@Riverpod(keepAlive: true)
-FlutterSecureStorage flutterSecureStorage(Ref ref) {
+/// The one secure store configuration. `main` uses it directly (before the
+/// `ProviderScope` exists) for `FreshInstallGuard`.
+FlutterSecureStorage createSecureStorage() {
   const androidOptions = AndroidOptions(encryptedSharedPreferences: true);
   const iosOptions = IOSOptions(
     accessibility: KeychainAccessibility.first_unlock,
@@ -15,6 +15,10 @@ FlutterSecureStorage flutterSecureStorage(Ref ref) {
     iOptions: iosOptions,
   );
 }
+
+// keepAlive: App-lifetime service: storage.
+@Riverpod(keepAlive: true)
+FlutterSecureStorage flutterSecureStorage(Ref ref) => createSecureStorage();
 
 extension SecureStorageRefX on Ref {
   FlutterSecureStorage get secureStorage => read(flutterSecureStorageProvider);

@@ -13,6 +13,27 @@ if (localPropertiesFile.exists()) {
     }
 }
 
+// Release signing. Each app keeps its own android/key.properties (never
+// committed); android/key.properties.example shows the four fields.
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file("key.properties")
+if (keystorePropertiesFile.exists()) {
+    keystorePropertiesFile.withReader("UTF-8") { reader ->
+        keystoreProperties.load(reader)
+    }
+}
+
+// API keys for the manifest (maps and the like). Each key in
+// android/secrets.properties (never committed) becomes a manifest
+// placeholder: MAPS_API_KEY=... -> ${MAPS_API_KEY} in AndroidManifest.xml.
+def secretProperties = new Properties()
+def secretPropertiesFile = rootProject.file("secrets.properties")
+if (secretPropertiesFile.exists()) {
+    secretPropertiesFile.withReader("UTF-8") { reader ->
+        secretProperties.load(reader)
+    }
+}
+
 def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
 if (flutterVersionCode == null) {
     flutterVersionCode = "1"
@@ -46,14 +67,35 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
+        manifestPlaceholders += secretProperties.collectEntries { k, v -> [(k): v] }
+    }
+
+    signingConfigs {
+        release {
+            if (keystorePropertiesFile.exists()) {
+                keyAlias = keystoreProperties["keyAlias"]
+                keyPassword = keystoreProperties["keyPassword"]
+                storeFile = file(keystoreProperties["storeFile"])
+                storePassword = keystoreProperties["storePassword"]
+            }
+        }
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+            signingConfig = signingConfigs.release
         }
+    }
+}
+
+// A release build without android/key.properties stops here instead of
+// signing with the debug key, which the stores reject.
+gradle.taskGraph.whenReady { graph ->
+    def buildsRelease = graph.allTasks.any { it.name.toLowerCase().contains("release") }
+    if (buildsRelease && !keystorePropertiesFile.exists()) {
+        throw new GradleException(
+            "android/key.properties is missing. Copy android/key.properties.example, " +
+            "fill it with this app's upload key, then build again.")
     }
 }
 

@@ -26,9 +26,7 @@ class NullablePhoneNumberConvertor
     if (json.isNullOrBlank) return null;
 
     if (json!.startsWith(iraqiPhoneNumberStarter)) {
-      return iraqiPhoneNumber.copyWith(
-        number: json.replaceRange(0, 1, ''),
-      );
+      return iraqiPhoneNumber.copyWith(number: json.replaceRange(0, 1, ''));
     }
 
     return phoneNumberFromString(json);

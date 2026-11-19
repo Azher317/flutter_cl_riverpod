@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:app/app.dart';
+import 'package:app/core/network/api_document.dart';
 import 'package:app/core/observability/app_logger.dart';
+import 'package:app/core/storage/fresh_install_guard.dart';
+import 'package:app/core/storage/secure_storage_provider.dart';
 import 'package:app/core/storage/shared_preferences_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +18,9 @@ import 'package:timeago/timeago.dart' as timeago;
 const String appName = 'Starter';
 
 Future<void> main() async {
+  // Every run names its server (env/*.json); stop here if this one didn't.
+  ApiDocument.assertConfigured();
+
   // Flutter Driver's text-entry emulation hijacks the real text input
   // channel, silently breaking normal keyboard input — only enable it when
   // a driver/integration test run explicitly asks for it.
@@ -46,6 +52,9 @@ Future<void> main() async {
       //       Firebase.initializeApp()).wait;
       // Keep only ordered steps sequential (e.g. a storage wipe before reads).
       final sharedPreferences = await SharedPreferences.getInstance();
+      // Ordered: a reinstall must wipe the Keychain before the session is
+      // restored from it.
+      await FreshInstallGuard.run(sharedPreferences, createSecureStorage());
 
       timeago.setLocaleMessages(
         'ar',

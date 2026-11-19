@@ -12,4 +12,8 @@ abstract class PreferenceKeys {
   const PreferenceKeys._();
 
   static const String settings = 'settings';
+
+  /// Written on the first launch after an install (`FreshInstallGuard`).
+  /// A reinstall wipes it; the iOS Keychain does not.
+  static const String installMarker = 'install_marker';
 }

@@ -27,9 +27,11 @@ abstract class NetworkErrorMapper {
         // Carry only the backend-provided message (or empty). Generic,
         // user-facing wording is the presentation layer's job and is localized
         // there (`FailureX.localizeFailure`) — the data layer never fabricates
-        // English display strings.
-        final message = messageFrom(e) ?? '';
-        switch (e.response?.statusCode) {
+        // English display strings. A 5xx never carries the server's text: it
+        // can be a crash page with headers or tokens in it.
+        final status = e.response?.statusCode ?? 0;
+        final message = status >= 500 ? '' : messageFrom(e) ?? '';
+        switch (status) {
           case 400:
             return BadRequestException(message);
           case 401:
@@ -53,20 +55,30 @@ abstract class NetworkErrorMapper {
         if (e.error is SocketException) {
           return const NetworkException('No internet connection');
         }
-        return ServerException(messageFrom(e) ?? '');
+        return const ServerException('');
     }
   }
 
   /// The backend's own error message, or `null` when it didn't send one.
+  ///
+  /// Only a short message inside a JSON object is ever read, in either of the
+  /// two shapes backends use: `{"message": "..."}` or
+  /// `{"error": {"message": "..."}}`. A plain-text or HTML body is never
+  /// returned, because it is not meant for a user and may hold secrets.
   /// Every branch is null-safe by design — a throw inside error handling would
   /// itself be the bug.
   static String? messageFrom(DioException e) {
     final data = e.response?.data;
-    if (data is Map<String, dynamic>) {
-      final message = data['message']?.toString();
-      if (message != null && message.isNotEmpty) return message;
-    }
-    if (data is String && data.isNotEmpty) return data;
-    return null;
+    if (data is! Map) return null;
+    final error = data['error'];
+    final raw = data['message'] ?? (error is Map ? error['message'] : null);
+    if (raw is! String) return null;
+    final message = raw.trim();
+    if (message.isEmpty || message.length > maxMessageLength) return null;
+    if (message.contains('<')) return null; // markup, not a sentence
+    return message;
   }
+
+  /// Longer than this, a "message" is a dump, not a sentence for a user.
+  static const maxMessageLength = 200;
 }

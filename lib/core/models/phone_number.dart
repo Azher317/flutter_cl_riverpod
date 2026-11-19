@@ -66,7 +66,10 @@ PhoneNumber? phoneNumberFromString(String phoneNumber) {
   try {
     if (_fullPhoneNumber.hasMatch(phoneNumber)) return null;
 
-    final String phoneNumberPart = phoneNumber.replaceAll(_countryCodesRegex, '');
+    final String phoneNumberPart = phoneNumber.replaceAll(
+      _countryCodesRegex,
+      '',
+    );
     final String countryCodePart = phoneNumber.split(phoneNumberPart).first;
 
     if (countryCodePart.isEmpty || phoneNumber.isEmpty) return null;
