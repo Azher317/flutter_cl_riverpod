@@ -1,9 +1,22 @@
 ---
 name: add-feature
-description: Scaffold a new vertical slice (domain → data → di → presentation) using the clr-* snippet library. Use when adding a feature, entity, repository contract, usecase, model, datasource, provider wiring, notifier, or screen under lib/features/.
+description: Scaffold a new feature (domain → data → di → presentation) using the clr-* snippet library. Use when the user asks for a new feature, screen with its own data, or "add an orders feature"; takes the feature name as its argument (/add-feature orders).
+argument-hint: <feature-name>
 ---
 
 # Adding a feature
+
+The feature name is `$ARGUMENTS` (snake_case folder under `lib/features/`).
+
+**Before writing code:**
+
+1. If the feature calls the server, **ask: "Is the backend for this feature
+   ready?"** Ready: build against the real API docs in `docs/api/`. Not ready:
+   follow "Fake data" in `.claude/rules/data-layer.md` (draft contract first).
+2. In the plan, list the shared widgets you will **reuse**, the ones you will
+   **improve** (add a parameter), and any **new** one with why none fits
+   (`docs/guides/widgets.md`). In tablet apps, say how each screen looks on a
+   tablet too.
 
 Ordered checklist. Placeholders are shown against their real `auth` counterparts.
 `auth` is the **reference slice**: copy its *shape* — layer order, file naming, the
@@ -26,10 +39,11 @@ needs the session, watch `currentUserProvider` / `isSignedInProvider` from
 | 11 | **Notifier** | `presentation/notifiers/login_notifier.dart` | `@riverpod class XNotifier extends _$XNotifier`; `build()` returns the initial state; actions set `AsyncLoading` then `.fold()` into `AsyncError(failure, StackTrace.current)` / `AsyncData`. |
 | 12 | **Screen** | `presentation/screens/login_screen.dart` | `ConsumerWidget`, or `HookConsumerWidget`/`StatefulHookConsumerWidget` if you need hooks. `ref.listen` the notifier and call `context.showFailure(failure)` on `AsyncError`. |
 | 13 | **Route** | [route_names.dart](../../../lib/core/utils/constants/route_names.dart) + [app_router.dart](../../../lib/router/app_router.dart) | Add a `static const` path to `RouteNames`, then a `GoRoute` in `app_router.dart`. |
-| 14 | **Strings** | `app_en.arb` + `app_ar.arb` | Add the key to **both**. Placeholders need an `@key` block. |
-| 15 | **Codegen** | — | `flutter pub run build_runner build --delete-conflicting-outputs`. |
+| 14 | **Strings** | `lib/l10n/arb/app_*.arb` | Use the `add-string` skill: every ARB the app ships. |
+| 15 | **Tests** | `test/features/<name>/` | Repository (each failure path) and screen widget test with `testAtScreenSizes`. |
+| 16 | **Verify** | — | Run the `verify` skill (`bin/gates.sh`); stop only when it passes. |
 
-Provider naming is documented in [CLAUDE.md](../../CLAUDE.md) — the generator drops a
+Provider naming is documented in [feature-layout.md](../../rules/feature-layout.md) — the generator drops a
 trailing `Notifier` from a class name.
 
 **What `splash` legitimately skips.** It is presentation-only: no server call, no
@@ -99,7 +113,7 @@ format-on-save settle it.
 | `clr-data-datasource-remote` | `abstract` + `Impl(ApiConsumer)` + in-file provider | data |
 | `clr-data-datasource-local` | Secure-storage datasource + in-file provider | data |
 | `clr-data-api-method` | One `_api.<verb>` + `Model.fromJson` method | data |
-| `clr-data-api-method-paged` | Paged call returning `PaginatedResponse<T>` | data |
+| `clr-data-api-method-paged` | Paged call returning `ApiPage<T>` (`ApiEnvelope.page`) | data |
 | `clr-data-repo-impl` | `with SafeRepositoryCall implements XRepository` | data |
 | `clr-data-guard-method` | One `guard(() async {...})` method | data |
 | `clr-di-providers` | Repository + first usecase provider | di |

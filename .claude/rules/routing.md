@@ -69,3 +69,13 @@ StatefulShellRoute(
 ```
 
 An app without bottom navigation deletes `lib/router/app_shell.dart`.
+
+## Adding a route
+
+1. Add the path constant to `RouteNames`.
+2. Add the `GoRoute` with `pageBuilder: (context, state) => appPage(context, state, const XScreen())`
+   (or under the shell branch it belongs to). Only `lib/router/` imports the screen.
+3. A screen only for signed-in users in a guest-mode app: add its path to
+   `RouteNames.signedInOnly`. Never a guard widget.
+4. Navigate with `context.go` / `context.push` for normal moves; never after
+   sign-in or sign-out (rule 15).

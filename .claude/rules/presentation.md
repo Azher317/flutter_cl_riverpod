@@ -63,6 +63,11 @@ before authoring.
     `testAtScreenSizes` (`test/helpers/screen_sizes.dart`): 375×667 and 360×640,
     plus the tablet sizes in apps that support tablets.
 
+14. **Widget tests use the real providers with overrides.** Wrap the widget in
+    `ProviderScope(overrides: [...])`, overriding the repository or data source
+    provider with a fake, never the notifier itself. `pumpApp` from
+    `test/helpers/pump_app.dart` supplies theme and localizations.
+
 ## Loading states (skeletons)
 
 1. **A screen that loads data shows a skeleton, not a spinner.** Spinners are for

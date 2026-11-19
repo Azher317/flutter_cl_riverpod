@@ -3,6 +3,12 @@
 The easy-to-forget commands for this project, in one place. Fuller context lives in
 [README.md](README.md) and [.claude/CLAUDE.md](.claude/CLAUDE.md).
 
+## New app
+
+```bash
+bin/new_app.sh                     # asks name, folder, ids, languages, sign-in, phone, tablets
+```
+
 ## Git hooks
 
 ```bash
@@ -24,6 +30,7 @@ bin/build_release.sh prod ipa
 ## Checks
 
 ```bash
+bin/gates.sh                       # everything CI runs, failures only; skips a commit that already passed
 bin/check_arch.sh                  # architecture checks (also on every commit and in CI)
 flutter analyze
 dart run custom_lint               # Riverpod lint rules (not part of flutter analyze)

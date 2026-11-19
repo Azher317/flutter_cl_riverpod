@@ -19,9 +19,9 @@ Pass `keys:` when you want the controller **recreated** (full reset to page 1);
 call `controller.refresh()` when you only want a refetch.
 
 Server pages implement `Paginated<T>`
-([paginated.dart](../../lib/core/network/paginated.dart)); `PaginatedResponse<T>`
-([paginated_response.dart](../../lib/core/network/paginated_response.dart)) is the wire
-shape (`items` / `totalCount`). `addItems` decides last-page from the rows actually
+([paginated.dart](../../lib/core/network/paginated.dart)); `ApiEnvelope.page`
+([api_envelope.dart](../../lib/core/network/api_envelope.dart)) parses this backend's
+page shape into an `ApiPage<T>`. `addItems` decides last-page from the rows actually
 returned, never an assumed page size. List UI goes through
 `controller.defaultListDelegate(context: ..., itemBuilder: ...)`
 ([paging_list_delegate.dart](../../lib/core/pagination/paging_list_delegate.dart)), which

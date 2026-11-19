@@ -1,7 +1,7 @@
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 /// Shape every paginated payload exposes to [PaginatedExtension.addItems],
-/// regardless of the wire format it was parsed from (see [PaginatedResponse]).
+/// regardless of the wire format it was parsed from (see `ApiEnvelope.page`).
 abstract interface class Paginated<T> {
   List<T> get result;
 
