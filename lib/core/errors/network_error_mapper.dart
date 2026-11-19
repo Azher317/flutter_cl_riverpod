@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app/core/errors/exceptions.dart';
+import 'package:app/core/network/api_envelope.dart';
 import 'package:dio/dio.dart';
 
 /// The single place raw transport errors are classified into the app's own
@@ -60,25 +61,7 @@ abstract class NetworkErrorMapper {
   }
 
   /// The backend's own error message, or `null` when it didn't send one.
-  ///
-  /// Only a short message inside a JSON object is ever read, in either of the
-  /// two shapes backends use: `{"message": "..."}` or
-  /// `{"error": {"message": "..."}}`. A plain-text or HTML body is never
-  /// returned, because it is not meant for a user and may hold secrets.
-  /// Every branch is null-safe by design — a throw inside error handling would
-  /// itself be the bug.
-  static String? messageFrom(DioException e) {
-    final data = e.response?.data;
-    if (data is! Map) return null;
-    final error = data['error'];
-    final raw = data['message'] ?? (error is Map ? error['message'] : null);
-    if (raw is! String) return null;
-    final message = raw.trim();
-    if (message.isEmpty || message.length > maxMessageLength) return null;
-    if (message.contains('<')) return null; // markup, not a sentence
-    return message;
-  }
-
-  /// Longer than this, a "message" is a dump, not a sentence for a user.
-  static const maxMessageLength = 200;
+  /// How it is read depends on the backend: see [ApiEnvelope.errorMessage].
+  static String? messageFrom(DioException e) =>
+      ApiEnvelope.errorMessage(e.response?.data);
 }

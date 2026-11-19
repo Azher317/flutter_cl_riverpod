@@ -1,4 +1,5 @@
 import 'package:app/core/errors/network_error_mapper.dart';
+import 'package:app/core/network/api_envelope.dart';
 import 'package:app/core/network/dio_module.dart';
 import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -6,7 +7,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'api_consumer.g.dart';
 
 /// The app's HTTP surface. Data sources call these verbs and get back the
-/// parsed JSON body (`response.data`); they never touch Dio. This replaces the
+/// response payload, already unwrapped by [ApiEnvelope.data]; they never
+/// touch Dio. This replaces the
 /// old Retrofit `@RestApi` clients.
 ///
 /// `extra` is forwarded to the request (used for `{'skipAuthLogout': true}` on
@@ -68,7 +70,7 @@ class DioConsumer implements ApiConsumer {
         queryParameters: queryParameters,
         options: Options(method: method, extra: extra),
       );
-      return response.data;
+      return ApiEnvelope.data(response.data);
     } on DioException catch (e) {
       throw NetworkErrorMapper.toException(e);
     }

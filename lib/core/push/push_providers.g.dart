@@ -231,7 +231,7 @@ final class PushControllerProvider
   }
 }
 
-String _$pushControllerHash() => r'8ae5c731910864ba07e3055bd8547ea9af83e10d';
+String _$pushControllerHash() => r'50179de63356bdce6ff20e2e3d2ec6765cb80fbe';
 
 /// The push plumbing every app needs, whatever the provider:
 ///
