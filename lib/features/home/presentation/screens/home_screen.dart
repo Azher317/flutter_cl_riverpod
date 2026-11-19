@@ -22,7 +22,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 /// Playfair Display → Aref Ruqaa and the body face Work Sans → Tajawal.
 ///
 /// TODO(placeholder): delete this file when building the real home screen, and
-/// delete every `preview*` key from lib/core/l10n/generated/app_{en,ar}.arb
+/// delete every `preview*` key from lib/l10n/arb/app_{en,ar}.arb
 /// plus assets/images/jpeg/monstera.jpeg. Keep the AppBar actions if useful.
 /// ───────────────────────────────────────────────────────────────────────────
 class HomeScreen extends ConsumerWidget {

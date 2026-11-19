@@ -1,0 +1,5 @@
+#!/bin/sh
+# Rebuild the translation code after a pull or merge that changed the ARBs.
+if git diff --quiet ORIG_HEAD HEAD -- lib/l10n/arb 2>/dev/null; then exit 0; fi
+echo "post-merge: translations changed, running flutter gen-l10n"
+flutter gen-l10n >/dev/null 2>&1 || echo "post-merge: flutter gen-l10n failed; run it by hand"

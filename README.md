@@ -66,7 +66,7 @@ Re-run `build_runner` after touching any `@riverpod`, `@freezed`, or `.arb` file
 | API base URL + media URL | [lib/core/network/api_document.dart](lib/core/network/api_document.dart) — **still points at a demo API, change it first** |
 | Colors | [lib/core/theme/colors/app_colors.dart](lib/core/theme/colors/app_colors.dart), [color_schemes.dart](lib/core/theme/colors/color_schemes.dart) |
 | Fonts | swap `.ttf` files in [assets/fonts/](assets/fonts/), the `fonts:` block in [pubspec.yaml](pubspec.yaml), and the constants in [lib/core/theme/app_fonts.dart](lib/core/theme/app_fonts.dart) — the family names must match character-for-character. The shipped fonts are placeholders. |
-| Strings / translations | `.arb` files in [lib/core/l10n/generated/](lib/core/l10n/generated/); missing keys land in `untranslated_messages.txt` |
+| Strings / translations | `.arb` files in [lib/l10n/arb/](lib/l10n/arb/); `flutter pub get` writes the Dart code into `lib/core/l10n/generated/` (not committed); missing keys land in `untranslated_messages.txt` |
 | Routes | [lib/router/app_router.dart](lib/router/app_router.dart) |
 | Images | drop into `assets/images/png/` or `assets/images/svg/`, then `dart run app:gen_assets` to regenerate [lib/core/utils/constants/assets.dart](lib/core/utils/constants/assets.dart) |
 | App icon / launch screen | `android/app/src/main/res/mipmap-*`, `ios/Runner/Assets.xcassets` |

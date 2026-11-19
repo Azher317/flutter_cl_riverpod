@@ -55,3 +55,18 @@ android/secrets.properties
 ios/Flutter/Secrets.xcconfig
 *.jks
 *.keystore
+
+# Generated translation code: `flutter pub get` / `flutter gen-l10n` rebuild it
+lib/core/l10n/generated/
+untranslated_messages.txt
+
+# Screenshots and agent output are never committed
+screenshots/
+**/screenshots/
+Claude outputs/
+
+# Backend material kept locally (the tracked contract lives in docs/api/)
+docs/backend/
+
+# Logs
+*.log
