@@ -59,16 +59,19 @@ extension AppLocalizationsExtension on BuildContext {
   String get locale => l10n.localeName;
 }
 
+/// Languages written right to left (Kurdish Sorani included).
+const _rtlLanguages = {'ar', 'ku', 'ckb', 'fa', 'ur', 'he'};
+
 extension LocaleDirectionX on WidgetRef {
   TextDirection get direction {
     final code = watch(settingsProvider).localeCode;
-    return code == 'ar' ? TextDirection.rtl : TextDirection.ltr;
+    return _rtlLanguages.contains(code) ? TextDirection.rtl : TextDirection.ltr;
   }
 }
 
 extension OppesitLocaleDirectionX on WidgetRef {
   TextDirection get oppesitDirection {
     final code = watch(settingsProvider).localeCode;
-    return code == 'ar' ? TextDirection.ltr : TextDirection.rtl;
+    return _rtlLanguages.contains(code) ? TextDirection.ltr : TextDirection.rtl;
   }
 }

@@ -1,9 +1,9 @@
 import 'package:app/core/config/app_config.dart';
-import 'package:app/core/session/session_notifier.dart';
-import 'package:app/core/session/sign_in_gate.dart';
+import 'package:app/core/session/session_notifier.dart'; // new_app:guest
+import 'package:app/core/session/sign_in_gate.dart'; // new_app:guest
 import 'package:app/core/utils/constants/route_names.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; // new_app:guest
+import 'package:go_router/go_router.dart'; // new_app:guest
 
 /// Where the router sends the user, or `null` to stay. Pure, so it is
 /// tested on its own (test/router/redirect_test.dart).
@@ -11,7 +11,7 @@ String? appRedirect({
   required String location,
   required bool restoring,
   required bool signedIn,
-  required bool handBack,
+  bool handBack = false,
   SignInMode mode = AppConfig.signIn,
 }) {
   // Session still restoring from cache: hold on the splash screen.
@@ -20,6 +20,10 @@ String? appRedirect({
   }
 
   if (!signedIn) {
+    // No sign-in at all: everyone uses the app as is.
+    if (mode == SignInMode.none) {
+      return location == RouteNames.splash ? RouteNames.home : null;
+    }
     if (mode == SignInMode.required) {
       return location == RouteNames.login ? null : RouteNames.login;
     }
@@ -36,6 +40,7 @@ String? appRedirect({
   return null;
 }
 
+// new_app:guest-start
 /// Sign-in hand-back (guest mode): once a sign-in opened by
 /// `requireSignIn` succeeds, close it, so the screen that asked is back on
 /// top and finishes its action.
@@ -46,3 +51,5 @@ void listenForSignInHandBack(Ref ref, GoRouter router) {
     }
   });
 }
+
+// new_app:guest-end

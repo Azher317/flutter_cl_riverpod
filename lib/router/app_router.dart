@@ -1,9 +1,9 @@
 import 'package:app/core/config/debug_tools.dart';
 import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/session/session_notifier.dart';
-import 'package:app/core/session/sign_in_gate.dart';
+import 'package:app/core/session/sign_in_gate.dart'; // new_app:guest
 import 'package:app/core/utils/constants/route_names.dart';
-import 'package:app/features/auth/presentation/screens/login_screen.dart';
+import 'package:app/features/auth/presentation/screens/login_screen.dart'; // new_app:sign-in
 import 'package:app/features/home/presentation/screens/home_screen.dart';
 import 'package:app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:app/router/page_transitions.dart';
@@ -42,7 +42,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         location: state.matchedLocation,
         restoring: session.isLoading,
         signedIn: session.value != null,
-        handBack: ref.read(signInHandBackProvider),
+        handBack: ref.read(signInHandBackProvider), // new_app:guest
       );
     },
     routes: [
@@ -56,11 +56,13 @@ final routerProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) =>
             appPage(context, state, const HomeScreen()),
       ),
+      // new_app:sign-in-start
       GoRoute(
         path: RouteNames.login,
         pageBuilder: (context, state) =>
             appPage(context, state, const LoginScreen()),
       ),
+      // new_app:sign-in-end
       if (showDebugTools)
         GoRoute(
           path: RouteNames.logs,
@@ -77,7 +79,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     ],
   );
 
-  listenForSignInHandBack(ref, router);
+  listenForSignInHandBack(ref, router); // new_app:guest
 
   // Clean up when provider disposes
   ref.onDispose(refreshNotifier.dispose);

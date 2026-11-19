@@ -15,11 +15,16 @@ void main() {
     expect(_alignOf(tester), TextAlign.right);
   });
 
-  testWidgets('English: text sits on the left', (tester) async {
+  testWidgets('left-to-right layout: text sits on the left', (tester) async {
     await pumpApp(
       tester,
-      CustomTextFormField(controller: TextEditingController(), hintText: 'x'),
-      locale: const Locale('en'),
+      Directionality(
+        textDirection: TextDirection.ltr,
+        child: CustomTextFormField(
+          controller: TextEditingController(),
+          hintText: 'x',
+        ),
+      ),
     );
     expect(_alignOf(tester), TextAlign.left);
   });

@@ -17,6 +17,9 @@ enum SignInMode {
   /// account (`ref.requireSignIn(context, then)`); screens that need one are
   /// listed in `RouteNames.signedInOnly`.
   guest,
+
+  /// The app has no sign-in.
+  none,
 }
 
 enum PhoneFormat {

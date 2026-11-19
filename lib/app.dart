@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:app/core/l10n/generated/app_localizations.dart';
-import 'package:app/core/l10n/kurdish/kurdish_material_localization_delegate.dart';
-import 'package:app/core/l10n/kurdish/kurdish_widget_localization_delegate.dart';
+import 'package:app/core/l10n/kurdish/kurdish_material_localization_delegate.dart'; // new_app:kurdish
+import 'package:app/core/l10n/kurdish/kurdish_widget_localization_delegate.dart'; // new_app:kurdish
 import 'package:app/core/messaging/snackbar.dart';
 import 'package:app/core/push/push_host.dart';
 import 'package:app/core/settings/app_settings_provider.dart';
@@ -46,8 +46,8 @@ class App extends ConsumerWidget {
           onGenerateTitle: (context) => context.l10n.appName,
           localizationsDelegates: const [
             ...AppLocalizations.localizationsDelegates,
-            KurdishMaterialLocalizations.delegate,
-            KurdishWidgetLocalizations.delegate,
+            KurdishMaterialLocalizations.delegate, // new_app:kurdish
+            KurdishWidgetLocalizations.delegate, // new_app:kurdish
           ],
           supportedLocales: AppLocalizations.supportedLocales,
           // Theme
