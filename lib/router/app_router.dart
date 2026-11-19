@@ -1,11 +1,13 @@
 import 'package:app/core/config/debug_tools.dart';
 import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/session/session_notifier.dart';
+import 'package:app/core/session/sign_in_gate.dart';
 import 'package:app/core/utils/constants/route_names.dart';
 import 'package:app/features/auth/presentation/screens/login_screen.dart';
 import 'package:app/features/home/presentation/screens/home_screen.dart';
 import 'package:app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:app/router/page_transitions.dart';
+import 'package:app/router/redirect.dart';
 import 'package:app/router/router_refresh_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -31,32 +33,17 @@ final routerProvider = Provider<GoRouter>((ref) {
     refreshListenable: refreshNotifier,
     observers: [if (showDebugTools) TalkerRouteObserver(routeTalker)],
     redirect: (context, state) {
-      final session = ref.read(sessionProvider);
-      final loc = state.matchedLocation;
-
       // The logs screen (debug and UAT builds) stays reachable signed out.
       if (showDebugTools && state.matchedLocation == RouteNames.logs) {
         return null;
       }
-
-      // Session still restoring from cache → hold on the splash screen.
-      if (session.isLoading) {
-        return loc == RouteNames.splash ? null : RouteNames.splash;
-      }
-
-      final signedIn = session.value != null;
-
-      // Signed out → only the login screen is allowed.
-      if (!signedIn) {
-        return loc == RouteNames.login ? null : RouteNames.login;
-      }
-
-      // Signed in → bounce away from the splash/login screens.
-      if (loc == RouteNames.splash || loc == RouteNames.login) {
-        return RouteNames.home;
-      }
-
-      return null; // no redirect needed
+      final session = ref.read(sessionProvider);
+      return appRedirect(
+        location: state.matchedLocation,
+        restoring: session.isLoading,
+        signedIn: session.value != null,
+        handBack: ref.read(signInHandBackProvider),
+      );
     },
     routes: [
       GoRoute(
@@ -89,6 +76,8 @@ final routerProvider = Provider<GoRouter>((ref) {
         ),
     ],
   );
+
+  listenForSignInHandBack(ref, router);
 
   // Clean up when provider disposes
   ref.onDispose(refreshNotifier.dispose);
