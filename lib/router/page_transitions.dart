@@ -8,7 +8,12 @@ import 'package:go_router/go_router.dart';
 /// The page for every screen route: `GoRoute(pageBuilder: appPage(…))`.
 /// One fade-through on every platform ([FadeThroughPage]).
 Page<void> appPage(BuildContext context, GoRouterState state, Widget child) =>
-    FadeThroughPage<void>(key: state.pageKey, child: child);
+    FadeThroughPage<void>(
+      key: state.pageKey,
+      // Route logs and the route observer name the screen, not the class.
+      name: state.name ?? state.matchedLocation,
+      child: child,
+    );
 
 /// The outgoing page is gone by this fraction of the transition; only then
 /// does the incoming one appear, so the two never overlap.
@@ -31,7 +36,7 @@ const double _inScale = 0.96;
 /// Bottom sheets' backdrop tilt works on these pages
 /// ([canTransitionTo]).
 class FadeThroughPage<T> extends Page<T> {
-  const FadeThroughPage({super.key, required this.child});
+  const FadeThroughPage({super.key, super.name, required this.child});
 
   final Widget child;
 

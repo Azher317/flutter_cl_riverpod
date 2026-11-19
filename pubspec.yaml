@@ -54,7 +54,6 @@ dependencies:
   # Logging
   talker_flutter: ^5.1.17
   talker_dio_logger: ^5.1.17
-  talker_riverpod_logger: ^5.1.17
 
   # Utils
   clock: ^1.1.2 # AppHaptics' throttle; fake-able in tests (withClock)

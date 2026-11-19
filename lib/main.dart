@@ -12,7 +12,6 @@ import 'package:flutter_driver/driver_extension.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:talker_riverpod_logger/talker_riverpod_logger.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 const String appName = 'Starter';
@@ -38,11 +37,18 @@ Future<void> main() async {
       FlutterNativeSplash.preserve(widgetsBinding: binding);
 
       FlutterError.onError = (details) {
-        talker.handle(details.exception, details.stack, 'FlutterError');
-        FlutterError.presentError(details);
+        // Debug: Flutter prints it in its own format (widget path, links);
+        // the logs screen gets a copy without printing it a second time.
+        if (kDebugMode) FlutterError.presentError(details);
+        AppLogger.fatal(
+          details.exception,
+          details.stack,
+          'FlutterError',
+          printedByFlutter: kDebugMode,
+        );
       };
       PlatformDispatcher.instance.onError = (error, stack) {
-        talker.handle(error, stack, 'Uncaught platform error');
+        AppLogger.fatal(error, stack, 'Uncaught platform error');
         return true;
       };
 
@@ -63,18 +69,6 @@ Future<void> main() async {
 
       runApp(
         ProviderScope(
-          // Debug only: the observer runs on every provider event, which is
-          // pure overhead in a release build.
-          observers: [
-            if (kDebugMode)
-              TalkerRiverpodObserver(
-                talker: talker,
-                settings: const TalkerRiverpodLoggerSettings(
-                  printProviderAdded: false,
-                  printProviderUpdated: false,
-                ),
-              ),
-          ],
           overrides: [
             sharedPreferencesProvider.overrideWith((ref) => sharedPreferences),
           ],
@@ -83,7 +77,7 @@ Future<void> main() async {
       );
     },
     (error, stack) {
-      talker.handle(error, stack, 'Uncaught async error');
+      AppLogger.fatal(error, stack, 'Uncaught async error');
     },
   );
 }

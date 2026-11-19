@@ -82,7 +82,7 @@ class PushController extends _$PushController {
       final initial = await messaging.initialTap();
       if (initial != null && ref.mounted) _tap(initial);
     } on Object catch (e, s) {
-      talker.handle(e, s, 'Push: start failed');
+      AppLogger.handle(e, s, 'Push: start failed');
     }
   }
 
@@ -94,7 +94,7 @@ class PushController extends _$PushController {
       await _send(messaging, token);
     } on Object catch (e, s) {
       // e.g. no APNs token yet (simulator): the next launch tries again.
-      talker.handle(e, s, 'Push: no token');
+      AppLogger.handle(e, s, 'Push: no token');
     }
   }
 
@@ -105,7 +105,7 @@ class PushController extends _$PushController {
           .read(pushTokenRegistrarProvider)
           .register(token: token, platform: messaging.platform);
     } on Object catch (e, s) {
-      talker.handle(e, s, 'Push: token not registered');
+      AppLogger.handle(e, s, 'Push: token not registered');
     }
   }
 
@@ -115,7 +115,7 @@ class PushController extends _$PushController {
     try {
       await ref.read(pushTokenRegistrarProvider).unregister(token: token);
     } on Object catch (e, s) {
-      talker.handle(e, s, 'Push: token not withdrawn');
+      AppLogger.handle(e, s, 'Push: token not withdrawn');
     }
   }
 

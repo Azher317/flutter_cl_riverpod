@@ -1,11 +1,11 @@
 import 'dart:async';
+import 'package:app/core/config/debug_tools.dart';
 import 'package:app/core/network/api_document.dart';
 import 'package:app/core/network/api_headers.dart';
 import 'package:app/core/network/authenticator.dart';
 import 'package:app/core/network/clients_lib.dart';
 import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/session/session_notifier.dart';
-import 'package:flutter/foundation.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
 
 part 'dio_module.g.dart';
@@ -46,11 +46,13 @@ Dio dio(Ref ref) {
             }
           }
 
-          if (!kDebugMode) {
+          if (!showDebugTools) {
+            // Debug and UAT already log every failure through
+            // TalkerDioLogger; prod has no console, so report instead.
             if (e.type == DioExceptionType.cancel) {
-              talker.warning(e.message ?? 'Request cancelled');
+              AppLogger.warning(e.message ?? 'Request cancelled');
             } else {
-              talker.handle(e, e.stackTrace);
+              AppLogger.handle(e, e.stackTrace);
             }
           }
           handler.next(e);
@@ -58,13 +60,18 @@ Dio dio(Ref ref) {
       ),
     );
 
-  if (kDebugMode) {
+  if (showDebugTools) {
     dio.interceptors.add(
       TalkerDioLogger(
         talker: talker,
+        // Console: method, URL, status, time, request body, error body.
+        // Response bodies are kept for the logs screen and cut from the
+        // console (app_logger.dart).
+        // Request and response headers are off by default; error headers
+        // are turned off here.
         settings: const TalkerDioLoggerSettings(
-          printRequestHeaders: true,
-          printResponseHeaders: true,
+          printErrorHeaders: false,
+          printResponseTime: true,
           hiddenHeaders: {'authorization', 'cookie', 'set-cookie'},
           hiddenBodyKeys: {
             'password',
@@ -79,6 +86,9 @@ Dio dio(Ref ref) {
             'newPassword',
             'oldPassword',
             'confirmPassword',
+            'phone',
+            'phoneCountryCode',
+            'email',
           },
         ),
       ),

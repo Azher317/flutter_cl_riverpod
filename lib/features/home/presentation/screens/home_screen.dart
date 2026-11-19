@@ -3,15 +3,13 @@ import 'dart:async';
 import 'package:app/core/messaging/snackbar.dart';
 import 'package:app/core/session/session_notifier.dart';
 import 'package:app/core/settings/appearance_actions.dart';
-import 'package:app/core/utils/constants/route_names.dart';
 import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
+import 'package:app/core/widgets/debug/debug_logs_tile.dart';
 import 'package:app/core/widgets/overlay/custom_modal_bottom_sheet.dart';
 import 'package:app/core/widgets/text.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// ───────────────────────────────────────────────────────────────────────────
@@ -40,13 +38,6 @@ class HomeScreen extends ConsumerWidget {
           context.l10n.previewTitle,
           style: context.textTheme.titleLarge,
         ),
-        leading: kDebugMode
-            ? IconButton(
-                onPressed: () => context.push(RouteNames.logs),
-                icon: const Icon(Icons.bug_report),
-                tooltip: 'Log viewer (debug only)',
-              )
-            : null,
         actions: <Widget>[
           // Theme and language both change through AppearanceActions, so
           // each plays the same circular reveal from the tap.
@@ -93,6 +84,9 @@ class HomeScreen extends ConsumerWidget {
           _ComponentGallery(),
           SizedBox(height: Insets.large),
           _OverlayGallery(),
+          SizedBox(height: Insets.large),
+          // Belongs in the app's settings screen; here until one exists.
+          DebugLogsTile(),
           SizedBox(height: Insets.extraLarge),
         ],
       ),
