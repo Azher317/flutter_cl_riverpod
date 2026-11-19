@@ -18,18 +18,20 @@ before authoring.
    builder in [component_themes.dart](../../lib/core/theme/component_themes.dart) instead of
    repeating a `style:` at each call site.
 3. **Localization over literals.** Every user-visible string is `context.l10n.<key>`,
-   added to `app_en.arb` *and* `app_ar.arb`. Proper nouns are the only exception
+   added to every ARB the app ships. Proper nouns are the only exception
    (and deserve a comment).
-4. **Core vs feature placement.** A widget belongs in `core/widgets/` **iff** it
-   names no feature vocabulary, imports no feature provider or entity, and could be
-   dropped into an unrelated app unchanged. That's why
-   [custom_text_form_field.dart](../../lib/core/widgets/form_fields/custom_text_form_field.dart)
-   is core while
-   [password_text_form_field.dart](../../lib/features/auth/presentation/widgets/password_text_form_field.dart)
-   (owns the auth-specific obscure toggle and the `typeYourPasswordHere` string) lives
-   in the feature. Feature widgets wrap core widgets, they never fork them.
-   A feature widget that turns out to be generic gets moved to `core/` and stripped
-   of its feature vocabulary, not copied.
+4. **Reuse before writing (rule 17).** Before building a widget, check
+   [widgets.md](../../docs/guides/widgets.md), `lib/core/widgets/` and `lib/shared/`.
+   - One almost fits: add a parameter to it, keep every current use working
+     and its tests passing. Never fork it.
+   - None fits: say why in the plan, then build it in `core/widgets/` if it
+     names no business word and could drop into an unrelated app unchanged,
+     otherwise in `lib/shared/`. Add one line for it to `widgets.md`.
+   - A feature's `presentation/widgets/` holds only private pieces of that
+     feature's screens.
+   - When a second feature needs data another feature changes (a product
+     became unavailable), share it through a provider in `lib/shared/` that
+     both watch; never reach into the other feature.
 5. **Const-correctness.** `prefer_const_constructors`,
    `prefer_const_constructors_in_immutables`, `prefer_const_declarations` and
    `prefer_const_literals_to_create_immutables` are promoted to **warning** in
@@ -56,6 +58,10 @@ before authoring.
 12. **MediaQuery reads are narrow.** `MediaQuery.sizeOf(context)` / `paddingOf` /
     `viewInsetsOf` (or `context.width/height`), never `MediaQuery.of(context).x`: the
     latter rebuilds the widget on every keyboard, inset or text-scale change.
+
+13. **No overflow on small phones.** A new screen gets a widget test with
+    `testAtScreenSizes` (`test/helpers/screen_sizes.dart`): 375×667 and 360×640,
+    plus the tablet sizes in apps that support tablets.
 
 ## Loading states (skeletons)
 

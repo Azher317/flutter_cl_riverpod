@@ -1,154 +1,70 @@
 # CLAUDE.md
 
-Guidance for Claude Code (claude.ai/code) working in this repository.
+The always-true invariants, one line each. The reasons and details load
+automatically from [.claude/rules/](rules/) when a matching file is opened.
+Commands: [COMMANDS.md](../COMMANDS.md). Shared widgets:
+[docs/guides/widgets.md](../docs/guides/widgets.md). New backend:
+[docs/guides/new-backend.md](../docs/guides/new-backend.md).
 
-This file holds the **always-true invariants**.
+`auth` is shipped infrastructure (the sign-in that sets the session) and the
+**reference slice**: copy its shape for a new feature, never its symbols. The
+session itself is core (`core/session/`).
 
-`auth` is **shipped infrastructure, not a sample** — the login slice that establishes a
-session. The **session itself is a core concern** (`core/session/`, owns state + token +
-`logout()`); the router redirect, the `Authenticator` interceptor and the 401→logout
-handler depend on *that*, and `auth` merely feeds it via login (`setSession`). Edit auth's
-UI and flow; don't delete it. `splash` is the spinner the router holds on while the
-session restores from cache.
+## Working rules
 
-`auth` is also the **reference slice**: when scaffolding a new feature, copy its *shape*
-— layer order, file naming, the `Either` contract — never its symbols. Copying the shape
-is not importing the feature: no feature imports another. Cross-feature session access
-goes through `currentUserProvider` / `isSignedInProvider` (rule 3).
-
-Layer detail lives in [.claude/rules/](rules/) — those files are path-scoped and load
-automatically when a matching file is opened (`theming.md` for `lib/core/theme/**`,
-`data-layer.md` for `lib/features/*/data/**`, `pubspec.md` for `pubspec.yaml`, and so on).
-Scaffolding a new vertical slice is the **`add-feature` skill**: it carries the ordered
-checklist and the `clr-*` snippet catalogue. The shared-widget catalogue lives in
-[docs/guides/widgets.md](../docs/guides/widgets.md); general Dart/Flutter style defaults (additive,
-never overriding the rules here) live in [docs/guides/dart-style.md](../docs/guides/dart-style.md).
-
-## Commands
-
-```bash
-# Codegen — required after touching any @riverpod, @freezed, or .arb file
-flutter pub run build_runner build --delete-conflicting-outputs   # or: bin/run.sh
-flutter pub run build_runner watch  --delete-conflicting-outputs   # rebuild on save
-
-# Lint — riverpod_lint runs via custom_lint (NOT the analyzer)
-dart run custom_lint          # full lint incl. Riverpod rules; writes custom_lint.log (gitignored)
-flutter analyze               # analyzer-only pass
-
-# Assets — regenerate constants after adding/renaming/removing an image
-dart run app:gen_assets
-
-# Run
-flutter run
-```
-
----
+- Commit locally; push only when asked.
+- No screenshots unless asked. Check UI with a widget test first; on a
+  simulator take one small screenshot of the end state, no sleep loops, and run
+  long device checks in a helper agent.
+- One thread per task. `docs/PHASES.md` is the handover: a status table under 2 KB.
+- Plan first only for work over ~3 files or any behaviour change. A plan lists
+  the widgets it reuses, improves and adds (with why no existing one fits).
+- Before building a screen that needs the server, ask whether its backend is
+  ready ([data-layer.md](rules/data-layer.md), "Fake data").
+- Reports go in chat, not new files. Edit code with the Edit tool; scripts only
+  for mechanical multi-file renames.
+- One agent writes in a checkout at a time. Spike branches are never merged;
+  only what was learned moves over.
+- Don't edit `docs/api/` (the backend contract) or `design/` unless asked.
 
 ## Layer rules
 
-Hard invariants. Rules 1, 2, 3, 5 and 16 are enforced in CI by
-[bin/check_arch.sh](../bin/check_arch.sh) (run it locally before pushing).
+`bin/check_arch.sh` enforces the ones marked (checked); it runs on every commit
+and in CI.
 
-1. **`lib/core/**` must not import `package:app/features/`.** If `core/` ever needs
-   something a feature owns, invert it: an interface in `core/` + a throwing provider +
-   an override at the composition root. *Currently holds.* (Session lives entirely in
-   `core/session/`, so it needs no override.)
-2. **`lib/core/**` should not import `package:app/router/`.** `router/` imports every
-   feature screen, so a `core/ → router/` edge is rule 1 with an extra hop. Route paths
-   live in [route_names.dart](../lib/core/utils/constants/route_names.dart) so `core/`
-   can name a destination without importing the route table. *Currently holds.*
-3. **No feature imports another feature.** Features read the session through
-   `currentUserProvider` / `isSignedInProvider`
-   ([session_notifier.dart](../lib/core/session/session_notifier.dart)) — reactive and
-   token-free — and change it only through `ref.read(sessionProvider.notifier)`
-   (`setSession` / `logout`). Features never read `sessionProvider`'s *state*: that's
-   where the token lives, and only `core/network` (token) and `lib/router` (redirect)
-   read it. Any user-scoped provider watches `currentUserProvider` so it clears on
-   logout. Session is core, so no feature imports `auth` for it. Only
-   `lib/router/` imports `features/*` at all, and only for the *screens* it composes.
-   A feature may import its own files; only feature-A → feature-B is a violation
-   (checked by [bin/check_arch.sh](../bin/check_arch.sh)).
-4. **`domain/` imports nothing but `core/errors`, `core/usecase`, `core/utils/either`,
-   and its own feature's `domain/`.** No Flutter, no Dio, no Riverpod, no `data/`
-   models. Entities are plain Dart classes (see
-   [user_entity.dart](../lib/core/session/entities/user_entity.dart), which is a shared
-   identity type and therefore lives in `core/session/`, not in the `auth` feature).
-5. **`package:dio/dio.dart` appears only under `lib/core/network/**` and
-   [network_error_mapper.dart](../lib/core/errors/network_error_mapper.dart).**
-   The only `on DioException` *catch* is in
-   [api_consumer.dart](../lib/core/network/api_consumer.dart); other textual hits
-   are doc comments.
-6. **Data sources return *models*, throw typed `*Exception`s, and are Dio-free.**
-   They never return `Either`, never build a `Failure`, never touch a widget.
-7. **Repositories return `Either<Failure, T>` and are the only callers of `guard()`.**
-   They map model → entity via `.toEntity()`.
-8. **`Failure` subclasses are constructed only inside
-   [safe_repository_call.dart](../lib/core/errors/safe_repository_call.dart).**
-   (The core `SessionRepository` sits outside this `Either`/`guard()` world entirely:
-   its reads/writes are best-effort and return plain values — a corrupt cache collapses
-   to `null` (signed out), never a `Failure` —
-   [session_repository.dart](../lib/core/session/data/session_repository.dart).)
-9. **Presentation never sees an `*Exception`.** Notifiers `.fold()` an `Either` into
-   `AsyncData`/`AsyncError`; screens only ever handle `Failure`.
-10. **Only [failure_messenger.dart](../lib/core/messaging/failure_messenger.dart)
-    switches on `Failure`.** Screens call `context.showFailure(f)` /
-    `context.localizeFailure(f)`.
-11. **No user-visible string literal in a widget.** Everything goes through
-    `context.l10n.*`, added to `app_en.arb` *and* `app_ar.arb`.
-12. **No hardcoded colours, fonts, or text styles in a widget.** Read
-    `context.colorScheme.*`, `context.textTheme.*`, `context.appStatusColors`.
-13. **Never read or edit `*.g.dart` / `*.freezed.dart`.** They're generated,
-    analyzer-excluded, and machine-owned. To change their output, edit the
-    annotation on the source class and re-run build_runner — hand-edits are
-    overwritten on the next build. Derive provider names from the naming rule
-    below; don't open the `.g.dart` to check. Exclude them from searches:
-    `--glob '!*.{g,freezed}.dart'`. They're tracked, not gitignored, so an
-    unfiltered `grep` under `lib/` is mostly generated hits.
-14. **Notifiers and screens go through a `@riverpod` usecase provider** — never call a
-    datasource or repository directly. That seam is where the `Either` contract lives.
-15. **No imperative `context.go(...)` after login/logout.** Update the session; the
-    router redirects on session change (`RouterRefreshNotifier` + `redirect`).
-16. **`lib/core/` is infrastructure only; shared business code lives in `lib/shared/`.**
-    `core/` holds what any app needs whatever it sells (network, session, theme, l10n,
-    widgets, storage). Business vocabulary that two or more features use (a product
-    card entity, a governorates list, store config) goes in `lib/shared/<topic>/`,
-    with the same `domain/` · `data/` · `di/` layering as a feature but no screens.
-    `shared/` may import `core/` only; features and `router/` may import `shared/`;
-    `core/` never imports `shared/`. Code used by one feature stays in that feature.
-    (Checked by [bin/check_arch.sh](../bin/check_arch.sh).)
+1. `lib/core/` never imports `features/` (checked).
+2. `lib/core/` never imports `router/`; route paths live in `RouteNames` (checked).
+3. No feature imports another (checked). Session: watch `currentUserProvider` /
+   `isSignedInProvider`, change it via `sessionProvider.notifier`; only
+   `core/network` and `lib/router` read `sessionProvider`'s state.
+4. `domain/` imports only `core/errors`, `core/usecase`, `core/utils/either` and
+   its own `domain/`. No Flutter, Dio, Riverpod or models.
+5. `package:dio` only under `core/network/` and the error mapper (checked).
+6. Data sources return models and throw `*Exception`s; never `Either`, never UI.
+7. Repositories return `Either<Failure, T>` and are the only callers of `guard()`.
+8. `Failure`s are built only in `safe_repository_call.dart`.
+9. Presentation never sees an `*Exception`; notifiers `.fold()` the `Either`.
+10. Only `failure_messenger.dart` switches on `Failure`.
+11. No user-visible string literal: `context.l10n.*`, in every ARB the app ships.
+12. No hard-coded colours, fonts or text styles; spacing uses `Insets` (checked).
+13. Never read or edit `*.g.dart`, `*.freezed.dart` or `lib/core/l10n/generated/`;
+    searches skip them (`.ignore`). Change the source, re-run codegen.
+14. Notifiers and screens go through a `@riverpod` usecase provider.
+15. No `context.go(...)` after sign-in or sign-out; the router redirects on
+    session change. Guest-mode apps use `ref.requireSignIn(context, then)`.
+16. `lib/core/` is infrastructure; business code shared by 2+ features lives in
+    `lib/shared/`, which imports only `core/` (checked).
+17. Features use the shared widgets: no raw text field, date/time picker,
+    dialog or bottom sheet, and no public `*Field`/`*Button`/`*Dialog`/
+    `*Sheet`/`*Card` class inside `lib/features` (checked). If one almost fits,
+    add a parameter to it; never a second widget for the same job.
+18. Log only through `AppLogger`; haptics only through `AppHaptics` (checked).
+19. The backend's response shape lives only in `core/network/api_envelope.dart`.
+20. Data for a signed-in user is never requested for a guest.
 
-### Feature layout (`lib/features/<feature>/`)
-- `domain/` — `entities/` (pure), `repositories/` (abstract), `usecases/`, `params/`.
-  Usecases implement `UseCase<T, Params>` / `NoParamsUseCase<T>` from
-  [usecase.dart](../lib/core/usecase/usecase.dart), returning `Future<Either<Failure, T>>`.
-- `data/` — `models/` (Freezed + json_serializable, each with `.toEntity()`),
-  `datasources/` (remote via `ApiConsumer`, local via secure storage),
-  `repositories/` (impl of the domain contract, `with SafeRepositoryCall`).
-- `presentation/` — `screens/`, `notifiers/` (`@riverpod` notifiers holding `AsyncValue`),
-  and `widgets/` (feature-specific widgets only).
-- `di/` — `@riverpod` provider functions wiring datasource → repository → usecase.
+## Builds
 
-**Provider naming (generator behaviour, easy to get wrong):** `@riverpod` on a
-*function* `authRepository` → `authRepositoryProvider`. On a *class*, the generator
-drops a trailing `Notifier`: `class LoginNotifier` →
-[`loginProvider`](../lib/features/auth/presentation/notifiers/login_notifier.dart), while
-a class with no `Notifier` suffix keeps its name — `class Session` →
-[`sessionProvider`](../lib/core/session/session_notifier.dart).
-
----
-
-## Anti-patterns
-
-These are the ones the numbered rules above don't already cover.
-
-| Don't | Why | Do instead |
-|---|---|---|
-| Add `dartz` / `fpdart` | The project has a local sealed `Either` with `fold`/`isLeft`/`isRight` | Import [either.dart](../lib/core/utils/either.dart) |
-| Reach into another feature's `data/`, `domain/` or notifiers | Couples two slices that should stay independently deletable | Session → watch `currentUserProvider` / `isSignedInProvider` (**no token**); change it via `ref.read(sessionProvider.notifier)` (`setSession` / `logout`). Never read `sessionProvider`'s state from a feature — only `core/network` (token) and the router (redirect) may. Anything else → duplicate the small piece, or move it to `lib/shared/` (rule 16) |
-
----
-
-## Notes
-
-- Helper scripts live in [bin/](../bin/): `run.sh` (build_runner), `gen_assets.dart`,
-  `rename.sh`, `deep_link.sh`, `export.sh`, `uninstall.sh`.
+- Every run names its server: `flutter run --dart-define-from-file=env/uat.json`
+  (the VS Code launch configs do it). No server named: the app stops at launch.
+- Release: `bin/build_release.sh prod appbundle` (or `ipa`). Needs
+  `android/key.properties`; refuses a placeholder host and any fake data.

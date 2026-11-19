@@ -184,9 +184,11 @@ Test an installed build:
 bin/deep_link.sh <host> <application-id>      # e.g. bin/deep_link.sh myshop.com com.company.myapp
 ```
 
-### G. Optional — release signing (needed to publish on Android)
+### G. Release signing and servers
 
-Release builds currently sign with the **debug** key (see the `buildTypes.release` TODO in [android/app/build.gradle](android/app/build.gradle)) — the Play Store rejects that. Generate an upload keystore and wire up `android/key.properties` following the official guide: <https://docs.flutter.dev/deployment/android>.
+- **Android signing:** copy `android/key.properties.example` to `android/key.properties` and fill it with this app's upload key (the example shows the `keytool` command). A release build stops without it. Back the `.jks` and passwords up outside the Mac.
+- **Apple team and API keys:** copy `ios/Flutter/Secrets.xcconfig.example` to `ios/Flutter/Secrets.xcconfig`; Android API keys go in `android/secrets.properties`.
+- **Servers:** fill `API_HOST` in `env/dev.json`, `env/uat.json`, `env/prod.json`. Build releases with `bin/build_release.sh prod appbundle` (or `ipa`).
 
 ### H. Optional — other platforms
 

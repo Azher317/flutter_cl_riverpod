@@ -65,8 +65,10 @@ screenshots/
 **/screenshots/
 Claude outputs/
 
-# Backend material kept locally (the tracked contract lives in docs/api/)
-docs/backend/
+# Backend material kept locally (the tracked contract lives in docs/api/);
+# only the requests list is committed.
+docs/backend/*
+!docs/backend/REQUESTS.md
 
 # Logs
 *.log

@@ -22,5 +22,13 @@ if [[ -z "$host" || "$host" == *.invalid ]]; then
   exit 1
 fi
 
+mocks="$(find lib -path '*/datasources/mock/*' -name '*.dart' 2>/dev/null)"
+if [[ -n "$mocks" ]]; then
+  echo "Stopped: fake data is still in the app. Switch these features to the real"
+  echo "backend and delete the mock files first:"
+  echo "$mocks" | sed 's/^/  /'
+  exit 1
+fi
+
 echo "Building $target for $env_name: $host"
 flutter build "$target" --release --dart-define-from-file="$file" "$@"

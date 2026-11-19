@@ -10,7 +10,25 @@ bin/setup-hooks.sh                 # activate tracked hooks (core.hooksPath -> .
 git config --get core.hooksPath    # verify hooks are active (should print: .githooks)
 ```
 
-The `pre-commit` hook runs `bin/check_arch.sh` (import-boundary guard).
+The `pre-commit` hook runs `bin/check_arch.sh` (architecture checks). `post-checkout`
+and `post-merge` rebuild the translation code when the ARBs changed.
+
+## Run and release
+
+```bash
+flutter run --dart-define-from-file=env/uat.json   # every run names its server (VS Code launch configs do this)
+bin/build_release.sh prod appbundle                # release: prints the server, refuses placeholders and fake data
+bin/build_release.sh prod ipa
+```
+
+## Checks
+
+```bash
+bin/check_arch.sh                  # architecture checks (also on every commit and in CI)
+flutter analyze
+dart run custom_lint               # Riverpod lint rules (not part of flutter analyze)
+flutter test
+```
 
 ## Codegen / build
 
