@@ -25,7 +25,10 @@ paths:
   23:41:09 ROUTE Open /
   ```
 
-  A prod release prints nothing and keeps nothing.
+  A prod release prints nothing and keeps nothing. On Android, run through
+  `bin/flutter_quiet.sh` (the VS Code launch configs do): it hides the phone's
+  own log lines (VRI, SurfaceView...) but keeps the app's lines, E/ and F/
+  lines and Java crash traces; `FLUTTER_ALL_LOGS=1` shows everything.
 - **Emojis, not colours:** the HTTP status gets 🟢 (2xx/3xx), 🔴 (4xx, and no
   response: timeout, offline) or 🟠 (5xx). `WARN` lines get ⚠️ and
   `ERROR`/`FATAL` lines ❌. Emojis are plain text, so they look the same in

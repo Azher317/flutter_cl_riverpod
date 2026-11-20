@@ -199,6 +199,7 @@ The structure ships Android and iOS only. Add another with
 ```bash
 bin/setup-hooks.sh                          # activate tracked git hooks (core.hooksPath -> .githooks)
 bin/run.sh                                  # build_runner build --delete-conflicting-outputs
+bin/flutter_quiet.sh run ...                # flutter, minus Android's system log noise
 bin/new_app.sh                     # start a new app: asks name, folder, ids, languages, sign-in, phone, tablets
 bin/uninstall.sh <application-id>           # remove the app from booted simulator + connected device
 bin/deep_link.sh <host> <application-id>    # fire a test deep link at the Android device

@@ -69,5 +69,8 @@ and in CI.
 - Debugging an endpoint that returns wrong data: add
   `--dart-define=LOG_BODIES=true` and read the bodies in the console. Without
   it only failed calls (4xx, 5xx) print their bodies.
+- Run the app through `bin/flutter_quiet.sh run ...` (the VS Code launch
+  configs do it): it hides Android's own system log lines.
+  `FLUTTER_ALL_LOGS=1` shows them.
 - Release: `bin/build_release.sh prod appbundle` (or `ipa`). Needs
   `android/key.properties`; refuses a placeholder host and any fake data.
