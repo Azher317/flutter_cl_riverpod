@@ -11,3 +11,7 @@ const bool showDebugTools = kDebugMode || ApiDocument.env != 'prod';
 /// failed ones: `--dart-define=LOG_BODIES=true`. Use it when an endpoint
 /// returns 200 with the wrong data. Has no effect without [showDebugTools].
 const bool logAllBodies = bool.fromEnvironment('LOG_BODIES');
+
+/// Colour the console tags and HTTP statuses. Agents reading the console pass
+/// `--dart-define=LOG_COLORS=false`: the colour codes are noise in plain text.
+const bool logColors = bool.fromEnvironment('LOG_COLORS', defaultValue: true);

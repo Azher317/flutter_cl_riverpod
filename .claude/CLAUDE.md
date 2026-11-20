@@ -69,5 +69,7 @@ and in CI.
 - Debugging an endpoint that returns wrong data: add
   `--dart-define=LOG_BODIES=true` and read the bodies in the console. Without
   it only failed calls (4xx, 5xx) print their bodies.
+- Agents running the app add `--dart-define=LOG_COLORS=false`: the console's
+  colour codes are noise in plain text.
 - Release: `bin/build_release.sh prod appbundle` (or `ipa`). Needs
   `android/key.properties`; refuses a placeholder host and any fake data.

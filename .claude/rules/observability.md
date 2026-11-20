@@ -26,6 +26,11 @@ paths:
   ```
 
   A prod release prints nothing and keeps nothing.
+- **Colours:** only the tag and the HTTP status are painted. Status: 2xx/3xx
+  green, 4xx red, 5xx orange, no response (timeout, offline) red. Tags: `ERROR`
+  and `FATAL` red, `WARN` orange, `ROUTE` dim. `--dart-define=LOG_COLORS=false`
+  turns them off (agents always do). Xcode's console and logcat show the raw
+  codes.
 - **HTTP bodies:** failed calls (4xx, 5xx, no response) print the request and
   response bodies under their line. `--dart-define=LOG_BODIES=true` prints them
   for every call; use it when an endpoint returns 200 with the wrong data.

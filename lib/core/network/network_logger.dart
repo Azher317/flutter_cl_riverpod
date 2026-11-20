@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:app/core/config/debug_tools.dart';
 import 'package:app/core/network/redact.dart';
 import 'package:app/core/observability/app_logger.dart';
+import 'package:app/core/observability/console_printer.dart';
 import 'package:dio/dio.dart';
 
 /// Prints one console line per HTTP call (debug and UAT builds only):
@@ -91,7 +92,21 @@ class NetworkLogger extends Interceptor {
         text.write('\n  response: ${_body(responseData)}');
       }
     }
-    AppLogger.network(text.toString(), failed: failed);
+    AppLogger.network(
+      text.toString(),
+      failed: failed,
+      status: result,
+      statusColor: _colorFor(result),
+    );
+  }
+
+  /// 2xx/3xx green, 4xx red, 5xx orange, no response (timeout, offline) red.
+  static ConsoleColor _colorFor(String result) {
+    final status = int.tryParse(result);
+    if (status == null) return ConsoleColor.red;
+    if (status >= 500) return ConsoleColor.orange;
+    if (status >= 400) return ConsoleColor.red;
+    return ConsoleColor.green;
   }
 
   String _body(Object? data) {
