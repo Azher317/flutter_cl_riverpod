@@ -84,10 +84,11 @@ report "Field/Button/Dialog/Sheet/Card widget defined in a feature (move it to l
   "$(grep -rnE '^(abstract |final |base |sealed )?class [A-Z][A-Za-z0-9_]*(Field|Button|Dialog|Sheet|Card)\b' lib/features --include='*.dart' \
       | grep -vE '\.(g|freezed)\.dart:' || true)"
 
-# Logging goes through AppLogger; only the logging wiring touches talker.
-report "talker used directly (use AppLogger, lib/core/observability/app_logger.dart)" \
-  "$(grep -rnE '\b(talker|routeTalker)\.' lib --include='*.dart' \
-      | grep -vE '^lib/core/observability/app_logger\.dart:|^lib/core/network/dio_module\.dart:|^lib/router/' \
+# Logging goes through AppLogger; only lib/core/observability/ uses the
+# logger package.
+report "package:logger used directly (use AppLogger, lib/core/observability/app_logger.dart)" \
+  "$(grep -rnE "import 'package:logger/" lib --include='*.dart' \
+      | grep -vE '^lib/core/observability/' \
       | no_comments)"
 
 if [[ "$fail" -eq 0 ]]; then

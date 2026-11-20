@@ -1,6 +1,6 @@
 # Flutter Clean Architecture + Riverpod starter
 
-Clean Architecture (data / domain / presentation) per feature · Riverpod for DI *and* state · go_router · Dio behind a hand-written `ApiConsumer` (no Retrofit) · Freezed + json_serializable · flutter_hooks · a local `Either` (no dartz/fpdart) · Talker for logging.
+Clean Architecture (data / domain / presentation) per feature · Riverpod for DI *and* state · go_router · Dio behind a hand-written `ApiConsumer` (no Retrofit) · Freezed + json_serializable · flutter_hooks · a local `Either` (no dartz/fpdart) · `logger` for the console, behind `AppLogger`.
 
 Architecture, error handling, pagination and lint conventions are documented in [CLAUDE.md](CLAUDE.md).
 
@@ -47,7 +47,6 @@ Then by hand:
 ```bash
 bin/setup-hooks.sh                                         # activate git hooks (one-time, see note below)
 flutter pub get
-grep -A4 '^  talker:' pubspec.lock                         # MUST show the git url — see the fork note below
 dart run build_runner build --delete-conflicting-outputs   # or: bin/run.sh
 dart pub global activate custom_lint && dart run custom_lint
 flutter analyze && flutter test
@@ -56,8 +55,6 @@ flutter analyze && flutter test
 Re-run `build_runner` after touching any `@riverpod`, `@freezed`, or `.arb` file. Riverpod lint rules only surface via `dart run custom_lint`, never via `flutter analyze`.
 
 > **Git hooks:** `bin/setup-hooks.sh` points git at the tracked [.githooks/](.githooks/) directory (`core.hooksPath`). Git never clones `.git/hooks/`, so this one-time command is what wires up the `pre-commit` hook after a fresh clone (or after the `git init` in step A). The hook blocks commits that break an import boundary (`bin/check_arch.sh`).
-
-> **Talker fork:** `pubspec.yaml` pins `talker`, `talker_flutter` and `talker_dio_logger` to a patched fork via `dependency_overrides`. All three are required — `talker_flutter`/`talker_dio_logger` depend on `talker: ^5.1.17` from pub.dev rather than their sibling in the fork, so dropping the `talker` override silently pulls in the unpatched core. The fork keeps version `5.1.17`, so `pub get` output and `flutter pub deps` look identical either way; only the lockfile's `url:`/`ref:` proves it. Alternative check: `dart pub deps --json` — `talker`, `talker_flutter` and `talker_dio_logger` must each report `"source": "git"`.
 
 ### D. Configure the app
 

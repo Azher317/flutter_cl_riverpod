@@ -7,8 +7,7 @@ paths:
 
 Single `routerProvider` (`go_router`) in [app_router.dart](../../lib/router/app_router.dart).
 Redirects are driven by the core `sessionProvider`'s `AsyncValue`: `isLoading` → hold on
-splash; `value == null` → force login; signed in → bounce off splash/login. The
-debug-only `/logs` route (`TalkerScreen`) stays reachable while signed out.
+splash; `value == null` → force login; signed in → bounce off splash/login.
 `RouterRefreshNotifier` ([router_refresh_notifier.dart](../../lib/router/router_refresh_notifier.dart))
 re-runs redirects when session state changes. Paths are constants on `RouteNames`
 ([route_names.dart](../../lib/core/utils/constants/route_names.dart)) — deliberately in

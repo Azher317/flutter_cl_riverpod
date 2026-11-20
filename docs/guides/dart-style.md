@@ -10,7 +10,7 @@ rule. Where the two meet, the project wins — see the deferrals below.
 |---|---|---|
 | Prefer built-in state (`ValueNotifier`/`ChangeNotifier`/`setState`) | State is **Riverpod** `@riverpod` notifiers holding `AsyncValue` | [CLAUDE.md](../../.claude/CLAUDE.md) rule 14 |
 | Manual constructor DI / `provider` | DI is `@riverpod` provider functions in each feature's `di/` | CLAUDE.md rule 14 |
-| `logging` pkg / `dart:developer` `log` | All logging flows through Talker + `AppLogger` | [observability.md](../../.claude/rules/observability.md) |
+| `logging` pkg / `dart:developer` `log` | All logging flows through `AppLogger` (console via `logger`) | [observability.md](../../.claude/rules/observability.md) |
 | `Image.network` + loading/error builders; `cached_network_image` | Use `CachedImage`; `Image.network` is a listed anti-pattern | [presentation.md](../../.claude/rules/presentation.md) |
 | `google_fonts` for fonts | Bundled fonts via `AppFontScheme.of(locale)` | [theming.md](../../.claude/rules/theming.md) |
 | `try-catch` / custom exceptions ad hoc | Layered `Either<Failure,T>` + `guard()`; presentation sees only `Failure` | CLAUDE.md rules 6–10 |

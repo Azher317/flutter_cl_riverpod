@@ -66,5 +66,8 @@ and in CI.
 
 - Every run names its server: `flutter run --dart-define-from-file=env/uat.json`
   (the VS Code launch configs do it). No server named: the app stops at launch.
+- Debugging an endpoint that returns wrong data: add
+  `--dart-define=LOG_BODIES=true` and read the bodies in the console. Without
+  it only failed calls (4xx, 5xx) print their bodies.
 - Release: `bin/build_release.sh prod appbundle` (or `ipa`). Needs
   `android/key.properties`; refuses a placeholder host and any fake data.

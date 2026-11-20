@@ -4,9 +4,9 @@ import 'package:app/core/network/api_document.dart';
 import 'package:app/core/network/api_headers.dart';
 import 'package:app/core/network/authenticator.dart';
 import 'package:app/core/network/clients_lib.dart';
+import 'package:app/core/network/network_logger.dart';
 import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/session/session_notifier.dart';
-import 'package:talker_dio_logger/talker_dio_logger.dart';
 
 part 'dio_module.g.dart';
 
@@ -47,8 +47,8 @@ Dio dio(Ref ref) {
           }
 
           if (!showDebugTools) {
-            // Debug and UAT already log every failure through
-            // TalkerDioLogger; prod has no console, so report instead.
+            // Debug and UAT already print every failure through
+            // NetworkLogger; prod has no console, so report instead.
             if (e.type == DioExceptionType.cancel) {
               AppLogger.warning(e.message ?? 'Request cancelled');
             } else {
@@ -61,38 +61,9 @@ Dio dio(Ref ref) {
     );
 
   if (showDebugTools) {
-    dio.interceptors.add(
-      TalkerDioLogger(
-        talker: talker,
-        // Console: method, URL, status, time, request body, error body.
-        // Response bodies are kept for the logs screen and cut from the
-        // console (app_logger.dart).
-        // Request and response headers are off by default; error headers
-        // are turned off here.
-        settings: const TalkerDioLoggerSettings(
-          printErrorHeaders: false,
-          printResponseTime: true,
-          hiddenHeaders: {'authorization', 'cookie', 'set-cookie'},
-          hiddenBodyKeys: {
-            'password',
-            'token',
-            'accessToken',
-            'access_token',
-            'refreshToken',
-            'refresh_token',
-            'otp',
-            'pin',
-            'secret',
-            'newPassword',
-            'oldPassword',
-            'confirmPassword',
-            'phone',
-            'phoneCountryCode',
-            'email',
-          },
-        ),
-      ),
-    );
+    // One console line per call; bodies for failed calls (or every call with
+    // LOG_BODIES), masked by redact.dart. Headers never print.
+    dio.interceptors.add(NetworkLogger());
   }
 
   ref.onDispose(() => dio.close(force: true));

@@ -1,5 +1,4 @@
 import 'package:app/core/config/debug_tools.dart';
-import 'package:app/core/observability/app_logger.dart';
 import 'package:app/core/session/session_notifier.dart';
 import 'package:app/core/session/sign_in_gate.dart'; // new_app:guest
 import 'package:app/core/utils/constants/route_names.dart';
@@ -8,11 +7,11 @@ import 'package:app/features/home/presentation/screens/home_screen.dart';
 import 'package:app/features/splash/presentation/screens/splash_screen.dart';
 import 'package:app/router/page_transitions.dart';
 import 'package:app/router/redirect.dart';
+import 'package:app/router/route_log_observer.dart';
 import 'package:app/router/router_refresh_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:talker_flutter/talker_flutter.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(
   debugLabel: 'root',
@@ -31,12 +30,8 @@ final routerProvider = Provider<GoRouter>((ref) {
     initialLocation: RouteNames.splash,
     navigatorKey: _rootNavigatorKey,
     refreshListenable: refreshNotifier,
-    observers: [if (showDebugTools) TalkerRouteObserver(routeTalker)],
+    observers: [if (showDebugTools) RouteLogObserver()],
     redirect: (context, state) {
-      // The logs screen (debug and UAT builds) stays reachable signed out.
-      if (showDebugTools && state.matchedLocation == RouteNames.logs) {
-        return null;
-      }
       final session = ref.read(sessionProvider);
       return appRedirect(
         location: state.matchedLocation,
@@ -63,19 +58,6 @@ final routerProvider = Provider<GoRouter>((ref) {
             appPage(context, state, const LoginScreen()),
       ),
       // new_app:sign-in-end
-      if (showDebugTools)
-        GoRoute(
-          path: RouteNames.logs,
-          pageBuilder: (context, state) => appPage(
-            context,
-            state,
-            TalkerScreen(
-              talker: talker,
-              appBarTitle: 'Debug',
-              showMonitorButton: false,
-            ),
-          ),
-        ),
     ],
   );
 

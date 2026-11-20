@@ -6,7 +6,6 @@ import 'package:app/core/settings/appearance_actions.dart';
 import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
-import 'package:app/core/widgets/debug/debug_logs_tile.dart';
 import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
 import 'package:app/core/widgets/overlay/app_dialog.dart';
 import 'package:app/core/widgets/overlay/custom_modal_bottom_sheet.dart';
@@ -86,9 +85,6 @@ class HomeScreen extends ConsumerWidget {
           _ComponentGallery(),
           SizedBox(height: Insets.large),
           _OverlayGallery(),
-          SizedBox(height: Insets.large),
-          // Belongs in the app's settings screen; here until one exists.
-          DebugLogsTile(),
           SizedBox(height: Insets.extraLarge),
         ],
       ),

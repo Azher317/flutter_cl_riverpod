@@ -37,8 +37,9 @@ Future<void> main() async {
       FlutterNativeSplash.preserve(widgetsBinding: binding);
 
       FlutterError.onError = (details) {
-        // Debug: Flutter prints it in its own format (widget path, links);
-        // the logs screen gets a copy without printing it a second time.
+        // Debug: Flutter prints it in its own format (widget path, links),
+        // so AppLogger doesn't print it a second time; it still reaches the
+        // ErrorReporter.
         if (kDebugMode) FlutterError.presentError(details);
         AppLogger.fatal(
           details.exception,

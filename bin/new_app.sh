@@ -204,7 +204,6 @@ unmark "${MARKED[@]}"
 
 cat > lib/features/home/presentation/screens/home_screen.dart <<'DART'
 import 'package:app/core/utils/extensions/common_extensions.dart';
-import 'package:app/core/widgets/debug/debug_logs_tile.dart';
 import 'package:flutter/material.dart';
 
 /// The app's first screen. Replace it with the real one.
@@ -215,10 +214,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.appName)),
-      body: ListView(
-        // Move DebugLogsTile into the settings screen once there is one.
-        children: const [DebugLogsTile()],
-      ),
+      body: const SizedBox.shrink(),
     );
   }
 }
