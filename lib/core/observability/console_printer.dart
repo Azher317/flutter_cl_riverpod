@@ -2,40 +2,14 @@ import 'package:app/core/config/debug_tools.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
-/// Console colours (ANSI). Shown by the `flutter run` terminal and the VS
-/// Code and Android Studio consoles; Xcode and logcat print the raw codes.
-enum ConsoleColor {
-  green('32'),
-  orange('38;5;208'),
-  red('31'),
-  dim('2');
-
-  const ConsoleColor(this.code);
-
-  final String code;
-
-  String paint(String text) => '\x1B[${code}m$text\x1B[0m';
-}
-
 /// A message with its own console tag (`HTTP`, `ROUTE`) instead of the one
 /// its level gives (`INFO`, `ERROR`). Only the logging wiring creates these.
-///
-/// [highlight] (an HTTP status) is painted [highlightColor] on the first line.
 @immutable
 final class TaggedMessage {
-  const TaggedMessage(
-    this.tag,
-    this.text, {
-    this.tagColor,
-    this.highlight,
-    this.highlightColor,
-  });
+  const TaggedMessage(this.tag, this.text);
 
   final String tag;
   final String text;
-  final ConsoleColor? tagColor;
-  final String? highlight;
-  final ConsoleColor? highlightColor;
 
   @override
   String toString() => text;
@@ -50,23 +24,24 @@ final class DebugToolsFilter extends LogFilter {
 
 /// One short line per entry: `23:41:09 INFO  Signed in`.
 ///
-/// With [colors] (on unless `--dart-define=LOG_COLORS=false`), only the tag
-/// and an HTTP status are painted: `ERROR`/`FATAL` red, `WARN` orange,
-/// `ROUTE` dim. The rest of the line and the body lines stay plain.
+/// Warnings and errors get an emoji after the tag (`WARN  ⚠️`, `ERROR ❌`), so
+/// they stand out in every console: the `flutter run` terminal, the IDEs,
+/// Xcode and logcat. Emojis are plain text, unlike colour codes, which iOS's
+/// console prints as junk. HTTP lines carry their own status emoji
+/// (`NetworkLogger`).
 ///
 /// A multi-line message (HTTP bodies) keeps its extra lines under the first.
 /// Errors add the error on the first line and the first [stackFrames]
 /// frames of the stack under it.
 final class OneLinePrinter extends LogPrinter {
-  OneLinePrinter({this.stackFrames = 8, this.colors = logColors});
+  OneLinePrinter({this.stackFrames = 8});
 
   final int stackFrames;
-  final bool colors;
 
-  static const _tagColors = {
-    Level.warning: ConsoleColor.orange,
-    Level.error: ConsoleColor.red,
-    Level.fatal: ConsoleColor.red,
+  static const _markers = {
+    Level.warning: '⚠️ ',
+    Level.error: '❌ ',
+    Level.fatal: '❌ ',
   };
 
   static const _tags = {
@@ -87,24 +62,12 @@ final class OneLinePrinter extends LogPrinter {
     final text = message?.toString() ?? '';
     final error = event.error;
 
-    final tagColor = message is TaggedMessage
-        ? message.tagColor
-        : _tagColors[event.level];
-    final paddedTag = tag.padRight(5);
+    final marker = message is TaggedMessage ? '' : _markers[event.level] ?? '';
 
     final lines = text.split('\n');
-    var head = lines.first;
-    if (colors && message is TaggedMessage) {
-      final highlight = message.highlight;
-      final color = message.highlightColor;
-      if (highlight != null && color != null) {
-        head = head.replaceFirst('  $highlight', '  ${color.paint(highlight)}');
-      }
-    }
     final first = StringBuffer(
-      '${_time(event.time)} '
-      '${colors && tagColor != null ? tagColor.paint(paddedTag) : paddedTag} ',
-    )..write(head);
+      '${_time(event.time)} ${tag.padRight(5)} $marker${lines.first}',
+    );
     if (error != null && !text.contains(error.toString())) {
       first.write(text.isEmpty ? '$error' : ': $error');
     }

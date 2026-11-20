@@ -32,7 +32,7 @@ abstract final class AppLogger {
         ? _defaultConsole()
         : Logger(
             filter: DebugToolsFilter(),
-            printer: OneLinePrinter(colors: false),
+            printer: OneLinePrinter(),
             output: output,
           );
   }
@@ -75,20 +75,13 @@ abstract final class AppLogger {
   /// One HTTP call, from `NetworkLogger` only. [text] is the summary line,
   /// optionally followed by body lines.
   ///
-  /// [status] (`200`, `404`, `connectionError`) is painted [statusColor].
-  static void network(
-    String text, {
-    required bool failed,
-    String? status,
-    ConsoleColor? statusColor,
-  }) => _console.log(
+  static void network(String text, {required bool failed}) => _console.log(
     failed ? Level.warning : Level.info,
-    TaggedMessage('HTTP', text, highlight: status, highlightColor: statusColor),
+    TaggedMessage('HTTP', text),
   );
 
   /// A screen change, from `RouteLogObserver` only.
-  static void route(String text) =>
-      _console.i(TaggedMessage('ROUTE', text, tagColor: ConsoleColor.dim));
+  static void route(String text) => _console.i(TaggedMessage('ROUTE', text));
 
   /// `logger` refuses a [StackTrace] passed as the error.
   static Object? _loggable(Object? error) => error is StackTrace ? null : error;

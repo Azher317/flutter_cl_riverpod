@@ -62,7 +62,7 @@ void main() {
     expect(console.lines, hasLength(2));
     expect(console.lines[0], matches(_time));
     expect(console.lines[0], endsWith('INFO  Signed in'));
-    expect(console.lines[1], endsWith('WARN  Request cancelled'));
+    expect(console.lines[1], endsWith('WARN  ⚠️ Request cancelled'));
   });
 
   test('an error prints its message, the error and at most 8 frames', () {
@@ -72,7 +72,7 @@ void main() {
       StackTrace.current,
     );
 
-    expect(console.lines.first, contains('ERROR Upload failed: '));
+    expect(console.lines.first, contains('ERROR ❌ Upload failed: '));
     expect(console.lines.first, contains('disk full'));
     expect(console.lines.length, inInclusiveRange(2, 9));
     expect(console.lines.skip(1), everyElement(startsWith('  ')));
@@ -81,7 +81,7 @@ void main() {
   test('a stack trace passed as the error does not throw', () {
     AppLogger.error('Oops', StackTrace.current);
 
-    expect(console.lines.first, endsWith('ERROR Oops'));
+    expect(console.lines.first, endsWith('ERROR ❌ Oops'));
     expect(reporter.errors, hasLength(1));
   });
 
@@ -100,7 +100,7 @@ void main() {
   test('an uncaught error prints as FATAL and is reported as fatal', () {
     AppLogger.fatal(StateError('boom'), null, 'Uncaught async error');
 
-    expect(console.lines.single, contains('FATAL Uncaught async error: '));
+    expect(console.lines.single, contains('FATAL ❌ Uncaught async error: '));
     expect(reporter.errors.single.$2, isTrue);
   });
 

@@ -20,17 +20,17 @@ paths:
   terminal, the IDE console and logcat:
 
   ```text
-  23:41:09 HTTP  POST /api/user/auth/login  200  66ms
+  23:41:09 HTTP  POST /api/user/auth/login  🟢 200  66ms
   23:41:09 INFO  Signed in
   23:41:09 ROUTE Open /
   ```
 
   A prod release prints nothing and keeps nothing.
-- **Colours:** only the tag and the HTTP status are painted. Status: 2xx/3xx
-  green, 4xx red, 5xx orange, no response (timeout, offline) red. Tags: `ERROR`
-  and `FATAL` red, `WARN` orange, `ROUTE` dim. `--dart-define=LOG_COLORS=false`
-  turns them off (agents always do). Xcode's console and logcat show the raw
-  codes.
+- **Emojis, not colours:** the HTTP status gets 🟢 (2xx/3xx), 🔴 (4xx, and no
+  response: timeout, offline) or 🟠 (5xx). `WARN` lines get ⚠️ and
+  `ERROR`/`FATAL` lines ❌. Emojis are plain text, so they look the same in
+  every console and agents read them as is. Don't add ANSI colour codes: iOS's
+  console prints them as junk (`\^[[31m`).
 - **HTTP bodies:** failed calls (4xx, 5xx, no response) print the request and
   response bodies under their line. `--dart-define=LOG_BODIES=true` prints them
   for every call; use it when an endpoint returns 200 with the wrong data.

@@ -78,7 +78,7 @@ void main() {
     expect(console.lines, hasLength(1));
     expect(
       console.lines.single,
-      matches(RegExp(r'HTTP  POST /api/user/auth/login  200  \d+ms$')),
+      matches(RegExp(r'HTTP  POST /api/user/auth/login  🟢 200  \d+ms$')),
     );
   });
 
@@ -92,7 +92,7 @@ void main() {
       throwsA(isA<DioException>()),
     );
 
-    expect(console.lines.first, contains('POST /api/user/auth/login  500'));
+    expect(console.lines.first, contains('POST /api/user/auth/login  🟠 500'));
     expect(printed(), contains('request:  {"phoneNumber":"$hiddenValue"'));
     expect(
       printed(),
@@ -121,7 +121,7 @@ void main() {
     );
 
     expect(console.lines.first, contains('POST /api/user/auth/login  '));
-    expect(console.lines.first, contains('connectionError'));
+    expect(console.lines.first, contains('🔴 connectionError'));
     expect(printed(), contains('request:  '));
   });
 

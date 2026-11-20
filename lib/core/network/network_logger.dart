@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:app/core/config/debug_tools.dart';
 import 'package:app/core/network/redact.dart';
 import 'package:app/core/observability/app_logger.dart';
-import 'package:app/core/observability/console_printer.dart';
 import 'package:dio/dio.dart';
 
 /// Prints one console line per HTTP call (debug and UAT builds only):
 ///
 /// ```text
-/// 23:41:09 HTTP  POST /api/user/auth/login  200  66ms
+/// 23:41:09 HTTP  POST /api/user/auth/login  🟢 200  66ms
 /// ```
 ///
 /// Failed calls (4xx, 5xx, no response) add the masked request and response
@@ -81,7 +80,7 @@ class NetworkLogger extends Interceptor {
 
     final text = StringBuffer(
       '${options.method.padRight(4)} ${redactPathAndQuery(options.uri)}'
-      '  $result${ms == null ? '' : '  ${ms}ms'}',
+      '  ${_emojiFor(result)} $result${ms == null ? '' : '  ${ms}ms'}',
     );
     if (note != null && note.isNotEmpty) text.write('  $note');
     if (withBodies) {
@@ -92,21 +91,16 @@ class NetworkLogger extends Interceptor {
         text.write('\n  response: ${_body(responseData)}');
       }
     }
-    AppLogger.network(
-      text.toString(),
-      failed: failed,
-      status: result,
-      statusColor: _colorFor(result),
-    );
+    AppLogger.network(text.toString(), failed: failed);
   }
 
-  /// 2xx/3xx green, 4xx red, 5xx orange, no response (timeout, offline) red.
-  static ConsoleColor _colorFor(String result) {
+  /// 2xx/3xx 🟢, 4xx 🔴, 5xx 🟠, no response (timeout, offline) 🔴.
+  static String _emojiFor(String result) {
     final status = int.tryParse(result);
-    if (status == null) return ConsoleColor.red;
-    if (status >= 500) return ConsoleColor.orange;
-    if (status >= 400) return ConsoleColor.red;
-    return ConsoleColor.green;
+    if (status == null) return '🔴';
+    if (status >= 500) return '🟠';
+    if (status >= 400) return '🔴';
+    return '🟢';
   }
 
   String _body(Object? data) {
