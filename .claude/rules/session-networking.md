@@ -73,7 +73,9 @@ Dio is configured in [dio_module.dart](../../lib/core/network/dio_module.dart): 
 from `ApiDocument`, an `Authenticator` interceptor attaching the bearer token, and a
 401 interceptor that triggers **exactly one** logout across concurrent requests
 (guarded by a `Completer`). Not a refresh-token flow — a 401 ends the session.
-Debug builds add `TalkerDioLogger` with header/body redaction.
+Debug and UAT builds add `NetworkLogger`
+([network_logger.dart](../../lib/core/network/network_logger.dart)): one console line per
+call, bodies masked by [redact.dart](../../lib/core/network/redact.dart).
 
 HTTP goes through the manual `ApiConsumer`/`DioConsumer` — **not** Retrofit. Data
 sources call `_api.get/post/put/delete` and parse models themselves. Opt a call out

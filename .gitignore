@@ -48,3 +48,27 @@ android/.kotlin/
 
 # graphify output (run graphify by hand if you want it; never commit the graph)
 graphify-out/
+
+# Per-app secrets (each app has its own; examples are committed)
+android/key.properties
+android/secrets.properties
+ios/Flutter/Secrets.xcconfig
+*.jks
+*.keystore
+
+# Generated translation code: `flutter pub get` / `flutter gen-l10n` rebuild it
+lib/core/l10n/generated/
+untranslated_messages.txt
+
+# Screenshots and agent output are never committed
+screenshots/
+**/screenshots/
+Claude outputs/
+
+# Backend material kept locally (the tracked contract lives in docs/api/);
+# only the requests list is committed.
+docs/backend/*
+!docs/backend/REQUESTS.md
+
+# Logs
+*.log

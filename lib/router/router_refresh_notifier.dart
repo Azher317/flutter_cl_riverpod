@@ -8,10 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// this notifies listeners so the router re-evaluates its `redirect`.
 class RouterRefreshNotifier extends ChangeNotifier {
   RouterRefreshNotifier(Ref ref) {
-    _sub = ref.listen(
-      sessionProvider,
-      (_, _) => notifyListeners(),
-    );
+    _sub = ref.listen(sessionProvider, (_, _) => notifyListeners());
   }
 
   late final ProviderSubscription _sub;

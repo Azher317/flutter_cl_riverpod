@@ -37,7 +37,15 @@ class SessionRepositoryImpl implements SessionRepository {
 
   @override
   Future<AuthSessionEntity?> read() async {
-    final raw = await _secureStorage.read(key: SecureStorageKeys.authSession);
+    final String? raw;
+    try {
+      raw = await _secureStorage.read(key: SecureStorageKeys.authSession);
+    } catch (e) {
+      // A Keychain/Keystore that can't be read restores as signed out
+      // instead of leaving the app stuck on the splash.
+      AppLogger.warning('Failed to read the session cache: $e');
+      return null;
+    }
     if (raw == null) return null;
     try {
       return SessionCacheModel.fromJson(

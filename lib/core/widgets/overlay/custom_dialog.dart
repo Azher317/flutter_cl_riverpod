@@ -1,6 +1,5 @@
-//TODO this widget need refactoring
-
 import 'package:app/core/utils/constants/sizes.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
 import 'package:app/core/widgets/buttons/filled_loading_button.dart';
 import 'package:app/core/widgets/column_padded.dart';
@@ -9,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+/// A dialog with a title, any content, and Add / Cancel buttons. For a plain
+/// message with OK, use `showDialog` + `AlertDialog` from `core/widgets` only.
 class CustomDialog extends HookConsumerWidget {
   const CustomDialog({
     super.key,
@@ -37,7 +38,7 @@ class CustomDialog extends HookConsumerWidget {
                 FilledLoadingButton(
                   isLoading: isLoading,
                   onPressed: onAdd,
-                  child: const CustomText('إضافة'),
+                  child: CustomText(context.l10n.add),
                 ),
                 const SizedBox(width: Insets.small),
                 FilledButton(
@@ -46,7 +47,7 @@ class CustomDialog extends HookConsumerWidget {
                     backgroundColor: context.colorScheme.error,
                     foregroundColor: context.colorScheme.onError,
                   ),
-                  child: const CustomText('الغاء'),
+                  child: CustomText(context.l10n.cancel),
                 ),
               ],
             ),

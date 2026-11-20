@@ -24,10 +24,13 @@ class CustomTimePickerFormField extends HookConsumerWidget {
     final textEditingController = useTextEditingController(
       text: selectedTimeNotifier.value?.format24Hour(),
     );
-    selectedTimeNotifier.addListener(() {
-      textEditingController.text =
+    // Keep the text in step with the value; removed when the field goes away.
+    useEffect(() {
+      void sync() => textEditingController.text =
           selectedTimeNotifier.value?.format24Hour() ?? '';
-    });
+      selectedTimeNotifier.addListener(sync);
+      return () => selectedTimeNotifier.removeListener(sync);
+    }, [selectedTimeNotifier]);
 
     return ValueListenableBuilder(
       valueListenable: selectedTimeNotifier,

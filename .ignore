@@ -1,0 +1,13 @@
+# Search tools (ripgrep and tools built on it) skip these by default.
+# Generated code nobody edits:
+*.g.dart
+*.freezed.dart
+lib/core/l10n/generated/
+# Build output and platform caches:
+build/
+.dart_tool/
+ios/Pods/
+ios/.symlinks/
+android/.gradle/
+# Logs:
+*.log

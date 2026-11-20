@@ -1,6 +1,6 @@
 # Flutter Clean Architecture + Riverpod starter
 
-Clean Architecture (data / domain / presentation) per feature · Riverpod for DI *and* state · go_router · Dio behind a hand-written `ApiConsumer` (no Retrofit) · Freezed + json_serializable · flutter_hooks · a local `Either` (no dartz/fpdart) · Talker for logging.
+Clean Architecture (data / domain / presentation) per feature · Riverpod for DI *and* state · go_router · Dio behind a hand-written `ApiConsumer` (no Retrofit) · Freezed + json_serializable · flutter_hooks · a local `Either` (no dartz/fpdart) · `logger` for the console, behind `AppLogger`.
 
 Architecture, error handling, pagination and lint conventions are documented in [CLAUDE.md](CLAUDE.md).
 
@@ -47,7 +47,6 @@ Then by hand:
 ```bash
 bin/setup-hooks.sh                                         # activate git hooks (one-time, see note below)
 flutter pub get
-grep -A4 '^  talker:' pubspec.lock                         # MUST show the git url — see the fork note below
 dart run build_runner build --delete-conflicting-outputs   # or: bin/run.sh
 dart pub global activate custom_lint && dart run custom_lint
 flutter analyze && flutter test
@@ -57,8 +56,6 @@ Re-run `build_runner` after touching any `@riverpod`, `@freezed`, or `.arb` file
 
 > **Git hooks:** `bin/setup-hooks.sh` points git at the tracked [.githooks/](.githooks/) directory (`core.hooksPath`). Git never clones `.git/hooks/`, so this one-time command is what wires up the `pre-commit` hook after a fresh clone (or after the `git init` in step A). The hook blocks commits that break an import boundary (`bin/check_arch.sh`).
 
-> **Talker fork:** `pubspec.yaml` pins `talker`, `talker_flutter` and `talker_dio_logger` to a patched fork via `dependency_overrides`. All three are required — `talker_flutter`/`talker_dio_logger` depend on `talker: ^5.1.17` from pub.dev rather than their sibling in the fork, so dropping the `talker` override silently pulls in the unpatched core. The fork keeps version `5.1.17`, so `pub get` output and `flutter pub deps` look identical either way; only the lockfile's `url:`/`ref:` proves it. Alternative check: `dart pub deps --json` — `talker`, `talker_flutter` and `talker_dio_logger` must each report `"source": "git"`.
-
 ### D. Configure the app
 
 | What | Where |
@@ -66,7 +63,7 @@ Re-run `build_runner` after touching any `@riverpod`, `@freezed`, or `.arb` file
 | API base URL + media URL | [lib/core/network/api_document.dart](lib/core/network/api_document.dart) — **still points at a demo API, change it first** |
 | Colors | [lib/core/theme/colors/app_colors.dart](lib/core/theme/colors/app_colors.dart), [color_schemes.dart](lib/core/theme/colors/color_schemes.dart) |
 | Fonts | swap `.ttf` files in [assets/fonts/](assets/fonts/), the `fonts:` block in [pubspec.yaml](pubspec.yaml), and the constants in [lib/core/theme/app_fonts.dart](lib/core/theme/app_fonts.dart) — the family names must match character-for-character. The shipped fonts are placeholders. |
-| Strings / translations | `.arb` files in [lib/core/l10n/generated/](lib/core/l10n/generated/); missing keys land in `untranslated_messages.txt` |
+| Strings / translations | `.arb` files in [lib/l10n/arb/](lib/l10n/arb/); `flutter pub get` writes the Dart code into `lib/core/l10n/generated/` (not committed); missing keys land in `untranslated_messages.txt` |
 | Routes | [lib/router/app_router.dart](lib/router/app_router.dart) |
 | Images | drop into `assets/images/png/` or `assets/images/svg/`, then `dart run app:gen_assets` to regenerate [lib/core/utils/constants/assets.dart](lib/core/utils/constants/assets.dart) |
 | App icon / launch screen | `android/app/src/main/res/mipmap-*`, `ios/Runner/Assets.xcassets` |
@@ -184,9 +181,11 @@ Test an installed build:
 bin/deep_link.sh <host> <application-id>      # e.g. bin/deep_link.sh myshop.com com.company.myapp
 ```
 
-### G. Optional — release signing (needed to publish on Android)
+### G. Release signing and servers
 
-Release builds currently sign with the **debug** key (see the `buildTypes.release` TODO in [android/app/build.gradle](android/app/build.gradle)) — the Play Store rejects that. Generate an upload keystore and wire up `android/key.properties` following the official guide: <https://docs.flutter.dev/deployment/android>.
+- **Android signing:** copy `android/key.properties.example` to `android/key.properties` and fill it with this app's upload key (the example shows the `keytool` command). A release build stops without it. Back the `.jks` and passwords up outside the Mac.
+- **Apple team and API keys:** copy `ios/Flutter/Secrets.xcconfig.example` to `ios/Flutter/Secrets.xcconfig`; Android API keys go in `android/secrets.properties`.
+- **Servers:** fill `API_HOST` in `env/dev.json`, `env/uat.json`, `env/prod.json`. Build releases with `bin/build_release.sh prod appbundle` (or `ipa`).
 
 ### H. Optional — other platforms
 
@@ -200,7 +199,8 @@ The structure ships Android and iOS only. Add another with
 ```bash
 bin/setup-hooks.sh                          # activate tracked git hooks (core.hooksPath -> .githooks)
 bin/run.sh                                  # build_runner build --delete-conflicting-outputs
-bin/rename.sh <bundle-id> "<App Name>" [iraqi|international]   # bundle id + app name; asks the phone format (AppConfig)
+bin/flutter_quiet.sh run ...                # flutter, minus Android's system log noise
+bin/new_app.sh                     # start a new app: asks name, folder, ids, languages, sign-in, phone, tablets
 bin/uninstall.sh <application-id>           # remove the app from booted simulator + connected device
 bin/deep_link.sh <host> <application-id>    # fire a test deep link at the Android device
 dart run app:gen_assets                     # regenerate asset constants

@@ -1,0 +1,10 @@
+# Copy to android/key.properties (never committed) and fill with THIS app's
+# upload key. Every app has its own keystore and its own key.properties.
+# Create a keystore once per app:
+#   keytool -genkey -v -keystore ~/keys/<app>-upload.jks -keyalg RSA \
+#     -keysize 2048 -validity 10000 -alias upload
+# Back the .jks file and these passwords up outside this Mac.
+storePassword=your-store-password
+keyPassword=your-key-password
+keyAlias=upload
+storeFile=/Users/you/keys/app-upload.jks

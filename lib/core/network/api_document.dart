@@ -1,7 +1,48 @@
+/// Where the backend lives. Every run and every build names its server with
+/// one of the files in `env/`:
+///
+/// ```bash
+/// flutter run --dart-define-from-file=env/uat.json
+/// bin/build_release.sh prod appbundle   # wraps --dart-define-from-file=env/prod.json
+/// ```
+///
+/// There is no default on purpose: a build that names no server stops at
+/// launch ([assertConfigured]) instead of quietly talking to a test server.
 abstract class ApiDocument {
   const ApiDocument._();
-  static const baseUrl = 'https://tafly-api.taco5k.site/api/user';
-  static const mediaUrl = 'https://tafly-api.taco5k.site/';
+
+  /// `dev`, `uat` or `prod`. Empty when no env file was passed.
+  static const String env = String.fromEnvironment('API_ENV');
+
+  /// Scheme + host, no trailing slash, e.g. `https://api.example.com`.
+  static const String host = String.fromEnvironment('API_HOST');
+
+  /// Every endpoint in `Endpoints` is appended to this.
+  static const String baseUrl = '$host/api/user';
+
+  /// Relative media paths from the API are resolved against this.
+  static const String mediaUrl = '$host/';
+
+  static const _envs = {'dev', 'uat', 'prod'};
+
+  /// Stops the app at launch, in every build mode, when the build named no
+  /// server or a server that is still a placeholder. Called first in `main`.
+  static void assertConfigured() {
+    if (!_envs.contains(env)) {
+      throw StateError(
+        'No server chosen. Run or build with '
+        '--dart-define-from-file=env/<dev|uat|prod>.json '
+        '(API_ENV was "$env").',
+      );
+    }
+    final uri = Uri.tryParse(host);
+    if (uri == null || !uri.hasScheme || host.endsWith('.invalid')) {
+      throw StateError(
+        'API_ENV=$env but API_HOST is not set: fill env/$env.json '
+        '(API_HOST was "$host").',
+      );
+    }
+  }
 
   static String? resolveMediaPath(String? path) {
     if (path == null || path.trim().isEmpty) return null;

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app/core/errors/exceptions.dart';
+import 'package:app/core/network/api_envelope.dart';
 import 'package:dio/dio.dart';
 
 /// The single place raw transport errors are classified into the app's own
@@ -27,9 +28,11 @@ abstract class NetworkErrorMapper {
         // Carry only the backend-provided message (or empty). Generic,
         // user-facing wording is the presentation layer's job and is localized
         // there (`FailureX.localizeFailure`) — the data layer never fabricates
-        // English display strings.
-        final message = messageFrom(e) ?? '';
-        switch (e.response?.statusCode) {
+        // English display strings. A 5xx never carries the server's text: it
+        // can be a crash page with headers or tokens in it.
+        final status = e.response?.statusCode ?? 0;
+        final message = status >= 500 ? '' : messageFrom(e) ?? '';
+        switch (status) {
           case 400:
             return BadRequestException(message);
           case 401:
@@ -53,20 +56,12 @@ abstract class NetworkErrorMapper {
         if (e.error is SocketException) {
           return const NetworkException('No internet connection');
         }
-        return ServerException(messageFrom(e) ?? '');
+        return const ServerException('');
     }
   }
 
   /// The backend's own error message, or `null` when it didn't send one.
-  /// Every branch is null-safe by design — a throw inside error handling would
-  /// itself be the bug.
-  static String? messageFrom(DioException e) {
-    final data = e.response?.data;
-    if (data is Map<String, dynamic>) {
-      final message = data['message']?.toString();
-      if (message != null && message.isNotEmpty) return message;
-    }
-    if (data is String && data.isNotEmpty) return data;
-    return null;
-  }
+  /// How it is read depends on the backend: see [ApiEnvelope.errorMessage].
+  static String? messageFrom(DioException e) =>
+      ApiEnvelope.errorMessage(e.response?.data);
 }

@@ -30,8 +30,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         // it from the global 401 -> logout interceptor.
         extra: const {'skipAuthLogout': true},
       );
-      // The login endpoint returns the user (token nested inside) directly, not
-      // wrapped in DefaultResponse — see the note in default_response.dart.
+      // DioConsumer already removed any wrapper (ApiEnvelope.data).
       return UserModel.fromJson(json as Map<String, dynamic>);
     } on UnauthorizedException catch (e) {
       // The one piece of error knowledge only this endpoint owns. Generic

@@ -165,10 +165,10 @@
   "clr-data-api-method-paged": {
     "scope": "dart",
     "prefix": "clr-data-api-method-paged",
-    "description": "Data · paged ApiConsumer call returning PaginatedResponse<T>. Needs imports of core/network/paginated.dart (defaultLimitSize) and core/network/paginated_response.dart.",
+    "description": "Data · paged ApiConsumer call returning ApiPage<T>. Needs imports of core/network/paginated.dart (defaultLimitSize) and core/network/api_envelope.dart.",
     "body": [
       "@override",
-      "Future<PaginatedResponse<${1:Thing}Model>> ${2:getThings}({",
+      "Future<ApiPage<${1:Thing}Model>> ${2:getThings}({",
       "  required int page,",
       "  int limit = defaultLimitSize,",
       "}) async {",
@@ -176,10 +176,7 @@
       "    Endpoints.${3:endpoint},",
       "    queryParameters: {'pageNumber': page, 'pageSize': limit},",
       "  );",
-      "  return PaginatedResponse<${1}Model>.fromJson(",
-      "    json as Map<String, dynamic>,",
-      "    (item) => ${1}Model.fromJson(item as Map<String, dynamic>),",
-      "  );",
+      "  return ApiEnvelope.page(json, ${1}Model.fromJson);",
       "}$0"
     ]
   },

@@ -7,8 +7,7 @@ paths:
 
 Single `routerProvider` (`go_router`) in [app_router.dart](../../lib/router/app_router.dart).
 Redirects are driven by the core `sessionProvider`'s `AsyncValue`: `isLoading` → hold on
-splash; `value == null` → force login; signed in → bounce off splash/login. The
-debug-only `/logs` route (`TalkerScreen`) stays reachable while signed out.
+splash; `value == null` → force login; signed in → bounce off splash/login.
 `RouterRefreshNotifier` ([router_refresh_notifier.dart](../../lib/router/router_refresh_notifier.dart))
 re-runs redirects when session state changes. Paths are constants on `RouteNames`
 ([route_names.dart](../../lib/core/utils/constants/route_names.dart)) — deliberately in
@@ -69,3 +68,13 @@ StatefulShellRoute(
 ```
 
 An app without bottom navigation deletes `lib/router/app_shell.dart`.
+
+## Adding a route
+
+1. Add the path constant to `RouteNames`.
+2. Add the `GoRoute` with `pageBuilder: (context, state) => appPage(context, state, const XScreen())`
+   (or under the shell branch it belongs to). Only `lib/router/` imports the screen.
+3. A screen only for signed-in users in a guest-mode app: add its path to
+   `RouteNames.signedInOnly`. Never a guard widget.
+4. Navigate with `context.go` / `context.push` for normal moves; never after
+   sign-in or sign-out (rule 15).

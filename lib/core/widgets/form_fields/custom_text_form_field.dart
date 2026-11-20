@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// The one text field. Every field in the app is this widget or is built on
+/// it (phone, date, time, dropdown); `bin/check_arch.sh` blocks a raw
+/// `TextFormField` in features. Missing an option? Add a parameter here.
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
@@ -27,6 +30,10 @@ class CustomTextFormField extends StatelessWidget {
     this.enabledBorder,
     this.focusedBorder,
     this.contentPadding,
+    this.textDirection,
+    this.autofillHints,
+    this.errorText,
+    this.onTapOutside,
   });
 
   final TextEditingController? controller;
@@ -50,6 +57,18 @@ class CustomTextFormField extends StatelessWidget {
   final OutlineInputBorder? enabledBorder;
   final OutlineInputBorder? focusedBorder;
   final EdgeInsets? contentPadding;
+
+  /// Force a direction for content that always reads left to right (phone
+  /// numbers, prices). The text still sits on the layout's start side.
+  final TextDirection? textDirection;
+  final Iterable<String>? autofillHints;
+
+  /// Shown instead of the validator's message while non-null.
+  final String? errorText;
+
+  /// Called on a tap outside the field, e.g. to close the keyboard.
+  final TapRegionCallback? onTapOutside;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -66,8 +85,16 @@ class CustomTextFormField extends StatelessWidget {
         focusedBorder: focusedBorder,
       ),
       validator: validator,
-      // textDirection: TextDirection.ltr,
-      // textAlign: TextAlign.left,
+      forceErrorText: errorText,
+      onTapOutside: onTapOutside,
+      autofillHints: autofillHints,
+      textDirection: textDirection,
+      // The layout's start as a fixed side: `TextAlign.start` would follow
+      // [textDirection], so a forced-LTR phone would sit at the far left in
+      // Arabic while every other field sits on the right.
+      textAlign: Directionality.of(context) == TextDirection.rtl
+          ? TextAlign.right
+          : TextAlign.left,
       maxLines: maxLines,
       minLines: minLines,
       onChanged: onChanged,

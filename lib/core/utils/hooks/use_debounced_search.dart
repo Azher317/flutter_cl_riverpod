@@ -15,8 +15,9 @@ class DebouncedSearch {
   });
 }
 
-DebouncedSearch useDebouncedSearch(
-    {Duration delay = const Duration(milliseconds: 500)}) {
+DebouncedSearch useDebouncedSearch({
+  Duration delay = const Duration(milliseconds: 500),
+}) {
   final controller = useTextEditingController();
   final value = useState('');
   final debounced = useDebounce(value.value, delay);
@@ -29,5 +30,8 @@ DebouncedSearch useDebouncedSearch(
   }, [controller]);
 
   return DebouncedSearch(
-      controller: controller, value: value, debounced: debounced);
+    controller: controller,
+    value: value,
+    debounced: debounced,
+  );
 }

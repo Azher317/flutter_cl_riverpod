@@ -3,15 +3,14 @@ import 'dart:async';
 import 'package:app/core/messaging/snackbar.dart';
 import 'package:app/core/session/session_notifier.dart';
 import 'package:app/core/settings/appearance_actions.dart';
-import 'package:app/core/utils/constants/route_names.dart';
 import 'package:app/core/utils/constants/sizes.dart';
 import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:app/core/utils/extensions/theme_extentions.dart';
+import 'package:app/core/widgets/form_fields/custom_text_form_field.dart';
+import 'package:app/core/widgets/overlay/app_dialog.dart';
 import 'package:app/core/widgets/overlay/custom_modal_bottom_sheet.dart';
 import 'package:app/core/widgets/text.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 /// ───────────────────────────────────────────────────────────────────────────
@@ -24,7 +23,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 /// Playfair Display → Aref Ruqaa and the body face Work Sans → Tajawal.
 ///
 /// TODO(placeholder): delete this file when building the real home screen, and
-/// delete every `preview*` key from lib/core/l10n/generated/app_{en,ar}.arb
+/// delete every `preview*` key from lib/l10n/arb/app_{en,ar}.arb
 /// plus assets/images/jpeg/monstera.jpeg. Keep the AppBar actions if useful.
 /// ───────────────────────────────────────────────────────────────────────────
 class HomeScreen extends ConsumerWidget {
@@ -40,13 +39,6 @@ class HomeScreen extends ConsumerWidget {
           context.l10n.previewTitle,
           style: context.textTheme.titleLarge,
         ),
-        leading: kDebugMode
-            ? IconButton(
-                onPressed: () => context.push(RouteNames.logs),
-                icon: const Icon(Icons.bug_report),
-                tooltip: 'Log viewer (debug only)',
-              )
-            : null,
         actions: <Widget>[
           // Theme and language both change through AppearanceActions, so
           // each plays the same circular reveal from the tap.
@@ -320,7 +312,7 @@ class _ComponentGallery extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          TextField(decoration: InputDecoration(hintText: context.l10n.search)),
+          CustomTextFormField(controller: null, hintText: context.l10n.search),
           const SizedBox(height: Insets.medium),
           Wrap(
             spacing: Insets.small,
@@ -430,8 +422,8 @@ class _OverlayGallery extends StatelessWidget {
     );
   }
 
-  Future<void> _showDialog(BuildContext context) => showDialog<void>(
-    context: context,
+  Future<void> _showDialog(BuildContext context) => showAppDialog<void>(
+    context,
     builder: (BuildContext context) => AlertDialog(
       title: CustomText(context.l10n.previewDialogTitle),
       content: CustomText(context.l10n.previewDialogBody),

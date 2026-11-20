@@ -1,47 +1,88 @@
-import 'package:talker_flutter/talker_flutter.dart';
+import 'package:app/core/observability/console_printer.dart';
+import 'package:app/core/observability/error_reporter.dart';
+import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 
-/// Single Talker instance for the whole app — HTTP, Riverpod, framework
-/// errors, and manual logs all flow through this one timeline.
+/// The one way the app logs.
 ///
-/// Global rather than provider-held because some call sites (e.g.
-/// [PagingControllerX]) have no [Ref] to read a provider from.
-final talker = TalkerFlutter.init(
-  settings: TalkerSettings(
-    
-  ),
-  // Riverpod add/update/dispose/fail logs are noisy by default; start with
-  // them off in the "Packages settings" sheet, toggle back on when needed.
-  filter: TalkerFilter(
-    disabledKeys: [
-      TalkerKey.riverpodAdd,
-      TalkerKey.riverpodUpdate,
-      TalkerKey.riverpodDispose,
-      TalkerKey.riverpodFail,
-    ],
-  ),
-);
+/// Debug and UAT builds ([showDebugTools]) print one short line per entry to
+/// the console; prod builds print nothing and keep nothing. Errors also go to
+/// the [ErrorReporter], so a release build still reports them.
+///
+/// Only `lib/core/observability/` imports `package:logger`; everything else
+/// logs through [AppLogger]. `bin/check_arch.sh` enforces it.
+abstract final class AppLogger {
+  static ErrorReporter _reporter = const NoopErrorReporter();
 
-/// Route transitions are console-only: they print with the same Talker
-/// formatting but never enter the shared history, so they don't crowd out
-/// HTTP/error entries in the log viewer — [TalkerScreen] renders [talker]'s
-/// history, not this one.
-final routeTalker = TalkerFlutter.init(
-  settings: TalkerSettings(
-    useHistory: false,
-  ),
-);
+  static Logger _console = _defaultConsole();
 
-/// Thin wrapper around [talker] so manual call sites depend on this
-/// interface rather than the Talker package directly — swapping in a crash
-/// reporter later is then a one-file change.
-abstract class AppLogger {
-  const AppLogger._();
+  static Logger _defaultConsole() => Logger(
+    filter: DebugToolsFilter(),
+    printer: OneLinePrinter(),
+    output: PlatformConsoleOutput(),
+  );
 
-  static void warning(String message) => talker.warning(message);
+  /// Installs the crash service adapter, once, in `main`.
+  static void useReporter(ErrorReporter reporter) => _reporter = reporter;
 
-  static void error(String message, [Object? error, StackTrace? stackTrace]) =>
-      talker.error(message, error, stackTrace);
+  /// Tests only: send console lines to [output] instead of [debugPrint].
+  @visibleForTesting
+  static void useConsoleOutput(LogOutput? output) {
+    _console = output == null
+        ? _defaultConsole()
+        : Logger(
+            filter: DebugToolsFilter(),
+            printer: OneLinePrinter(),
+            output: output,
+          );
+  }
 
-  static void handle(Object error, [StackTrace? stackTrace, String? message]) =>
-      talker.handle(error, stackTrace, message);
+  static void info(String message) => _console.i(message);
+
+  static void warning(String message) => _console.w(message);
+
+  static void error(String message, [Object? error, StackTrace? stackTrace]) {
+    _console.e(message, error: _loggable(error), stackTrace: stackTrace);
+    _reporter.recordError(error ?? message, stackTrace, reason: message);
+  }
+
+  static void handle(Object error, [StackTrace? stackTrace, String? message]) {
+    _console.e(
+      message ?? error.toString(),
+      error: message == null ? null : _loggable(error),
+      stackTrace: stackTrace,
+    );
+    _reporter.recordError(error, stackTrace, reason: message);
+  }
+
+  /// A crash: an uncaught error, or a Flutter framework error.
+  ///
+  /// With [printedByFlutter] (framework errors in debug, which
+  /// `FlutterError.presentError` already printed in Flutter's own format),
+  /// nothing is printed again, so the error shows once.
+  static void fatal(
+    Object error,
+    StackTrace? stackTrace,
+    String reason, {
+    bool printedByFlutter = false,
+  }) {
+    if (!printedByFlutter) {
+      _console.f(reason, error: _loggable(error), stackTrace: stackTrace);
+    }
+    _reporter.recordError(error, stackTrace, reason: reason, fatal: true);
+  }
+
+  /// One HTTP call, from `NetworkLogger` only. [text] is the summary line,
+  /// optionally followed by body lines.
+  ///
+  static void network(String text, {required bool failed}) => _console.log(
+    failed ? Level.warning : Level.info,
+    TaggedMessage('HTTP', text),
+  );
+
+  /// A screen change, from `RouteLogObserver` only.
+  static void route(String text) => _console.i(TaggedMessage('ROUTE', text));
+
+  /// `logger` refuses a [StackTrace] passed as the error.
+  static Object? _loggable(Object? error) => error is StackTrace ? null : error;
 }

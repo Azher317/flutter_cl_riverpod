@@ -51,9 +51,7 @@ class AccountAvatar extends StatelessWidget {
               width: 28,
               decoration: BoxDecoration(
                 color: context.colorScheme.surfaceContainerHighest,
-                border: Border.all(
-                  color: context.colorScheme.primary,
-                ),
+                border: Border.all(color: context.colorScheme.primary),
                 shape: BoxShape.circle,
               ),
               padding: Insets.extraSmallAll,

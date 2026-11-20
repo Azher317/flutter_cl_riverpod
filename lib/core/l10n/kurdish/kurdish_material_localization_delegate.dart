@@ -555,10 +555,10 @@ class KurdishMaterialLocalizations extends GlobalMaterialLocalizations {
 
   @override
   String get shareButtonLabel => 'هاوبەشکردن';
-  
+
   @override
   String get clearButtonTooltip => '';
-  
+
   @override
   String get selectedDateLabel => '';
 }
@@ -579,7 +579,7 @@ const kuDateSymbols = {
     'ل',
     'ت.ی',
     'ت.د',
-    'ک.ی'
+    'ک.ی',
   ],
   'STANDALONENARROWMONTHS': [
     'ک.د',
@@ -593,7 +593,7 @@ const kuDateSymbols = {
     'ل',
     'ت.ی',
     'ت.د',
-    'ک.ی'
+    'ک.ی',
   ],
   'MONTHS': [
     'کانونی دووەم',
@@ -658,7 +658,7 @@ const kuDateSymbols = {
     'چوارشەممە',
     'پێنجشەممە',
     'هەینی',
-    'شەممە'
+    'شەممە',
   ],
   'STANDALONEWEEKDAYS': [
     'یەکشەممە',
@@ -667,7 +667,7 @@ const kuDateSymbols = {
     'چوارشەممە',
     'پێنجشەممە',
     'هەینی',
-    'شەممە'
+    'شەممە',
   ],
   'SHORTWEEKDAYS': [
     'یەکشەم',
@@ -676,7 +676,7 @@ const kuDateSymbols = {
     'چوارشەم',
     'پێنجشەم',
     'هەینی',
-    'شەممە'
+    'شەممە',
   ],
   'STANDALONESHORTWEEKDAYS': [
     'یەکشەم',
@@ -685,36 +685,21 @@ const kuDateSymbols = {
     'چوارشەم',
     'پێنجشەم',
     'هەینی',
-    'شەممە'
+    'شەممە',
   ],
   'NARROWWEEKDAYS': ['ی', 'د', 'س', 'چ', 'پ', 'ه', 'ش'],
   'STANDALONENARROWWEEKDAYS': ['ی', 'د', 'س', 'چ', 'پ', 'ه', 'ش'],
   'SHORTQUARTERS': ['چ١', 'چ٢', 'چ٣', 'چ٤'],
   'QUARTERS': ['چارەکی یەکەم', 'چارەکی دووەم', 'چارەکی سێیەم', 'چارەکی چوارەم'],
   'AMPMS': ['پ.ن', 'د.ن'],
-  'DATEFORMATS': [
-    'EEEE، d MMMM y',
-    'd MMMM y',
-    'dd‏/MM‏/y',
-    'd‏/M‏/y',
-  ],
-  'TIMEFORMATS': [
-    'h:mm:ss a zzzz',
-    'h:mm:ss a z',
-    'h:mm:ss a',
-    'h:mm a',
-  ],
+  'DATEFORMATS': ['EEEE، d MMMM y', 'd MMMM y', 'dd‏/MM‏/y', 'd‏/M‏/y'],
+  'TIMEFORMATS': ['h:mm:ss a zzzz', 'h:mm:ss a z', 'h:mm:ss a', 'h:mm a'],
   'AVAILABLEFORMATS': null,
-  'DATETIMEFORMATS': [
-    '{1} {0}',
-    '{1} {0}',
-    '{1} {0}',
-    '{1} {0}',
-  ],
+  'DATETIMEFORMATS': ['{1} {0}', '{1} {0}', '{1} {0}', '{1} {0}'],
   'ZERODIGIT': '٠',
   'FIRSTDAYOFWEEK': 5,
   'WEEKENDRANGE': [4, 5],
-  'FIRSTWEEKCUTOFFDAY': 3
+  'FIRSTWEEKCUTOFFDAY': 3,
 };
 const kuLocaleDatePatterns = {
   'd': 'd', // DAY
@@ -760,5 +745,5 @@ const kuLocaleDatePatterns = {
   'v': 'v', // ABBR_GENERIC_TZ
   'z': 'z', // ABBR_SPECIFIC_TZ
   'zzzz': 'zzzz', // SPECIFIC_TZ
-  'ZZZZ': 'ZZZZ' // ABBR_UTC_TZ
+  'ZZZZ': 'ZZZZ', // ABBR_UTC_TZ
 };

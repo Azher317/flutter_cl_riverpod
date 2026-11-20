@@ -115,7 +115,10 @@ class _PagingControllerHookState<ItemType>
 extension PagingControllerX<ItemType> on PagingController<int, ItemType> {
   /// Runs a throwing [PageChanged] for [pageKey], appending the page or
   /// surfacing the error.
-  Future<void> appendPageFrom(PageChanged<ItemType> callback, int pageKey) async {
+  Future<void> appendPageFrom(
+    PageChanged<ItemType> callback,
+    int pageKey,
+  ) async {
     try {
       addItems(await callback(pageKey), pageKey);
     } catch (e, stackTrace) {
@@ -131,13 +134,10 @@ extension PagingControllerX<ItemType> on PagingController<int, ItemType> {
     int pageKey,
   ) async {
     try {
-      (await callback(pageKey)).fold(
-        (failure) {
-          AppLogger.handle(failure, StackTrace.current);
-          error = failure;
-        },
-        (page) => addItems(page, pageKey),
-      );
+      (await callback(pageKey)).fold((failure) {
+        AppLogger.handle(failure, StackTrace.current);
+        error = failure;
+      }, (page) => addItems(page, pageKey));
     } catch (e, stackTrace) {
       AppLogger.handle(e, stackTrace);
       error = e;

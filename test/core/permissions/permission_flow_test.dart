@@ -25,13 +25,17 @@ class _FakeService implements PermissionService {
   Future<bool> openSettings() async => true;
 }
 
+// The app's first language, so the test runs whichever languages it ships.
+final _locale = AppLocalizations.supportedLocales.first;
+final _l10n = lookupAppLocalizations(_locale);
+
 Future<Future<bool>> _start(WidgetTester tester, _FakeService service) async {
   late Future<bool> result;
   await tester.pumpWidget(
     ProviderScope(
       overrides: [permissionServiceProvider.overrideWithValue(service)],
       child: MaterialApp(
-        locale: const Locale('en'),
+        locale: _locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: Consumer(
@@ -65,7 +69,7 @@ void main() {
     final service = _FakeService(AppPermissionStatus.denied);
     final result = await _start(tester, service);
     expect(find.text('To scan codes'), findsOneWidget);
-    await tester.tap(find.text('Not now'));
+    await tester.tap(find.text(_l10n.permissionNotNow));
     await tester.pumpAndSettle();
     expect(await result, isFalse);
     expect(service.requests, 0);
@@ -79,7 +83,7 @@ void main() {
       afterRequest: AppPermissionStatus.permanentlyDenied,
     );
     final result = await _start(tester, service);
-    await tester.tap(find.text('Continue'));
+    await tester.tap(find.text(_l10n.permissionContinue));
     await tester.pumpAndSettle();
     expect(await result, isFalse);
     expect(find.byType(AlertDialog), findsNothing);
@@ -90,8 +94,8 @@ void main() {
   ) async {
     final service = _FakeService(AppPermissionStatus.permanentlyDenied);
     final result = await _start(tester, service);
-    expect(find.text('Open Settings'), findsOneWidget);
-    await tester.tap(find.text('Not now'));
+    expect(find.text(_l10n.permissionOpenSettings), findsOneWidget);
+    await tester.tap(find.text(_l10n.permissionNotNow));
     await tester.pumpAndSettle();
     expect(await result, isFalse);
   });

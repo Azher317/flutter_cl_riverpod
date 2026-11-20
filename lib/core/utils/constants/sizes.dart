@@ -58,6 +58,12 @@ class Insets {
   static const double large = 24.0;
   static const double extraLarge = 32.0;
 
+  /// Side margin from the screen edge to content on a phone.
+  static const double screen = medium;
+
+  /// Side margin on a tablet (opt-in tablet layer, `lib/core/layout/`).
+  static const double screenTablet = large;
+
   static const EdgeInsets noneAll = EdgeInsets.all(none);
   static const EdgeInsets extraSmallAll = EdgeInsets.all(extraSmall);
   static const EdgeInsets smallAll = EdgeInsets.all(small);
@@ -160,6 +166,15 @@ class Layout {
   /// A window at least this wide is laid out as a tablet: sheets don't
   /// lean the screen behind them there.
   static const double tabletBreakpoint = 600;
+
+  /// From this width, [TwoPane] shows its two panes side by side.
+  static const double twoPaneMinWidth = 720;
+
+  /// Content never grows wider than this; the extra goes to the margins.
+  static const double contentMaxWidth = 1040;
+
+  /// A single column of reading or a form is capped at this.
+  static const double singleColumnMaxWidth = 640;
 
   /// The splash logo, in the native splash and the in-app splash alike.
   static const double splashLogoSize = 120;

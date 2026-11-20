@@ -14,7 +14,7 @@ class CustomDatePickerFormField extends HookConsumerWidget {
     this.validator,
     this.firstDate,
     this.lastDate,
-    this.labelText = 'YYYY/MM/DD',
+    required this.labelText,
   });
 
   final ValueNotifier<DateTime?> selectedDateNotifier;
@@ -27,10 +27,13 @@ class CustomDatePickerFormField extends HookConsumerWidget {
     final textEditingController = useTextEditingController(
       text: selectedDateNotifier.value?.formatDate(),
     );
-    selectedDateNotifier.addListener(() {
-      textEditingController.text =
+    // Keep the text in step with the value; removed when the field goes away.
+    useEffect(() {
+      void sync() => textEditingController.text =
           selectedDateNotifier.value?.formatDate() ?? '';
-    });
+      selectedDateNotifier.addListener(sync);
+      return () => selectedDateNotifier.removeListener(sync);
+    }, [selectedDateNotifier]);
     return ValueListenableBuilder(
       valueListenable: selectedDateNotifier,
       builder: (context, selectedDate, child) {
