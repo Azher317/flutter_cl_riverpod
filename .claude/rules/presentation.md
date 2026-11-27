@@ -40,8 +40,13 @@ before authoring.
 6. **RTL correctness.** Prefer `EdgeInsetsDirectional` / `AlignmentDirectional` /
    `BorderRadiusDirectional` over their LTR-fixed counterparts (see
    [svg_prefix_icon.dart](../../lib/core/widgets/svg_prefix_icon.dart)). Never
-   hardcode `TextAlign.left`/`right`. Use `DirectionalIcon` for arrows that must
-   flip. Fonts follow the locale automatically via `AppFontScheme.of(locale)` — never
+   hardcode `TextAlign.left`/`right`. The one allowed exception is
+   `CustomTextFormField`, which picks `right`/`left` from the layout direction
+   so a forced-LTR field (a phone number) still lines up with the other fields
+   in Arabic; `TextAlign.start` would follow the field's own LTR direction.
+   Use `DirectionalIcon` for arrows that must flip; the Material back arrows
+   in `customAppBar` already flip by themselves
+   ([custom_app_bar_test.dart](../../test/core/widgets/custom_app_bar_test.dart)). Fonts follow the locale automatically via `AppFontScheme.of(locale)` — never
    name a family in a widget.
 7. **`use_build_context_synchronously` is a warning.** Guard `context` use after an
    `await` with a `mounted` check.

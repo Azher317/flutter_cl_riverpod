@@ -58,12 +58,12 @@ class RoundedButton extends StatelessWidget {
               child: count != null
                   ? Badge.count(
                       count: count!,
-                      alignment: Alignment.topLeft,
+                      alignment: AlignmentDirectional.topStart,
                       backgroundColor: badgeColor,
                       child: child,
                     )
                   : Badge(
-                      alignment: Alignment.topRight,
+                      alignment: AlignmentDirectional.topEnd,
                       smallSize: 10,
                       backgroundColor: badgeColor,
                       child: child,

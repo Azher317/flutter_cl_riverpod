@@ -37,8 +37,9 @@ and in CI.
 3. No feature imports another (checked). Session: watch `currentUserProvider` /
    `isSignedInProvider`, change it via `sessionProvider.notifier`; only
    `core/network` and `lib/router` read `sessionProvider`'s state.
-4. `domain/` imports only `core/errors`, `core/usecase`, `core/utils/either` and
-   its own `domain/`. No Flutter, Dio, Riverpod or models.
+4. `domain/` imports only `core/errors`, `core/usecase`, `core/utils/either`,
+   `core/session/entities` (the pure-Dart session and user) and its own
+   `domain/`. No Flutter, Dio, Riverpod or models.
 5. `package:dio` only under `core/network/` and the error mapper (checked).
 6. Data sources return models and throw `*Exception`s; never `Either`, never UI.
 7. Repositories return `Either<Failure, T>` and are the only callers of `guard()`.

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 /// Where the backend lives. Every run and every build names its server with
 /// one of the files in `env/`:
 ///
@@ -26,8 +28,14 @@ abstract class ApiDocument {
   static const _envs = {'dev', 'uat', 'prod'};
 
   /// Stops the app at launch, in every build mode, when the build named no
-  /// server or a server that is still a placeholder. Called first in `main`.
-  static void assertConfigured() {
+  /// server, a server that is still a placeholder, or a host that ends with
+  /// `/`. Called first in `main`.
+  static void assertConfigured() => check(env: env, host: host);
+
+  /// The rules behind [assertConfigured], taking the values as arguments so a
+  /// test can try each case (the real ones are fixed at compile time).
+  @visibleForTesting
+  static void check({required String env, required String host}) {
     if (!_envs.contains(env)) {
       throw StateError(
         'No server chosen. Run or build with '
@@ -39,6 +47,13 @@ abstract class ApiDocument {
     if (uri == null || !uri.hasScheme || host.endsWith('.invalid')) {
       throw StateError(
         'API_ENV=$env but API_HOST is not set: fill env/$env.json '
+        '(API_HOST was "$host").',
+      );
+    }
+    if (host.endsWith('/')) {
+      throw StateError(
+        'API_HOST in env/$env.json ends with "/", which doubles the slash in '
+        'every request (\$host/api/user). Remove the trailing slash '
         '(API_HOST was "$host").',
       );
     }

@@ -1,4 +1,5 @@
 import 'package:app/core/observability/app_logger.dart';
+import 'package:app/core/utils/extensions/common_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,13 +7,15 @@ import 'package:image_picker/image_picker.dart';
 Future<CroppedFile?> cropImage(BuildContext context) async {
   try {
     final theme = Theme.of(context);
+    // Read before the await: the context may be gone once the picker returns.
+    final title = context.l10n.crop;
     final result = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (result == null) return null;
     return await ImageCropper().cropImage(
       sourcePath: result.path,
       uiSettings: [
         AndroidUiSettings(
-          toolbarTitle: 'Crop',
+          toolbarTitle: title,
           toolbarColor: theme.colorScheme.primary,
           cropGridColor: theme.colorScheme.outline,
           backgroundColor: theme.colorScheme.surface,
@@ -29,7 +32,7 @@ Future<CroppedFile?> cropImage(BuildContext context) async {
           cropFrameStrokeWidth: 2,
           cropGridStrokeWidth: 1,
         ),
-        IOSUiSettings(title: 'Crop'),
+        IOSUiSettings(title: title),
       ],
     );
   } catch (e, st) {

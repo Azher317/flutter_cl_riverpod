@@ -1,4 +1,5 @@
 import 'package:app/core/l10n/generated/app_localizations.dart';
+import 'package:app/core/messaging/snackbar.dart';
 import 'package:app/core/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -6,7 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 /// Pumps [child] inside the app's theme and localizations (Arabic by
 /// default, the app's default language). [size] sets the window (logical
 /// pixels) for layout tests; without it `MediaQuery.sizeOf` is zero, which
-/// lays out as a phone.
+/// lays out as a phone. [messenger] attaches [AppMessenger.key], so
+/// snackbars shown through `AppMessenger` / `context.showFailure` appear.
 Future<void> pumpApp(
   WidgetTester tester,
   Widget child, {
@@ -14,6 +16,7 @@ Future<void> pumpApp(
   ThemeMode themeMode = ThemeMode.light,
   bool disableAnimations = false,
   Size? size,
+  bool messenger = false,
 }) async {
   if (size != null) setWindowSize(tester, size);
   await tester.pumpWidget(
@@ -23,6 +26,7 @@ Future<void> pumpApp(
         disableAnimations: disableAnimations,
       ),
       child: MaterialApp(
+        scaffoldMessengerKey: messenger ? AppMessenger.key : null,
         locale: locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

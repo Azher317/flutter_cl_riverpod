@@ -60,8 +60,8 @@ must survive navigation.
 **`keepAlive` is the exception, not the default.** Allowed only for:
 - app-lifetime services: Dio, storage, settings, session, push, the router;
 - small caches the whole app reads and that are expensive to refetch (store config,
-  lookups such as governorates), and only when they watch `currentUserIdProvider` (or
-  `currentUserProvider`) if they are user-scoped, so logout clears them.
+  lookups such as governorates), and only when they watch `currentUserProvider` if
+  they are user-scoped, so logout clears them.
 
 Never for screen data (lists, details, forms): those auto-dispose, and Riverpod refetches
 them when the screen opens again. A kept-alive provider is never freed for the whole
@@ -82,8 +82,11 @@ sources call `_api.get/post/put/delete` and parse models themselves. Opt a call 
 of the 401→logout with `extra: const {'skipAuthLogout': true}` (the login call).
 Inject `apiConsumerProvider`; reach raw Dio via `ref.dio` only if you must.
 
-[api_document.dart](../../lib/core/network/api_document.dart) still points at a demo API
-— change it first in a new project.
+[api_document.dart](../../lib/core/network/api_document.dart) has no default server:
+each run and build names one with `--dart-define-from-file=env/<dev|uat|prod>.json`,
+and `ApiDocument.assertConfigured` stops the app at launch when none is named, the
+host is still a placeholder, or it ends with `/`. Fill `env/*.json` first in a new
+project.
 
 ## Push notifications
 
