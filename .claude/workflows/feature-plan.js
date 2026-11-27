@@ -66,6 +66,7 @@ const PLAN_SCHEMA = {
   type: 'object',
   properties: {
     feature: { type: 'string' },
+    languages: { type: 'array', items: { type: 'string' }, description: 'Language codes the app ships: one per file in lib/l10n/arb/ (app_ar.arb → ar), plus ku when lib/core/l10n/kurdish/ exists' },
     summary: { type: 'string', description: 'Two or three plain sentences: what the user gets' },
     backend: { type: 'string', enum: ['ready', 'not ready', 'unknown'], description: 'not ready → the fake data rule in data-layer.md applies' },
     screens: {
@@ -132,7 +133,7 @@ const PLAN_SCHEMA = {
     tests: { type: 'array', items: { type: 'string' }, description: 'Test files under test/features/<feature>/ and what each covers' },
     questions: { type: 'array', items: { type: 'string' }, description: 'Things only the owner can decide. Never guess these.' },
   },
-  required: ['feature', 'summary', 'backend', 'screens', 'widgets', 'endpoints', 'models', 'domain', 'providers', 'routes', 'strings', 'tests', 'questions'],
+  required: ['feature', 'languages', 'summary', 'backend', 'screens', 'widgets', 'endpoints', 'models', 'domain', 'providers', 'routes', 'strings', 'tests', 'questions'],
 };
 
 const WRITE_SCHEMA = {
@@ -140,9 +141,10 @@ const WRITE_SCHEMA = {
   properties: {
     written: { type: 'boolean' },
     path: { type: 'string' },
+    lines: { type: 'number', description: 'Line count of the file after writing (wc -l, or Read it back and count)' },
     note: { type: 'string' },
   },
-  required: ['written', 'path', 'note'],
+  required: ['written', 'path', 'lines', 'note'],
 };
 
 // ---------- prompts ----------
@@ -216,7 +218,7 @@ function planMarkdown(plans, conflicts, notes) {
   out.push('');
   out.push('Strings (every language file the app ships):');
   out.push('');
-  const langs = [...new Set(plans.flatMap((p) => p.strings.flatMap((s) => Object.keys(s.texts))))].sort();
+  const langs = shippedLanguages(plans);
   out.push(`| Feature | Key | ${langs.join(' | ')} |`);
   out.push(`| --- | --- | ${langs.map(() => '---').join(' | ')} |`);
   for (const p of plans) {
@@ -275,9 +277,14 @@ function findConflicts(plans) {
   return conflicts;
 }
 
-// Strings missing a language another string in the phase has.
+// Every language the app ships (as the planners found it) and every language any string uses.
+function shippedLanguages(plans) {
+  return [...new Set([...plans.flatMap((p) => p.languages ?? []), ...plans.flatMap((p) => p.strings.flatMap((s) => Object.keys(s.texts)))])].sort();
+}
+
+// Strings missing a shipped language.
 function findMissingTexts(plans) {
-  const langs = [...new Set(plans.flatMap((p) => p.strings.flatMap((s) => Object.keys(s.texts))))];
+  const langs = shippedLanguages(plans);
   const missing = [];
   for (const p of plans) {
     for (const s of p.strings) {
@@ -338,7 +345,7 @@ const markdown = planMarkdown(plans, conflicts, NOTES);
 
 phase('Write');
 const written = await agent(
-  `Write the plan below to ${PLAN_PATH} with the Write tool, exactly as given, creating docs/plans/ if needed. Change nothing else, run nothing else. If ${PLAN_PATH} already exists, overwrite it (the owner asked for a new plan).
+  `Write the plan below to ${PLAN_PATH} with the Write tool, exactly as given, creating docs/plans/ if needed. Change nothing else. If ${PLAN_PATH} already exists, overwrite it (the owner asked for a new plan). Then count the file's lines and report them.
 
 ----- BEGIN FILE -----
 ${markdown}
@@ -346,12 +353,19 @@ ${markdown}
   { ...WRITER, label: 'write-plan', phase: 'Write', schema: WRITE_SCHEMA },
 );
 
+// A copy that came out a different length was not copied exactly: show the plan in chat instead.
+const expectedLines = markdown.split('\n').length;
+const exact = Boolean(written && written.written && Math.abs((written.lines ?? 0) - expectedLines) <= 1);
+if (written && written.written && !exact) {
+  log(`The written plan has ${written.lines} lines, expected ${expectedLines} — check ${PLAN_PATH} against the plan returned in chat`);
+}
+
 return {
   planPath: PLAN_PATH,
-  written: Boolean(written && written.written),
+  written: exact,
   features: plans.map((p) => ({ name: p.feature, backend: p.backend, screens: p.screens.length, questions: p.questions.length })),
   conflicts,
   questions: plans.flatMap((p) => p.questions.map((q) => `${p.feature}: ${q}`)),
   // Fallback when the file could not be written: the main session shows this in chat.
-  markdown: written && written.written ? undefined : markdown,
+  markdown: exact ? undefined : markdown,
 };

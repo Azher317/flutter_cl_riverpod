@@ -39,7 +39,9 @@ It stops there. Read the plan, edit it, tick each question with your answer
 ## feature-build
 
 Refuses to start if the plan has an unticked question or the checkout has
-uncommitted changes.
+uncommitted changes (a local edit to `env/*.json` is allowed). The result is
+`done` only when the lead's checks pass **and** every feature was approved by
+its reviewer and tester; otherwise `done-with-open-issues`, with the reasons.
 
 - **One feature (the small team):** one developer, then a reviewer, then a
   tester, with up to 2 fix rounds, then the lead runs `bin/gates.sh`.

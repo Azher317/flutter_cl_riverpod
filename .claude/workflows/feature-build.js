@@ -156,7 +156,7 @@ function readPrompt() {
 
 1. Read ${PLAN_PATH}. Not there → ready = false.
 2. Approved? The owner approves in chat; the file's "Questions for the owner" section must have no unticked "- [ ]" item (a ticked "- [x]" item carries the owner's answer in its text). Any unticked question or "Conflict:" → ready = false, and list them in reason.
-3. Run \`git status --porcelain --untracked-files=all\`. Any line except ${PLAN_PATH} itself → ready = false ("commit or stash these first: …"). The plan file may be uncommitted.
+3. Run \`git status --porcelain --untracked-files=all\`. Any line except ${PLAN_PATH} itself and modified env/*.json files (each developer's local server settings, never part of a feature) → ready = false ("commit or stash these first: …"). The plan file may be uncommitted.
 4. Run \`git branch --show-current\` and \`git rev-parse HEAD\`.
 5. Extract the features${ONLY ? ` — ONLY these: ${ONLY.join(', ')}` : ''}: each feature's whole section verbatim, with its rows from the shared tables. Extract the shared pieces as one block of text for the shared developer.`;
 }
@@ -296,6 +296,7 @@ async function buildFeature(feature, originSha, fromSha, single, firstFeedback) 
     : await agent(devPrompt(feature, originSha, single), { ...DEV, label: `dev:${feature.name}`, phase: 'Develop', schema: DEV_SCHEMA });
   let review = null;
   let test = null;
+  let lastBlocking = [];
   let approved = false;
   let testsPassed = false;
   let round = 1;
@@ -328,6 +329,7 @@ async function buildFeature(feature, originSha, fromSha, single, firstFeedback) 
       feedback = { summary: `Tests failed: ${test.summary}`, issues: [...blocking, ...test.issues.filter((i) => i.severity === 'minor')] };
     }
 
+    lastBlocking = blocking;
     if (round > MAX_FIX_ROUNDS) {
       log(`${feature.name}: still ${blocking.length} blocking issue(s) after ${MAX_FIX_ROUNDS} fix round(s) — handing to the lead`);
       break;
@@ -353,7 +355,8 @@ async function buildFeature(feature, originSha, fromSha, single, firstFeedback) 
     testsPassed,
     rounds: round,
     blockers: dev?.blockers ?? [],
-    openIssues: [...(review?.issues ?? []), ...(test?.issues ?? [])],
+    // What still blocks it, including problems the workflow found itself (files outside the feature).
+    openIssues: approved && testsPassed ? [...(review?.issues ?? []), ...(test?.issues ?? [])] : lastBlocking.length ? lastBlocking : [...(review?.issues ?? []), ...(test?.issues ?? [])],
   };
 }
 
@@ -435,8 +438,16 @@ for (let round = 1; round <= MAX_SIGNOFF_ROUNDS; round += 1) {
   });
 }
 
+// The lead's "done" is not enough: every feature must also be approved and tested.
+const unfinished = results.filter((r) => !r.approved || !r.testsPassed).map((r) => r.name);
+const status = !signoff ? 'no-signoff' : signoff.status !== 'done' ? signoff.status : unfinished.length ? 'done-with-open-issues' : 'done';
+if (unfinished.length) {
+  log(`Not approved or not tested: ${unfinished.join(', ')} — see openIssues`);
+}
+
 return {
-  status: signoff?.status ?? 'no-signoff',
+  status,
+  unfinished,
   phase: PHASE,
   startedFrom: `${read.baseBranch} @ ${read.baseSha.slice(0, 7)}`,
   branches: signoff?.branches ?? [],
