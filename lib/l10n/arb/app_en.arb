@@ -45,16 +45,20 @@
   "validationRequired": "This field is required",
   "validationUrl": "Please enter a valid URL",
   "validatorEmail": "The field is not a valid email address",
-  "validatorMaxLength": "The field must be at most {n} characters long",
+  "validatorMaxLength": "{n, plural, =1{The field must be at most 1 character long} other{The field must be at most {n} characters long}}",
   "@validatorMaxLength": {
     "placeholders": {
-      "n": {}
+      "n": {
+        "type": "int"
+      }
     }
   },
-  "validatorMinLength": "The field must be at least {n} characters long",
+  "validatorMinLength": "{n, plural, =1{The field must be at least 1 character long} other{The field must be at least {n} characters long}}",
   "@validatorMinLength": {
     "placeholders": {
-      "n": {}
+      "n": {
+        "type": "int"
+      }
     }
   },
   "validatorPhoneNumber": "The field is not a valid phone number",
