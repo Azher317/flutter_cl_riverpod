@@ -25,14 +25,14 @@ class AccountAvatar extends StatelessWidget {
       borderRadius: BorderSize.extraLargeRadius,
       onTap: onTap,
       child: Stack(
-        alignment: Alignment.bottomRight,
+        alignment: AlignmentDirectional.bottomEnd,
         children: [
           Badge(
             smallSize: verifiedSize,
             largeSize: verifiedSize,
             backgroundColor: Colors.transparent,
             padding: EdgeInsets.zero,
-            alignment: Alignment.topRight,
+            alignment: AlignmentDirectional.topEnd,
             child: _framed(
               context,
               child: imageUrl == null
