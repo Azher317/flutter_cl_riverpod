@@ -40,7 +40,7 @@ needs the session, watch `currentUserProvider` / `isSignedInProvider` from
 | 12 | **Screen** | `presentation/screens/login_screen.dart` | `ConsumerWidget`, or `HookConsumerWidget`/`StatefulHookConsumerWidget` if you need hooks. `ref.listen` the notifier and call `context.showFailure(failure)` on `AsyncError`. |
 | 13 | **Route** | [route_names.dart](../../../lib/core/utils/constants/route_names.dart) + [app_router.dart](../../../lib/router/app_router.dart) | Add a `static const` path to `RouteNames`, then a `GoRoute` in `app_router.dart`. |
 | 14 | **Strings** | `lib/l10n/arb/app_*.arb` | Use the `add-string` skill: every ARB the app ships. |
-| 15 | **Tests** | `test/features/<name>/` | Repository (each failure path) and screen widget test with `testAtScreenSizes`. |
+| 15 | **Tests** | `test/features/<name>/` | The minimum in [testing.md](../../rules/testing.md): repository failure paths, each screen in loading / error / empty / success, every shipped language, `testAtScreenSizes`. |
 | 16 | **Verify** | — | Run the `verify` skill (`bin/gates.sh`); stop only when it passes. |
 
 Provider naming is documented in [feature-layout.md](../../rules/feature-layout.md) — the generator drops a

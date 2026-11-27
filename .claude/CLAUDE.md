@@ -26,6 +26,10 @@ session itself is core (`core/session/`).
 - One agent writes in a checkout at a time. Spike branches are never merged;
   only what was learned moves over.
 - Don't edit `docs/api/` (the backend contract) or `design/` unless asked.
+- The workflows in `.claude/workflows/` (`app-check`, `feature-plan`,
+  `feature-build`) run only when the owner asks for one by name
+  ([workflows.md](../docs/guides/workflows.md)). Their plans live in
+  `docs/plans/`; that is the one exception to "reports go in chat".
 
 ## Layer rules
 
